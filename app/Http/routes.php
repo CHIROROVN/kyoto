@@ -69,7 +69,7 @@ Route::group(['prefix' => '4school', 'namespace' => 'Frontend'], function ()
 {
 	Route::get('login', ['as' => 'frontend.users.login', 'uses' => 'UsersController@getLogin']);
 	Route::post('login', ['as' => 'frontend.users.login', 'uses' => 'UsersController@postLogin']);
-	Route::get('logout', ['as' => 'frontend.users.logout', 'uses' => 'UsersController@logout']);
+	Route::get('logout', ['as' => 'frontend.users.logout', 'uses' => 'UsersController@getLogout']);
 
 	Route::get('/', ['as' => 'frontend.index', 'uses' => 'HomeController@index']);
 });

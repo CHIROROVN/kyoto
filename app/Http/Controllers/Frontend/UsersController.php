@@ -22,6 +22,10 @@ class UsersController extends FrontendController
 		
 	}
 
+	public function getLogout() {
+		return view('frontend.users.logout');
+	}
+
 	public function logout() {
 		
 	}
