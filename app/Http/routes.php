@@ -64,3 +64,13 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::post('login', ['as' => 'backend.login', 'uses' => 'AuthController@postLogin']);
 	Route::get('logout', ['as' => 'backend.logout', 'uses' => 'AuthController@logout']);
 });
+
+Route::get('sys-adm', function () {
+        return redirect()->to('sys-adm/login');
+    });
+Route::get('auth/login', function () {
+        return redirect()->to('sys-adm/login');
+    });
+Route::get('auth/logout', function () {
+        return redirect()->to('sys-adm/logout');
+    });
