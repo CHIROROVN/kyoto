@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 
@@ -67,6 +67,10 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 
 Route::group(['prefix' => '4school', 'namespace' => 'Frontend'], function () 
 {
+	Route::get('login', ['as' => 'frontend.users.login', 'uses' => 'UsersController@getLogin']);
+	Route::post('login', ['as' => 'frontend.users.login', 'uses' => 'UsersController@postLogin']);
+	Route::get('logout', ['as' => 'frontend.users.logout', 'uses' => 'UsersController@logout']);
+
 	Route::get('/', ['as' => 'frontend.index', 'uses' => 'HomeController@index']);
 });
 
