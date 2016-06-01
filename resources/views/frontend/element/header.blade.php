@@ -26,9 +26,9 @@
           </div>
           <div class="col-md-6">
             <div class="fl-right mar-left40">
-              <input type="button" class="btn btn-sm btn-info" name="button" value="ログアウト" onclick="location.href='login.html'"/>
+              <input type="button" class="btn btn-sm btn-info" name="button" value="ログアウト" onclick='location.href="{{URL::route('frontend.users.logout')}}"'/>
             </div>
-            <div class="fl-right mar-top5">ようこそ、岡山理科大学・山田花子さん（<a href="customer_detail.html" class="text-orange">登録内容の参照</a> / <a href="passwd.html" class="text-orange">パスワード変更</a>）</div>
+            <div class="fl-right mar-top5">ようこそ、岡山理科大学・山田花子さん（<a href="{{URL::route('frontend.customer.detail')}}" class="text-orange">登録内容の参照</a> / <a href="{{URL::route('frontend.users.change_passwd')}}" class="text-orange">パスワード変更</a>）</div>
           </div>
         </div>
       </div>

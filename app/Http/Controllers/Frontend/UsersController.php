@@ -26,6 +26,14 @@ class UsersController extends FrontendController
 		return view('frontend.users.logout');
 	}
 
+	public function getChangePasswd() {
+		return view('frontend.users.change_passwd');
+	}
+
+	public function changePasswd() {
+		
+	}
+
 	public function logout() {
 		
 	}

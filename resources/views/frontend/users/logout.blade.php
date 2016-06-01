@@ -10,7 +10,7 @@
         </div>
         <div class="row mar-bottom30">
           <div class="col-md-12 text-center">
-            <a href="login.html" class="btn btn-sm btn-primary">ログイン画面へ</a>
+            <a href="{{URL::route('frontend.users.login')}}" class="btn btn-sm btn-primary">ログイン画面へ</a>
           </div>
         </div>
       </div>
