@@ -67,7 +67,7 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 
 Route::group(['prefix' => '4school', 'namespace' => 'Frontend'], function () 
 {
-	Route::get('/', ['as' => 'frontend.index', 'uses' => 'AuthController@getLogin']);
+	Route::get('/', ['as' => 'frontend.index', 'uses' => 'HomeController@index']);
 });
 
 Route::get('/', function () {
