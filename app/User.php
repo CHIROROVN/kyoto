@@ -28,6 +28,7 @@ class User extends Authenticatable
     protected $table = 'm_user';
     protected $primaryKey = 'u_id';
     public $timestamps  = false;
+    // protected $redirectTo = 'sys-adm/login';
 
     public function getPasswordAttribute(){
         return $this->u_password;

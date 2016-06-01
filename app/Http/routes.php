@@ -26,13 +26,17 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
         return redirect()->route('backend.menus');
     });
 
-	// menu
+	/**
+	 * menu
+	 */
 	Route::get('menu', ['as' => 'backend.menu', 'uses' => 'MenuController@index']);
 
 	// user. Using onl add new account admin
 	// Route::get('users', ['as' => 'admin.users.index', 'uses' => 'UserController@index']);
 
-	// presents
+	/**
+	 * presents
+	 */
 	Route::get('presents', ['as' => 'backend.presents.index', 'uses' => 'PresentController@index']);
 	Route::get('presents/regist', ['as' => 'backend.presents.regist', 'uses' => 'PresentController@getRegist']);
 	Route::post('presents/regist', ['as' => 'backend.presents.regist', 'uses' => 'PresentController@postRegist']);
@@ -42,20 +46,21 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 
 
 	/**
+	 * bunya
+	 */
+	Route::get('bunyas', ['as' => 'backend.bunyas.index', 'uses' => 'BunyaController@index']);
+	Route::get('bunyas/regist', ['as' => 'backend.bunyas.regist', 'uses' => 'BunyaController@getRegist']);
+	Route::post('bunyas/regist', ['as' => 'backend.bunyas.regist', 'uses' => 'BunyaController@postRegist']);
+	Route::get('bunyas/edit/{id}', ['as' => 'backend.bunyas.edit', 'uses' => 'BunyaController@getEdit']);
+	Route::post('bunyas/edit/{id}', ['as' => 'backend.bunyas.edit', 'uses' => 'BunyaController@postEdit']);
+	Route::get('bunyas/delete/{id}', ['as' => 'backend.bunyas.delete', 'uses' => 'BunyaController@delete']);
+	Route::get('bunyas/search', ['as' => 'backend.bunyas.search', 'uses' => 'BunyaController@search']);
+
+
+	/**
 	 * auth
 	 */
 	Route::get('login', ['as' => 'backend.login', 'uses' => 'AuthController@getLogin']);
 	Route::post('login', ['as' => 'backend.login', 'uses' => 'AuthController@postLogin']);
 	Route::get('logout', ['as' => 'backend.logout', 'uses' => 'AuthController@logout']);
 });
-
-
-Route::get('sys-adm', function () {
-        return redirect()->to('sys-adm/login');
-    });
-Route::get('auth/login', function () {
-        return redirect()->to('sys-adm/login');
-    });
-Route::get('auth/logout', function () {
-        return redirect()->to('sys-adm/logout');
-    });
