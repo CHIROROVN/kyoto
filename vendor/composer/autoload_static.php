@@ -57,7 +57,6 @@ class ComposerStaticInitbd1f1942fe362ba9d5e9b08f31ba0dc1
         array (
             'Psy\\' => 4,
             'PhpParser\\' => 10,
-            'Paulvl\\JWTGuard\\' => 16,
         ),
         'M' => 
         array (
@@ -74,7 +73,6 @@ class ComposerStaticInitbd1f1942fe362ba9d5e9b08f31ba0dc1
         ),
         'F' => 
         array (
-            'Firebase\\JWT\\' => 13,
             'Faker\\' => 6,
         ),
         'D' => 
@@ -86,7 +84,6 @@ class ComposerStaticInitbd1f1942fe362ba9d5e9b08f31ba0dc1
         'C' => 
         array (
             'Collective\\Html\\' => 16,
-            'Collective\\Bus\\' => 15,
             'ClassPreloader\\' => 15,
             'Carbon\\' => 7,
         ),
@@ -189,10 +186,6 @@ class ComposerStaticInitbd1f1942fe362ba9d5e9b08f31ba0dc1
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
-        'Paulvl\\JWTGuard\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/paulvl/jwt-guard/src',
-        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -208,10 +201,6 @@ class ComposerStaticInitbd1f1942fe362ba9d5e9b08f31ba0dc1
         'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
-        ),
-        'Firebase\\JWT\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Faker\\' => 
         array (
@@ -232,10 +221,6 @@ class ComposerStaticInitbd1f1942fe362ba9d5e9b08f31ba0dc1
         'Collective\\Html\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravelcollective/html/src',
-        ),
-        'Collective\\Bus\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravelcollective/bus/src',
         ),
         'ClassPreloader\\' => 
         array (
@@ -328,25 +313,23 @@ class ComposerStaticInitbd1f1942fe362ba9d5e9b08f31ba0dc1
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Events\\Event' => __DIR__ . '/../..' . '/app/Events/Event.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
-        'App\\Http\\Controllers\\Admin\\MenuController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/MenuController.php',
-        'App\\Http\\Controllers\\Admin\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/UsersController.php',
-        'App\\Http\\Controllers\\Auth\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AuthController.php',
-        'App\\Http\\Controllers\\Auth\\PasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PasswordController.php',
+        'App\\Http\\Controllers\\Auth\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthController.php',
+        'App\\Http\\Controllers\\Auth\\PasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/PasswordController.php',
         'App\\Http\\Controllers\\BackendController' => __DIR__ . '/../..' . '/app/Http/Controllers/BackendController.php',
+        'App\\Http\\Controllers\\Backend\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/AuthController.php',
+        'App\\Http\\Controllers\\Backend\\MenuController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/MenuController.php',
+        'App\\Http\\Controllers\\Backend\\PresentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/PresentController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\FrontendController' => __DIR__ . '/../..' . '/app/Http/Controllers/FrontendController.php',
-        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
-        'App\\Http\\Middleware\\RedirectIfNotAdmin' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfNotAdmin.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
-        'App\\Http\\Models\\Admin' => __DIR__ . '/../..' . '/app/Http/Models/Admin.php',
-        'App\\Http\\Models\\Model' => __DIR__ . '/../..' . '/app/Http/Models/Model.php',
-        'App\\Http\\Models\\User' => __DIR__ . '/../..' . '/app/Http/Models/User.php',
+        'App\\Http\\Models\\PresentModel' => __DIR__ . '/../..' . '/app/Http/Models/PresentModel.php',
         'App\\Http\\Requests\\Request' => __DIR__ . '/../..' . '/app/Http/Requests/Request.php',
         'App\\Jobs\\Job' => __DIR__ . '/../..' . '/app/Jobs/Job.php',
+        'App\\Pagination\\CustomPresenter' => __DIR__ . '/../..' . '/app/Pagination/CustomPresenter.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
@@ -383,11 +366,6 @@ class ComposerStaticInitbd1f1942fe362ba9d5e9b08f31ba0dc1
         'ClassPreloader\\Parser\\FileVisitor' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/Parser/FileVisitor.php',
         'ClassPreloader\\Parser\\NodeTraverser' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/Parser/NodeTraverser.php',
         'ClassPreloader\\Parser\\StrictTypesVisitor' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/Parser/StrictTypesVisitor.php',
-        'Collective\\Bus\\BusServiceProvider' => __DIR__ . '/..' . '/laravelcollective/bus/src/BusServiceProvider.php',
-        'Collective\\Bus\\Dispatcher' => __DIR__ . '/..' . '/laravelcollective/bus/src/Dispatcher.php',
-        'Collective\\Bus\\HandlerResolver' => __DIR__ . '/..' . '/laravelcollective/bus/src/HandlerResolver.php',
-        'Collective\\Bus\\MarshalException' => __DIR__ . '/..' . '/laravelcollective/bus/src/MarshalException.php',
-        'Collective\\Bus\\Queueable' => __DIR__ . '/..' . '/laravelcollective/bus/src/Queueable.php',
         'Collective\\Html\\Componentable' => __DIR__ . '/..' . '/laravelcollective/html/src/Componentable.php',
         'Collective\\Html\\Eloquent\\FormAccessible' => __DIR__ . '/..' . '/laravelcollective/html/src/Eloquent/FormAccessible.php',
         'Collective\\Html\\FormBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/FormBuilder.php',
@@ -828,10 +806,6 @@ class ComposerStaticInitbd1f1942fe362ba9d5e9b08f31ba0dc1
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
-        'Firebase\\JWT\\BeforeValidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/BeforeValidException.php',
-        'Firebase\\JWT\\ExpiredException' => __DIR__ . '/..' . '/firebase/php-jwt/src/ExpiredException.php',
-        'Firebase\\JWT\\JWT' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWT.php',
-        'Firebase\\JWT\\SignatureInvalidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/SignatureInvalidException.php',
         'Fixed_Positioner' => __DIR__ . '/..' . '/dompdf/dompdf/include/fixed_positioner.cls.php',
         'Font' => __DIR__ . '/..' . '/phenx/php-font-lib/classes/Font.php',
         'Font_Binary_Stream' => __DIR__ . '/..' . '/phenx/php-font-lib/classes/Font_Binary_Stream.php',
@@ -2367,22 +2341,6 @@ class ComposerStaticInitbd1f1942fe362ba9d5e9b08f31ba0dc1
         'Page_Cache' => __DIR__ . '/..' . '/dompdf/dompdf/include/page_cache.cls.php',
         'Page_Frame_Decorator' => __DIR__ . '/..' . '/dompdf/dompdf/include/page_frame_decorator.cls.php',
         'Page_Frame_Reflower' => __DIR__ . '/..' . '/dompdf/dompdf/include/page_frame_reflower.cls.php',
-        'Paulvl\\JWTGuard\\Auth\\AuthServiceProvider' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/Auth/AuthServiceProvider.php',
-        'Paulvl\\JWTGuard\\Auth\\JWTGuard' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/Auth/JWTGuard.php',
-        'Paulvl\\JWTGuard\\Auth\\JWTGuardInterface' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/Auth/JWTGuardInterface.php',
-        'Paulvl\\JWTGuard\\Auth\\JWTGuardTrait' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/Auth/JWTGuardTrait.php',
-        'Paulvl\\JWTGuard\\Auth\\Middleware\\AuthenticateJwt' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/Auth/Middleware/AuthenticateJwt.php',
-        'Paulvl\\JWTGuard\\Auth\\UserJWTGuard' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/Auth/UserJWTGuard.php',
-        'Paulvl\\JWTGuard\\JWT\\JWTManager' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/JWT/JWTManager.php',
-        'Paulvl\\JWTGuard\\JWT\\Token\\CommonJWT' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/JWT/Token/CommonJWT.php',
-        'Paulvl\\JWTGuard\\JWT\\Token\\ErrorToken' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/JWT/Token/ErrorToken.php',
-        'Paulvl\\JWTGuard\\JWT\\Token\\RefreshJWT' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/JWT/Token/RefreshJWT.php',
-        'Paulvl\\JWTGuard\\JWT\\Token\\TokenInterface' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/JWT/Token/TokenInterface.php',
-        'Paulvl\\JWTGuard\\JWT\\Token\\TokenTrait' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/JWT/Token/TokenTrait.php',
-        'Paulvl\\JWTGuard\\JWT\\Token\\UserJWT' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/JWT/Token/UserJWT.php',
-        'Paulvl\\JWTGuard\\Support\\Facades\\JWTManager' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/Support/Facades/JWTManager.php',
-        'Paulvl\\JWTGuard\\Support\\Facades\\Serializer' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/Support/Facades/Serializer.php',
-        'Paulvl\\JWTGuard\\Support\\Serializer' => __DIR__ . '/..' . '/paulvl/jwt-guard/src/Support/Serializer.php',
         'PhpParser\\Autoloader' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Autoloader.php',
         'PhpParser\\Builder' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Builder.php',
         'PhpParser\\BuilderAbstract' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/BuilderAbstract.php',
