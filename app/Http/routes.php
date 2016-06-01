@@ -65,6 +65,14 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::get('logout', ['as' => 'backend.logout', 'uses' => 'AuthController@logout']);
 });
 
+Route::group(['prefix' => '4school', 'namespace' => 'Frontend'], function () 
+{
+	Route::get('/', ['as' => 'frontend.index', 'uses' => 'AuthController@getLogin']);
+});
+
+Route::get('/', function () {
+        return redirect()->to('4school');
+    });
 Route::get('sys-adm', function () {
         return redirect()->to('sys-adm/login');
     });

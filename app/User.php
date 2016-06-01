@@ -6,6 +6,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    protected $table = 'm_user';
+    protected $primaryKey = 'u_id';
+    public $timestamps  = false;
     /**
      * The attributes that are mass assignable.
      *
@@ -24,17 +27,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
-    protected $table = 'm_user';
-    protected $primaryKey = 'u_id';
-    public $timestamps  = false;
     // protected $redirectTo = 'sys-adm/login';
 
     public function getPasswordAttribute(){
-        return $this->u_password;
+        return $this->u_passwd;
     } 
 
     public function setPasswordAttribute($value){
-        $this->u_password = $value;
+        $this->u_passwd = $value;
     }
 }
