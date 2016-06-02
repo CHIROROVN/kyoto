@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Http\Controllers\Backend;
+<?php namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\BackendController;
 use App\Http\Models\PresentModel;
@@ -18,6 +16,7 @@ class MenuController extends BackendController
 
 
 	public function index() {
-		return view('backend.menu.index');
+		$title = 'メニュー';
+		return view('backend.menu.index', compact('title'));
 	}
 }

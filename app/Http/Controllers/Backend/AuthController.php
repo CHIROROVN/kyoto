@@ -27,11 +27,10 @@ class AuthController extends BackendController
 
 	}
 
-
 	public function getLogin()
 	{
-
-		return view('backend.auth.login');
+        $title = 'ログイン';
+		return view('backend.auth.login', compact('title'));
 	}
 
 

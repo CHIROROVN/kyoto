@@ -9,6 +9,7 @@
     <!-- Bootstrap -->
     <link href="{{ asset('') }}public/backend/common/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('') }}public/backend/common/css/page.css" rel="stylesheet">
+    <link href="{{ asset('public/backend/common/css/style.css')}}" rel="stylesheet">
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -23,13 +24,13 @@
         <div class="row">
           <div class="col-md-6">
             <h1 class="fl-left">キッズコーポレーション業務管理システム</h1>
-            <h1 class="fl-right">プレゼント情報の検索結果一覧</h1>
+            <h1 class="fl-right">{{@$title}}</h1>
           </div>
           <div class="col-md-6">
             <div class="fl-right mar-left40">
               <input type="button" class="btn btn-sm btn-info  btn-mar-right" name="button2" value="メニューへ" onclick="location.href='{{ route('backend.menu') }}'"/><input type="button" class="btn btn-sm btn-info" name="button" value="ログアウト" onclick="location.href='{{ route('backend.logout') }}'"/>
             </div>
-            <div class="fl-right mar-top5">ようこそ、山田花子さん（<a href="change_pass.html" class="text-orange">パスワード変更</a>）</div>
+            <div class="fl-right mar-top5">ようこそ、{{@Auth::user()->u_name}}さん（<a href="{{URL::route('backend.users.change_passwd')}}" class="text-orange">パスワード変更</a>）</div>
           </div>
         </div>
       </div>

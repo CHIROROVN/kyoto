@@ -15,7 +15,8 @@ class UsersController extends FrontendController
 	}
 
 	public function getLogin() {
-		return view('frontend.users.login');
+		$title = 'Login';
+		return view('frontend.users.login', compact('title'));
 	}
 
 	public function postLogin() {
@@ -23,7 +24,8 @@ class UsersController extends FrontendController
 	}
 
 	public function getLogout() {
-		return view('frontend.users.logout');
+		$title = 'Logout';
+		return view('frontend.users.logout', compact('title'));
 	}
 
 	public function getChangePasswd() {

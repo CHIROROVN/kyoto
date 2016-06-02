@@ -11,10 +11,6 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 
 
 /**
@@ -36,7 +32,7 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 
 	/**
 	 * presents
-	 */
+	*/
 	Route::get('presents', ['as' => 'backend.presents.index', 'uses' => 'PresentController@index']);
 	Route::get('presents/regist', ['as' => 'backend.presents.regist', 'uses' => 'PresentController@getRegist']);
 	Route::post('presents/regist', ['as' => 'backend.presents.regist', 'uses' => 'PresentController@postRegist']);
@@ -47,7 +43,7 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 
 	/**
 	 * bunya
-	 */
+	*/
 	Route::get('bunyas', ['as' => 'backend.bunyas.index', 'uses' => 'BunyaController@index']);
 	Route::get('bunyas/regist', ['as' => 'backend.bunyas.regist', 'uses' => 'BunyaController@getRegist']);
 	Route::post('bunyas/regist', ['as' => 'backend.bunyas.regist', 'uses' => 'BunyaController@postRegist']);
@@ -59,10 +55,18 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 
 	/**
 	 * auth
-	 */
+	*/
 	Route::get('login', ['as' => 'backend.login', 'uses' => 'AuthController@getLogin']);
 	Route::post('login', ['as' => 'backend.login', 'uses' => 'AuthController@postLogin']);
 	Route::get('logout', ['as' => 'backend.logout', 'uses' => 'AuthController@logout']);
+
+	/**
+	 * Users
+	*/
+	Route::get('users', ['as' => 'backend.users.index', 'uses' => 'UsersController@index']);
+	Route::get('change_passwd', ['as' => 'backend.users.change_passwd', 'uses' => 'UsersController@getChangePasswd']);
+	Route::post('change_passwd', ['as' => 'backend.users.change_passwd', 'uses' => 'UsersController@ChangePasswd']);
+
 });
 
 Route::group(['prefix' => '4school', 'namespace' => 'Frontend'], function () 
