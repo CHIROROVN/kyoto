@@ -30,15 +30,15 @@
       <ul>
         <li><a href="customer_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>顧客マスタ管理</a></li>
         <li><a href="enterprise_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>法人マスタ管理</a></li>
-        <li><a href="baitai_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>媒体マスタ管理</a></li>
+        <li><a href="{{ route('backend.baitais.search') }}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>媒体マスタ管理</a></li>
         <li><a href="pamphlet_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>資料請求番号マスタ管理</a></li>
         <li><a href="g-pamphlet_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>一括資料請求番号マスタ管理</a></li>
-        <li><a href="{{URL::route('backend.bunyas.index')}}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>分野番号マスタ管理</a></li>
+        <li><a href="{{ route('backend.bunyas.search') }}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>分野番号マスタ管理</a></li>
         <li><a href="highschool_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>高等学校マスタ管理</a></li>
         <li><a href="university_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>大学マスタ管理</a></li>
-        <li><a href="present_list.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>プレゼントマスタ管理</a></li>
+        <li><a href="{{ route('backend.presents.index') }}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>プレゼントマスタ管理</a></li>
         <li><a href="campaign_list.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>キャンペーンマスタ管理</a></li>
-        <li><a href="{{URL::route('backend.users.index')}}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>ユーザー管理</a></li>
+        <li><a href="user_list.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>ユーザー管理</a></li>
       </ul>
     </div>
   </div>

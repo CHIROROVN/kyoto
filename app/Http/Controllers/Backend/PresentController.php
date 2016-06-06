@@ -18,15 +18,17 @@ class PresentController extends BackendController
 
 
 	public function index() {
-		$clsPresent = new PresentModel();
-		$data['presents'] = $clsPresent->get_all();
+		$clsPresent 		= new PresentModel();
+		$data['presents'] 	= $clsPresent->get_all();
+		$data['title'] 		= 'プレゼント情報の検索結果一覧';
 
 		return view('backend.presents.index', $data);
 	}
 
 
 	public function getRegist() {
-		return view('backend.presents.regist');
+		$data['title'] 		= 'プレゼントの新規登録';
+		return view('backend.presents.regist', $data);
 	}
 
 
@@ -36,6 +38,7 @@ class PresentController extends BackendController
             'present_code'      => Input::get('present_code'),
             'present_name'      => Input::get('present_name'),
 
+            'last_date'         => date('Y-m-d H:i:s'),
             'last_kind'         => INSERT,
             'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
             'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
@@ -55,6 +58,7 @@ class PresentController extends BackendController
 	public function getEdit($id) {
 		$clsPresent 		= new PresentModel();
 		$data['present'] 	= $clsPresent->get_by_id($id);
+		$data['title'] 		= 'プレゼントの新規登録';
 
 		return view('backend.presents.edit', $data);
 	}

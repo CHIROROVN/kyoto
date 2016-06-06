@@ -54,6 +54,42 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 
 
 	/**
+	 * baitai
+	 */
+	Route::get('baitais', ['as' => 'backend.baitais.index', 'uses' => 'BaitaiController@index']);
+	Route::get('baitais/regist', ['as' => 'backend.baitais.regist', 'uses' => 'BaitaiController@getRegist']);
+	Route::post('baitais/regist', ['as' => 'backend.baitais.regist', 'uses' => 'BaitaiController@postRegist']);
+	Route::get('baitais/edit/{id}', ['as' => 'backend.baitais.edit', 'uses' => 'BaitaiController@getEdit']);
+	Route::post('baitais/edit/{id}', ['as' => 'backend.baitais.edit', 'uses' => 'BaitaiController@postEdit']);
+	Route::get('baitais/delete/{id}', ['as' => 'backend.baitais.delete', 'uses' => 'BaitaiController@delete']);
+	Route::get('baitais/search', ['as' => 'backend.baitais.search', 'uses' => 'BaitaiController@search']);
+
+
+	/**
+	 * campaigns
+	 */
+	Route::get('campaigns', ['as' => 'backend.campaigns.index', 'uses' => 'CampaignController@index']);
+	Route::get('campaigns/regist', ['as' => 'backend.campaigns.regist', 'uses' => 'CampaignController@getRegist']);
+	Route::post('campaigns/regist', ['as' => 'backend.campaigns.regist', 'uses' => 'CampaignController@postRegist']);
+	Route::get('campaigns/edit/{id}', ['as' => 'backend.campaigns.edit', 'uses' => 'CampaignController@getEdit']);
+	Route::post('campaigns/edit/{id}', ['as' => 'backend.campaigns.edit', 'uses' => 'CampaignController@postEdit']);
+	Route::get('campaigns/delete/{id}', ['as' => 'backend.campaigns.delete', 'uses' => 'CampaignController@delete']);
+	Route::get('campaigns/search', ['as' => 'backend.campaigns.search', 'uses' => 'CampaignController@search']);
+
+
+	/**
+	 * enterprises
+	 */
+	Route::get('enterprises', ['as' => 'backend.enterprises.index', 'uses' => 'EnterpriseController@index']);
+	Route::get('enterprises/regist', ['as' => 'backend.enterprises.regist', 'uses' => 'EnterpriseController@getRegist']);
+	Route::post('enterprises/regist', ['as' => 'backend.enterprises.regist', 'uses' => 'EnterpriseController@postRegist']);
+	Route::get('enterprises/edit/{id}', ['as' => 'backend.enterprises.edit', 'uses' => 'EnterpriseController@getEdit']);
+	Route::post('enterprises/edit/{id}', ['as' => 'backend.enterprises.edit', 'uses' => 'EnterpriseController@postEdit']);
+	Route::get('enterprises/delete/{id}', ['as' => 'backend.enterprises.delete', 'uses' => 'EnterpriseController@delete']);
+	Route::get('enterprises/search', ['as' => 'backend.enterprises.search', 'uses' => 'EnterpriseController@search']);
+
+
+	/**
 	 * auth
 	*/
 	Route::get('login', ['as' => 'backend.login', 'uses' => 'AuthController@getLogin']);
