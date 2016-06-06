@@ -37,8 +37,8 @@
         <li><a href="highschool_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>高等学校マスタ管理</a></li>
         <li><a href="university_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>大学マスタ管理</a></li>
         <li><a href="{{ route('backend.presents.index') }}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>プレゼントマスタ管理</a></li>
-        <li><a href="campaign_list.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>キャンペーンマスタ管理</a></li>
-        <li><a href="user_list.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>ユーザー管理</a></li>
+        <li><a href="{{ route('backend.campaigns.index') }}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>キャンペーンマスタ管理</a></li>
+        <li><a href="{{ route('backend.users.index') }}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>ユーザー管理</a></li>
       </ul>
     </div>
   </div>

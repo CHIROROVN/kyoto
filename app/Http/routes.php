@@ -109,6 +109,16 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::get('change_passwd', ['as' => 'backend.users.change_passwd', 'uses' => 'UsersController@getChangePasswd']);
 	Route::post('change_passwd', ['as' => 'backend.users.change_passwd', 'uses' => 'UsersController@ChangePasswd']);
 
+	/**
+	 * Students
+	*/
+	Route::get('students/search', ['as' => 'backend.students.search', 'uses' => 'StudentController@search']);
+	Route::get('students', ['as' => 'backend.students.index', 'uses' => 'StudentController@index']);
+	Route::get('students/regist', ['as' => 'backend.students.regist', 'uses' => 'StudentController@regist']);
+	Route::get('students/update/{?id}', ['as' => 'backend.students.update', 'uses' => 'StudentController@getUpdate']);
+	Route::post('students/update/{?id}', ['as' => 'backend.students.update', 'uses' => 'StudentController@postUpdate']);
+	Route::get('students/detail/{?id}', ['as' => 'backend.students.detail', 'uses' => 'StudentController@detail']);
+
 });
 
 Route::group(['prefix' => '4school', 'namespace' => 'Frontend'], function () 
