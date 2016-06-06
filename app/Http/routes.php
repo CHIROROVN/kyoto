@@ -64,6 +64,12 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	 * Users
 	*/
 	Route::get('users', ['as' => 'backend.users.index', 'uses' => 'UsersController@index']);
+	Route::get('users/regist', ['as' => 'backend.users.regist', 'uses' => 'UsersController@getRegist']);
+	Route::post('users/regist', ['as' => 'backend.users.regist', 'uses' => 'UsersController@postRegist']);
+	Route::get('users/update/{id}', ['as' => 'backend.users.update', 'uses' => 'UsersController@getUpdate']);
+	Route::post('users/update/{id}', ['as' => 'backend.users.update', 'uses' => 'UsersController@postUpdate']);
+	Route::get('users/delete/{id}', ['as' => 'backend.users.delete', 'uses' => 'UsersController@delete']);
+	
 	Route::get('change_passwd', ['as' => 'backend.users.change_passwd', 'uses' => 'UsersController@getChangePasswd']);
 	Route::post('change_passwd', ['as' => 'backend.users.change_passwd', 'uses' => 'UsersController@ChangePasswd']);
 

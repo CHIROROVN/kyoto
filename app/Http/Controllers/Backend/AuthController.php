@@ -21,7 +21,6 @@ class AuthController extends BackendController
         }
 	}
 
-
 	public function index()
 	{
 

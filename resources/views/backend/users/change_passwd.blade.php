@@ -7,60 +7,59 @@
         <div class="row content content--changepass">        
           <div class="col-md-12">
         	<div class="msg-alert">
-		        @if ($message = Session::get('success'))
-					<div class="alert alert-success  alert-dismissible fade in" role="alert">
-					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					    <span aria-hidden="true">&times;</span>
-					  </button>
-					  <ul><strong><li> {{ $message }}</li></strong></ul>
-					</div>
-				@elseif($message = Session::get('danger'))
-					<div class="alert alert-danger alert-dismissible fade in" role="alert">
-					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					    <span aria-hidden="true">&times;</span>
-					  </button>
-					  <ul><strong><li> {{ $message }}</li></strong></ul>
-					</div>
-				@endif
-			</div>
-
-          {!! Form::open( ['id' => 'frmChangePasswd', 'class' => 'form-horizontal','method' => 'post', 'route' => 'backend.users.change_passwd', 'enctype'=>'multipart/form-data'] ) !!} 
-            <label class="col-md-3 control-label" for="currpasswd">現在のパスワード「<span class="note_required">※</span>」</label>
-              <div class="form-group">
-                <div class="col-md-6">
-                  <input type="password" name="currpasswd" class="form-control" id="currpasswd" value="{{old('currpasswd')}}">
-                  <div class="help-block with-errors">
-                  	<ul class="list-unstyled"><li>@if ($errors->first('currpasswd')) ※ {!! $errors->first('currpasswd') !!} @endif</li></ul>
-                  </div>
+  		        @if ($message = Session::get('success'))
+  					<div class="alert alert-success  alert-dismissible fade in" role="alert">
+  					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  					    <span aria-hidden="true">&times;</span>
+  					  </button>
+  					  <ul><strong><li> {{ $message }}</li></strong></ul>
+  					</div>
+  				@elseif($message = Session::get('danger'))
+  					<div class="alert alert-danger alert-dismissible fade in" role="alert">
+  					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  					    <span aria-hidden="true">&times;</span>
+  					  </button>
+  					  <ul><strong><li> {{ $message }}</li></strong></ul>
+  					</div>
+  				@endif
+  			</div>
+        {!! Form::open( ['id' => 'frmChangePasswd', 'class' => 'form-horizontal','method' => 'post', 'route' => 'backend.users.change_passwd', 'enctype'=>'multipart/form-data'] ) !!} 
+          <label class="col-md-3 control-label" for="currpasswd">現在のパスワード <span class="note_required">※</span></label>
+            <div class="form-group">
+              <div class="col-md-6">
+                <input type="password" name="currpasswd" class="form-control" id="currpasswd" value="{{old('currpasswd')}}">
+                <div class="help-block with-errors">
+                	<ul class="list-unstyled"><li>@if ($errors->first('currpasswd')) ※ {!! $errors->first('currpasswd') !!} @endif</li></ul>
                 </div>
               </div>
-              <label class="col-md-3 control-label" for="newpasswd">新しいパスワード「<span class="note_required">※</span>」</label>
-              <div class="form-group">                
-                <div class="col-md-6">
-                  <input type="password" name="newpasswd" class="form-control" id="newpasswd">
-                  <div class="help-block with-errors">
-                  	<ul class="list-unstyled"><li>@if ($errors->first('newpasswd')) ※ {!! $errors->first('newpasswd') !!} @endif</li></ul>
-                  </div>
+            </div>
+            <label class="col-md-3 control-label" for="newpasswd">新しいパスワード <span class="note_required">※</span></label>
+            <div class="form-group">                
+              <div class="col-md-6">
+                <input type="password" name="newpasswd" class="form-control" id="newpasswd">
+                <div class="help-block with-errors">
+                	<ul class="list-unstyled"><li>@if ($errors->first('newpasswd')) ※ {!! $errors->first('newpasswd') !!} @endif</li></ul>
                 </div>
               </div>
-              <label class="col-md-3 control-label" for="confnewpasswd">新しいパスワード（確認）</label>
-              <div class="form-group" >                
-                <div class="col-md-6">
-                  <input type="password" name="confnewpasswd" class="form-control" id="confnewpasswd">
-                  <div class="help-block with-errors">
-                  	<ul class="list-unstyled"><li>@if ($errors->first('confnewpasswd')) ※ {!! $errors->first('confnewpasswd') !!} @endif</li></ul>
-                  </div>
+            </div>
+            <label class="col-md-3 control-label" for="confnewpasswd">新しいパスワード（確認）</label>
+            <div class="form-group" >                
+              <div class="col-md-6">
+                <input type="password" name="confnewpasswd" class="form-control" id="confnewpasswd">
+                <div class="help-block with-errors">
+                	<ul class="list-unstyled"><li>@if ($errors->first('confnewpasswd')) ※ {!! $errors->first('confnewpasswd') !!} @endif</li></ul>
                 </div>
               </div>
-              <div class="form-group">
-                <div class="col-md-offset-3 col-md-6">
-                  <button type="submit" class="btn btn-primary">&nbsp;&nbsp;更新&nbsp;&nbsp;</button>
-                </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-offset-3 col-md-6">
+                <button type="submit" class="btn btn-primary">&nbsp;&nbsp;更新&nbsp;&nbsp;</button>
               </div>
-            {!! Form::close() !!}
-          </div>
+            </div>
+          {!! Form::close() !!}
         </div>
       </div>
-    </section>
-    <!-- End content change pass -->	
+    </div>
+  </section>
+  <!-- End content change pass -->
 @endsection
