@@ -8,7 +8,7 @@
       <ul>
         <li><a href="student_regist.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>個人情報の新規登録</a></li>
         <li><a href="student_import.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>個人情報のCSV一括登録</a></li>
-        <li><a href="student_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>個人情報の検索・一覧・修正・削除・CSV出力</a></li>
+        <li><a href="{{ route('backend.students.search') }}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>個人情報の検索・一覧・修正・削除・CSV出力</a></li>
       </ul>
     </div>
     <div class="col-md-4">
@@ -29,7 +29,7 @@
       <h2>マスタ管理</h2>
       <ul>
         <li><a href="customer_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>顧客マスタ管理</a></li>
-        <li><a href="enterprise_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>法人マスタ管理</a></li>
+        <li><a href="{{ route('backend.enterprises.index') }}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>法人マスタ管理</a></li>
         <li><a href="{{ route('backend.baitais.search') }}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>媒体マスタ管理</a></li>
         <li><a href="pamphlet_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>資料請求番号マスタ管理</a></li>
         <li><a href="g-pamphlet_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>一括資料請求番号マスタ管理</a></li>

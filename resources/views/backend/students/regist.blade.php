@@ -279,5 +279,5 @@
         </div>
       </div>
     </section>
-    <!-- End content student regist -->
+<!-- End content student regist -->
 @endsection
