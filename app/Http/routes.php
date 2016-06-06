@@ -112,12 +112,35 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	/**
 	 * Students
 	*/
-	Route::get('students/search', ['as' => 'backend.students.search', 'uses' => 'StudentController@search']);
-	Route::get('students', ['as' => 'backend.students.index', 'uses' => 'StudentController@index']);
-	Route::get('students/regist', ['as' => 'backend.students.regist', 'uses' => 'StudentController@regist']);
-	Route::get('students/update/{?id}', ['as' => 'backend.students.update', 'uses' => 'StudentController@getUpdate']);
-	Route::post('students/update/{?id}', ['as' => 'backend.students.update', 'uses' => 'StudentController@postUpdate']);
-	Route::get('students/detail/{?id}', ['as' => 'backend.students.detail', 'uses' => 'StudentController@detail']);
+	Route::get('student/search', ['as' => 'backend.students.search', 'uses' => 'StudentController@search']);
+	Route::get('student', ['as' => 'backend.students.index', 'uses' => 'StudentController@index']);
+	Route::get('student/regist', ['as' => 'backend.students.regist', 'uses' => 'StudentController@regist']);
+	Route::get('student/update', ['as' => 'backend.students.update', 'uses' => 'StudentController@getUpdate']);
+	Route::post('student/update', ['as' => 'backend.students.update', 'uses' => 'StudentController@postUpdate']);
+	Route::get('student/detail/{?id}', ['as' => 'backend.students.detail', 'uses' => 'StudentController@detail']);
+
+	Route::get('student/detail', ['as' => 'backend.students.detail', 'uses' => 'StudentController@detail']);
+
+	Route::get('student/delete', ['as' => 'backend.students.delete', 'uses' => 'StudentController@delete']);
+
+	Route::get('student/delete_cnf', ['as' => 'backend.students.delete_cnf', 'uses' => 'StudentController@deleteCnf']);
+
+
+	/**
+	 * Students present 
+	*/
+	Route::get('student/present', ['as' => 'backend.students.present_index', 'uses' => 'StudentController@presentIndex']);
+	Route::get('student/present_regist', ['as' => 'backend.students.present_regist', 'uses' => 'StudentController@getPresentRegist']);
+	Route::post('student/present_regist', ['as' => 'backend.students.present_regist', 'uses' => 'StudentController@postPresentRegist']);
+	Route::get('students/present_update', ['as' => 'backend.students.present_update', 'uses' => 'StudentController@getPresentUpdate']);
+	Route::post('student/present_update', ['as' => 'backend.students.present_update', 'uses' => 'StudentController@postPresentUpdate']);
+
+	/**
+	 * University
+	*/
+	Route::get('university', ['as' => 'backend.unyversitys.index', 'uses' => 'UniversityController@index']);
+	Route::get('university/regist', ['as' => 'backend.unyversitys.regist', 'uses' => 'UniversityController@regist']);
+	Route::get('university/search', ['as' => 'backend.unyversitys.search', 'uses' => 'UniversityController@search']);
 
 });
 

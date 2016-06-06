@@ -1,6 +1,6 @@
 @extends('backend.backend')
 @section('content')
-	    <!-- Content student list -->
+	<!-- Content student list -->
     <section id="page">
       <div class="container">
         <div class="row content content--list">
