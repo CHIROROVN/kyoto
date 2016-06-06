@@ -20,10 +20,10 @@ class BunyaModel
     {
     	return array(
             
-            'bunya_code.required'       => '※必須',
-            'bunya_name.required'       => '※必須',
-            'bunya_kind.required'       => '※必須',
-            'bunya_class.required'      => '※必須',
+            'bunya_code.required'       => '※必須分野コード',
+            'bunya_name.required'       => '※必須分野名',
+            'bunya_kind.required'       => '※必須種類',
+            'bunya_class.required'      => '※必須区分',
 		);
     }
 
