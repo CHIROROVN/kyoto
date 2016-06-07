@@ -27,10 +27,44 @@ class BaitaiModel
 		);
     }
 
-    public function get_all()
+    public function get_all($where = array())
     {
-        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->orderBy('baitai_id', 'desc')->paginate(PAGINATION);
-        return $results;
+        $results = DB::table($this->table)->where('last_kind', '<>', DELETE);
+
+        // where baitai_code
+        if ( !empty($where['baitai_code']) ) {
+            $results = $results->where('baitai_code', 'like', '%' . $where['baitai_code'] . '%');
+        }
+
+        // where baitai_name
+        if ( !empty($where['baitai_name']) ) {
+            $results = $results->where('baitai_name', 'like', '%' . $where['baitai_name'] . '%');
+        }
+
+        // where baitai_kind
+        // (old) or (new) or (old & new)
+        if ( !empty($where['baitai_kind_old']) && !empty($where['baitai_kind_new']) ) {
+            $results = $results->where('baitai_kind', '=', $where['baitai_kind_old'])
+                                ->orWhere('baitai_kind', '=', $where['baitai_kind_new']);
+        } elseif ( !empty($where['baitai_kind_old']) && empty($where['baitai_kind_new']) ) {
+            $results = $results->where('baitai_kind', '=', $where['baitai_kind_old']);
+        } elseif ( empty($where['baitai_kind_old']) && !empty($where['baitai_kind_new']) ) {
+            $results = $results->where('baitai_kind', '=', $where['baitai_kind_new']);
+        }
+
+        // where baitai_year
+        // begin & end
+        if ( !empty($where['baitai_year_begin']) && !empty($where['baitai_year_end']) ) {
+            $results = $results->where('baitai_year', '>=', $where['baitai_year_begin'])
+                                ->where('baitai_year', '<=', $where['baitai_year_end']);
+        } elseif ( !empty($where['baitai_year_begin']) && empty($where['baitai_year_end']) ) {
+            $results = $results->where('baitai_year', '>=', $where['baitai_year_begin']);
+        } elseif ( empty($where['baitai_year_begin']) && !empty($where['baitai_year_end']) ) {
+            $results = $results->where('baitai_year', '<=', $where['baitai_year_end']);
+        }
+
+        $db = $results->orderBy('baitai_code', 'asc')->paginate(PAGINATION);
+        return $db;
     }
 
     public function insert($data)

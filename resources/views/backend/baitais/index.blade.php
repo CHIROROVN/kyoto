@@ -69,7 +69,7 @@
   <div class="row">
     <div class="col-md-12 text-center">
       <input name="button7" value="再検索（条件を引き継ぐ）" type="submit" class="btn btn-sm btn-primary form-control--mar-right" onclick="location.href='{{ route('backend.baitais.search') }}'">
-      <input name="button5" value="再検索（条件をクリアする）" type="reset" class="btn btn-sm btn-primary">
+      <input name="button5" value="再検索（条件をクリアする）" type="reset" class="btn btn-sm btn-primary" onclick="location.href='{{ route('backend.baitais.search', array('where' => 'null')) }}'">
     </div>
   </div>
 </div>

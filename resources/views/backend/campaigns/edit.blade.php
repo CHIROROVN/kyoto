@@ -1,7 +1,7 @@
 @extends('backend.backend')
 
 @section('content')
-{!! Form::open(array('route' => array('backend.campaigns.edit', $campaign->campaign_id))) !!}
+{!! Form::open(array('route' => array('backend.campaigns.edit', $campaign->campaign_id), 'enctype'=>'multipart/form-data')) !!}
 <div class="container">
   <div class="row content">
     <table class="table table-bordered">

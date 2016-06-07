@@ -18,8 +18,13 @@ class BaitaiController extends BackendController
 
 
 	public function index() {
+		// if click search, set session where
+		if (Input::get('where') == 1) {
+			Session::put('where', Input::all());
+		}
+		
 		$clsBaitai 			= new BaitaiModel();
-		$data['baitais'] 	= $clsBaitai->get_all();
+		$data['baitais'] 	= $clsBaitai->get_all(Input::all());
 		$data['title'] 		= '媒体情報の検索結果一覧';
 
 		return view('backend.baitais.index', $data);
@@ -107,6 +112,11 @@ class BaitaiController extends BackendController
 
 	public function search()
 	{
+		// destroy session where
+		if (Input::get('where') == 'null') {
+			Session::forget('where');
+		}
+
 		$data['title'] 		= '媒体の検索';
 		return view('backend.baitais.search', $data);
 	}

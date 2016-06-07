@@ -74,7 +74,6 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::get('campaigns/edit/{id}', ['as' => 'backend.campaigns.edit', 'uses' => 'CampaignController@getEdit']);
 	Route::post('campaigns/edit/{id}', ['as' => 'backend.campaigns.edit', 'uses' => 'CampaignController@postEdit']);
 	Route::get('campaigns/delete/{id}', ['as' => 'backend.campaigns.delete', 'uses' => 'CampaignController@delete']);
-	Route::get('campaigns/search', ['as' => 'backend.campaigns.search', 'uses' => 'CampaignController@search']);
 
 
 	/**

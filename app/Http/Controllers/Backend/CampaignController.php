@@ -112,11 +112,4 @@ class CampaignController extends BackendController
 
         return redirect()->route('backend.campaigns.index');
 	}
-
-
-	public function search()
-	{
-		$data['title']  = '分野の検索';
-		return view('backend.campaigns.search', $data);
-	}
 }

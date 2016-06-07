@@ -1,7 +1,7 @@
 @extends('backend.backend')
 
 @section('content')
-{!! Form::open(array('route' => 'backend.presents.regist')) !!}
+{!! Form::open(array('route' => 'backend.presents.regist', 'enctype'=>'multipart/form-data')) !!}
 <div class="container">
   <div class="row content">
     <table class="table table-bordered">
