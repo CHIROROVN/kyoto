@@ -87,6 +87,8 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::get('enterprises/delete/{id}', ['as' => 'backend.enterprises.delete', 'uses' => 'EnterpriseController@delete']);
 	Route::get('enterprises/search', ['as' => 'backend.enterprises.search', 'uses' => 'EnterpriseController@search']);
 
+	Route::get('enterprise/regist/cnk_ajax', ['as' => 'backend.enterprise.cnk_ajax', 'uses' => 'EnterpriseController@getCusNameAjax']);
+
 
 	/**
 	 * customers
