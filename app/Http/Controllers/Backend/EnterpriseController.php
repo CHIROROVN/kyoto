@@ -14,7 +14,6 @@ use Html;
 use DB;
 use URL;
 
-
 class EnterpriseController extends BackendController
 {
 	public function __construct()

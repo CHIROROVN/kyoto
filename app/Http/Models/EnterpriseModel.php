@@ -18,9 +18,9 @@ class EnterpriseModel
     public function Messages()
     {
     	return array(
-            'ent_name.required'   	    => '※必須',
-            'ent_login.required'        => '※必須',
-            'ent_passwd.required'       => '※必須',
+            'ent_name.required'   	    => 'Please enter enterprise nam',
+            'ent_login.required'        => 'Please enter enterprise login id',
+            'ent_passwd.required'       => 'Please enter enterprise password',
 		);
     }
 

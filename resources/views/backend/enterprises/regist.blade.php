@@ -38,8 +38,8 @@
                     <tbody>
                       <tr>
                         <td rowspan="2" valign="bottom">
-                          <select name="select" multiple="multiple" id="select">
-                            <option value="" style="width: 100px;">&nbsp;</option>
+                          <select name="select" multiple="multiple" id="select" style="width: 120px;">
+                            <!-- <option value="">&nbsp;</option> -->
                           </select>
                         </td>
                         <td align="right"><input name="cus_name_add" id="cus_name_add" value="←追加" type="button"></td>
@@ -57,9 +57,9 @@
                         </select></td>
                       </tr>
                       <tr>
-                        <td align="right"><input name="cus_name_del" id="cus_name_del" value="削除→" type="submit"></td>
+                        <td align="right"><input name="cus_name_del" id="cus_name_del" value="削除→" type="button"></td>
                         <td>
-                          <select name="cus_name" multiple="multiple" id="cus_name">
+                          <select name="cus_name" multiple="multiple" id="cus_name" style="width: 120px;">
                             <option value="" style="width: 100px;">&nbsp;</option>
                             <!-- <option>岡山理科大学</option>
                             <option>岡山商科大学</option>
@@ -77,7 +77,7 @@
         </div>
         <div class="row mar-bottom30">
           <div class="col-md-12 text-center">
-            <input name="button4" id="button4" value="登録する" type="submit" class="btn btn-sm btn-primary">
+            <input name="btnSave" id="btnSave" value="登録する" type="submit" class="btn btn-sm btn-primary">
           </div>
         </div>
         <div class="row">
@@ -91,29 +91,38 @@
     <!-- End content enterprise regist -->
 <script type="text/javascript">
   $('#cus_name_kana').on('change',function(){
+    var cnk = $(this).val();
+    getCusName(cnk);
+    });
+  $(document).ready(function(){
+    var cnk = $('#cus_name_kana').val();
+    getCusName(cnk); 
+  });
+
+  function getCusName(cnk){
     $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
-        });
-    var cnk = $(this).val();
+        });    
     var url = "{{route('backend.enterprise.cnk_ajax')}}";
-    var option = "<option value='' style='width: 100px;'>&nbsp;</option>";
+    var option = "";
     $.ajax({
-                type: "GET",
+                type: "POST",
                 url: url,
                 data: {cnk:cnk},
                 success: function (data) {
                   console.log(data['cnk']);
                   $.each(data['cnk'], function(key, val){
                   option += "<option value="+key+">" + val + "</option>";
-              });
-              $('#cus_name').html(option);
+                  });                  
+                  $('#cus_name').html(option);
                 },
                 error: function (data) {
                     console.log('Error:', data);
                 }
-        });
-    });
+        })
+  }
+
 </script>
 @endsection
