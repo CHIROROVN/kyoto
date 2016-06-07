@@ -1,13 +1,19 @@
-<?php
-
-namespace App\Http\Controllers\Backend;
+<?php namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\BackendController;
 use App\Http\Models\EnterpriseModel;
-use Input;
-use Session;
-use Validator;
+use App\Http\Models\CustomerModel;
 use Auth;
+use Validator;
+use Input;
+use Redirect;
+use Hash;
+use Session;
+use Response;
+use Html;
+use DB;
+use URL;
+
 
 class EnterpriseController extends BackendController
 {
@@ -27,13 +33,20 @@ class EnterpriseController extends BackendController
 
 
 	public function getRegist() {
-		$data['title'] 		= '媒体情報の新規登録';
+		$data['title']         = '媒体情報の新規登録';
+		$data['cus_name']      = '';
 		return view('backend.enterprises.regist', $data);
 	}
 
+	function getCusNameAjax(){
+		$cmModel = new CustomerModel();
+		$cnk = Input::get('cnk');
+		$cn_kana = $cmModel->get_cus_by_kana($cnk);
+        return Response::json(array('cnk' => $cn_kana));
+	}
 
 	public function postRegist() {
-		$clsEnterprise             	= new EnterpriseModel();
+		$clsEnterprise          = new EnterpriseModel();
         $dataInsert             = array(
             'baitai_code'      	=> Input::get('baitai_code'),
             'baitai_name'      	=> Input::get('baitai_name'),
@@ -90,9 +103,8 @@ class EnterpriseController extends BackendController
         return redirect()->route('backend.enterprises.index');
 	}
 
-
 	public function delete($id) {
-		$clsEnterprise             	= new EnterpriseModel();
+		$clsEnterprise          = new EnterpriseModel();
 		$dataUpdate 			= array(
 			'last_date'         => date('Y-m-d H:i:s'),
 			'last_kind'         => DELETE,
@@ -103,7 +115,6 @@ class EnterpriseController extends BackendController
 
         return redirect()->route('backend.enterprises.index');
 	}
-
 
 	public function search()
 	{
