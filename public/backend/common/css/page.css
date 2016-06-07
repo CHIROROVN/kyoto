@@ -447,7 +447,7 @@ h1 {
   display: block;
 }
 
-.my_pagination .pagination li {
+.my-pagination li {
   display: inline-block;
   color: #fff;
   background-color: #428bca;
@@ -464,19 +464,22 @@ h1 {
   border: 1px solid transparent;
   white-space: nowrap;
 }
-.my_pagination .pagination li:first-child{
+.my-pagination li:first-child{
   margin-right: 10px;
 }
-.my_pagination .pagination li.disabled {
+.my-pagination li.disabled {
   opacity: 0.7;
 }
-.my_pagination .pagination li a{
+.my-pagination li a{
   float: none;
   margin: 0;
   padding: 0;
   background: none;
   color: white;
   border: none;
+}
+.my-pagination li a:hover {
+  text-decoration: none;
 }
 
 

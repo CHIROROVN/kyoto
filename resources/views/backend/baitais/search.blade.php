@@ -18,7 +18,7 @@
           </td>
           <td class="col-title"><label for="baitai_name">媒体名</label></td>
           <td><input name="baitai_name" id="baitai_name" type="text" class="form-control form-control--default" value="<?php echo isset(Session::get('where')['baitai_name']) ? Session::get('where')['baitai_name'] : ''; ?>"></td>
-          <td class="col-title"><label for="baitai_kind">性別</label></td>
+          <td class="col-title"><label for="baitai_kind">新旧</label></td>
           <td>
             <input name="baitai_kind_old" id="baitai_kind" class="baitai_kind" value="1" type="checkbox" @if(isset(Session::get('where')['baitai_kind_old'])) {{'checked'}} @endif> 旧　　　
             <input name="baitai_kind_new" class="baitai_kind" value="2" type="checkbox" @if(isset(Session::get('where')['baitai_kind_new'])) {{'checked'}} @endif> 新
@@ -53,7 +53,7 @@
   <div class="row mar-bottom30">
     <div class="col-md-12 text-center">
       <input type="hidden" name="where" value="1">
-      <input value="検索開始（OR検索）" type="submit" class="btn btn-sm btn-primary form-control--mar-right">
+      <input value="検索開始（AND検索）" type="submit" class="btn btn-sm btn-primary form-control--mar-right">
       <input name="button5" id="reset" value="クリア（全消し）" type="reset" class="btn btn-sm btn-primary" onclick="location.href='{{ route('backend.baitais.search', array('where' => 'null')) }}'">
     </div>
   </div>

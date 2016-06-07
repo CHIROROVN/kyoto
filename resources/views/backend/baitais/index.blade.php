@@ -63,7 +63,7 @@
     <div class="col-md-12 text-center">
       <!-- <input name="button3" value="前の20件を表示" disabled="disabled" type="submit" class="btn btn-sm btn-primary form-control--mar-right">
       <input name="button4" value="次の20件を表示" type="submit" class="btn btn-sm btn-primary"> -->
-      @include('backend.pagination.custom', ['paginator' => $baitais])
+      {!! $baitais->appends(['key' => 'value'])->render(new App\Pagination\SimplePagination($baitais))  !!}
     </div>
   </div>
   <div class="row">

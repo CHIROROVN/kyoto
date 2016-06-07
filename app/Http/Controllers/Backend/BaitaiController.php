@@ -22,6 +22,8 @@ class BaitaiController extends BackendController
 		if (Input::get('where') == 1) {
 			Session::put('where', Input::all());
 		}
+
+		// $data['']
 		
 		$clsBaitai 			= new BaitaiModel();
 		$data['baitais'] 	= $clsBaitai->get_all(Input::all());
