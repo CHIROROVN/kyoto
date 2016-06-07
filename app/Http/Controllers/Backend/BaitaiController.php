@@ -18,12 +18,13 @@ class BaitaiController extends BackendController
 
 
 	public function index() {
-		// if click search, set session where
-		if (Input::get('where') == 1) {
-			Session::put('where', Input::all());
-		}
-
-		// $data['']
+		// search
+		$data['baitai_code'] 		= Input::get('baitai_code');
+		$data['baitai_name'] 		= Input::get('baitai_name');
+		$data['baitai_kind_old'] 	= Input::get('baitai_kind_old', null);
+		$data['baitai_kind_new'] 	= Input::get('baitai_kind_new', null);
+		$data['baitai_year_begin'] 	= Input::get('baitai_year_begin');
+		$data['baitai_year_end'] 	= Input::get('baitai_year_end');
 		
 		$clsBaitai 			= new BaitaiModel();
 		$data['baitais'] 	= $clsBaitai->get_all(Input::all());
@@ -65,6 +66,14 @@ class BaitaiController extends BackendController
 
 
 	public function getEdit($id) {
+		// search
+		$data['baitai_code'] 		= Input::get('baitai_code');
+		$data['baitai_name'] 		= Input::get('baitai_name');
+		$data['baitai_kind_old'] 	= Input::get('baitai_kind_old', null);
+		$data['baitai_kind_new'] 	= Input::get('baitai_kind_new', null);
+		$data['baitai_year_begin'] 	= Input::get('baitai_year_begin');
+		$data['baitai_year_end'] 	= Input::get('baitai_year_end');
+
 		$clsBaitai 			= new BaitaiModel();
 		$data['baitai'] 	= $clsBaitai->get_by_id($id);
 		$data['title'] 		= '媒体情報の新規登録';
@@ -74,6 +83,14 @@ class BaitaiController extends BackendController
 
 
 	public function postEdit($id) {
+		// search
+		$data['baitai_code'] 		= Input::get('baitai_code');
+		$data['baitai_name'] 		= Input::get('baitai_name');
+		$data['baitai_kind_old'] 	= Input::get('baitai_kind_old', null);
+		$data['baitai_kind_new'] 	= Input::get('baitai_kind_new', null);
+		$data['baitai_year_begin'] 	= Input::get('baitai_year_begin');
+		$data['baitai_year_end'] 	= Input::get('baitai_year_end');
+
 		$clsBaitai             	= new BaitaiModel();
         $dataInsert             = array(
             'baitai_code'      	=> Input::get('baitai_code'),
@@ -89,16 +106,38 @@ class BaitaiController extends BackendController
 
         $validator  = Validator::make($dataInsert, $clsBaitai->Rules(), $clsBaitai->Messages());
         if ($validator->fails()) {
-            return redirect()->route('backend.baitais.edit', $id)->withErrors($validator)->withInput();
+            return redirect()->route('backend.baitais.edit', array($id, 
+            		'baitai_code' 		=> Input::get('baitai_code'),
+			        'baitai_name' 		=> Input::get('baitai_name'),
+			        'baitai_kind_old' 	=> Input::get('baitai_kind_old', null),
+			        'baitai_kind_new' 	=> Input::get('baitai_kind_new', null),
+			        'baitai_year_begin' => Input::get('baitai_year_begin'),
+			        'baitai_year_end' 	=> Input::get('baitai_year_end')
+            	))->withErrors($validator)->withInput();
         }
 
         $clsBaitai->update($id, $dataInsert);
 
-        return redirect()->route('backend.baitais.index');
+        return redirect()->route('backend.baitais.index', array(
+        		'baitai_code' 		=> Input::get('baitai_code'),
+		        'baitai_name' 		=> Input::get('baitai_name'),
+		        'baitai_kind_old' 	=> Input::get('baitai_kind_old', null),
+		        'baitai_kind_new' 	=> Input::get('baitai_kind_new', null),
+		        'baitai_year_begin' => Input::get('baitai_year_begin'),
+		        'baitai_year_end' 	=> Input::get('baitai_year_end')
+        	));
 	}
 
 
 	public function delete($id) {
+		// search
+		$data['baitai_code'] 		= Input::get('baitai_code');
+		$data['baitai_name'] 		= Input::get('baitai_name');
+		$data['baitai_kind_old'] 	= Input::get('baitai_kind_old', null);
+		$data['baitai_kind_new'] 	= Input::get('baitai_kind_new', null);
+		$data['baitai_year_begin'] 	= Input::get('baitai_year_begin');
+		$data['baitai_year_end'] 	= Input::get('baitai_year_end');
+
 		$clsBaitai             	= new BaitaiModel();
 		$dataUpdate 			= array(
 			'last_date'         => date('Y-m-d H:i:s'),
@@ -108,15 +147,38 @@ class BaitaiController extends BackendController
 		);
 		$clsBaitai->update($id, $dataUpdate);
 
-        return redirect()->route('backend.baitais.index');
+        return redirect()->route('backend.baitais.index', array(
+        		'baitai_code' 		=> Input::get('baitai_code'),
+		        'baitai_name' 		=> Input::get('baitai_name'),
+		        'baitai_kind_old' 	=> Input::get('baitai_kind_old', null),
+		        'baitai_kind_new' 	=> Input::get('baitai_kind_new', null),
+		        'baitai_year_begin' => Input::get('baitai_year_begin'),
+		        'baitai_year_end' 	=> Input::get('baitai_year_end')
+        	));
 	}
 
 
 	public function search()
 	{
-		// destroy session where
+		// search
+		$data['baitai_code'] 		= Input::get('baitai_code');
+		$data['baitai_name'] 		= Input::get('baitai_name');
+		$data['baitai_kind_old'] 	= Input::get('baitai_kind_old');
+		$data['baitai_kind_new'] 	= Input::get('baitai_kind_new');
+		$data['baitai_year_begin'] 	= Input::get('baitai_year_begin');
+		$data['baitai_year_end'] 	= Input::get('baitai_year_end');
+
+		// reset where
 		if (Input::get('where') == 'null') {
-			Session::forget('where');
+			// search
+			$data['baitai_code'] 		= null;
+			$data['baitai_name'] 		= null;
+			$data['baitai_kind_old'] 	= null;
+			$data['baitai_kind_new'] 	= null;
+			$data['baitai_year_begin'] 	= null;
+			$data['baitai_year_end'] 	= null;
+
+			return redirect()->route('backend.baitais.search');
 		}
 
 		$data['title'] 		= '媒体の検索';

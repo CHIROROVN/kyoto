@@ -44,8 +44,7 @@ class BaitaiModel
         // where baitai_kind
         // (old) or (new) or (old or new)
         if ( !empty($where['baitai_kind_old']) && !empty($where['baitai_kind_new']) ) {
-            $results = $results->where('baitai_kind', '=', $where['baitai_kind_old'])
-                                ->orWhere('baitai_kind', '=', $where['baitai_kind_new']);
+            $results = $results->whereIn('baitai_kind', [1, 2]);
         } elseif ( !empty($where['baitai_kind_old']) && empty($where['baitai_kind_new']) ) {
             $results = $results->where('baitai_kind', '=', $where['baitai_kind_old']);
         } elseif ( empty($where['baitai_kind_old']) && !empty($where['baitai_kind_new']) ) {
@@ -55,12 +54,12 @@ class BaitaiModel
         // where baitai_year
         // begin & end
         if ( !empty($where['baitai_year_begin']) && !empty($where['baitai_year_end']) ) {
-            $results = $results->where('baitai_year', '>=', (int)$where['baitai_year_begin'])
-                                ->where('baitai_year', '<=', (int)$where['baitai_year_end']);
+            $results = $results->where('baitai_year', '>=', $where['baitai_year_begin'])
+                                ->where('baitai_year', '<=', $where['baitai_year_end']);
         } elseif ( !empty($where['baitai_year_begin']) && empty($where['baitai_year_end']) ) {
-            $results = $results->where('baitai_year', '>=', (int)$where['baitai_year_begin']);
+            $results = $results->where('baitai_year', '>=', $where['baitai_year_begin']);
         } elseif ( empty($where['baitai_year_begin']) && !empty($where['baitai_year_end']) ) {
-            $results = $results->where('baitai_year', '<=', (int)$where['baitai_year_end']);
+            $results = $results->where('baitai_year', '<=', $where['baitai_year_end']);
         }
 
         $db = $results->orderBy('baitai_code', 'asc')->simplePaginate(PAGINATION);//simplePaginate, paginate

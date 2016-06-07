@@ -28,7 +28,14 @@
           <td>{{ $baitai->baitai_name }}</td>
           <td><?php echo ($baitai->baitai_kind == 2) ? '新' : '旧'; ?></td>
           <td>{{ $baitai-> baitai_year }}</td>
-          <td align="center"><input onclick="location.href='{{ route('backend.baitais.edit', $baitai->baitai_id) }}'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
+          <td align="center"><input onclick="location.href='{{ route('backend.baitais.edit', array($baitai->baitai_id, 
+            'baitai_code' => $baitai_code,
+            'baitai_name' => $baitai_name,
+            'baitai_kind_old' => $baitai_kind_old,
+            'baitai_kind_new' => $baitai_kind_new,
+            'baitai_year_begin' => $baitai_year_begin,
+            'baitai_year_end' => $baitai_year_end
+          )) }}'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
           <td align="center">
             <!-- <input onclick="location.href='{{ route('backend.baitais.delete', $baitai->baitai_id) }}'" value="削除" type="button" class="btn btn-xs btn-primary"> -->
             <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal-{{ $baitai->baitai_id }}">削除</button>
@@ -45,7 +52,14 @@
                     <p>Are you want to delete?</p>
                   </div>
                   <div class="modal-footer">
-                    <a href="{{ route('backend.baitais.delete', $baitai->baitai_id) }}" class="btn btn-xs btn-primary">削除</a>
+                    <a href="{{ route('backend.baitais.delete', array($baitai->baitai_id, 
+                      'baitai_code' => $baitai_code,
+                      'baitai_name' => $baitai_name,
+                      'baitai_kind_old' => $baitai_kind_old,
+                      'baitai_kind_new' => $baitai_kind_new,
+                      'baitai_year_begin' => $baitai_year_begin,
+                      'baitai_year_end' => $baitai_year_end
+                    )) }}" class="btn btn-xs btn-primary">削除</a>
                     <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
                   </div>
                 </div>
@@ -63,13 +77,26 @@
     <div class="col-md-12 text-center">
       <!-- <input name="button3" value="前の20件を表示" disabled="disabled" type="submit" class="btn btn-sm btn-primary form-control--mar-right">
       <input name="button4" value="次の20件を表示" type="submit" class="btn btn-sm btn-primary"> -->
-      {!! $baitais->appends(['key' => 'value'])->render(new App\Pagination\SimplePagination($baitais))  !!}
+      {!! $baitais->appends(['baitai_code' => $baitai_code,
+                              'baitai_name' => $baitai_name,
+                              'baitai_kind_old' => $baitai_kind_old,
+                              'baitai_kind_new' => $baitai_kind_new,
+                              'baitai_year_begin' => $baitai_year_begin,
+                              'baitai_year_end' => $baitai_year_end
+                              ])->render(new App\Pagination\SimplePagination($baitais))  !!}
     </div>
   </div>
   <div class="row">
     <div class="col-md-12 text-center">
-      <input name="button7" value="再検索（条件を引き継ぐ）" type="submit" class="btn btn-sm btn-primary form-control--mar-right" onclick="location.href='{{ route('backend.baitais.search') }}'">
-      <input name="button5" value="再検索（条件をクリアする）" type="reset" class="btn btn-sm btn-primary" onclick="location.href='{{ route('backend.baitais.search', array('where' => 'null')) }}'">
+      <input name="button7" value="再検索（条件を引き継ぐ）" type="submit" class="btn btn-sm btn-primary form-control--mar-right" onclick="location.href='{{ route('backend.baitais.search', array(
+        'baitai_code' => $baitai_code,
+        'baitai_name' => $baitai_name,
+        'baitai_kind_old' => $baitai_kind_old,
+        'baitai_kind_new' => $baitai_kind_new,
+        'baitai_year_begin' => $baitai_year_begin,
+        'baitai_year_end' => $baitai_year_end
+      )) }}'">
+      <input name="button5" value="再検索（条件をクリアする）" type="reset" class="btn btn-sm btn-primary" onclick="location.href='{{ route('backend.baitais.search') }}'">
     </div>
   </div>
 </div>
