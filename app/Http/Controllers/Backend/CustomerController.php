@@ -162,7 +162,7 @@ class CustomerController extends BackendController
 
 
 	public function delete($id) {
-		$clsCustomer             	= new CustomerModel();
+		$clsCustomer            = new CustomerModel();
 		$dataUpdate 			= array(
 			'last_date'         => date('Y-m-d H:i:s'),
 			'last_kind'         => DELETE,
@@ -171,7 +171,10 @@ class CustomerController extends BackendController
 		);
 		$clsCustomer->update($id, $dataUpdate);
 
-        return redirect()->route('backend.customers.index');
+        // set page current
+        $page = $this->set_page($clsBaitai, Input::get('page'));
+
+        return redirect()->route('backend.customers.index', ['page' => $page]);
 	}
 
 

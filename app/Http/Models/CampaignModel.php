@@ -25,10 +25,17 @@ class CampaignModel
 		);
     }
 
-    public function get_all()
+    public function get_all($pagination = true)
     {
-        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->orderBy('campaign_id', 'desc')->paginate(PAGINATION);
-        return $results;
+        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->orderBy('campaign_id', 'asc');
+
+        if ($pagination) {
+            $db = $results->simplePaginate(PAGINATION); //simplePaginate, paginate
+        } else {
+            $db = $results->get();
+        }
+
+        return $db;
     }
 
     public function get_all_join()
@@ -38,8 +45,13 @@ class CampaignModel
                         ->leftJoin('m_presentlist', 't_campaign.presentlist_id', '=', 'm_presentlist.presentlist_id')
                         ->select('t_campaign.*', 'baitai_name', 'present_name')
                         ->where('t_campaign.last_kind', '<>', DELETE)
-                        ->orderBy('t_campaign.campaign_id', 'desc')
+                        ->orderBy('t_campaign.campaign_id', 'asc')
                         ->paginate(PAGINATION);
+        return $results;
+    }
+
+    public function count() {
+        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->count();
         return $results;
     }
 

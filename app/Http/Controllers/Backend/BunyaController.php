@@ -17,21 +17,38 @@ class BunyaController extends BackendController
 	}
 
 
+	/**
+	 * get list bunyas
+	 */
 	public function index() {
+		// search
+		$data['s_bunya_code'] 			= Input::get('s_bunya_code');
+		$data['s_bunya_name'] 			= Input::get('s_bunya_name');
+		$data['s_bunya_kind_pro'] 		= Input::get('s_bunya_kind_pro', null);
+		$data['s_bunya_kind_stu'] 		= Input::get('s_bunya_kind_stu', null);
+		$data['s_bunya_class_main'] 	= Input::get('s_bunya_class_main');
+		$data['s_bunya_class_sub'] 		= Input::get('s_bunya_class_sub');
+
 		$clsBunya 		= new BunyaModel();
-		$data['bunyas'] = $clsBunya->get_all();
+		$data['bunyas'] = $clsBunya->get_all(true, Input::all());
 		$data['title']  = '分野情報の検索結果一覧';
 
 		return view('backend.bunyas.index', $data);
 	}
 
 
+	/**
+	 * get view regist
+	 */
 	public function getRegist() {
 		$data['title']  = '分野情報の新規登録';
 		return view('backend.bunyas.regist', $data);
 	}
 
 
+	/**
+	 * insert database
+	 */
 	public function postRegist() {
 		$clsBunya             	= new BunyaModel();
         $dataInsert             = array(
@@ -57,7 +74,20 @@ class BunyaController extends BackendController
 	}
 
 
+	/**
+	 * get view edit
+	 * $id: id record
+	 */
 	public function getEdit($id) {
+		// search
+		$data['s_bunya_code'] 			= Input::get('s_bunya_code');
+		$data['s_bunya_name'] 			= Input::get('s_bunya_name');
+		$data['s_bunya_kind_pro'] 		= Input::get('s_bunya_kind_pro', null);
+		$data['s_bunya_kind_stu'] 		= Input::get('s_bunya_kind_stu', null);
+		$data['s_bunya_class_main'] 	= Input::get('s_bunya_class_main');
+		$data['s_bunya_class_sub'] 		= Input::get('s_bunya_class_sub');
+		$data['page'] 					= Input::get('page');
+
 		$clsBunya 		= new BunyaModel();
 		$data['bunya'] 	= $clsBunya->get_by_id($id);
 		$data['title']  = '分野情報の新規登録';
@@ -66,6 +96,10 @@ class BunyaController extends BackendController
 	}
 
 
+	/**
+	 * update database
+	 * $id: id record
+	 */
 	public function postEdit($id) {
 		$clsBunya             	= new BunyaModel();
         $dataInsert             = array(
@@ -82,15 +116,35 @@ class BunyaController extends BackendController
 
         $validator  = Validator::make($dataInsert, $clsBunya->Rules(), $clsBunya->Messages());
         if ($validator->fails()) {
-            return redirect()->route('backend.bunyas.edit', $id)->withErrors($validator)->withInput();
+            return redirect()->route('backend.bunyas.edit', [$id, 
+            		's_bunya_code' 			=> Input::get('s_bunya_code'),
+			        's_bunya_name' 			=> Input::get('s_bunya_name'),
+			        's_bunya_kind_pro' 		=> Input::get('s_bunya_kind_pro', null),
+			        's_bunya_kind_stu' 		=> Input::get('s_bunya_kind_stu', null),
+			        's_bunya_class_main' 	=> Input::get('s_bunya_class_main'),
+			        's_bunya_class_sub' 	=> Input::get('s_bunya_class_sub'),
+			        'page' 					=> Input::get('page')
+            	])->withErrors($validator)->withInput();
         }
 
         $clsBunya->update($id, $dataInsert);
 
-        return redirect()->route('backend.bunyas.index');
+        return redirect()->route('backend.bunyas.index', [
+        		's_bunya_code' 			=> Input::get('s_bunya_code'),
+		        's_bunya_name' 			=> Input::get('s_bunya_name'),
+		        's_bunya_kind_pro' 		=> Input::get('s_bunya_kind_pro', null),
+		        's_bunya_kind_stu' 		=> Input::get('s_bunya_kind_stu', null),
+		        's_bunya_class_main' 	=> Input::get('s_bunya_class_main'),
+		        's_bunya_class_sub' 	=> Input::get('s_bunya_class_sub'),
+		        'page' 					=> Input::get('page')
+        	]);
 	}
 
 
+	/**
+	 * update database
+	 * $id: id record
+	 */
 	public function delete($id) {
 		$clsBunya             	= new BunyaModel();
 		$dataUpdate 			= array(
@@ -101,12 +155,48 @@ class BunyaController extends BackendController
 		);
 		$clsBunya->update($id, $dataUpdate);
 
-        return redirect()->route('backend.bunyas.index');
+		// set page current
+		$page = $this->set_page($clsBunya, Input::get('page'));
+
+        return redirect()->route('backend.bunyas.index', [
+        		's_bunya_code' 			=> Input::get('s_bunya_code'),
+		        's_bunya_name' 			=> Input::get('s_bunya_name'),
+		        's_bunya_kind_pro' 		=> Input::get('s_bunya_kind_pro', null),
+		        's_bunya_kind_stu' 		=> Input::get('s_bunya_kind_stu', null),
+		        's_bunya_class_main' 	=> Input::get('s_bunya_class_main'),
+		        's_bunya_class_sub' 	=> Input::get('s_bunya_class_sub'),
+		        'page' 					=> $page
+        	]);
 	}
 
 
+	/**
+	 * search where
+	 * return index() function
+	 */
 	public function search()
 	{
+		// search
+		$data['s_bunya_code'] 			= Input::get('s_bunya_code');
+		$data['s_bunya_name'] 			= Input::get('s_bunya_name');
+		$data['s_bunya_kind_pro'] 		= Input::get('s_bunya_kind_pro', null);
+		$data['s_bunya_kind_stu'] 		= Input::get('s_bunya_kind_stu', null);
+		$data['s_bunya_class_main'] 	= Input::get('s_bunya_class_main');
+		$data['s_bunya_class_sub'] 		= Input::get('s_bunya_class_sub');
+
+		// reset where
+		if (Input::get('where') == 'null') {
+			// search
+			$data['s_bunya_code'] 			= null;
+			$data['s_bunya_name'] 			= null;
+			$data['s_bunya_kind_pro'] 		= null;
+			$data['s_bunya_kind_stu'] 		= null;
+			$data['s_bunya_class_main'] 	= null;
+			$data['s_bunya_class_sub'] 		= null;
+
+			return redirect()->route('backend.bunyas.search');
+		}
+
 		$data['title']  = '分野の検索';
 		return view('backend.bunyas.search', $data);
 	}

@@ -39,7 +39,7 @@ class UserModel
             'u_name.required'           => 'Please enter full name',
             'u_login.required'          => 'Please enter login ID',
             'u_passwd.required'         => 'Please enter password',
-            'u_passwd.min'             => 'The password must be least 6 characters.',
+            'u_passwd.min'              => 'The password must be least 6 characters.',
             'u_belong.required'         => 'Please enter belong',
             'u_power.required'          => 'Please choose power',
             'u_login.unique'            => 'This login ID existed, try again!',
@@ -51,9 +51,22 @@ class UserModel
 		);
     }
 
-    public function get_all()
+    public function get_all($pagination = true)
     {
-        return DB::table($this->table)->where('last_kind', '<>', DELETE)->orderBy('u_id', 'desc')->paginate(PAGINATION);
+        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->orderBy('u_id', 'desc');
+
+        if ($pagination) {
+            $db = $results->simplePaginate(PAGINATION); //simplePaginate, paginate
+        } else {
+            $db = $results->get();
+        }
+
+        return $db;
+    }
+
+    public function count() {
+        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->count();
+        return $results;
     }
 
     public function insert($data)

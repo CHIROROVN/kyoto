@@ -37,6 +37,14 @@
   </div>
   <div class="row mar-bottom30">
     <div class="col-md-12 text-center">
+      <input type="hidden" name="s_bunya_code" value="{{ $s_bunya_code }}">
+      <input type="hidden" name="s_bunya_name" value="{{ $s_bunya_name }}">
+      <input type="hidden" name="s_bunya_kind_pro" value="{{ $s_bunya_kind_pro }}">
+      <input type="hidden" name="s_bunya_kind_stu" value="{{ $s_bunya_kind_stu }}">
+      <input type="hidden" name="s_bunya_class_main" value="{{ $s_bunya_class_main }}">
+      <input type="hidden" name="s_bunya_class_sub" value="{{ $s_bunya_class_sub }}">
+      <input type="hidden" name="page" value="{{ $page }}">
+      <!-- save -->
       <input name="button4" id="button4" value="登録する" type="submit" class="btn btn-sm btn-primary">
       <!-- delete -->
       <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal-{{ $bunya->bunya_id }}">削除</button>
@@ -53,7 +61,15 @@
               <p>Are you want to delete?</p>
             </div>
             <div class="modal-footer">
-              <a href="{{ route('backend.bunyas.delete', $bunya->bunya_id) }}" class="btn btn-xs btn-primary">削除</a>
+              <a href="{{ route('backend.bunyas.delete', [$bunya->bunya_id, 
+                's_bunya_code'       => $s_bunya_code,
+                's_bunya_name'       => $s_bunya_name,
+                's_bunya_kind_pro'   => $s_bunya_kind_pro,
+                's_bunya_kind_stu'   => $s_bunya_kind_stu,
+                's_bunya_class_main' => $s_bunya_class_main,
+                's_bunya_class_sub'  => $s_bunya_class_sub,
+                'page'               => $page
+              ]) }}" class="btn btn-xs btn-primary">削除</a>
               <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>

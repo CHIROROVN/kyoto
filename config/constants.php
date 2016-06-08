@@ -9,9 +9,4 @@ return [
 
 		'PAGINATION' 			=> 2,
 	),
-
-	'ACCOUNT_ADMIN' 	=> array(
-		'USERNAME' 		=> 'chiroro',
-		'PASSWORD' 		=> '123456',
-	),
 ];

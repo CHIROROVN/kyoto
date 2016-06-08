@@ -19,6 +19,9 @@ class CampaignController extends BackendController
 	}
 
 
+	/**
+	 * get view list compaigns
+	 */
 	public function index() {
 		$clsCampaign 		= new CampaignModel();
 		$data['campaigns'] 	= $clsCampaign->get_all_join();
@@ -28,6 +31,9 @@ class CampaignController extends BackendController
 	}
 
 
+	/**
+	 * get view regist
+	 */
 	public function getRegist() {
 		$clsBaitai 			= new BaitaiModel();
 		$clsPresent 		= new PresentModel();
@@ -39,6 +45,9 @@ class CampaignController extends BackendController
 	}
 
 
+	/**
+	 * insert database
+	 */
 	public function postRegist() {
 		$clsCampaign            = new CampaignModel();
         $dataInsert             = array(
@@ -63,12 +72,19 @@ class CampaignController extends BackendController
 	}
 
 
+	/**
+	 * get view edit
+	 * $id: id record
+	 */
 	public function getEdit($id) {
+		//page
+		$data['page']		= Input::get('page');
+
 		$clsCampaign 		= new CampaignModel();
 		$clsBaitai 			= new BaitaiModel();
 		$clsPresent 		= new PresentModel();
-		$data['baitais'] 	= $clsBaitai->get_all();
-		$data['presents'] 	= $clsPresent->get_all();
+		$data['baitais'] 	= $clsBaitai->get_all(false);
+		$data['presents'] 	= $clsPresent->get_all(false);
 		$data['campaign'] 	= $clsCampaign->get_by_id($id);
 		$data['title']  	= 'キャンペーンの新規登録';
 
@@ -76,6 +92,10 @@ class CampaignController extends BackendController
 	}
 
 
+	/**
+	 * update database
+	 * $id: id record
+	 */
 	public function postEdit($id) {
 		$clsCampaign            = new CampaignModel();
         $dataInsert             = array(
@@ -91,15 +111,23 @@ class CampaignController extends BackendController
 
         $validator  = Validator::make($dataInsert, $clsCampaign->Rules(), $clsCampaign->Messages());
         if ($validator->fails()) {
-            return redirect()->route('backend.campaigns.edit', $id)->withErrors($validator)->withInput();
+            return redirect()->route('backend.campaigns.edit', array($id, 
+            		'page' => Input::get('page')
+            	))->withErrors($validator)->withInput();
         }
 
         $clsCampaign->update($id, $dataInsert);
 
-        return redirect()->route('backend.campaigns.index');
+        return redirect()->route('backend.campaigns.index', array(
+        		'page' => Input::get('page')
+        	));
 	}
 
 
+	/**
+	 * update database
+	 * $id: id record
+	 */
 	public function delete($id) {
 		$clsCampaign            = new CampaignModel();
 		$dataUpdate 			= array(
@@ -110,6 +138,11 @@ class CampaignController extends BackendController
 		);
 		$clsCampaign->update($id, $dataUpdate);
 
-        return redirect()->route('backend.campaigns.index');
+		// set page current
+		$page = $this->set_page($clsCampaign, Input::get('page'));
+
+        return redirect()->route('backend.campaigns.index', array(
+        		'page' => $page
+        	));
 	}
 }

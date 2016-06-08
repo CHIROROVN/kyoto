@@ -24,9 +24,21 @@ class PresentModel
 		);
     }
 
-    public function get_all()
+    public function get_all($pagination = true)
     {
-        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->orderBy('presentlist_id', 'desc')->paginate(PAGINATION);
+        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->orderBy('present_code', 'asc');
+
+        if ($pagination) {
+            $db = $results->paginate(PAGINATION);
+        } else {
+            $db = $results->get();
+        }
+        
+        return $db;
+    }
+
+    public function count() {
+        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->count();
         return $results;
     }
 

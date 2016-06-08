@@ -27,9 +27,53 @@ class BunyaModel
 		);
     }
 
-    public function get_all()
+    public function get_all($pagination = true, $where = array())
     {
-        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->orderBy('bunya_id', 'desc')->paginate(PAGINATION);
+        $results = DB::table($this->table)->where('last_kind', '<>', DELETE);
+
+        // where bunya_code
+        if ( !empty($where['s_bunya_code']) ) {
+            $results = $results->where('bunya_code', 'like', '%' . $where['s_bunya_code'] . '%');
+        }
+
+        // where bunya_name
+        if ( !empty($where['s_bunya_name']) ) {
+            $results = $results->where('bunya_name', 'like', '%' . $where['s_bunya_name'] . '%');
+        }
+
+        // where bunya_kind
+        // (professional = 1) or (study = 2) or (professional or study); 
+        if ( !empty($where['s_bunya_kind_pro']) && !empty($where['s_bunya_kind_stu']) ) {
+            $results = $results->whereIn('bunya_kind', [1, 2]);
+        } elseif ( !empty($where['s_bunya_kind_pro']) && empty($where['s_bunya_kind_stu']) ) {
+            $results = $results->where('bunya_kind', '=', $where['s_bunya_kind_pro']);
+        } elseif ( empty($where['s_bunya_kind_pro']) && !empty($where['s_bunya_kind_stu']) ) {
+            $results = $results->where('bunya_kind', '=', $where['s_bunya_kind_stu']);
+        }
+
+        // where bunya_class
+        // (main = 1) or (sub = 2) or (main or sub); 
+        if ( !empty($where['s_bunya_class_main']) && !empty($where['s_bunya_class_sub']) ) {
+            $results = $results->whereIn('bunya_class', [1, 2]);
+        } elseif ( !empty($where['s_bunya_class_main']) && empty($where['s_bunya_class_sub']) ) {
+            $results = $results->where('bunya_class', '=', $where['s_bunya_class_main']);
+        } elseif ( empty($where['s_bunya_class_main']) && !empty($where['s_bunya_class_sub']) ) {
+            $results = $results->where('bunya_class', '=', $where['s_bunya_class_sub']);
+        }
+
+        $results = $results->orderBy('bunya_code', 'asc');
+
+        if ($pagination) {
+            $db = $results->simplePaginate(PAGINATION);//simplePaginate, paginate
+        } else {
+            $db = $results->get();
+        }
+
+        return $db;
+    }
+
+    public function count() {
+        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->count();
         return $results;
     }
 

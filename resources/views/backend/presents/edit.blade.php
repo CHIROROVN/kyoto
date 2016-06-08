@@ -23,6 +23,7 @@
   </div>
   <div class="row mar-bottom30">
     <div class="col-md-12 text-center">
+      <input type="hidden" name="page" value="{{ $page }}">
       <input name="button4" id="button4" value="登録する" type="submit" class="btn btn-sm btn-primary">
       <!-- delete -->
       <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal-{{ $present->presentlist_id }}">削除</button>
@@ -39,7 +40,7 @@
               <p>Are you want to delete?</p>
             </div>
             <div class="modal-footer">
-              <a href="{{ route('backend.presents.delete', $present->presentlist_id) }}" class="btn btn-xs btn-primary">削除</a>
+              <a href="{{ route('backend.presents.delete', [$present->presentlist_id, 'page' => $page]) }}" class="btn btn-xs btn-primary">削除</a>
               <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>

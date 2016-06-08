@@ -116,6 +116,11 @@ class CustomerModel
         return $results;
     }
 
+    public function count() {
+        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->count();
+        return $results;
+    }
+
     public function insert($data)
     {
         $results = DB::table($this->table)->insert($data);

@@ -75,12 +75,36 @@
         </div>
         <div class="row mar-bottom30">
           <div class="col-md-12 text-center">
+            <input type="hidden" name="page" value="{{ $page }}">
             <input name="btnSubmit" id="btnSubmit" value="登録する" type="submit" class="btn btn-sm btn-primary">
+            <!-- delete -->
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal-{{ $user->u_id }}">削除</button>
+            <!-- popup -->
+            <div class="modal fade bs-example-modal-sm" id="myModal-{{ $user->u_id }}" role="dialog">
+              <div class="modal-dialog modal-sm">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are you want to delete?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="{{ route('backend.users.delete', array($user->u_id, 'page' => $page)) }}" class="btn btn-xs btn-primary">削除</a>
+                    <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                <!-- End Modal content-->
+              </div>
+            </div>
+            <!-- end popup -->
           </div>
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-            <input onclick="history.back()" value="前の画面に戻る" type="button" class="btn btn-sm btn-primary">
+            <input onclick="location.href='{{ route('backend.users.index') }}'" value="前の画面に戻る" type="button" class="btn btn-sm btn-primary">
           </div>
         </div>
       </div>

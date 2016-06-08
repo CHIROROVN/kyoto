@@ -24,9 +24,8 @@
         <tr>
           <td>{{ $present->present_code }}</td>
           <td>{{ $present->present_name }}</td>
-          <td align="center"><input onclick="location.href='{{ route('backend.presents.edit', $present->presentlist_id) }}'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
+          <td align="center"><input onclick="location.href='{{ route('backend.presents.edit', [$present->presentlist_id, 'page' => $presents->currentPage()]) }}'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
           <td align="center">
-            <!-- <input onclick="location.href='{{ route('backend.presents.delete', $present->presentlist_id) }}'" value="削除" type="button" class="btn btn-xs btn-primary"> -->
             <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal-{{ $present->presentlist_id }}">削除</button>
             <!-- popup -->
             <div class="modal fade bs-example-modal-sm" id="myModal-{{ $present->presentlist_id }}" role="dialog">
@@ -41,7 +40,7 @@
                     <p>Are you want to delete?</p>
                   </div>
                   <div class="modal-footer">
-                    <a href="{{ route('backend.presents.delete', $present->presentlist_id) }}" class="btn btn-xs btn-primary">削除</a>
+                    <a href="{{ route('backend.presents.delete', [$present->presentlist_id, 'page' => $presents->currentPage()]) }}" class="btn btn-xs btn-primary">削除</a>
                     <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
                   </div>
                 </div>
@@ -57,9 +56,7 @@
   </div>
   <div class="row mar-bottom30">
     <div class="col-md-12 text-center">
-      <!-- <input name="button3" value="前の20件を表示" disabled="disabled" type="submit" class="btn btn-sm btn-primary form-control--mar-right">
-      <input name="button4" value="次の20件を表示" type="submit" class="btn btn-sm btn-primary"> -->
-      @include('backend.pagination.custom', ['paginator' => $presents])
+      {!! (new App\Pagination\SimplePagination($presents))->render() !!}
     </div>
   </div>
   <div class="row">

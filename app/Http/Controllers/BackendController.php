@@ -28,4 +28,26 @@ class BackendController extends Controller
             $ipaddress = 'UNKNOWN';
         define('CLIENT_IP_ADRS', $ipaddress);
 	}
+
+    /**
+     * function set page, using in function delete(id)
+     * $class_model: class object
+     * $input_page: page current 
+     */
+    public function set_page($class_model, $input_page) {
+        $count = $class_model->count();
+        $tmp_page = $count / PAGINATION;
+        $tmp_page = ceil($tmp_page);
+        $tmp_page1 = $count % PAGINATION;
+        $page = $input_page;
+
+        if ($tmp_page1 != 0) {
+            $tmp_page = $tmp_page + 1;
+        }
+        if ($tmp_page < $page) {
+            $page = $tmp_page;
+        }
+
+        return $page;
+    }
 }

@@ -37,12 +37,13 @@
   <div class="row mar-bottom30">
     <div class="col-md-12 text-center">
       <!-- search -->
-      <input type="hidden" name="baitai_code" value="{{ $baitai_code }}">
-      <input type="hidden" name="baitai_name" value="{{ $baitai_name }}">
-      <input type="hidden" name="baitai_kind_old" value="{{ $baitai_kind_old }}">
-      <input type="hidden" name="baitai_kind_new" value="{{ $baitai_kind_new }}">
-      <input type="hidden" name="baitai_year_begin" value="{{ $baitai_year_begin }}">
-      <input type="hidden" name="baitai_year_end" value="{{ $baitai_year_end }}">
+      <input type="hidden" name="s_baitai_code" value="{{ $s_baitai_code }}">
+      <input type="hidden" name="s_baitai_name" value="{{ $s_baitai_name }}">
+      <input type="hidden" name="s_baitai_kind_old" value="{{ $s_baitai_kind_old }}">
+      <input type="hidden" name="s_baitai_kind_new" value="{{ $s_baitai_kind_new }}">
+      <input type="hidden" name="s_baitai_year_begin" value="{{ $s_baitai_year_begin }}">
+      <input type="hidden" name="s_baitai_year_end" value="{{ $s_baitai_year_end }}">
+      <input type="hidden" name="page" value="{{ $page }}">
       <!-- save -->
       <input name="button4" id="button4" value="登録する" type="submit" class="btn btn-sm btn-primary">
       <!-- delete -->
@@ -61,12 +62,13 @@
             </div>
             <div class="modal-footer">
               <a href="{{ route('backend.baitais.delete', array($baitai->baitai_id, 
-                      'baitai_code' => $baitai_code,
-                      'baitai_name' => $baitai_name,
-                      'baitai_kind_old' => $baitai_kind_old,
-                      'baitai_kind_new' => $baitai_kind_new,
-                      'baitai_year_begin' => $baitai_year_begin,
-                      'baitai_year_end' => $baitai_year_end
+                      's_baitai_code'         => $s_baitai_code,
+                      's_baitai_name'         => $s_baitai_name,
+                      's_baitai_kind_old'     => $s_baitai_kind_old,
+                      's_baitai_kind_new'     => $s_baitai_kind_new,
+                      's_baitai_year_begin'   => $s_baitai_year_begin,
+                      's_baitai_year_end'     => $s_baitai_year_end,
+                      'page'                  => $page
                     )) }}" class="btn btn-xs btn-primary">削除</a>
               <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
             </div>

@@ -17,6 +17,9 @@ class PresentController extends BackendController
 	}
 
 
+	/**
+	 * get view list presents
+	 */
 	public function index() {
 		$clsPresent 		= new PresentModel();
 		$data['presents'] 	= $clsPresent->get_all();
@@ -26,12 +29,18 @@ class PresentController extends BackendController
 	}
 
 
+	/**
+	 * get view regist
+	 */
 	public function getRegist() {
 		$data['title'] 		= 'プレゼントの新規登録';
 		return view('backend.presents.regist', $data);
 	}
 
 
+	/**
+	 * insert database
+	 */
 	public function postRegist() {
 		$clsPresent             = new PresentModel();
         $dataInsert             = array(
@@ -55,15 +64,24 @@ class PresentController extends BackendController
 	}
 
 
+	/**
+	 * get view edit
+	 * $id: id record
+	 */
 	public function getEdit($id) {
 		$clsPresent 		= new PresentModel();
 		$data['present'] 	= $clsPresent->get_by_id($id);
 		$data['title'] 		= 'プレゼントの新規登録';
+		$data['page']		= Input::get('page');
 
 		return view('backend.presents.edit', $data);
 	}
 
 
+	/**
+	 * update database
+	 * $id: id record
+	 */
 	public function postEdit($id) {
 		$clsPresent             = new PresentModel();
         $dataInsert             = array(
@@ -78,15 +96,19 @@ class PresentController extends BackendController
 
         $validator  = Validator::make($dataInsert, $clsPresent->Rules(), $clsPresent->Messages());
         if ($validator->fails()) {
-            return redirect()->route('backend.presents.edit', $id)->withErrors($validator)->withInput();
+            return redirect()->route('backend.presents.edit', [$id, 'page' => Input::get('page')])->withErrors($validator)->withInput();
         }
 
         $clsPresent->update($id, $dataInsert);
 
-        return redirect()->route('backend.presents.index');
+        return redirect()->route('backend.presents.index', ['page' => Input::get('page')]);
 	}
 
 
+	/**
+	 * update database
+	 * $id: id record
+	 */
 	public function delete($id) {
 		$clsPresent             = new PresentModel();
 		$dataUpdate = array(
@@ -97,6 +119,9 @@ class PresentController extends BackendController
 		);
 		$clsPresent->update($id, $dataUpdate);
 
-        return redirect()->route('backend.presents.index');
+		// set page current
+		$page = $this->set_page($clsPresent, Input::get('page'));
+
+        return redirect()->route('backend.presents.index', ['page' => $page]);
 	}
 }

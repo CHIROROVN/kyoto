@@ -56,3 +56,8 @@ class SimplePagination extends BasePagination
     protected $dotsText = '...';
 
 }
+
+
+// using in view
+// {!! (new App\Pagination\SimplePagination($items))->render() !!}
+//{!! $items->appends(['key' => 'value'])->render(new App\Pagination\SimplePagination($items))  !!}

@@ -45,8 +45,32 @@
                   <td>キッズ</td>
                   <td>{{$user->u_login}}</td>
                   <td>{{@$powers[$user->u_power]}}</td>
-                  <td align="center"><input onclick="location.href='{{URL::route('backend.users.update', $user->u_id)}}'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
-                  <td align="center"><input onclick="location.href='{{URL::route('backend.users.delete', $user->u_id)}}'" value="削除" type="button" class="btn btn-xs btn-primary"></td>
+                  <td align="center"><input onclick="location.href='{{URL::route('backend.users.update', [$user->u_id, 'page' => $users->currentPage()])}}'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
+                  <td align="center">
+                    <!-- <input onclick="location.href='{{URL::route('backend.users.delete', [$user->u_id, 'page' => $users->currentPage()])}}'" value="削除" type="button" class="btn btn-xs btn-primary"> -->
+                    <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal-{{ $user->u_id }}">削除</button>
+                    <!-- popup -->
+                    <div class="modal fade bs-example-modal-sm" id="myModal-{{ $user->u_id }}" role="dialog">
+                      <div class="modal-dialog modal-sm">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Delete</h4>
+                          </div>
+                          <div class="modal-body">
+                            <p>Are you want to delete?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <a href="{{ route('backend.users.delete', array($user->u_id, 'page' => $users->currentPage())) }}" class="btn btn-xs btn-primary">削除</a>
+                            <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                        <!-- End Modal content-->
+                      </div>
+                    </div>
+                    <!-- end popup -->
+                  </td>
                 </tr>
               @endforeach
             @else
@@ -56,9 +80,7 @@
         </div>
         <div class="row mar-bottom30">
           <div class="col-md-12 text-center">
-            <!-- <input name="button3" value="前の20件を表示" disabled="disabled" type="submit" class="btn btn-sm btn-primary form-control--mar-right">
-            <input name="button4" value="次の20件を表示" type="submit" class="btn btn-sm btn-primary"> -->
-             @include('backend.pagination.custom', ['paginator' => $users])
+            {!! (new App\Pagination\SimplePagination($users))->render() !!}
           </div>
         </div>
         <div class="row">
