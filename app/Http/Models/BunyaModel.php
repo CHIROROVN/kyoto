@@ -63,13 +63,19 @@ class BunyaModel
 
         $results = $results->orderBy('bunya_code', 'asc');
 
+        // count record pagination
+        $total_count = $results->count();
+
         if ($pagination) {
             $db = $results->simplePaginate(PAGINATION);//simplePaginate, paginate
         } else {
             $db = $results->get();
         }
 
-        return $db;
+        return array(
+            'db'            => $db,
+            'total_count'   => $total_count
+        );
     }
 
     public function count() {

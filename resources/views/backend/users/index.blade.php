@@ -38,16 +38,24 @@
               <td class="col-title" align="center">削除</td>
             </tr>
             <?php $powers = array('000' => 'Ｓ管理者', '010' => '管理', '020' => '営業', '030' => '印刷', '040' => '中国'); ?>
-            @if(count($users) > 0)
+            @if(count($users) > 0 && !empty($users))
               @foreach($users as $user)
                 <tr>
                   <td>{{$user->u_name}}</td>
-                  <td>キッズ</td>
+                  <td>{{ $user->u_belong }}</td>
                   <td>{{$user->u_login}}</td>
-                  <td>{{@$powers[$user->u_power]}}</td>
+                  <td>
+                    <?php
+                    $u_power = json_decode($user->u_power, true);
+                    foreach ($u_power as $item) {
+                      if ( isset($powers[$item]) ) {
+                        echo $powers[$item] . '<br>';
+                      }
+                    }
+                    ?>
+                  </td>
                   <td align="center"><input onclick="location.href='{{URL::route('backend.users.update', [$user->u_id, 'page' => $users->currentPage()])}}'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
                   <td align="center">
-                    <!-- <input onclick="location.href='{{URL::route('backend.users.delete', [$user->u_id, 'page' => $users->currentPage()])}}'" value="削除" type="button" class="btn btn-xs btn-primary"> -->
                     <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal-{{ $user->u_id }}">削除</button>
                     <!-- popup -->
                     <div class="modal fade bs-example-modal-sm" id="myModal-{{ $user->u_id }}" role="dialog">

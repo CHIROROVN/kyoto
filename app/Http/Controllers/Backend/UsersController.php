@@ -67,7 +67,7 @@ class UsersController extends BackendController
         	'last_date'         	=> date('Y-m-d H:i:s'),
         	'last_ipadrs'       	=> CLIENT_IP_ADRS,
         	'last_user'				=> $id,
-			);
+		);
 		$validator  = Validator::make(Input::all(), $userModel->addRules(), $userModel->Messages());
         if ( $validator->fails() ) {
             return redirect()->route('backend.users.regist')->withErrors($validator)->withInput();
@@ -112,49 +112,41 @@ class UsersController extends BackendController
 		$user 						= $userModel->get_by_id($id);
 
 		$dataUpdate = array();
-		if(empty($passwd))
-			unset($rules['u_passwd']);
-		if ( Input::get('u_login') == $user->u_login ) {
-			unset($rules['u_login']);
-		}
-
-		$dataUpdate['remember_token']		= Input::get('_token');
-		$dataUpdate['u_name']				= Input::get('u_name');
-		$dataUpdate['u_login']				= Input::get('u_login');
-		$dataUpdate['u_passwd']				= '';                                                                 
-		$dataUpdate['u_belong']				= '';
-		$dataUpdate['u_power']				= '';
-		$dataUpdate['last_kind']			= '';
-		$dataUpdate['last_date']			= date('Y-m-d H:i:s');
-		$dataUpdate['last_ipadrs']			= CLIENT_IP_ADRS;
-		$dataUpdate['last_user']			= $id;
-
 		$dataUpdate = array(
-			'remember_token'		=> Input::get('_token'),
+			// 'remember_token'		=> Input::get('_token'),
 			'u_name'				=> Input::get('u_name'),
 			'u_login'				=> Input::get('u_login'),
 			'u_passwd'				=> Hash::make(Input::get('u_passwd')),
 			'u_belong'				=> Input::get('u_belong'),
 			'u_power'				=> json_encode(Input::get('u_power')),
-        	'last_kind'				=> INSERT,
+        	'last_kind'				=> UPDATE,
         	'last_date'         	=> date('Y-m-d H:i:s'),
         	'last_ipadrs'       	=> CLIENT_IP_ADRS,
-        	'last_user'				=> $id,
+        	'last_user'				=> (Auth::check()) ? Auth::user()->u_id : 1,
 		);
+
+		// if no update new password
+		if ( empty($passwd) ) {
+			unset($rules['u_passwd']);
+			unset($dataUpdate['u_passwd']);
+		}
+		// if update your self
+		if ( Input::get('u_login') == $user->u_login ) {
+			unset($rules['u_login']);
+		}
+
 		$validator  = Validator::make(Input::all(), $rules, $userModel->Messages());
         if ($validator->fails()) {
             return redirect()->route('backend.users.update', [$id, 'page' => $page])->withErrors($validator)->withInput();
         }
 
-        if($userModel->insert($dataUpdate)){
+        if($userModel->update($id, $dataUpdate)){
     		Session::flash('success', 'The user registed successfully.');
     		return redirect()->route('backend.users.index', ['page' => $page]);
     	}else{
     		Session::flash('danger', 'The user regist faild, try again!');
 			return redirect()->route('backend.users.update', [$id, 'page' => $page])->with('title', $title);
     	}
-
-
 	}
 
 

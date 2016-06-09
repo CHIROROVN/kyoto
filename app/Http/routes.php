@@ -27,65 +27,62 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	 */
 	Route::get('menu', ['as' => 'backend.menu', 'uses' => 'MenuController@index']);
 
-	// user. Using onl add new account admin
-	// Route::get('users', ['as' => 'admin.users.index', 'uses' => 'UserController@index']);
-
 	/**
 	 * presents
 	*/
-	Route::get('presents', ['as' => 'backend.presents.index', 'uses' => 'PresentController@index']);
-	Route::get('presents/regist', ['as' => 'backend.presents.regist', 'uses' => 'PresentController@getRegist']);
-	Route::post('presents/regist', ['as' => 'backend.presents.regist', 'uses' => 'PresentController@postRegist']);
-	Route::get('presents/edit/{id}', ['as' => 'backend.presents.edit', 'uses' => 'PresentController@getEdit']);
-	Route::post('presents/edit/{id}', ['as' => 'backend.presents.edit', 'uses' => 'PresentController@postEdit']);
-	Route::get('presents/delete/{id}', ['as' => 'backend.presents.delete', 'uses' => 'PresentController@delete']);
+	Route::get('presents', ['middleware' => 'permission_admin', 'as' => 'backend.presents.index', 'uses' => 'PresentController@index']);
+	Route::get('presents/regist', ['middleware' => 'permission_admin', 'as' => 'backend.presents.regist', 'uses' => 'PresentController@getRegist']);
+	Route::post('presents/regist', ['middleware' => 'permission_admin', 'as' => 'backend.presents.regist', 'uses' => 'PresentController@postRegist']);
+	Route::get('presents/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.presents.edit', 'uses' => 'PresentController@getEdit']);
+	Route::post('presents/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.presents.edit', 'uses' => 'PresentController@postEdit']);
+	Route::get('presents/delete/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.presents.delete', 'uses' => 'PresentController@delete']);
 
 
 	/**
 	 * bunya
 	*/
-	Route::get('bunyas', ['as' => 'backend.bunyas.index', 'uses' => 'BunyaController@index']);
-	Route::get('bunyas/regist', ['as' => 'backend.bunyas.regist', 'uses' => 'BunyaController@getRegist']);
-	Route::post('bunyas/regist', ['as' => 'backend.bunyas.regist', 'uses' => 'BunyaController@postRegist']);
-	Route::get('bunyas/edit/{id}', ['as' => 'backend.bunyas.edit', 'uses' => 'BunyaController@getEdit']);
-	Route::post('bunyas/edit/{id}', ['as' => 'backend.bunyas.edit', 'uses' => 'BunyaController@postEdit']);
-	Route::get('bunyas/delete/{id}', ['as' => 'backend.bunyas.delete', 'uses' => 'BunyaController@delete']);
-	Route::get('bunyas/search', ['as' => 'backend.bunyas.search', 'uses' => 'BunyaController@search']);
+	Route::get('bunyas', ['middleware' => 'permission_admin', 'as' => 'backend.bunyas.index', 'uses' => 'BunyaController@index']);
+	Route::get('bunyas/regist', ['middleware' => 'permission_admin', 'as' => 'backend.bunyas.regist', 'uses' => 'BunyaController@getRegist']);
+	Route::post('bunyas/regist', ['middleware' => 'permission_admin', 'as' => 'backend.bunyas.regist', 'uses' => 'BunyaController@postRegist']);
+	Route::get('bunyas/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.bunyas.edit', 'uses' => 'BunyaController@getEdit']);
+	Route::post('bunyas/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.bunyas.edit', 'uses' => 'BunyaController@postEdit']);
+	Route::get('bunyas/delete/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.bunyas.delete', 'uses' => 'BunyaController@delete']);
+	Route::get('bunyas/search', ['middleware' => 'permission_admin', 'as' => 'backend.bunyas.search', 'uses' => 'BunyaController@search']);
 
 
 	/**
 	 * baitai
 	 */
-	Route::get('baitais', ['as' => 'backend.baitais.index', 'uses' => 'BaitaiController@index']);
-	Route::get('baitais/regist', ['as' => 'backend.baitais.regist', 'uses' => 'BaitaiController@getRegist']);
-	Route::post('baitais/regist', ['as' => 'backend.baitais.regist', 'uses' => 'BaitaiController@postRegist']);
-	Route::get('baitais/edit/{id}', ['as' => 'backend.baitais.edit', 'uses' => 'BaitaiController@getEdit']);
-	Route::post('baitais/edit/{id}', ['as' => 'backend.baitais.edit', 'uses' => 'BaitaiController@postEdit']);
-	Route::get('baitais/delete/{id}', ['as' => 'backend.baitais.delete', 'uses' => 'BaitaiController@delete']);
-	Route::get('baitais/search', ['as' => 'backend.baitais.search', 'uses' => 'BaitaiController@search']);
+	Route::get('baitais', ['middleware' => 'permission_admin', 'as' => 'backend.baitais.index', 'uses' => 'BaitaiController@index']);
+	Route::get('baitais/regist', ['middleware' => 'permission_admin', 'as' => 'backend.baitais.regist', 'uses' => 'BaitaiController@getRegist']);
+	Route::post('baitais/regist', ['middleware' => 'permission_admin', 'as' => 'backend.baitais.regist', 'uses' => 'BaitaiController@postRegist']);
+	Route::get('baitais/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.baitais.edit', 'uses' => 'BaitaiController@getEdit']);
+	Route::post('baitais/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.baitais.edit', 'uses' => 'BaitaiController@postEdit']);
+	Route::get('baitais/delete/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.baitais.delete', 'uses' => 'BaitaiController@delete']);
+	Route::get('baitais/search', ['middleware' => 'permission_admin', 'as' => 'backend.baitais.search', 'uses' => 'BaitaiController@search']);
 
 
 	/**
 	 * campaigns
 	 */
-	Route::get('campaigns', ['as' => 'backend.campaigns.index', 'uses' => 'CampaignController@index']);
-	Route::get('campaigns/regist', ['as' => 'backend.campaigns.regist', 'uses' => 'CampaignController@getRegist']);
-	Route::post('campaigns/regist', ['as' => 'backend.campaigns.regist', 'uses' => 'CampaignController@postRegist']);
-	Route::get('campaigns/edit/{id}', ['as' => 'backend.campaigns.edit', 'uses' => 'CampaignController@getEdit']);
-	Route::post('campaigns/edit/{id}', ['as' => 'backend.campaigns.edit', 'uses' => 'CampaignController@postEdit']);
-	Route::get('campaigns/delete/{id}', ['as' => 'backend.campaigns.delete', 'uses' => 'CampaignController@delete']);
+	Route::get('campaigns', ['middleware' => 'permission_admin', 'as' => 'backend.campaigns.index', 'uses' => 'CampaignController@index']);
+	Route::get('campaigns/regist', ['middleware' => 'permission_admin', 'as' => 'backend.campaigns.regist', 'uses' => 'CampaignController@getRegist']);
+	Route::post('campaigns/regist', ['middleware' => 'permission_admin', 'as' => 'backend.campaigns.regist', 'uses' => 'CampaignController@postRegist']);
+	Route::get('campaigns/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.campaigns.edit', 'uses' => 'CampaignController@getEdit']);
+	Route::post('campaigns/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.campaigns.edit', 'uses' => 'CampaignController@postEdit']);
+	Route::get('campaigns/delete/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.campaigns.delete', 'uses' => 'CampaignController@delete']);
 
 
 	/**
 	 * enterprises
 	 */
-	Route::get('enterprises', ['as' => 'backend.enterprises.index', 'uses' => 'EnterpriseController@index']);
-	Route::get('enterprises/regist', ['as' => 'backend.enterprises.regist', 'uses' => 'EnterpriseController@getRegist']);
-	Route::post('enterprises/regist', ['as' => 'backend.enterprises.regist', 'uses' => 'EnterpriseController@postRegist']);
-	Route::get('enterprises/edit/{id}', ['as' => 'backend.enterprises.edit', 'uses' => 'EnterpriseController@getEdit']);
-	Route::post('enterprises/edit/{id}', ['as' => 'backend.enterprises.edit', 'uses' => 'EnterpriseController@postEdit']);
-	Route::get('enterprises/delete/{id}', ['as' => 'backend.enterprises.delete', 'uses' => 'EnterpriseController@delete']);
-	Route::get('enterprises/search', ['as' => 'backend.enterprises.search', 'uses' => 'EnterpriseController@search']);
+	Route::get('enterprises', ['middleware' => 'permission_admin', 'as' => 'backend.enterprises.index', 'uses' => 'EnterpriseController@index']);
+	Route::get('enterprises/regist', ['middleware' => 'permission_admin', 'as' => 'backend.enterprises.regist', 'uses' => 'EnterpriseController@getRegist']);
+	Route::post('enterprises/regist', ['middleware' => 'permission_admin', 'as' => 'backend.enterprises.regist', 'uses' => 'EnterpriseController@postRegist']);
+	Route::get('enterprises/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.enterprises.edit', 'uses' => 'EnterpriseController@getEdit']);
+	Route::post('enterprises/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.enterprises.edit', 'uses' => 'EnterpriseController@postEdit']);
+	Route::get('enterprises/delete/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.enterprises.delete', 'uses' => 'EnterpriseController@delete']);
+	Route::get('enterprises/search', ['middleware' => 'permission_member', 'as' => 'backend.enterprises.search', 'uses' => 'EnterpriseController@search']);
 
 	Route::post('enterprise/regist/cnk_ajax', ['as' => 'backend.enterprise.cnk_ajax', 'uses' => 'EnterpriseController@getCusNameAjax']);
 
@@ -112,12 +109,12 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	/**
 	 * Users
 	*/
-	Route::get('users', ['as' => 'backend.users.index', 'uses' => 'UsersController@index']);
-	Route::get('users/regist', ['as' => 'backend.users.regist', 'uses' => 'UsersController@getRegist']);
-	Route::post('users/regist', ['as' => 'backend.users.regist', 'uses' => 'UsersController@postRegist']);
-	Route::get('users/update/{id}', ['as' => 'backend.users.update', 'uses' => 'UsersController@getUpdate']);
-	Route::post('users/update/{id}', ['as' => 'backend.users.update', 'uses' => 'UsersController@postUpdate']);
-	Route::get('users/delete/{id}', ['as' => 'backend.users.delete', 'uses' => 'UsersController@delete']);
+	Route::get('users', ['middleware' => 'permission_admin', 'as' => 'backend.users.index', 'uses' => 'UsersController@index']);
+	Route::get('users/regist', ['middleware' => 'permission_admin', 'as' => 'backend.users.regist', 'uses' => 'UsersController@getRegist']);
+	Route::post('users/regist', ['middleware' => 'permission_admin', 'as' => 'backend.users.regist', 'uses' => 'UsersController@postRegist']);
+	Route::get('users/update/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.users.update', 'uses' => 'UsersController@getUpdate']);
+	Route::post('users/update/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.users.update', 'uses' => 'UsersController@postUpdate']);
+	Route::get('users/delete/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.users.delete', 'uses' => 'UsersController@delete']);
 	
 	Route::get('change_passwd', ['as' => 'backend.users.change_passwd', 'uses' => 'UsersController@getChangePasswd']);
 	Route::post('change_passwd', ['as' => 'backend.users.change_passwd', 'uses' => 'UsersController@ChangePasswd']);
@@ -180,3 +177,6 @@ Route::get('auth/login', function () {
 Route::get('auth/logout', function () {
         return redirect()->to('sys-adm/logout');
     });
+
+
+

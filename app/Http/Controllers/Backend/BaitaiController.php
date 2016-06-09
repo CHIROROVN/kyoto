@@ -29,9 +29,15 @@ class BaitaiController extends BackendController
 		$data['s_baitai_year_begin'] 	= Input::get('s_baitai_year_begin');
 		$data['s_baitai_year_end'] 		= Input::get('s_baitai_year_end');
 		
-		$clsBaitai 			= new BaitaiModel();
-		$data['baitais'] 	= $clsBaitai->get_all(true, Input::all());
-		$data['title'] 		= '媒体情報の検索結果一覧';
+		$clsBaitai 				= new BaitaiModel();
+		$data['baitais'] 		= $clsBaitai->get_all(true, Input::all())['db'];
+		$data['title'] 			= '媒体情報の検索結果一覧';
+
+		$data['count_all']		= $clsBaitai->count();
+		$data['total_count'] 	= $clsBaitai->get_all(true, Input::all())['total_count'];
+		$page_current 			= Input::get('page', 1);
+		$data['record_from'] 	= (($page_current - 1) * PAGINATION) + 1;
+		$data['record_to'] 		= $data['record_from'] - 1;
 
 		return view('backend.baitais.index', $data);
 	}

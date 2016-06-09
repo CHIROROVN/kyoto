@@ -64,19 +64,35 @@ class BaitaiModel
 
         $results = $results->orderBy('baitai_code', 'asc');
 
+        // count record pagination
+        $total_count = $results->count();
+
         if ($pagination) {
             $db = $results->simplePaginate(PAGINATION);//simplePaginate, paginate
         } else {
             $db = $results->get();
         }
 
-        return $db;
+        return array(
+            'db'            => $db,
+            'total_count'   => $total_count
+        );
     }
 
-    public function count() {
+
+    public function get_for_select()
+    {
+        $results = DB::table($this->table)->select('baitai_id', 'baitai_name')->where('last_kind', '<>', DELETE)->get();
+        return $results;
+    }
+
+
+    public function count() 
+    {
         $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->count();
         return $results;
     }
+
 
     public function insert($data)
     {
@@ -84,17 +100,20 @@ class BaitaiModel
         return $results;
     }
 
+
     public function insert_get_id($data)
     {
         $results = DB::table($this->table)->insertGetId($data);
         return $results;
     }
 
+
     public function get_by_id($id)
     {
         $results = DB::table($this->table)->where('baitai_id', $id)->first();
         return $results;
     }
+
 
     public function update($id, $data)
     {

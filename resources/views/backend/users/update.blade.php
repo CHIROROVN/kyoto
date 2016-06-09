@@ -44,7 +44,7 @@
                 </td>
                 <td class="col-title"><label for="u_passwd">パスワード</span></label></td></label></td>
                 <td>
-                  <input name="u_passwd" id="u_passwd" type="password" class="form-control form-control--default">
+                  <input name="u_passwd" id="u_passwd" type="password" class="form-control form-control--default" value="">
                   @if ($errors->first('u_passwd'))
                     <div class="help-block with-errors">※ {!! $errors->first('u_passwd') !!}</div>
                   @endif

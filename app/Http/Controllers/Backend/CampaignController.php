@@ -37,8 +37,8 @@ class CampaignController extends BackendController
 	public function getRegist() {
 		$clsBaitai 			= new BaitaiModel();
 		$clsPresent 		= new PresentModel();
-		$data['baitais'] 	= $clsBaitai->get_all();
-		$data['presents'] 	= $clsPresent->get_all();
+		$data['baitais'] 	= $clsBaitai->get_for_select();
+		$data['presents'] 	= $clsPresent->get_for_select();
 		$data['title']  	= 'キャンペーンの新規登録';
 
 		return view('backend.campaigns.regist', $data);
@@ -83,8 +83,8 @@ class CampaignController extends BackendController
 		$clsCampaign 		= new CampaignModel();
 		$clsBaitai 			= new BaitaiModel();
 		$clsPresent 		= new PresentModel();
-		$data['baitais'] 	= $clsBaitai->get_all(false);
-		$data['presents'] 	= $clsPresent->get_all(false);
+		$data['baitais'] 	= $clsBaitai->get_for_select();
+		$data['presents'] 	= $clsPresent->get_for_select();
 		$data['campaign'] 	= $clsCampaign->get_by_id($id);
 		$data['title']  	= 'キャンペーンの新規登録';
 

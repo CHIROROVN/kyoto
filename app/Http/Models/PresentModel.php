@@ -37,6 +37,13 @@ class PresentModel
         return $db;
     }
 
+
+    public function get_for_select()
+    {
+        $results = DB::table($this->table)->select('presentlist_id', 'present_name')->where('last_kind', '<>', DELETE)->get();
+        return $results;
+    }
+
     public function count() {
         $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->count();
         return $results;

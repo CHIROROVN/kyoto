@@ -3,11 +3,14 @@
 @section('content')
 <div class="container">
   <div class="row content content--list">
+    <p>全{{ $count_all }}件中、{{ $total_count }}件が該当しました。うち、{{ $record_from }}～{{ $record_to + $bunyas->count() }}件を表示しています。</p>
+
     <div class="row fl-right mar-bottom">
       <div class="col-md-12">
         <input onclick="location.href='{{ route('backend.bunyas.regist') }}'" value="分野の新規登録" type="button" class="btn btn-sm btn-primary"/>
       </div>
     </div>
+    
     <table class="table table-bordered table-striped clearfix">
       <tr>
         <td class="col-title" align="center">媒体コード</td>

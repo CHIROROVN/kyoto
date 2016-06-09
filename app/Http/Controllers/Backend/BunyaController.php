@@ -30,8 +30,14 @@ class BunyaController extends BackendController
 		$data['s_bunya_class_sub'] 		= Input::get('s_bunya_class_sub');
 
 		$clsBunya 		= new BunyaModel();
-		$data['bunyas'] = $clsBunya->get_all(true, Input::all());
+		$data['bunyas'] = $clsBunya->get_all(true, Input::all())['db'];
 		$data['title']  = '分野情報の検索結果一覧';
+
+		$data['count_all']		= $clsBunya->count();
+		$data['total_count'] 	= $clsBunya->get_all(true, Input::all())['total_count'];
+		$page_current 			= Input::get('page', 1);
+		$data['record_from'] 	= (($page_current - 1) * PAGINATION) + 1;
+		$data['record_to'] 		= $data['record_from'] - 1;
 
 		return view('backend.bunyas.index', $data);
 	}

@@ -8,6 +8,8 @@ use Session;
 use Validator;
 use Auth;
 use Config;
+use App\Http\Models\UserModel;
+use Hash;
 
 class AuthController extends BackendController
 {
