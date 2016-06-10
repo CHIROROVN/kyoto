@@ -9,7 +9,7 @@ class BunyaModel
     public function Rules()
     {
     	return array(
-            'bunya_code'        => 'required',
+            'bunya_code'        => 'required|unique:m_bunya,bunya_code',
             'bunya_name'        => 'required',
             'bunya_kind'        => 'required',
             'bunya_class'       => 'required',
@@ -21,6 +21,7 @@ class BunyaModel
     	return array(
             
             'bunya_code.required'       => '※必須分野コード',
+            'bunya_code.unique'         => '※分野コード exists',
             'bunya_name.required'       => '※必須分野名',
             'bunya_kind.required'       => '※必須種類',
             'bunya_class.required'      => '※必須区分',
@@ -78,6 +79,13 @@ class BunyaModel
         );
     }
 
+
+    public function get_for_select()
+    {
+        $results = DB::table($this->table)->select('bunya_id', 'bunya_code', 'bunya_name')->where('last_kind', '<>', DELETE)->get();
+        return $results;
+    }
+
     public function count() {
         $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->count();
         return $results;
@@ -98,6 +106,12 @@ class BunyaModel
     public function get_by_id($id)
     {
         $results = DB::table($this->table)->where('bunya_id', $id)->first();
+        return $results;
+    }
+
+    public function get_by_code($bunya_code)
+    {
+        $results = DB::table($this->table)->where('bunya_code', $bunya_code)->first();
         return $results;
     }
 

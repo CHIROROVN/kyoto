@@ -38,6 +38,9 @@ class BaitaiController extends BackendController
 		$page_current 			= Input::get('page', 1);
 		$data['record_from'] 	= (($page_current - 1) * PAGINATION) + 1;
 		$data['record_to'] 		= $data['record_from'] - 1;
+		if ( $data['count_all'] == 0 ) {
+			$data['record_from'] 	= 0;
+		}
 
 		return view('backend.baitais.index', $data);
 	}

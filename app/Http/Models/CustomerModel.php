@@ -121,6 +121,13 @@ class CustomerModel
         return $results;
     }
 
+
+    public function get_for_select()
+    {
+        $results = DB::table($this->table)->select('cus_id', 'cus_code', 'cus_name')->where('last_kind', '<>', DELETE)->get();
+        return $results;
+    }
+
     public function count() {
         $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->count();
         return $results;
@@ -141,6 +148,12 @@ class CustomerModel
     public function get_by_id($id)
     {
         $results = DB::table($this->table)->where('cus_id', $id)->first();
+        return $results;
+    }
+
+    public function get_by_code($cus_code)
+    {
+        $results = DB::table($this->table)->where('cus_code', $cus_code)->first();
         return $results;
     }
 

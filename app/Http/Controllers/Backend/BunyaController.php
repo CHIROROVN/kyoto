@@ -38,6 +38,9 @@ class BunyaController extends BackendController
 		$page_current 			= Input::get('page', 1);
 		$data['record_from'] 	= (($page_current - 1) * PAGINATION) + 1;
 		$data['record_to'] 		= $data['record_from'] - 1;
+		if ( $data['count_all'] == 0 ) {
+			$data['record_from'] 	= 0;
+		}
 
 		return view('backend.bunyas.index', $data);
 	}
@@ -108,6 +111,7 @@ class BunyaController extends BackendController
 	 */
 	public function postEdit($id) {
 		$clsBunya             	= new BunyaModel();
+		$bunya 					= $clsBunya->get_by_id($id);
         $dataInsert             = array(
             'bunya_code'      	=> Input::get('bunya_code'),
             'bunya_name'      	=> Input::get('bunya_name'),
@@ -119,8 +123,12 @@ class BunyaController extends BackendController
             'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
             'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
         );
+        $rule = $clsBunya->Rules();
+        if ( $bunya->bunya_code == Input::get('bunya_code') ) {
+        	unset($rule['bunya_code']);
+        }
 
-        $validator  = Validator::make($dataInsert, $clsBunya->Rules(), $clsBunya->Messages());
+        $validator  = Validator::make($dataInsert, $rule, $clsBunya->Messages());
         if ($validator->fails()) {
             return redirect()->route('backend.bunyas.edit', [$id, 
             		's_bunya_code' 			=> Input::get('s_bunya_code'),
