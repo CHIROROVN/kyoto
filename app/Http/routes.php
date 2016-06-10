@@ -97,6 +97,7 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::post('customers/edit/{id}', ['as' => 'backend.customers.edit', 'uses' => 'CustomerController@postEdit']);
 	Route::get('customers/delete/{id}', ['as' => 'backend.customers.delete', 'uses' => 'CustomerController@delete']);
 	Route::get('customers/search', ['as' => 'backend.customers.search', 'uses' => 'CustomerController@search']);
+	Route::get('customers/detail/{id}', ['as' => 'backend.customers.detail', 'uses' => 'CustomerController@detail']);
 
 
 	/**

@@ -1,6 +1,10 @@
 @extends('backend.backend')
 
 @section('content')
+<!-- <script src="{{ asset('') }}/public/backend/common/js/dist/jquery.bootstrap-duallistbox.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+
 {!! Form::open( ['id' => 'frmEnterpriseRegist', 'class' => 'form-horizontal','method' => 'post', 'route' => 'backend.enterprises.regist', 'enctype'=>'multipart/form-data', 'accept-charset'=>'utf-8']) !!}
     <!-- content enterprise regist -->
     <section id="page">
@@ -38,8 +42,8 @@
                     <tbody>
                       <tr>
                         <td rowspan="2" valign="bottom">
-                          <select name="select" multiple="multiple" id="select" style="width: 120px;">
-                            <!-- <option value="">&nbsp;</option> -->
+                          <select name="cus_name_lb2" multiple="multiple" id="cus_name_lb2" style="width: 120px;">
+                            <option value="">&nbsp;</option>
                           </select>
                         </td>
                         <td align="right"><input name="cus_name_add" id="cus_name_add" value="←追加" type="button"></td>
@@ -59,7 +63,7 @@
                       <tr>
                         <td align="right"><input name="cus_name_del" id="cus_name_del" value="削除→" type="button"></td>
                         <td>
-                          <select name="cus_name" multiple="multiple" id="cus_name" style="width: 120px;">
+                          <select name="cus_name_lb1" multiple="multiple" id="cus_name_lb1" style="width: 120px;">
                             <option value="" style="width: 100px;">&nbsp;</option>
                             <!-- <option>岡山理科大学</option>
                             <option>岡山商科大学</option>
@@ -90,13 +94,42 @@
     <meta name="_token" content="{!! csrf_token() !!}" />
     <!-- End content enterprise regist -->
 <script type="text/javascript">
+      $('#cus_name_add').click(function(){
+        var optVal1 = $( "#cus_name_lb1 option:selected" ).val();
+        var optText1 = $( "#cus_name_lb1 option:selected" ).text();
+        var htmlOption1 = "<option value="+optVal1+">" + optText1 + "</option>";
+        if(optVal1 != null){
+          $('#cus_name_lb2').append(htmlOption1);
+          $("#cus_name_lb1 option:selected").remove();
+        }
+        $("#cus_name_lb1 option:first-child").attr("selected", true);
+
+      });
+
+      $('#cus_name_del').click(function(){
+        var optVal2 = $( "#cus_name_lb2 option:selected" ).val();
+        var optText2 = $( "#cus_name_lb2 option:selected" ).text();
+        var htmlOption2 = "<option value="+optVal2+">" + optText2 + "</option>";
+        if(optVal2 != null){
+          $('#cus_name_lb1').append(htmlOption2);
+          $("#cus_name_lb2 option:selected").remove();
+        }
+        $("#cus_name_lb2 option:first-child").attr("selected", true);
+        
+      });       
+    
+
+</script>
+<script type="text/javascript">
   $('#cus_name_kana').on('change',function(){
     var cnk = $(this).val();
     getCusName(cnk);
     });
+
   $(document).ready(function(){
     var cnk = $('#cus_name_kana').val();
     getCusName(cnk); 
+
   });
 
   function getCusName(cnk){
@@ -106,23 +139,51 @@
             }
         });    
     var url = "{{route('backend.enterprise.cnk_ajax')}}";
-    var option = "";
+    var htmlOptions = "";
     $.ajax({
                 type: "POST",
                 url: url,
                 data: {cnk:cnk},
                 success: function (data) {
-                  console.log(data['cnk']);
+                  //console.log(data['cnk']);
                   $.each(data['cnk'], function(key, val){
-                  option += "<option value="+key+">" + val + "</option>";
+                  htmlOptions += "<option value="+key+">" + val + "</option>";
                   });                  
-                  $('#cus_name').html(option);
+                  $('#cus_name_lb1').html(htmlOptions);
+                  $("#cus_name_lb1 option:first-child").attr("selected", true);
                 },
                 error: function (data) {
                     console.log('Error:', data);
                 }
-        })
+        });
   }
 
+</script>
+
+<script type="text/javascript">
+   var url_cnk = "{{route('backend.enterprises.regist')}}";
+   //var data = "";
+  $('#btnSave').click(function(){
+    getAllCusName();
+  });
+   function getAllCusName(){
+        $("#cus_name_lb2 option").each(function( index ) {
+          //console.log( index + ": " + $(this).val());
+          data = $(this).val();
+          console.log(data);
+        });
+
+      $.ajax({
+                type: "POST",
+                url: url_cnk,
+                data: {cnk:data},
+                success: function (data) {
+                  console.log(data['cnk']);                  
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                }                       
+        });
+   }
 </script>
 @endsection

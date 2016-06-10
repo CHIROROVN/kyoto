@@ -45,6 +45,10 @@ class EnterpriseController extends BackendController
 	}
 
 	public function postRegist() {
+		$cn = Input::get('cnk');
+		var_dump($cn);
+		echo "<pre>";
+		print_r(Input::all());exit;
 		$clsEnterprise          = new EnterpriseModel();
         $dataInsert             = array(
             'baitai_code'      	=> Input::get('baitai_code'),
@@ -71,15 +75,15 @@ class EnterpriseController extends BackendController
 
 	public function getEdit($id) {
 		$clsEnterprise 			= new EnterpriseModel();
-		$data['baitai'] 	= $clsEnterprise->get_by_id($id);
-		$data['title'] 		= '媒体情報の新規登録';
+		$data['baitai'] 		= $clsEnterprise->get_by_id($id);
+		$data['title'] 			= '媒体情報の新規登録';
 
 		return view('backend.enterprises.edit', $data);
 	}
 
 
 	public function postEdit($id) {
-		$clsEnterprise             	= new EnterpriseModel();
+		$clsEnterprise          = new EnterpriseModel();
         $dataInsert             = array(
             'baitai_code'      	=> Input::get('baitai_code'),
             'baitai_name'      	=> Input::get('baitai_name'),

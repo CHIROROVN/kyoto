@@ -48,7 +48,7 @@
     <div class="col-md-4">
       <h2>マスタ管理</h2>
       <ul>
-        <li><a href="customer_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>顧客マスタ管理</a></li>
+        <li><a href="{{route('backend.customers.search')}}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>顧客マスタ管理</a></li>
         <li><a href="{{ route('backend.enterprises.index') }}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>法人マスタ管理</a></li>
         <li><a href="{{ route('backend.baitais.search') }}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>媒体マスタ管理</a></li>
         <li><a href="pamphlet_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>資料請求番号マスタ管理</a></li>
