@@ -74,18 +74,6 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 
 
 	/**
-	 * pamphlets
-	 */
-	Route::get('pamphlets', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.index', 'uses' => 'PamphletController@index']);
-	Route::get('pamphlets/regist', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.regist', 'uses' => 'PamphletController@getRegist']);
-	Route::post('pamphlets/regist', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.regist', 'uses' => 'PamphletController@postRegist']);
-	Route::get('pamphlets/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.edit', 'uses' => 'PamphletController@getEdit']);
-	Route::post('pamphlets/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.edit', 'uses' => 'PamphletController@postEdit']);
-	Route::get('pamphlets/delete/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.delete', 'uses' => 'PamphletController@delete']);
-	Route::get('pamphlets/search', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.search', 'uses' => 'PamphletController@search']);
-
-
-	/**
 	 * enterprises
 	 */
 	Route::get('enterprises', ['middleware' => 'permission_admin', 'as' => 'backend.enterprises.index', 'uses' => 'EnterpriseController@index']);
@@ -109,6 +97,7 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::post('customers/edit/{id}', ['as' => 'backend.customers.edit', 'uses' => 'CustomerController@postEdit']);
 	Route::get('customers/delete/{id}', ['as' => 'backend.customers.delete', 'uses' => 'CustomerController@delete']);
 	Route::get('customers/search', ['as' => 'backend.customers.search', 'uses' => 'CustomerController@search']);
+	Route::post('customers/search', ['as' => 'backend.customers.search', 'uses' => 'CustomerController@postSearch']);
 	Route::get('customers/detail/{id}', ['as' => 'backend.customers.detail', 'uses' => 'CustomerController@detail']);
 
 

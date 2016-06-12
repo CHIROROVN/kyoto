@@ -27,10 +27,6 @@
 					$arr[] = $power[$item];
 				}
 			}
-      
-      
-      
-      
 
 			return $arr;
 		}

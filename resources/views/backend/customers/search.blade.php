@@ -4,28 +4,32 @@
 <!-- content customer search -->
     <section id="page">
       <div class="container">
+      {!! Form::open( ['id' => 'frmCustomerSearch', 'class' => 'form-horizontal','method' => 'post', 'route' => 'backend.customers.search', 'enctype'=>'multipart/form-data']) !!}
         <div class="row content">
           <table class="table table-bordered">
             <tbody>
               <tr>
-                <td class="col-title"><label for="textSchoolCode">学校コード</label></td>
+                <td class="col-title"><label for="cus_code">学校コード</label></td>
                 <td>
-                  <input name="txtSchoolCode" id="textSchoolCode" type="text" class="form-control form-control--small">
+                  <input name="cus_code" id="cus_code" type="text" class="form-control form-control--small" value="{{@$cus_code}}">
                 </td>
-                <td class="col-title"><label for="textSchoolName">学校名</label></td>
-                <td><input name="txtSchoolName" id="textSchoolName" type="text" class="form-control form-control--small"></td>
-                <td class="col-title"><label for="textOldSchoolName">性別</label></td>
-                 <td><input name="txtOldSchoolName" id="textOldSchoolName" type="text" class="form-control form-control--small"></td>
+                <td class="col-title"><label for="cus_name">学校名</label></td>
+                <td>
+                  <input name="cus_name" id="cus_name" type="text" class="form-control form-control--small" value="{{@$cus_name}}">
+                </td>
+                <td class="col-title"><label for="cus_old_name">性別</label></td>
+                 <td><input name="cus_old_name" id="cus_old_name" type="text" class="form-control form-control--small" value="{{@$cus_old_name}}"></td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="row mar-bottom30">
           <div class="col-md-12 text-center">
-            <input onclick="location.href='customer_list.html'" value="検索開始（OR検索）" type="button" class="btn btn-sm btn-primary form-control--mar-right">
-            <input name="button5" value="クリア（全消し）" type="reset" class="btn btn-sm btn-primary">
+            <input type="submit" value="検索開始（OR検索）" type="button" class="btn btn-sm btn-primary form-control--mar-right">
+            <input name="btnReset" value="クリア（全消し）" type="reset" class="btn btn-sm btn-primary">
           </div>
         </div>
+        {!! Form::close() !!}
       </div>
     </section>
     <!-- End content customer search -->

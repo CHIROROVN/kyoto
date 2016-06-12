@@ -50,12 +50,12 @@ class CustomerModel
             // 'cus_mail_youbi'            => 'required',
             // 'cus_mail_hi'               => 'required',
             // 'cus_mail_attach'           => 'required',
-		);
+        );
     }
 
     public function Messages()
     {
-    	return array(
+        return array(
             'cus_code.required'                  => 'Please enter customer code.',
             'cus_code.unique'                    => 'This customer code existed,try again.',
             'cus_name.required'                  => 'Please enter customer name.',
@@ -107,17 +107,28 @@ class CustomerModel
             // 'cus_mail_youbi.required'            => '※必須',
             // 'cus_mail_hi.required'               => '※必須',
             // 'cus_mail_attach.required'           => '※必須',
-		);
+        );
     }
 
-    public function get_all()
+    public function get_all($where = null)
     {
-        $results = DB::table($this->table)
+        $query = DB::table($this->table)
                         ->where('last_kind', '<>', DELETE)
                         ->orderBy('cus_staff1_name_kana', 'asc')
                         ->orderBy('cus_staff2_name_kana', 'asc')
-                        ->orderBy('cus_staff3_name_kana', 'asc')
-                        ->paginate(PAGINATION);
+                        ->orderBy('cus_staff3_name_kana', 'asc');
+
+        if(!empty($where['cus_code']))
+            $query->where('cus_code', 'LIKE', '%' .$where['cus_code']. '%');
+
+        if(!empty($where['cus_name']))
+            $query->where('cus_name', 'LIKE', '%' .$where['cus_name']. '%');
+
+        if(!empty($where['cus_old_name']))
+            $query->where('cus_old_name', 'LIKE', '%' .$where['cus_old_name']. '%');
+
+        $results = $query->simplePaginate(PAGINATION);
+
         return $results;
     }
 
