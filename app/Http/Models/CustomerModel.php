@@ -132,6 +132,23 @@ class CustomerModel
         return $results;
     }
 
+    public function get_cus_by_cid($whereIn=null){
+        if(!empty($whereIn))
+        {
+            return DB::table($this->table)
+                        ->select('cus_id', 'ent_id', 'last_kind', 'last_date', 'last_ipadrs', 'last_user')
+                        ->where('last_kind', '<>', DELETE)
+                        ->whereIn('cus_id', $whereIn)
+                        ->orderBy('cus_id', 'asc')
+                        ->get();
+        }else{
+            return DB::table($this->table)
+                        ->select('cus_id', 'ent_id', 'last_kind', 'last_date', 'last_ipadrs', 'last_user')
+                        ->where('last_kind', '<>', DELETE)
+                        ->orderBy('cus_id', 'asc')
+                        ->get();
+        }
+    }
 
     public function get_for_select()
     {
@@ -168,6 +185,12 @@ class CustomerModel
         return $results;
     }
 
+    public function get_cus_by_ent_id($ent_id)
+    {
+        $results = DB::table($this->table)->select('cus_id','cus_name')->where('ent_id', $ent_id)->get();
+        return $results;
+    }
+
     public function update($id, $data)
     {
     	$results = DB::table($this->table)->where('cus_id', $id)->update($data);
@@ -177,9 +200,6 @@ class CustomerModel
     //get list customer
     public function get_cus_by_kana($kana=null){
         if(!empty($kana)){
-            // $arr_kana = $this->convert_kana($kana);
-            // $where_kana = implode(" ", $arr_kana);
-
             switch ($kana) {
                 case 'あ':
                 return  DB::table($this->table)
@@ -316,58 +336,7 @@ class CustomerModel
                                 ->lists('cus_name', 'cus_id');
                     break;
             }
-
-           
-            // return  DB::table($this->table)
-            //                     ->where('last_kind', '<>', DELETE)
-            //                     ->whereNotNull('last_kind')
-            //                     ->where('cus_name_kana', 'LIKE', "%".$where_kana."%")
-            //                     ->lists('cus_name', 'cus_id');
-        }        
-    }
-
-//$q->whereRaw("(GroupId = 'KO11' OR GroupId = 'KO05')")
-
-    public function convert_kana($kana=null){
-        if(!empty($kana) ){
-            switch ($kana) {
-                case 'あ':
-                    return ['あ','い','う','え','お'];                  
-                    break;
-                case 'か':
-                    return ['か','き','く','け','こ'];
-                    break;
-                case 'さ':
-                    return ['さ','し','す','せ','そ'];
-                    break;
-                case 'た':
-                    return ['た','ち','つ','て','と'];
-                    break;
-                case 'な':
-                    return ['な','に','ぬ','ね','の'];
-                    break;
-                case 'は':
-                    return ['は','ひ','ふ','へ','ほ'];
-                    break;
-                case 'ま':
-                    return ['ま','み','む','め','も'];
-                    break;
-                case 'や':
-                    return ['や','ゆ','よ'];
-                    break;
-                case 'ら':
-                    return ['ら','り','る','れ','ろ'];
-                    break;
-                case 'わ':
-                    return ['わ','を'];
-                    break;                
-                default:
-                    return ['ん'];
-                    break;
-            }
-        }else{
-            return null;
         }
-
     }
+
 }
