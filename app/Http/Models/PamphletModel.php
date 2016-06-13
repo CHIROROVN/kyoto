@@ -16,7 +16,8 @@ class PamphletModel
             'pamph_cus_id'      => 'required',
             'pamph_send'        => 'required',
             'pamph_bunya_id'    => 'required',
-            'pamph_area_pref'   => 'required',
+            'pamph_area'        => 'required',
+            'pamph_pref'        => 'required',
             'pamph_sex'         => 'required',
 		);
     }
@@ -31,7 +32,8 @@ class PamphletModel
             'pamph_cus_id.required'         => '※必須学校名',
             'pamph_send.required'           => '※必須発送の有無',
             'pamph_bunya_id.required'       => '※必須分野',
-            'pamph_area_pref.required'      => '※必須都道府県・エリア',
+            'pamph_area.required'           => '※必須都道府県 or エリア',
+            'pamph_pref.required'           => '※必須都道府県 or エリア',
             'pamph_sex.required'            => '※必須対象',
 		);
     }
@@ -76,6 +78,8 @@ class PamphletModel
         // count record pagination
         $total_count = $results->count();
 
+        $results = $results->groupby('pamph_number');
+
         if ($pagination) {
             $db = $results->simplePaginate(PAGINATION);//simplePaginate, paginate
         } else {
@@ -88,62 +92,32 @@ class PamphletModel
         );
     }
 
-    public function get_all_distinct($pagination = true, $where = array())
+    public function get_all_distinct()
     {
-        $results = DB::table($this->table)->where('last_kind', '<>', DELETE);
+        $results = DB::table($this->table)
+                        ->join('m_customer', 'm_pamphlet.pamph_cus_id', '=', 'm_customer.cus_id')
+                        ->select('m_pamphlet.*', 'm_customer.cus_id', 'm_customer.cus_name')
+                        ->where('m_pamphlet.last_kind', '<>', DELETE)
+                        ->get();
+        return $results;
+    }
 
-        /*// where pamph_code
-        if ( !empty($where['s_pamph_code']) ) {
-            $results = $results->where('pamph_code', 'like', '%' . $where['s_pamph_code'] . '%');
-        }
 
-        // where pamph_name
-        if ( !empty($where['s_pamph_name']) ) {
-            $results = $results->where('pamph_name', 'like', '%' . $where['s_pamph_name'] . '%');
-        }
-
-        // where pamph_kind
-        // (old) or (new) or (old or new)
-        if ( !empty($where['s_pamph_kind_old']) && !empty($where['s_pamph_kind_new']) ) {
-            $results = $results->whereIn('pamph_kind', [1, 2]);
-        } elseif ( !empty($where['s_pamph_kind_old']) && empty($where['s_pamph_kind_new']) ) {
-            $results = $results->where('pamph_kind', '=', $where['s_pamph_kind_old']);
-        } elseif ( empty($where['s_pamph_kind_old']) && !empty($where['s_pamph_kind_new']) ) {
-            $results = $results->where('pamph_kind', '=', $where['s_pamph_kind_new']);
-        }
-
-        // where pamph_year
-        // begin & end
-        if ( !empty($where['s_pamph_year_begin']) && !empty($where['s_pamph_year_end']) ) {
-            $results = $results->where('pamph_year', '>=', $where['s_pamph_year_begin'])
-                                ->where('pamph_year', '<=', $where['s_pamph_year_end']);
-        } elseif ( !empty($where['s_pamph_year_begin']) && empty($where['s_pamph_year_end']) ) {
-            $results = $results->where('pamph_year', '>=', $where['s_pamph_year_begin']);
-        } elseif ( empty($where['s_pamph_year_begin']) && !empty($where['s_pamph_year_end']) ) {
-            $results = $results->where('pamph_year', '<=', $where['s_pamph_year_end']);
-        }*/
-
-        $results = $results->orderBy('pamph_number', 'asc');
-
-        // count record pagination
-        $total_count = $results->count();
-
-        if ($pagination) {
-            $db = $results->distinct('pamph_number')->simplePaginate(PAGINATION);//simplePaginate, paginate
-        } else {
-            $db = $results->distinct('pamph_number')->get();
-        }
-
-        return array(
-            'db'            => $db,
-            'total_count'   => $total_count
-        );
+    public function get_by_pamph_number($pamph_number)
+    {
+        $results = DB::table($this->table)
+                            ->join('m_customer', 'm_pamphlet.pamph_cus_id', '=', 'm_customer.cus_id')
+                            ->select('m_pamphlet.*', 'm_customer.cus_id', 'm_customer.cus_name')
+                            ->where('m_pamphlet.last_kind', '<>', DELETE)
+                            ->where('m_pamphlet.pamph_number', $pamph_number)
+                            ->get();
+        return $results;
     }
 
 
     public function get_for_select()
     {
-        $results = DB::table($this->table)->select('pamph_id', 'pamph_name')->where('last_kind', '<>', DELETE)->get();
+        $results = DB::table($this->table)->select('pamph_id', 'pamph_number', 'pamph_name')->where('last_kind', '<>', DELETE)->get();
         return $results;
     }
 
@@ -171,7 +145,11 @@ class PamphletModel
 
     public function get_by_id($id)
     {
-        $results = DB::table($this->table)->where('pamph_id', $id)->first();
+        $results = DB::table($this->table)
+                        ->join('m_customer', 'm_pamphlet.pamph_cus_id', '=', 'm_customer.cus_id')
+                        ->select('m_pamphlet.*', 'm_customer.cus_id', 'm_customer.cus_code', 'm_customer.cus_name')
+                        ->where('pamph_id', $id)
+                        ->first();
         return $results;
     }
 
@@ -179,6 +157,13 @@ class PamphletModel
     public function update($id, $data)
     {
     	$results = DB::table($this->table)->where('pamph_id', $id)->update($data);
+        return $results;
+    }
+
+
+    public function update_by_pamph_number($pamph_number, $data)
+    {
+        $results = DB::table($this->table)->where('pamph_number', $pamph_number)->update($data);
         return $results;
     }
 }

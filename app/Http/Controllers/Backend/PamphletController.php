@@ -37,17 +37,18 @@ class PamphletController extends BackendController
 		$data['s_pamph_send'] 				= Input::get('s_pamph_send');
 		$data['s_pamph_bunya_id'] 			= Input::get('s_pamph_bunya_id');
 		$data['s_pamph_pref'] 				= Input::get('s_pamph_pref');
+		$data['s_pamph_area'] 				= Input::get('s_pamph_area');
 		$data['s_pamph_sex_unspecified'] 	= Input::get('s_pamph_sex_unspecified');
 		$data['s_pamph_sex_men'] 			= Input::get('s_pamph_sex_men');
 		$data['s_pamph_sex_women'] 			= Input::get('s_pamph_sex_women');
 		
-		$clsPamphlet 			= new PamphletModel();
-		$clsBunya				= new BunyaModel();
-		$clsCustomer 			= new CustomerModel();
-		$clsArea 				= new AreaModel();
-		$clsPref 				= new PrefModel();
-		$data['pamphlets'] 		= $clsPamphlet->get_all(false, Input::all())['db'];
-		$data['pamphlets_distinct'] 	= $clsPamphlet->get_all_distinct(false, Input::all())['db'];
+		$clsPamphlet 					= new PamphletModel();
+		$clsBunya						= new BunyaModel();
+		$clsCustomer 					= new CustomerModel();
+		$clsArea 						= new AreaModel();
+		$clsPref 						= new PrefModel();
+		$data['pamphlets'] 				= $clsPamphlet->get_all(true, Input::all())['db'];
+		$data['pamphlets_distinct'] 	= $clsPamphlet->get_all_distinct();
 		// set bunyas
 		$bunyas 				= $clsBunya->get_for_select();
 		foreach ( $bunyas as $bunya ) {
@@ -76,20 +77,18 @@ class PamphletController extends BackendController
 
 		$data['count_all']		= $clsPamphlet->count();
 		$data['total_count'] 	= $clsPamphlet->get_all(true, Input::all())['total_count'];
+
 		$page_current 			= Input::get('page', 1);
 		$data['record_from'] 	= (($page_current - 1) * PAGINATION) + 1;
 		$data['record_to'] 		= $data['record_from'] - 1;
 		if ( $data['count_all'] == 0 ) {
-			$data['record_from'] 	= 0;
+			$data['record_from'] = 0;
 		}
 		if ( $data['total_count'] == 0 ) {
 			$data['record_to'] = 0;
-			$data['record_from'] 	= 0;
+			$data['record_from'] = 0;
 		}
-echo '<pre>';
-print_r($data['pamphlets']);
-print_r($data['pamphlets_distinct']);
-echo '</pre>';die;
+
 		return view('backend.pamphlets.index', $data);
 	}
 
@@ -145,13 +144,14 @@ echo '</pre>';die;
 		} else {
 			$pamph_bunya_id 		= $pamph_bunya_id->bunya_id;
 		}
+
 		$arr_cus_id 			= Input::get('pamph_cus_id');
-		if ( empty($arr_cus_id) && count($arr_cus_id) == 0 ) {
+		if ( empty($arr_cus_id) || count($arr_cus_id) == 0 || $arr_cus_id[0] == null ) {
 			$pamph_cus_id = '';
 		} else {
 			$pamph_cus_id = Input::get('pamph_cus_id'); //temp value
 		}
-		
+			
         $dataInsert             = array(
             'pamph_number'      => Input::get('pamph_number'),
             'pamph_name'      	=> Input::get('pamph_name'),
@@ -175,9 +175,11 @@ echo '</pre>';die;
 
         // set value for pamph_area_pref
         if ( $dataInsert['pamph_pref'] == 0 && $dataInsert['pamph_area'] == 0 ) {
-        	$dataInsert['pamph_area_pref'] = '';
+        	$dataInsert['pamph_area'] = '';
+        	$dataInsert['pamph_pref'] = '';
         } else {
-        	$dataInsert['pamph_area_pref'] = ($dataInsert['pamph_pref'] == 0) ? $dataInsert['pamph_area'] : $dataInsert['pamph_pref'];
+        	$dataInsert['pamph_area'] = $dataInsert['pamph_area'];
+        	$dataInsert['pamph_pref'] = $dataInsert['pamph_pref'];
         }
 
         $validator  = Validator::make($dataInsert, $clsPamphlet->Rules(), $clsPamphlet->Messages());
@@ -190,7 +192,8 @@ echo '</pre>';die;
         	Session::flash('error-input', 'Please select only one 都道府県 or エリア');
         	return redirect()->route('backend.pamphlets.regist')->withErrors($validator)->withInput();
         } else {
-        	$dataInsert['pamph_area_pref'] = (empty($dataInsert['pamph_pref'])) ? $dataInsert['pamph_area'] : $dataInsert['pamph_pref'];
+        	$dataInsert['pamph_area'] = $dataInsert['pamph_area'];
+        	$dataInsert['pamph_pref'] = $dataInsert['pamph_pref'];
         }
 
         // check select multi customer
@@ -236,6 +239,7 @@ echo '</pre>';die;
 		$data['s_pamph_send'] 				= Input::get('s_pamph_send');
 		$data['s_pamph_bunya_id'] 			= Input::get('s_pamph_bunya_id');
 		$data['s_pamph_pref'] 				= Input::get('s_pamph_pref');
+		$data['s_pamph_area'] 				= Input::get('s_pamph_area');
 		$data['s_pamph_sex_unspecified'] 	= Input::get('s_pamph_sex_unspecified');
 		$data['s_pamph_sex_men'] 			= Input::get('s_pamph_sex_men');
 		$data['s_pamph_sex_women'] 			= Input::get('s_pamph_sex_women');
@@ -284,6 +288,13 @@ echo '</pre>';die;
 		}
 		$data['customers_old']		= $tmp;
 
+		if ( !empty(Input::get('type')) ) {
+			$data['list_customers'] = $clsPamphlet->get_by_pamph_number(Input::get('type'));
+		}
+		// echo '<pre>';
+		// print_r($data);
+		// echo '</pre>';die;
+
 		return view('backend.pamphlets.edit', $data);
 	}
 
@@ -303,13 +314,16 @@ echo '</pre>';die;
 		} else {
 			$pamph_bunya_id 		= $pamph_bunya_id->bunya_id;
 		}
-		$pamph_cus_id 			= $clsCustomer->get_by_code(Input::get('pamph_cus_id'));
-		if ( empty($pamph_cus_id) ) {
-			$pamph_cus_id 		= $clsCustomer->get_by_id(Input::get('pamph_cus_id'));
-			$pamph_cus_id 		= $pamph_cus_id->cus_id;
+
+		$arr_cus_id 			= Input::get('pamph_cus_id');
+		if ( empty($arr_cus_id) || count($arr_cus_id) == 0 || $arr_cus_id[0] == null ) {
+			$pamph_cus_id = '';
 		} else {
-			$pamph_cus_id 		= $pamph_cus_id->cus_id;
+			$pamph_cus_id = Input::get('pamph_cus_id'); //temp value
 		}
+		// echo '<pre>';
+		// print_r($pamph_cus_id);
+		// echo '</pre>';die;
         $dataInsert             = array(
 			'pamph_number'      => Input::get('pamph_number'),
 			'pamph_name'      	=> Input::get('pamph_name'),
@@ -331,10 +345,12 @@ echo '</pre>';die;
         $dataInsert['pamph_cus_name'] 	= Input::get('pamph_cus_name');
 
         // set value for pamph_area_pref
-        if ( $dataInsert['pamph_pref'] == 0 && $dataInsert['pamph_area'] == 0 ) {
-        	$dataInsert['pamph_area_pref'] = '';
+        if ( $dataInsert['pamph_pref'] != 0 && $dataInsert['pamph_area'] != 0 ) {
+        	Session::flash('error-input', 'Please select only one 都道府県 or エリア');
+        	return redirect()->route('backend.pamphlets.regist')->withErrors($validator)->withInput();
         } else {
-        	$dataInsert['pamph_area_pref'] = ($dataInsert['pamph_pref'] == 0) ? $dataInsert['pamph_area'] : $dataInsert['pamph_pref'];
+        	$dataInsert['pamph_area'] = $dataInsert['pamph_area'];
+        	$dataInsert['pamph_pref'] = $dataInsert['pamph_pref'];
         }
 
         $validator  = Validator::make($dataInsert, $clsPamphlet->Rules(), $clsPamphlet->Messages());
@@ -354,11 +370,12 @@ echo '</pre>';die;
 				's_pamph_sex_unspecified' 	=> Input::get('s_pamph_sex_unspecified'),
 				's_pamph_sex_men' 			=> Input::get('s_pamph_sex_men'),
 				's_pamph_sex_women' 		=> Input::get('s_pamph_sex_women'),
-				's_pamph_pref' 				=> Input::get('s_pamph_pref'),
+				's_pamph_area' 				=> Input::get('s_pamph_area'),
 				'page' 						=> Input::get('page')
         	))->withErrors($validator)->withInput();
         }
 
+        // check select only pamph_pref and pamph_area
         if ( $dataInsert['pamph_pref'] != 0 && $dataInsert['pamph_area'] != 0 ) {
         	Session::flash('error-input', 'Please select only one 都道府県 or エリア');
         	return redirect()->route('backend.pamphlets.edit', [$id, 
@@ -376,19 +393,27 @@ echo '</pre>';die;
 				's_pamph_sex_unspecified' 	=> Input::get('s_pamph_sex_unspecified'),
 				's_pamph_sex_men' 			=> Input::get('s_pamph_sex_men'),
 				's_pamph_sex_women' 		=> Input::get('s_pamph_sex_women'),
-				's_pamph_pref' 				=> Input::get('s_pamph_pref'),
+				's_pamph_area' 				=> Input::get('s_pamph_area'),
 				'page' 						=> Input::get('page')
 			])->withErrors($validator)->withInput();
         } else {
-        	$dataInsert['pamph_area_pref'] = (empty($dataInsert['pamph_pref'])) ? $dataInsert['pamph_area'] : $dataInsert['pamph_pref'];
+        	$dataInsert['pamph_area'] = $dataInsert['pamph_area'];
+        	$dataInsert['pamph_pref'] = $dataInsert['pamph_pref'];
         }
 
         unset($dataInsert['pamph_pref']);
         unset($dataInsert['pamph_area']);
         unset($dataInsert['pamph_bunya_name']);
         unset($dataInsert['pamph_cus_name']);
-
-        $clsPamphlet->update($id, $dataInsert);
+echo '<pre>';
+print_r($dataInsert);
+echo '</pre>';die;
+		$tmp = $dataInsert['pamph_cus_id'];
+		foreach ( $tmp as $item ) {
+			$dataInsert['pamph_cus_id'] = $item;
+			$clsPamphlet->update($id, $dataInsert);
+		}
+        
 
         return redirect()->route('backend.pamphlets.index', array(
 			's_pamph_number' 			=> Input::get('s_pamph_number'),
@@ -405,7 +430,7 @@ echo '</pre>';die;
 			's_pamph_sex_unspecified' 	=> Input::get('s_pamph_sex_unspecified'),
 			's_pamph_sex_men' 			=> Input::get('s_pamph_sex_men'),
 			's_pamph_sex_women' 		=> Input::get('s_pamph_sex_women'),
-			's_pamph_pref' 				=> Input::get('s_pamph_pref'),
+			's_pamph_area' 				=> Input::get('s_pamph_area'),
 			'page' 						=> Input::get('page')
     	));
 	}
@@ -423,7 +448,13 @@ echo '</pre>';die;
             'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
             'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
 		);
-		$clsPamphlet->update($id, $dataUpdate);
+
+		// delete all
+		if ( !empty(Input::get('type')) ) {
+			$clsPamphlet->update_by_pamph_number(Input::get('type'), $dataUpdate);
+		} else {
+			$clsPamphlet->update($id, $dataUpdate);
+		}
 
 		// set page current
 		$page = $this->set_page($clsPamphlet, Input::get('page'));
@@ -443,7 +474,7 @@ echo '</pre>';die;
 			's_pamph_sex_unspecified' 	=> Input::get('s_pamph_sex_unspecified'),
 			's_pamph_sex_men' 			=> Input::get('s_pamph_sex_men'),
 			's_pamph_sex_women' 		=> Input::get('s_pamph_sex_women'),
-			's_pamph_pref' 				=> Input::get('s_pamph_pref'),
+			's_pamph_area' 				=> Input::get('s_pamph_area'),
 			'page' 						=> Input::get('page')
     	));
 	}
@@ -467,6 +498,7 @@ echo '</pre>';die;
 		$data['s_pamph_send'] 				= Input::get('s_pamph_send');
 		$data['s_pamph_bunya_id'] 			= Input::get('s_pamph_bunya_id');
 		$data['s_pamph_pref'] 				= Input::get('s_pamph_pref');
+		$data['s_pamph_area'] 				= Input::get('s_pamph_area');
 		$data['s_pamph_sex_unspecified'] 	= Input::get('s_pamph_sex_unspecified');
 		$data['s_pamph_sex_men'] 			= Input::get('s_pamph_sex_men');
 		$data['s_pamph_sex_women'] 			= Input::get('s_pamph_sex_women');
@@ -486,6 +518,7 @@ echo '</pre>';die;
 			$data['s_pamph_send'] 				= null;
 			$data['s_pamph_bunya_id'] 			= null;
 			$data['s_pamph_pref'] 				= null;
+			$data['s_pamph_area'] 				= null;
 			$data['s_pamph_sex_unspecified'] 	= null;
 			$data['s_pamph_sex_men'] 			= null;
 			$data['s_pamph_sex_women'] 			= null;

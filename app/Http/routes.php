@@ -74,6 +74,30 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 
 
 	/**
+	 * pamphlets
+	 */
+	Route::get('pamphlets', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.index', 'uses' => 'PamphletController@index']);
+	Route::get('pamphlets/regist', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.regist', 'uses' => 'PamphletController@getRegist']);
+	Route::post('pamphlets/regist', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.regist', 'uses' => 'PamphletController@postRegist']);
+	Route::get('pamphlets/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.edit', 'uses' => 'PamphletController@getEdit']);
+	Route::post('pamphlets/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.edit', 'uses' => 'PamphletController@postEdit']);
+	Route::get('pamphlets/delete/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.delete', 'uses' => 'PamphletController@delete']);
+	Route::get('pamphlets/search', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.search', 'uses' => 'PamphletController@search']);
+
+
+	/**
+	 * gpamphlets
+	 */
+	Route::get('gpamphlets', ['middleware' => 'permission_admin', 'as' => 'backend.gpamphlets.index', 'uses' => 'GPamphletController@index']);
+	Route::get('gpamphlets/regist', ['middleware' => 'permission_admin', 'as' => 'backend.gpamphlets.regist', 'uses' => 'GPamphletController@getRegist']);
+	Route::post('gpamphlets/regist', ['middleware' => 'permission_admin', 'as' => 'backend.gpamphlets.regist', 'uses' => 'GPamphletController@postRegist']);
+	Route::get('gpamphlets/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.gpamphlets.edit', 'uses' => 'GPamphletController@getEdit']);
+	Route::post('gpamphlets/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.gpamphlets.edit', 'uses' => 'GPamphletController@postEdit']);
+	Route::get('gpamphlets/delete/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.gpamphlets.delete', 'uses' => 'GPamphletController@delete']);
+	Route::get('gpamphlets/search', ['middleware' => 'permission_admin', 'as' => 'backend.gpamphlets.search', 'uses' => 'GPamphletController@search']);
+
+
+	/**
 	 * enterprises
 	 */
 	Route::get('enterprises', ['middleware' => 'permission_admin', 'as' => 'backend.enterprises.index', 'uses' => 'EnterpriseController@index']);
