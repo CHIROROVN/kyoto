@@ -82,6 +82,10 @@ class PamphletController extends BackendController
 		if ( $data['count_all'] == 0 ) {
 			$data['record_from'] 	= 0;
 		}
+		if ( $data['total_count'] == 0 ) {
+			$data['record_to'] = 0;
+			$data['record_from'] 	= 0;
+		}
 echo '<pre>';
 print_r($data['pamphlets']);
 print_r($data['pamphlets_distinct']);

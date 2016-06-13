@@ -41,6 +41,10 @@ class BunyaController extends BackendController
 		if ( $data['count_all'] == 0 ) {
 			$data['record_from'] 	= 0;
 		}
+		if ( $data['total_count'] == 0 ) {
+			$data['record_to'] = 0;
+			$data['record_from'] 	= 0;
+		}
 
 		return view('backend.bunyas.index', $data);
 	}
