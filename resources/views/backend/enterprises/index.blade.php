@@ -1,8 +1,10 @@
 @extends('backend.backend')
 
 @section('content')
+
 <div class="container">
   <div class="row content content--list">
+  <p>全123件中、99件が該当しました。うち、1～20件を表示しています。</p>
     <div class="row fl-right mar-bottom">
       <div class="col-md-12">
         <input onclick="location.href='{{ route('backend.enterprises.regist') }}'" value="媒体の新規登録" type="button" class="btn btn-sm btn-primary"/>
@@ -24,9 +26,19 @@
         @foreach ($enterprises as $enterprise)
         <tr>
           <td>{{ $enterprise->ent_name }}</td>
-          <td>xxx</td>
-          <td><input onclick="location.href='xxx'" value="詳細" type="button" class="btn btn-xs btn-primary"></td>
-          <td align="center"><input onclick="location.href='{{ route('backend.enterprises.edit', $enterprise->ent_id) }}'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
+          <td>
+            @if($count = count(CusName($enterprise->ent_id)))
+              @foreach(CusName($enterprise->ent_id) as $key => $cusName)
+                {{@$cusName->cus_name}}@if($count > 1 && ($key <= $count - 2)){{'、'}}@endif
+              @endforeach
+            @endif
+          </td>
+          <td>
+            <input onclick="location.href='{{route('backend.enterprises.detail', $enterprise->ent_id)}}'" value="詳細" type="button" class="btn btn-xs btn-primary">
+          </td>
+          <td align="center">
+            <input onclick="location.href='{{ route('backend.enterprises.edit', $enterprise->ent_id) }}'" value="編集" type="button" class="btn btn-xs btn-primary">
+            </td>
           <td align="center">
             <!-- <input onclick="location.href='{{ route('backend.enterprises.delete', $enterprise->ent_id) }}'" value="削除" type="button" class="btn btn-xs btn-primary"> -->
             <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal-{{ $enterprise->ent_id }}">削除</button>
@@ -37,10 +49,10 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">{{ TITLE_DELETE }}</h4>
+                    <h4 class="modal-title">Delete</h4>
                   </div>
                   <div class="modal-body">
-                    <p>{{ CONTENT_DELETE }}</p>
+                    <p>Are you want to delete?</p>
                   </div>
                   <div class="modal-footer">
                     <a href="{{ route('backend.enterprises.delete', $enterprise->ent_id) }}" class="btn btn-xs btn-primary">削除</a>

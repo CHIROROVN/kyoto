@@ -21,7 +21,6 @@ class EnterpriseController extends BackendController
 		parent::__construct();
 	}
 
-
 	public function index() {
 		$clsEnterprise 			= new EnterpriseModel();
 		$data['enterprises'] 	= $clsEnterprise->get_all();
@@ -30,6 +29,18 @@ class EnterpriseController extends BackendController
 		return view('backend.enterprises.index', $data);
 	}
 
+	public static function getCusName($ent_id=null){
+		$cmModel = new CustomerModel();
+		return $cmModel->get_cus_by_ent_id($ent_id);
+	}
+
+	public function detail($id) {
+		$clsEnterprise 			= new EnterpriseModel();
+		$data['enterprise'] 	= $clsEnterprise->get_by_id($id);
+		$data['title'] 			= '登録済み法人情報の詳細';
+
+		return view('backend.enterprises.detail', $data);
+	}
 
 	public function getRegist() {
 		$data['title']         = '媒体情報の新規登録';
@@ -45,78 +56,119 @@ class EnterpriseController extends BackendController
 	}
 
 	public function postRegist() {
-		$cn = Input::get('cnk');
-		var_dump($cn);
-		echo "<pre>";
-		print_r(Input::all());exit;
-		$clsEnterprise          = new EnterpriseModel();
+		$cns = Input::get('cus_name_lb2');
         $dataInsert             = array(
-            'baitai_code'      	=> Input::get('baitai_code'),
-            'baitai_name'      	=> Input::get('baitai_name'),
-            'baitai_kind'      	=> Input::get('baitai_kind'),
-            'baitai_year'      	=> Input::get('baitai_year'),
+            'ent_id'      		=> Input::get('ent_id'),
+            'ent_name'      	=> Input::get('ent_name'),
+            'ent_login'      	=> Input::get('ent_login'),
+            'ent_passwd'      	=> Input::get('ent_passwd'),
 
             'last_date'         => date('Y-m-d H:i:s'),
             'last_kind'         => INSERT,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
+            'last_ipadrs'       => CLIENT_IP_ADRS,
+            'last_user'         => (Auth::check()) ? Auth::user()->u_id : '',
         );
+        $clsEnterprise          = new EnterpriseModel();
+        $validator  = Validator::make(Input::all(), $clsEnterprise->Rules(), $clsEnterprise->Messages());
 
-        $validator  = Validator::make($dataInsert, $clsEnterprise->Rules(), $clsEnterprise->Messages());
         if ($validator->fails()) {
             return redirect()->route('backend.enterprises.regist')->withErrors($validator)->withInput();
+        }else{
+        	$cmModel = new CustomerModel();
+        	$customers = $cmModel->get_cus_by_cid($cns);
+
+        	if(!empty($customers)){
+        		foreach($customers as $cus){
+        			foreach ($cns as $key=>$cn) {
+        				if($cus->cus_id == $cn){
+        					$cmModel->update($cn, ['ent_id' => $cn]);
+        				}
+        			}
+        			
+        		}
+        	}
+
+        	if ( $clsEnterprise->insert($dataInsert) ){
+	    		Session::flash('success', 'The Enterprise registed successfully.');
+	    		return redirect()->route('backend.enterprises.index');
+	    	} else {
+	    		Session::flash('danger', 'The Enterprise regist faild, try again!');
+				return redirect()->route('backend.enterprises.regist')->with('title', $title);
+	    	}
         }
-
-        $clsEnterprise->insert($dataInsert);
-
-        return redirect()->route('backend.enterprises.index');
 	}
 
 
 	public function getEdit($id) {
 		$clsEnterprise 			= new EnterpriseModel();
-		$data['baitai'] 		= $clsEnterprise->get_by_id($id);
-		$data['title'] 			= '媒体情報の新規登録';
+		$data['enterprise'] 		= $clsEnterprise->get_by_id($id);
+		$data['title'] 			= 'メディア情報のエディション';
 
 		return view('backend.enterprises.edit', $data);
 	}
 
-
 	public function postEdit($id) {
+		$cns = Input::get('cus_name_lb2');
 		$clsEnterprise          = new EnterpriseModel();
-        $dataInsert             = array(
-            'baitai_code'      	=> Input::get('baitai_code'),
-            'baitai_name'      	=> Input::get('baitai_name'),
-            'baitai_kind'      	=> Input::get('baitai_kind'),
-            'baitai_year'      	=> Input::get('baitai_year'),
+		$rules = $clsEnterprise->Rules();
+		$data 		= $clsEnterprise->get_by_id($id);
+		$ent_login = $data->ent_login;
+		if(Input::get('ent_login') == $ent_login)
+			unset($rules['ent_login']);
+		
+        $dataUpdate             = array(
+           // 'ent_id'      		=> Input::get('ent_id'),
+            'ent_name'      	=> Input::get('ent_name'),
+            'ent_login'      	=> Input::get('ent_login'),
+            'ent_passwd'      	=> Input::get('ent_passwd'),
 
             'last_date'         => date('Y-m-d H:i:s'),
             'last_kind'         => UPDATE,
             'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
+            'last_user'         => (Auth::check()) ? Auth::user()->u_id : '',
         );
 
-        $validator  = Validator::make($dataInsert, $clsEnterprise->Rules(), $clsEnterprise->Messages());
+        $validator  = Validator::make(Input::all(), $rules, $clsEnterprise->Messages());
         if ($validator->fails()) {
-            return redirect()->route('backend.enterprises.edit', $id)->withErrors($validator)->withInput();
+            return redirect()->route('backend.enterprises.regist')->withErrors($validator)->withInput();
+        }else{
+        	$cmModel = new CustomerModel();
+        	$customers = $cmModel->get_cus_by_cid($cns);
+        	if(!empty($customers)){
+        		foreach($customers as $cus){
+        			foreach ($cns as $cn) {
+        				if($cus->cus_id == $cn){
+        					$cmModel->update($cn, ['ent_id' => $cn]);
+        				}
+        			}
+        		}
+        	}
+        	if ( $clsEnterprise->update($id, $dataUpdate) ){
+	    		Session::flash('success', 'The Enterprise updated successfully.');
+	    		return redirect()->route('backend.enterprises.index');
+	    	} else {
+	    		Session::flash('danger', 'The Enterprise updated faild, try again!');
+				return redirect()->route('backend.enterprises.edit')->with('title', $title);
+	    	}
         }
-
-        $clsEnterprise->update($id, $dataInsert);
-
-        return redirect()->route('backend.enterprises.index');
 	}
 
 	public function delete($id) {
 		$clsEnterprise          = new EnterpriseModel();
-		$dataUpdate 			= array(
+		$dataDelete 			= array(
 			'last_date'         => date('Y-m-d H:i:s'),
 			'last_kind'         => DELETE,
             'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
+            'last_user'         => (Auth::check()) ? Auth::user()->u_id : '',
 		);
-		$clsEnterprise->update($id, $dataUpdate);
 
-        return redirect()->route('backend.enterprises.index');
+		if ( $clsEnterprise->update($id, $dataDelete) ){
+    		Session::flash('success', 'The Enterprise deleted successfully.');
+    		return redirect()->route('backend.enterprises.index');
+    	} else {
+    		Session::flash('danger', 'The Enterprise deleted faild, try again!');
+			return redirect()->route('backend.enterprises.index')->with('title', $title);
+    	}
 	}
 
 	public function search()
