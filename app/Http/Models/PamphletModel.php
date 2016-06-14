@@ -42,36 +42,103 @@ class PamphletModel
     {
         $results = DB::table($this->table)->where('last_kind', '<>', DELETE);
 
-        /*// where pamph_code
-        if ( !empty($where['s_pamph_code']) ) {
-            $results = $results->where('pamph_code', 'like', '%' . $where['s_pamph_code'] . '%');
+        // where s_pamph_number
+        if ( !empty($where['s_pamph_number']) ) {
+            $results = $results->where('pamph_number', 'like', '%' . $where['s_pamph_number'] . '%');
         }
 
-        // where pamph_name
+        // where s_pamph_name
         if ( !empty($where['s_pamph_name']) ) {
             $results = $results->where('pamph_name', 'like', '%' . $where['s_pamph_name'] . '%');
         }
 
         // where pamph_kind
-        // (old) or (new) or (old or new)
-        if ( !empty($where['s_pamph_kind_old']) && !empty($where['s_pamph_kind_new']) ) {
-            $results = $results->whereIn('pamph_kind', [1, 2]);
-        } elseif ( !empty($where['s_pamph_kind_old']) && empty($where['s_pamph_kind_new']) ) {
-            $results = $results->where('pamph_kind', '=', $where['s_pamph_kind_old']);
-        } elseif ( empty($where['s_pamph_kind_old']) && !empty($where['s_pamph_kind_new']) ) {
-            $results = $results->where('pamph_kind', '=', $where['s_pamph_kind_new']);
+        if ( isset($where['s_pamph_kind_school']) || isset($where['s_pamph_kind_reserve']) || isset($where['s_pamph_kind_bundle']) ) {
+            $s_pamph_kind_school = null;
+            if ( isset($where['s_pamph_kind_school']) ) {
+                $s_pamph_kind_school = $where['s_pamph_kind_school'];
+            }
+            $s_pamph_kind_reserve = null;
+            if ( isset($where['s_pamph_kind_reserve']) ) {
+                $s_pamph_kind_reserve = $where['s_pamph_kind_reserve'];
+            }
+            $s_pamph_kind_bundle = null;
+            if ( isset($where['s_pamph_kind_bundle']) ) {
+                $s_pamph_kind_bundle = $where['s_pamph_kind_bundle'];
+            }
+            $arr = [$s_pamph_kind_school, $s_pamph_kind_reserve, $s_pamph_kind_bundle];
+            $results = $results->whereIn('pamph_kind', $arr);
         }
 
-        // where pamph_year
-        // begin & end
-        if ( !empty($where['s_pamph_year_begin']) && !empty($where['s_pamph_year_end']) ) {
-            $results = $results->where('pamph_year', '>=', $where['s_pamph_year_begin'])
-                                ->where('pamph_year', '<=', $where['s_pamph_year_end']);
-        } elseif ( !empty($where['s_pamph_year_begin']) && empty($where['s_pamph_year_end']) ) {
-            $results = $results->where('pamph_year', '>=', $where['s_pamph_year_begin']);
-        } elseif ( empty($where['s_pamph_year_begin']) && !empty($where['s_pamph_year_end']) ) {
-            $results = $results->where('pamph_year', '<=', $where['s_pamph_year_end']);
-        }*/
+        // where s_pamph_class
+        if ( isset($where['s_pamph_class_unused']) || isset($where['s_pamph_class_used']) ) {
+            $s_pamph_class_unused = null;
+            if ( isset($where['s_pamph_class_unused']) ) {
+                $s_pamph_class_unused = $where['s_pamph_class_unused'];
+            }
+            $s_pamph_class_used = null;
+            if ( isset($where['s_pamph_class_used']) ) {
+                $s_pamph_class_used = $where['s_pamph_class_used'];
+            }
+            $arr = [$s_pamph_class_unused, $s_pamph_class_used];
+            $results = $results->whereIn('pamph_class', $arr);
+        }
+
+        // where s_pamph_cus_id
+        if ( !empty($where['s_pamph_cus_id']) ) {
+            $results = $results->where('pamph_cus_id', $where['s_pamph_cus_id']);
+        }
+
+        // where s_pamph_send
+        if ( isset($where['s_pamph_send_none']) || isset($where['s_pamph_send_yes']) ) {
+            $s_pamph_send_none = null;
+            if ( isset($where['s_pamph_send_none']) ) {
+                $s_pamph_send_none = $where['s_pamph_send_none'];
+            }
+            $s_pamph_send_yes = null;
+            if ( isset($where['s_pamph_send_yes']) ) {
+                $s_pamph_send_yes = $where['s_pamph_send_yes'];
+            }
+            $arr = [$s_pamph_send_none, $s_pamph_send_yes];
+            $results = $results->whereIn('pamph_send', $arr);
+        }
+
+        // where s_pamph_bunya_id
+        if ( !empty($where['s_pamph_bunya_id']) ) {
+            $results = $results->where('pamph_bunya_id', $where['s_pamph_bunya_id']);
+        }
+
+        // where s_pamph_pref
+        if ( !empty($where['s_pamph_pref']) ) {
+            $arr = array();
+            if ( !in_array(0, $where['s_pamph_pref']) ) {
+                foreach ( $where['s_pamph_pref'] as $item ) {
+                    if ( $item == 0 ) {
+                        break;
+                    }
+                    $arr[] = $item;
+                }
+                $results = $results->whereIn('pamph_pref', $arr);
+            }
+        }
+
+        // where s_pamph_sex_unspecified
+        if ( isset($where['s_pamph_sex_unspecified']) || isset($where['s_pamph_sex_men']) || isset($where['s_pamph_sex_women']) ) {
+            $s_pamph_sex_unspecified = null;
+            if ( isset($where['s_pamph_sex_unspecified']) ) {
+                $s_pamph_sex_unspecified = $where['s_pamph_sex_unspecified'];
+            }
+            $s_pamph_sex_men = null;
+            if ( isset($where['s_pamph_sex_men']) ) {
+                $s_pamph_sex_men = $where['s_pamph_sex_men'];
+            }
+            $s_pamph_sex_women = null;
+            if ( isset($where['s_pamph_sex_women']) ) {
+                $s_pamph_sex_women = $where['s_pamph_sex_women'];
+            }
+            $arr = [$s_pamph_sex_unspecified, $s_pamph_sex_men, $s_pamph_sex_women];
+            $results = $results->whereIn('pamph_sex', $arr);
+        }
 
         $results = $results->orderBy('pamph_number', 'asc');
 

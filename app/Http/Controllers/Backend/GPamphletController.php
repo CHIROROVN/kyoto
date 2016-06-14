@@ -62,9 +62,9 @@ class GPamphletController extends BackendController
 		$pamphlets 			= $clsPamphlet->get_for_select();
 		foreach ( $pamphlets as $pamphlet ) {
 			$tmp[] = array(
-				'value' => $pamphlet->pamph_id,
-				'label' => $pamphlet->pamph_name,
-				'desc' => $pamphlet->pamph_number . '_' . $pamphlet->pamph_name
+				'value' 	=> $pamphlet->pamph_id,
+				'label' 	=> $pamphlet->pamph_name,
+				'desc' 		=> $pamphlet->pamph_number . '_' . $pamphlet->pamph_name
 			);
 		}
 		$data['pamphlets'] = json_encode($tmp);
@@ -122,9 +122,9 @@ class GPamphletController extends BackendController
 		$pamphlets 			= $clsPamphlet->get_for_select();
 		foreach ( $pamphlets as $pamphlet ) {
 			$tmp[] = array(
-				'value' => $pamphlet->pamph_id,
-				'label' => $pamphlet->pamph_name,
-				'desc' => $pamphlet->pamph_number . '_' . $pamphlet->pamph_name
+				'value' 	=> $pamphlet->pamph_id,
+				'label' 	=> $pamphlet->pamph_name,
+				'desc' 		=> $pamphlet->pamph_number . '_' . $pamphlet->pamph_name
 			);
 		}
 		$data['pamphlets'] = json_encode($tmp);

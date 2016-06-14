@@ -4,25 +4,24 @@ use DB;
 
 class EnterpriseModel
 {
-    protected $table = 'm_enterprise';
+	protected $table = 'm_enterprise';
 
     public function Rules()
     {
-        return array(
-            'ent_name'         => 'required',
-            'ent_login'        => 'required|unique::m_enterprise',
+    	return array(
+    		'ent_name'    	   => 'required',
+            'ent_login'        => 'required',
             'ent_passwd'       => 'required',
-        );
+		);
     }
 
     public function Messages()
     {
-        return array(
-            'ent_name.required'         => 'Please enter enterprise nam',
+    	return array(
+            'ent_name.required'   	    => 'Please enter enterprise nam',
             'ent_login.required'        => 'Please enter enterprise login id',
-            'ent_login.unique'          => 'This login id existed, try again.',
             'ent_passwd.required'       => 'Please enter enterprise password',
-        );
+		);
     }
 
     public function get_all()

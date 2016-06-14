@@ -15,21 +15,21 @@
               <tr>
                 <td class="col-title"><label for="ent_name">法人名 <span class="note_required">※</span></label></td>
                 <td>
-                  <input name="ent_name" id="ent_name" type="text" class="form-control form-control--small" value="{{old('ent_name')}}">
+                  <input name="ent_name" id="ent_name" type="text" class="form-control form-control--small">
                   @if ($errors->first('ent_name'))
                     <div class="help-block with-errors">※ {!! $errors->first('ent_name') !!}</div>
                   @endif
                 </td>
                 <td class="col-title"><label for="ent_login">ログインID <span class="note_required">※</span></label></td>
                 <td>
-                  <input name="ent_login" id="ent_login" type="text" class="form-control form-control--default" value="{{old('ent_login')}}">
+                  <input name="ent_login" id="ent_login" type="text" class="form-control form-control--default">
                   @if ($errors->first('ent_login'))
                     <div class="help-block with-errors">※ {!! $errors->first('ent_login') !!}</div>
                   @endif
                 </td>
                 <td class="col-title"><label for="textPass">パスワード <span class="note_required">※</span></label></td>
                 <td>
-                  <input name="ent_passwd" id="ent_passwd" type="text" class="form-control form-control--default" value="{{old('ent_passwd')}}">
+                  <input name="ent_passwd" id="ent_passwd" type="text" class="form-control form-control--default">
                   @if ($errors->first('ent_passwd'))
                     <div class="help-block with-errors">※ {!! $errors->first('ent_passwd') !!}</div>
                   @endif
@@ -42,22 +42,22 @@
                     <tbody>
                       <tr>
                         <td rowspan="2" valign="bottom">
-                          <select name="cus_name_lb2[]" multiple="multiple" id="cus_name_lb2" style="width: 120px;">
-                            <!-- <option value="">&nbsp;</option> -->
+                          <select name="cus_name_lb2" multiple="multiple" id="cus_name_lb2" style="width: 120px;">
+                            <option value="">&nbsp;</option>
                           </select>
                         </td>
                         <td align="right"><input name="cus_name_add" id="cus_name_add" value="←追加" type="button"></td>
                         <td><select name="cus_name_kana" id="cus_name_kana">
-                          <option value="あ" @if(old('cus_name_kana') == 'あ') selected="selected" @endif >あ行</option>
-                          <option value="か" @if(old('cus_name_kana') == 'か') selected="selected" @endif >か行</option>
-                          <option value="さ" @if(old('cus_name_kana') == 'さ') selected="selected" @endif >さ行</option>
-                          <option value="た" @if(old('cus_name_kana') == 'た') selected="selected" @endif >た行</option>
-                          <option value="な" @if(old('cus_name_kana') == 'な') selected="selected" @endif >な行</option>
-                          <option value="は" @if(old('cus_name_kana') == 'は') selected="selected" @endif >は行</option>
-                          <option value="ま" @if(old('cus_name_kana') == 'ま') selected="selected" @endif >ま行</option>
-                          <option value="や" @if(old('cus_name_kana') == 'や') selected="selected" @endif >や行</option>
-                          <option value="ら" @if(old('cus_name_kana') == 'ら') selected="selected" @endif >ら行</option>
-                          <option value="わ" @if(old('cus_name_kana') == 'わ') selected="selected" @endif >わ行</option>
+                          <option value="あ">あ行</option>
+                          <option value="か">か行</option>
+                          <option value="さ">さ行</option>
+                          <option value="た">た行</option>
+                          <option value="な">な行</option>
+                          <option value="は">は行</option>
+                          <option value="ま">ま行</option>
+                          <option value="や">や行</option>
+                          <option value="ら">ら行</option>
+                          <option value="わ">わ行</option>
                         </select></td>
                       </tr>
                       <tr>
@@ -81,7 +81,7 @@
         </div>
         <div class="row mar-bottom30">
           <div class="col-md-12 text-center">
-            <input name="btnSave" id="btnSave" value="登録する" type="button" class="btn btn-sm btn-primary">
+            <input name="btnSave" id="btnSave" value="登録する" type="submit" class="btn btn-sm btn-primary">
           </div>
         </div>
         <div class="row">
@@ -161,16 +161,12 @@
 </script>
 
 <script type="text/javascript">
+   var url_cnk = "{{route('backend.enterprises.regist')}}";
+   //var data = "";
   $('#btnSave').click(function(){
-    $("#cus_name_lb2 option").each(function( index ) {
-      $(this).prop("selected", true);
-    });
-    $( "form#frmEnterpriseRegist" ).submit();
+    getAllCusName();
   });
-
    function getAllCusName(){
-    var data = [];
-    var url_cnk = "{{route('backend.enterprises.regist')}}";
         $("#cus_name_lb2 option").each(function( index ) {
           //console.log( index + ": " + $(this).val());
           data = $(this).val();
@@ -178,11 +174,11 @@
         });
 
       $.ajax({
-                type: "get",
+                type: "POST",
                 url: url_cnk,
                 data: {cnk:data},
                 success: function (data) {
-                  console.log(data['cnk']);
+                  console.log(data['cnk']);                  
                 },
                 error: function(data) {
                     console.log('Error:', data);

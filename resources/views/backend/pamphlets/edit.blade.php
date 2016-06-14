@@ -3,7 +3,7 @@
 @section('content')
 
 <script>
-  function delete_div(span) {
+/*  function delete_div(span) {
     var group_child_id = $(span).attr('div-group');
     $('#' + group_child_id).remove();
   }
@@ -42,7 +42,7 @@
           .appendTo( ul );
       };
     });
-  }
+  }*/
 </script>
 
 {!! Form::open(array('route' => ['backend.pamphlets.edit', $pamphlet->pamph_id], 'enctype'=>'multipart/form-data')) !!}
@@ -142,9 +142,11 @@
                 @endif
 
                 @if ( old('pamph_cus_id') )
-                <input name="pamph_cus_id[]" type="hidden" id="pamph_cus_id-group-1-id" value="{{ old('pamph_cus_id') }}">
+                <!-- <input name="pamph_cus_id[]" type="hidden" id="pamph_cus_id-group-1-id" value="{{ old('pamph_cus_id') }}"> -->
+                <input name="pamph_cus_id" type="hidden" id="pamph_cus_id-group-1-id" value="{{ old('pamph_cus_id') }}">
                 @else
-                <input name="pamph_cus_id[]" type="hidden" id="pamph_cus_id-group-1-id" value="{{ $pamphlet->cus_code }}">
+                <!-- <input name="pamph_cus_id[]" type="hidden" id="pamph_cus_id-group-1-id" value="{{ $pamphlet->pamph_cus_id }}"> -->
+                <input name="pamph_cus_id" type="hidden" id="pamph_cus_id-group-1-id" value="{{ $pamphlet->pamph_cus_id }}">
                 @endif
               </div>
               @else
@@ -157,7 +159,7 @@
                 @endforeach
               @endif
             </div>
-            <button style="margin-top: 5px;" class="btn btn-primary btn-xs" id="add">Add</button>
+            <!-- <button style="margin-top: 5px;" class="btn btn-primary btn-xs" id="add">Add</button> -->
             <!-- <p id="pamph_bunya_id-description"></p> -->
             @if ($errors->first('pamph_cus_id'))<span class="error-input">{!! $errors->first('pamph_cus_id') !!}</span>@endif
             @if ($message = Session::get('error-input-cus-exits'))<span class="error-input">{!! $message !!}</span>@endif
@@ -241,7 +243,7 @@
             </select>
             @if ($errors->first('pamph_area'))<span class="error-input">{!! $errors->first('pamph_area') !!}</span>@endif
             @if ($errors->first('pamph_pref'))<span class="error-input">{!! $errors->first('pamph_pref') !!}</span>@endif
-            @if ($message = Session::get('error-input'))<span class="error-input">{!! $message !!}</span>@endif
+            @if ($message = Session::get('error-input-area-pref'))<span class="error-input">{!! $message !!}</span>@endif
           </td>
 
           <!-- pamph_sex -->
@@ -288,10 +290,12 @@
       <input type="hidden" name="s_pamph_class_unused" value="{{ $s_pamph_class_unused }}">
       <input type="hidden" name="s_pamph_class_used" value="{{ $s_pamph_class_used }}">
       <input type="hidden" name="s_pamph_cus_id" value="{{ $s_pamph_cus_id }}">
-      <input type="hidden" name="s_pamph_send" value="{{ $s_pamph_send }}">
+      <input type="hidden" name="s_pamph_cus_name" value="{{ $s_pamph_cus_name }}">
+      <input type="hidden" name="s_pamph_send_none" value="{{ $s_pamph_send_none }}">
+      <input type="hidden" name="s_pamph_send_yes" value="{{ $s_pamph_send_yes }}">
       <input type="hidden" name="s_pamph_bunya_id" value="{{ $s_pamph_bunya_id }}">
-      <input type="hidden" name="s_pamph_pref" value="{{ $s_pamph_pref }}">
-      <input type="hidden" name="s_pamph_area" value="{{ $s_pamph_area }}">
+      <input type="hidden" name="s_pamph_bunya_name" value="{{ $s_pamph_bunya_name }}">
+      <?php //<input type="hidden" name="s_pamph_pref" value="{{ $s_pamph_pref }}"> ?>
       <input type="hidden" name="s_pamph_sex_unspecified" value="{{ $s_pamph_sex_unspecified }}">
       <input type="hidden" name="s_pamph_sex_men" value="{{ $s_pamph_sex_men }}">
       <input type="hidden" name="s_pamph_sex_women" value="{{ $s_pamph_sex_women }}">
@@ -307,29 +311,31 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Delete</h4>
+              <h4 class="modal-title">{{ TITLE_DELETE }}</h4>
             </div>
             <div class="modal-body">
-              <p>Are you want to delete?</p>
+              <p>{{ CONTENT_DELETE }}</p>
             </div>
             <div class="modal-footer">
               <a href="{{ route('backend.pamphlets.delete', array($pamphlet->pamph_id, 
-                      's_pamph_number'            => $s_pamph_number,
-                      's_pamph_name'              => $s_pamph_name,
-                      's_pamph_kind_school'       => $s_pamph_kind_school,
-                      's_pamph_kind_reserve'      => $s_pamph_kind_reserve,
-                      's_pamph_kind_bundle'       => $s_pamph_kind_bundle,
-                      's_pamph_class_unused'      => $s_pamph_class_unused,
-                      's_pamph_class_used'        => $s_pamph_class_used,
-                      's_pamph_cus_id'            => $s_pamph_cus_id,
-                      's_pamph_send'              => $s_pamph_send,
-                      's_pamph_bunya_id'          => $s_pamph_bunya_id,
-                      's_pamph_pref'              => $s_pamph_pref,
-                      's_pamph_area'              => $s_pamph_area,
-                      's_pamph_sex_unspecified'   => $s_pamph_sex_unspecified,
-                      's_pamph_sex_men'           => $s_pamph_sex_men,
-                      's_pamph_sex_women'         => $s_pamph_sex_women,
-                      'page'                      => $page
+                      's_pamph_number'          => $s_pamph_number,
+                      's_pamph_name'            => $s_pamph_name,
+                      's_pamph_kind_school'     => $s_pamph_kind_school,
+                      's_pamph_kind_reserve'    => $s_pamph_kind_reserve,
+                      's_pamph_kind_bundle'     => $s_pamph_kind_bundle,
+                      's_pamph_class_unused'    => $s_pamph_class_unused,
+                      's_pamph_class_used'      => $s_pamph_class_used,
+                      's_pamph_cus_id'          => $s_pamph_cus_id,
+                      's_pamph_cus_name'        => $s_pamph_cus_name,
+                      's_pamph_send_none'       => $s_pamph_send_none,
+                      's_pamph_send_yes'        => $s_pamph_send_yes,
+                      's_pamph_bunya_id'        => $s_pamph_bunya_id,
+                      's_pamph_bunya_name'      => $s_pamph_bunya_name,
+                      's_pamph_pref'            => $s_pamph_pref,
+                      's_pamph_sex_unspecified' => $s_pamph_sex_unspecified,
+                      's_pamph_sex_men'         => $s_pamph_sex_men,
+                      's_pamph_sex_women'       => $s_pamph_sex_women,
+                      'page'                    => $page
                     )) }}" class="btn btn-xs btn-primary">削除</a>
               <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
             </div>
@@ -397,18 +403,18 @@
     
 
 
-    // add new customer
-    $('#add').click(function(event) {
-      event.preventDefault();
+    // // add new customer
+    // $('#add').click(function(event) {
+    //   event.preventDefault();
 
-      var count_group_child = $('#group').find('.group-child').length;
-      count_group_child += 1;
-      count_group_child = check_id(count_group_child);
+    //   var count_group_child = $('#group').find('.group-child').length;
+    //   count_group_child += 1;
+    //   count_group_child = check_id(count_group_child);
 
-      $('#group').append('<div style="margin-top: 5px;" class="group-child" id="group-' + count_group_child + '"><input name="pamph_cus_name" id="pamph_cus_id-group-' + count_group_child + '" type="text" class="form-control form-control--default input-auto-complete" value=""><input name="pamph_cus_id[]" type="hidden" id="pamph_cus_id-group-' + count_group_child + '-id" value=""><span style="margin-left: 5px;" id="" div-group="group-' + count_group_child + '" class="btn btn-default btn-xs delete" onClick="delete_div(this);">Delete</span></div>');
+    //   $('#group').append('<div style="margin-top: 5px;" class="group-child" id="group-' + count_group_child + '"><input name="pamph_cus_name" id="pamph_cus_id-group-' + count_group_child + '" type="text" class="form-control form-control--default input-auto-complete" value=""><input name="pamph_cus_id[]" type="hidden" id="pamph_cus_id-group-' + count_group_child + '-id" value=""><span style="margin-left: 5px;" id="" div-group="group-' + count_group_child + '" class="btn btn-default btn-xs delete" onClick="delete_div(this);">Delete</span></div>');
 
-      after_add();
-    });
+    //   after_add();
+    // });
   });
 </script>
 @endsection

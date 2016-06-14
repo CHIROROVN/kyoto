@@ -131,20 +131,20 @@ class CustomerController extends BackendController
             Session::flash('danger', 'The customer regist faild, try again!');
             return redirect()->route('backend.customers.regist')->with('title', $title);
         }
-    }
+	}
 
 
-    public function getEdit($id) {
-        $clsCustomer          = new CustomerModel();
-        $data['customer']     = $clsCustomer->get_by_id($id);
-        $data['title']        = '顧客情報の新規登録';
+	public function getEdit($id) {
+		$clsCustomer 		= new CustomerModel();
+		$data['customer'] 	= $clsCustomer->get_by_id($id);
+		$data['title'] 		= '顧客情報の新規登録';
         if($data['customer'] == null) return redirect()->route('backend.customers.index')->with($data);
 
-        return view('backend.customers.edit', $data);
-    }
+		return view('backend.customers.edit', $data);
+	}
 
-    public function postEdit($id) {
-        $clsCustomer   = new CustomerModel();
+	public function postEdit($id) {
+		$clsCustomer   = new CustomerModel();
         $dataCus       = $clsCustomer->get_by_id($id);
         $rules         = $clsCustomer->Rules();
 

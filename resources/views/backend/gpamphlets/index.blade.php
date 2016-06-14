@@ -12,7 +12,7 @@
       </div>
     </div>
     
-    <table class="table table-bordered table-striped clearfix">
+    <table class="table table-bordered clearfix">
       <tr>
         <td class="col-title" align="center">一括資料請求番号</td>
         <td class="col-title" align="center">資料請求番号</td>
@@ -27,28 +27,38 @@
         @foreach ($gpamphlets as $gpamphlet)
         <tr>
           <td>{{ $gpamphlet->gpamph_number }}</td>
-          <td>
+          <td align="center" style="padding: 0;">
+            <table class="child-tbl table-striped">
             @foreach ( $gpamphlets_distinct as $item )
               @if ( $item->gpamph_number == $gpamphlet->gpamph_number )
+              <tr><td style="height: 30px; padding-top: 2px;">
               {{ $item->pamph_number }} <br>
+              </td></tr>
               @endif
             @endforeach
+            </table>
           </td>
-          <td align="center">
+          <td align="center" style="padding: 0;">
+            <table class="child-tbl table-striped">
             @foreach ( $gpamphlets_distinct as $item )
               @if ( $item->gpamph_number == $gpamphlet->gpamph_number )
+              <tr><td>
               <input style="margin-top: 5px;" onclick="location.href='{{ route('backend.gpamphlets.edit', array($item->gpamph_id, 
                 's_gpamph_number'         => $s_gpamph_number,
                 's_pamph_name'            => $s_pamph_name,
                 's_pamph_id'              => $s_pamph_id,
                 'page'                    => $gpamphlets->currentPage()
               )) }}'" value="編集" type="button" class="btn btn-xs btn-primary"> <br>
+              </td></tr>
               @endif
             @endforeach
+            </table>
           </td>
-          <td align="center">
+          <td align="center" style="padding: 0;">
+            <table class="child-tbl table-striped">
             @foreach ( $gpamphlets_distinct as $item )
               @if ( $item->gpamph_number == $gpamphlet->gpamph_number )
+              <tr><td>
               <button style="margin-top: 5px;" type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal-{{ $item->gpamph_id }}">削除</button>
               <!-- popup -->
               <div class="modal fade bs-example-modal-sm" id="myModal-{{ $item->gpamph_id }}" role="dialog">
@@ -57,10 +67,10 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Delete</h4>
+                      <h4 class="modal-title">{{ TITLE_DELETE }}</h4>
                     </div>
                     <div class="modal-body">
-                      <p>Are you want to delete?</p>
+                      <p>{{ CONTENT_DELETE }}</p>
                     </div>
                     <div class="modal-footer">
                       <a href="{{ route('backend.gpamphlets.delete', array($item->gpamph_id, 
@@ -76,10 +86,10 @@
                 </div>
               </div>
               <!-- end popup --> <br>
+              </td></tr>
               @endif
             @endforeach
-
-            
+            </table>
           </td>
         </tr>
         @endforeach
