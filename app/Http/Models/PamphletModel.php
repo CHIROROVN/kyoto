@@ -110,10 +110,11 @@ class PamphletModel
 
         // where s_pamph_pref
         if ( !empty($where['s_pamph_pref']) ) {
+            $s_pamph_pref = $where['s_pamph_pref'];
             $arr = array();
-            if ( !in_array(0, $where['s_pamph_pref']) ) {
-                foreach ( $where['s_pamph_pref'] as $item ) {
-                    if ( $item == 0 ) {
+            if ( !in_array('0', $s_pamph_pref) ) {
+                foreach ( $s_pamph_pref as $item ) {
+                    if ( $item == '0' ) {
                         break;
                     }
                     $arr[] = $item;

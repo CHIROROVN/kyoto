@@ -51,9 +51,7 @@ class PamphletController extends BackendController
 		$data['s_pamph_sex_men'] 			= Input::get('s_pamph_sex_men');
 		$data['s_pamph_sex_women'] 			= Input::get('s_pamph_sex_women');
 		$data['page'] 						= Input::get('page');
-		// echo '<pre>';
-		// print_r(Input::all());
-		// echo '</pre>';
+
 		$clsPamphlet 					= new PamphletModel();
 		$clsBunya						= new BunyaModel();
 		$clsCustomer 					= new CustomerModel();
@@ -534,8 +532,6 @@ class PamphletController extends BackendController
 		if ( empty($data['s_pamph_bunya_name']) ) {
 			$data['s_pamph_bunya_id'] = null;
 		}
-		// $s_pamph_pref 						= implode('-', Input::get('s_pamph_pref'));
-		// $data['s_pamph_pref'] 				= $s_pamph_pref;
 		$data['s_pamph_pref'] 				= Input::get('s_pamph_pref');
 		// $data['s_pamph_area'] 				= Input::get('s_pamph_area');
 		$data['s_pamph_sex_unspecified'] 	= Input::get('s_pamph_sex_unspecified');
@@ -580,7 +576,7 @@ class PamphletController extends BackendController
 			$tmp[] = array(
 				'value' => $bunya->bunya_id,
 				'label' => $bunya->bunya_name,
-				'desc' => $bunya->bunya_code . '_' . $bunya->bunya_name
+				'desc' 	=> $bunya->bunya_code . '_' . $bunya->bunya_name
 			);
 		}
 		$data['bunyas'] = json_encode($tmp);
@@ -590,7 +586,7 @@ class PamphletController extends BackendController
 			$tmp[] = array(
 				'value' => $customer->cus_id,
 				'label' => $customer->cus_name,
-				'desc' => $customer->cus_code . '_' . $customer->cus_name
+				'desc' 	=> $customer->cus_code . '_' . $customer->cus_name
 			);
 		}
 		$data['customers'] = json_encode($tmp);
