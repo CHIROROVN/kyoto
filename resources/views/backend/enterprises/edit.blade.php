@@ -1,72 +1,190 @@
 @extends('backend.backend')
 
 @section('content')
-{!! Form::open(array('route' => array('backend.baitais.edit', $baitai->baitai_id), 'enctype'=>'multipart/form-data')) !!}
-<div class="container">
-  <div class="row content">
-    <table class="table table-bordered">
-      <tbody>
-        <tr>
-          <td class="col-title"><label for="baitai_code">媒体コード</label></td>
-          <td>
-            <input name="baitai_code" id="baitai_code" type="text" class="form-control form-control--default" value="{{ $baitai->baitai_code }}">
-            @if ($errors->first('baitai_code'))<span class="error-input">{!! $errors->first('baitai_code') !!}</span>@endif
-          </td>
-          <td class="col-title"><label for="baitai_name">媒体名</label></td>
-          <td>
-            <input name="baitai_name" id="baitai_name" type="text" class="form-control form-control--default" value="{{ $baitai->baitai_name }}">
-            @if ($errors->first('baitai_name'))<span class="error-input">{!! $errors->first('baitai_name') !!}</span>@endif
-          </td>
-          <td class="col-title"><label for="rdNewOld">性別</label></td>
-          <td>
-            <input name="baitai_kind" id="rdNewOld" value="2" type="radio" @if($baitai->baitai_kind == 2) {{'checked'}} @endif> 新　　　
-            <input name="baitai_kind" value="1" type="radio" @if($baitai->baitai_kind == 1) {{'checked'}} @endif> 旧
-            @if ($errors->first('baitai_kind'))<span class="error-input">{!! $errors->first('baitai_kind') !!}</span>@endif
-          </td>
-        </tr>
-        <tr>
-          <td class="col-title"><label for="baitai_year">発行年</label></td>
-          <td colspan="5">
-            <input name="baitai_year" id="baitai_year" type="text" class="form-control form-control--small" value="{{ $baitai->baitai_year }}" maxlength="4">  年
-            @if ($errors->first('baitai_year'))<span class="error-input">{!! $errors->first('baitai_year') !!}</span>@endif
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="row mar-bottom30">
-    <div class="col-md-12 text-center">
-      <input name="button4" id="button4" value="登録する" type="submit" class="btn btn-sm btn-primary">
-      <!-- delete -->
-      <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal-{{ $baitai->baitai_id }}">削除</button>
-      <!-- popup -->
-      <div class="modal fade bs-example-modal-sm" id="myModal-{{ $baitai->baitai_id }}" role="dialog">
-        <div class="modal-dialog modal-sm">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">{{ TITLE_DELETE }}</h4>
-            </div>
-            <div class="modal-body">
-              <p>{{ CONTENT_DELETE }}</p>
-            </div>
-            <div class="modal-footer">
-              <a href="{{ route('backend.baitais.delete', $baitai->baitai_id) }}" class="btn btn-xs btn-primary">削除</a>
-              <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
-            </div>
+
+{!! Form::open( ['id' => 'frmEnterpriseEdit', 'class' => 'form-horizontal','method' => 'post', 'route' => ['backend.enterprises.edit', $enterprise->ent_id], 'enctype'=>'multipart/form-data', 'accept-charset'=>'utf-8']) !!}
+    <!-- content enterprise edit -->
+    <section id="page">
+      <div class="container">
+        <div class="row content">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td class="col-title"><label for="ent_name">法人名 <span class="note_required">※</span></label></td>
+                <td>
+                  <input name="ent_name" id="ent_name" type="text" class="form-control form-control--small" value="@if(old('ent_name')){{old('ent_name')}}@else{{$enterprise->ent_name}}@endif">
+                  @if ($errors->first('ent_name'))
+                    <div class="help-block with-errors">※ {!! $errors->first('ent_name') !!}</div>
+                  @endif
+                </td>
+                <td class="col-title"><label for="ent_login">ログインID <span class="note_required">※</span></label></td>
+                <td>
+                  <input name="ent_login" id="ent_login" type="text" class="form-control form-control--default" value="@if(old('ent_login')){{old('ent_login')}}@else{{$enterprise->ent_login}}@endif">
+                  @if ($errors->first('ent_login'))
+                    <div class="help-block with-errors">※ {!! $errors->first('ent_login') !!}</div>
+                  @endif
+                </td>
+                <td class="col-title"><label for="textPass">パスワード <span class="note_required">※</span></label></td>
+                <td>
+                  <input name="ent_passwd" id="ent_passwd" type="text" class="form-control form-control--default" value="@if(old('ent_passwd')){{old('ent_passwd')}}@else{{$enterprise->ent_passwd}}@endif">
+                  @if ($errors->first('ent_passwd'))
+                    <div class="help-block with-errors">※ {!! $errors->first('ent_passwd') !!}</div>
+                  @endif
+                </td>
+              </tr>
+              <tr>
+                <td class="col-title">傘下の学校</td>
+                <td colspan="5">
+                  <table class="table table-bordered" style="background:transparent;">
+                    <tbody>
+                      <tr>
+                        <td rowspan="2" valign="bottom">
+                          <select name="cus_name_lb2[]" multiple="multiple" id="cus_name_lb2" style="width: 120px;">
+                            @if($count = count(CusName($enterprise->ent_id)))
+                              @foreach(CusName($enterprise->ent_id) as $key => $cusName)
+                                <option value="{{@$cusName->cus_id}}">{{@$cusName->cus_name}}</option>
+                              @endforeach
+                            @endif
+                          </select>
+                        </td>
+                        <td align="right"><input name="cus_name_add" id="cus_name_add" value="←追加" type="button"></td>
+                        <td><select name="cus_name_kana" id="cus_name_kana">
+                          <option value="あ" @if(old('cus_name_kana') == 'あ') selected="selected" @endif >あ行</option>
+                          <option value="か" @if(old('cus_name_kana') == 'か') selected="selected" @endif >か行</option>
+                          <option value="さ" @if(old('cus_name_kana') == 'さ') selected="selected" @endif >さ行</option>
+                          <option value="た" @if(old('cus_name_kana') == 'た') selected="selected" @endif >た行</option>
+                          <option value="な" @if(old('cus_name_kana') == 'な') selected="selected" @endif >な行</option>
+                          <option value="は" @if(old('cus_name_kana') == 'は') selected="selected" @endif >は行</option>
+                          <option value="ま" @if(old('cus_name_kana') == 'ま') selected="selected" @endif >ま行</option>
+                          <option value="や" @if(old('cus_name_kana') == 'や') selected="selected" @endif >や行</option>
+                          <option value="ら" @if(old('cus_name_kana') == 'ら') selected="selected" @endif >ら行</option>
+                          <option value="わ" @if(old('cus_name_kana') == 'わ') selected="selected" @endif >わ行</option>
+                        </select></td>
+                      </tr>
+                      <tr>
+                        <td align="right"><input name="cus_name_del" id="cus_name_del" value="削除→" type="button"></td>
+                        <td>
+                          <select name="cus_name_lb1" multiple="multiple" id="cus_name_lb1" style="width: 120px;">
+                            <option value="" style="width: 100px;">&nbsp;</option>
+
+                          </select>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row mar-bottom30">
+          <div class="col-md-12 text-center">
+            <input name="btnSave" id="btnSave" value="登録する" type="button" class="btn btn-sm btn-primary">
           </div>
-          <!-- End Modal content-->
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <input onclick="history.back()" value="前の画面に戻る" type="button" class="btn btn-sm btn-primary">
+          </div>
         </div>
       </div>
-      <!-- end popup -->
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <input onclick="location.href='{{ route('backend.baitais.index') }}'" value="前の画面に戻る" type="button" class="btn btn-sm btn-primary">
-    </div>
-  </div>
-</div>
-</form>
+    </section>
+    <meta name="_token" content="{!! csrf_token() !!}" />
+    <!-- End content enterprise regist -->
+<script type="text/javascript">
+      $('#cus_name_add').click(function(){
+        var optVal1 = $( "#cus_name_lb1 option:selected" ).val();
+        var optText1 = $( "#cus_name_lb1 option:selected" ).text();
+        var htmlOption1 = "<option value="+optVal1+">" + optText1 + "</option>";
+        if(optVal1 != null){
+          $('#cus_name_lb2').append(htmlOption1);
+          $("#cus_name_lb1 option:selected").remove();
+        }
+        $("#cus_name_lb1 option:first-child").attr("selected", true);
+
+      });
+
+      $('#cus_name_del').click(function(){
+        var optVal2 = $( "#cus_name_lb2 option:selected" ).val();
+        var optText2 = $( "#cus_name_lb2 option:selected" ).text();
+        var htmlOption2 = "<option value="+optVal2+">" + optText2 + "</option>";
+        if(optVal2 != null){
+          $('#cus_name_lb1').append(htmlOption2);
+          $("#cus_name_lb2 option:selected").remove();
+        }
+        $("#cus_name_lb2 option:first-child").attr("selected", true);
+      });
+    
+
+</script>
+<script type="text/javascript">
+  $('#cus_name_kana').on('change',function(){
+    var cnk = $(this).val();
+    getCusName(cnk);
+    });
+
+  $(document).ready(function(){
+    var cnk = $('#cus_name_kana').val();
+    getCusName(cnk); 
+
+  });
+
+  function getCusName(cnk){
+    $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });    
+    var url = "{{route('backend.enterprise.cnk_ajax')}}";
+    var htmlOptions = "";
+    $.ajax({
+                type: "POST",
+                url: url,
+                data: {cnk:cnk},
+                success: function (data) {
+                  //console.log(data['cnk']);
+                  $.each(data['cnk'], function(key, val){
+                  htmlOptions += "<option value="+key+">" + val + "</option>";
+                  });                  
+                  $('#cus_name_lb1').html(htmlOptions);
+                  $("#cus_name_lb1 option:first-child").attr("selected", true);
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+        });
+  }
+
+</script>
+
+<script type="text/javascript">
+  $('#btnSave').click(function(){
+    $("#cus_name_lb2 option").each(function( index ) {
+      $(this).prop("selected", true);
+    });
+    $( "form#frmEnterpriseEdit" ).submit();
+  });
+
+   function getAllCusName(){
+    var data = [];
+    var url_cnk = "{{route('backend.enterprises.regist')}}";
+        $("#cus_name_lb2 option").each(function( index ) {
+          //console.log( index + ": " + $(this).val());
+          data = $(this).val();
+          console.log(data);
+        });
+
+      $.ajax({
+                type: "get",
+                url: url_cnk,
+                data: {cnk:data},
+                success: function (data) {
+                  console.log(data['cnk']);
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                }                       
+        });
+   }
+</script>
 @endsection

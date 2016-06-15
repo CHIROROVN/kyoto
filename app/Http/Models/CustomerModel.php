@@ -142,11 +142,7 @@ class CustomerModel
                         ->orderBy('cus_id', 'asc')
                         ->get();
         }else{
-            return DB::table($this->table)
-                        ->select('cus_id', 'ent_id', 'last_kind', 'last_date', 'last_ipadrs', 'last_user')
-                        ->where('last_kind', '<>', DELETE)
-                        ->orderBy('cus_id', 'asc')
-                        ->get();
+            return null;
         }
     }
 
@@ -154,6 +150,11 @@ class CustomerModel
     {
         $results = DB::table($this->table)->select('cus_id', 'cus_code', 'cus_name')->where('last_kind', '<>', DELETE)->get();
         return $results;
+    }
+
+    public function get_by_ent_id($ent_id=null)
+    {
+        return DB::table($this->table)->select('cus_id', 'ent_id')->where('last_kind', '<>', DELETE)->where('ent_id', '=', $ent_id)->get();
     }
 
     public function count() {

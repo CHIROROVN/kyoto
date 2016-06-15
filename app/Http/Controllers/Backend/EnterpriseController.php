@@ -58,10 +58,10 @@ class EnterpriseController extends BackendController
 	public function postRegist() {
 		$cns = Input::get('cus_name_lb2');
         $dataInsert             = array(
-            'ent_id'      		=> Input::get('ent_id'),
+            // 'ent_id'      		=> Input::get('ent_id'),
             'ent_name'      	=> Input::get('ent_name'),
             'ent_login'      	=> Input::get('ent_login'),
-            'ent_passwd'      	=> Input::get('ent_passwd'),
+            'ent_passwd'        => Input::get('ent_passwd'),
 
             'last_date'         => date('Y-m-d H:i:s'),
             'last_kind'         => INSERT,
@@ -69,6 +69,7 @@ class EnterpriseController extends BackendController
             'last_user'         => (Auth::check()) ? Auth::user()->u_id : '',
         );
         $clsEnterprise          = new EnterpriseModel();
+        $max_ent_id = $clsEnterprise->find_max_id() + 1;
         $validator  = Validator::make(Input::all(), $clsEnterprise->Rules(), $clsEnterprise->Messages());
 
         if ($validator->fails()) {
@@ -76,12 +77,11 @@ class EnterpriseController extends BackendController
         }else{
         	$cmModel = new CustomerModel();
         	$customers = $cmModel->get_cus_by_cid($cns);
-
         	if(!empty($customers)){
         		foreach($customers as $cus){
         			foreach ($cns as $key=>$cn) {
         				if($cus->cus_id == $cn){
-        					$cmModel->update($cn, ['ent_id' => $cn]);
+        					$cmModel->update($cn, ['ent_id' => $max_ent_id]);
         				}
         			}
         			
@@ -134,15 +134,28 @@ class EnterpriseController extends BackendController
         }else{
         	$cmModel = new CustomerModel();
         	$customers = $cmModel->get_cus_by_cid($cns);
+        	$cusByEntID = $cmModel->get_by_ent_id($id);
+        	echo "<pre>"; print_r($cusByEntID);die;
         	if(!empty($customers)){
         		foreach($customers as $cus){
-        			foreach ($cns as $cn) {
-        				if($cus->cus_id == $cn){
-        					$cmModel->update($cn, ['ent_id' => $cn]);
-        				}
-        			}
+        			
+        			if(!empty($cns)){
+	        			foreach ($cns as $cn) {
+	        				if($cus->cus_id == $cn){
+	        					$cmModel->update($cn, ['ent_id' => $id]);
+	        				}else{
+	        					$cmModel->update($cn, ['ent_id' => null]);
+	        				}
+	        			}
+	        		}
         		}
-        	}
+        	}else{
+        		if(!empty($customers)){
+
+        		}
+	        		//$cmModel->update($cus->cus_id, ['ent_id' => null]);
+	        }
+
         	if ( $clsEnterprise->update($id, $dataUpdate) ){
 	    		Session::flash('success', 'The Enterprise updated successfully.');
 	    		return redirect()->route('backend.enterprises.index');

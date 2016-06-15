@@ -54,6 +54,11 @@ class EnterpriseModel
         return $results;
     }
 
+    public function find_max_id()
+    {
+        return DB::table($this->table)->where('last_kind', '<>', DELETE)->max('ent_id');
+    }
+
     public function update($id, $data)
     {
     	$results = DB::table($this->table)->where('ent_id', $id)->update($data);
