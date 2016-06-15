@@ -25,9 +25,17 @@ class EnterpriseModel
         );
     }
 
-    public function get_all()
+    public function get_all($where = null)
     {
-        return DB::table($this->table)->where('last_kind', '<>', DELETE)->orderBy('ent_id', 'desc')->paginate(PAGINATION);
+        $query = DB::table($this->table)
+                ->where('last_kind', '<>', DELETE)
+                ->orderBy('ent_id', 'desc');
+
+        if(!empty($where['entName']))
+            $query->where('ent_name', 'LIKE', '%' .$where['entName']. '%');
+
+        $results = $query->simplePaginate(PAGINATION);
+        return $results;
     }
 
     public function count() {

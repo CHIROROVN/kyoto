@@ -109,7 +109,11 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::get('enterprises/delete/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.enterprises.delete', 'uses' => 'EnterpriseController@delete']);
 
 	Route::get('enterprises/search', ['middleware' => 'permission_member', 'as' => 'backend.enterprises.search', 'uses' => 'EnterpriseController@search']);
+
+	Route::post('enterprises/search', ['middleware' => 'permission_member', 'as' => 'backend.enterprises.search', 'uses' => 'EnterpriseController@postSearch']);
+
 	Route::get('enterprises/detail/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.enterprises.detail', 'uses' => 'EnterpriseController@detail']);
+	
 	Route::post('enterprise/regist/cnk_ajax', ['as' => 'backend.enterprise.cnk_ajax', 'uses' => 'EnterpriseController@getCusNameAjax']);
 
 	/**

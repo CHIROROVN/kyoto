@@ -3,8 +3,27 @@
 @section('content')
 
 <div class="container">
+  @if ($message = Session::get('success'))
+    <br><br>
+    <div class="alert alert-success  alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <ul><strong><li> {{ $message }}</li></strong></ul>
+    </div>
+  @elseif($message = Session::get('danger'))
+    <br><br>
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <ul><strong><li> {{ $message }}</li></strong></ul>
+    </div>
+  @endif
+
   <div class="row content content--list">
-  <p>全123件中、99件が該当しました。うち、1～20件を表示しています。</p>
+  <p>全{{@$count_all}}件中、{{@$total_count}}件が該当しました。うち、{{@$record_from}}～{{@$record_to + count(@$enterprises)}}件を表示しています。</p>
+
     <div class="row fl-right mar-bottom">
       <div class="col-md-12">
         <input onclick="location.href='{{ route('backend.enterprises.regist') }}'" value="媒体の新規登録" type="button" class="btn btn-sm btn-primary"/>
@@ -19,9 +38,7 @@
         <td class="col-title" align="center">削除</td>
       </tr>
       @if (empty($enterprises) || count($enterprises) == 0)
-      <tr>
-        <td colspan="5"><h1 class="data-empty">Data empty...</h1></td>
-      </tr>
+      <tr><td colspan="6" style="text-align: center;">該当するデータがありません。</td></tr>
       @else
         @foreach ($enterprises as $enterprise)
         <tr>
@@ -49,14 +66,14 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Delete</h4>
+                    <h4 class="modal-title">{{trans('common.modal_header_delete')}}</h4>
                   </div>
                   <div class="modal-body">
-                    <p>Are you want to delete?</p>
+                    <p>{{trans('common.modal_confirn_delete')}}</p>
                   </div>
                   <div class="modal-footer">
-                    <a href="{{ route('backend.enterprises.delete', $enterprise->ent_id) }}" class="btn btn-xs btn-primary">削除</a>
-                    <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
+                    <a href="{{ route('backend.enterprises.delete', $enterprise->ent_id) }}" class="btn btn-xs btn-primary">{{trans('common.modal_btn_delete')}}</a>
+                    <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{trans('common.modal_btn_cancel')}}</button>
                   </div>
                 </div>
                 <!-- End Modal content-->
@@ -78,8 +95,8 @@
   </div>
   <div class="row">
     <div class="col-md-12 text-center">
-      <input name="button7" value="再検索（条件を引き継ぐ）" type="submit" class="btn btn-sm btn-primary form-control--mar-right" onclick="location.href='{{ route('backend.enterprises.search') }}'">
-      <input name="button5" value="再検索（条件をクリアする）" type="reset" class="btn btn-sm btn-primary">
+      <input name="button7" value="再検索（条件を引き継ぐ）" type="submit" class="btn btn-sm btn-primary form-control--mar-right" onclick="location.href='{{ route('backend.enterprises.search', ['ent_name='.@$ent_name]) }}'">
+      <input name="button5" value="再検索（条件をクリアする）" type="reset" class="btn btn-sm btn-primary" onclick="location.href='{{ route('backend.enterprises.search') }}'">
     </div>
   </div>
 </div>

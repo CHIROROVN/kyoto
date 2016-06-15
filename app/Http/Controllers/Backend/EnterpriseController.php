@@ -13,6 +13,7 @@ use Response;
 use Html;
 use DB;
 use URL;
+use LaravelLocalization;
 
 class EnterpriseController extends BackendController
 {
@@ -22,11 +23,34 @@ class EnterpriseController extends BackendController
 	}
 
 	public function index() {
-		$clsEnterprise 			= new EnterpriseModel();
-		$data['enterprises'] 	= $clsEnterprise->get_all();
-		$data['title'] 			= '法人情報の検索結果一覧';
-
+		$clsEnterprise 				= new EnterpriseModel();
+		$where['entName']          	= Input::get('ent_name');
+		$data['enterprises'] 		= $clsEnterprise->get_all($where);
+		$data['title'] 				= '法人情報の検索結果一覧';
+		$data['ent_name']          	= Input::get('ent_name');
+		$data['count_all']          = $clsEnterprise->count();
+        $data['total_count']        = count($clsEnterprise->get_all($where));
+        $page_current               = Input::get('page') ? Input::get('page') : '1';
+        if($data['total_count'] == 0){
+            $data['record_from']    = 0;
+            $data['record_to']      = 0;
+        }else{
+            $data['record_from']    = (($page_current - 1) * PAGINATION) + 1;
+            $data['record_to']      = $data['record_from'] - 1;
+        }
 		return view('backend.enterprises.index', $data);
+	}
+
+	public function search()
+	{
+		$data['title'] 		= '媒体の検索';
+		return view('backend.enterprises.search', $data);
+	}
+
+	public function postSearch()
+	{
+		$data['ent_name']     = Input::get('ent_name');
+		return redirect()->route('backend.enterprises.index', $data);
 	}
 
 	public static function getCusName($ent_id=null){
@@ -58,7 +82,6 @@ class EnterpriseController extends BackendController
 	public function postRegist() {
 		$cns = Input::get('cus_name_lb2');
         $dataInsert             = array(
-            // 'ent_id'      		=> Input::get('ent_id'),
             'ent_name'      	=> Input::get('ent_name'),
             'ent_login'      	=> Input::get('ent_login'),
             'ent_passwd'        => Input::get('ent_passwd'),
@@ -118,7 +141,7 @@ class EnterpriseController extends BackendController
 			unset($rules['ent_login']);
 		
         $dataUpdate             = array(
-           // 'ent_id'      		=> Input::get('ent_id'),
+           // 'ent_id'      	=> Input::get('ent_id'),
             'ent_name'      	=> Input::get('ent_name'),
             'ent_login'      	=> Input::get('ent_login'),
             'ent_passwd'      	=> Input::get('ent_passwd'),
@@ -183,9 +206,4 @@ class EnterpriseController extends BackendController
     	}
 	}
 
-	public function search()
-	{
-		$data['title'] 		= '媒体の検索';
-		return view('backend.enterprises.search', $data);
-	}
 }

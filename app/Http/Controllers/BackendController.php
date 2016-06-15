@@ -1,9 +1,7 @@
-<?php
-
-namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
+use LaravelLocalization;
 class BackendController extends Controller
 {
 	public function __construct()
@@ -27,6 +25,8 @@ class BackendController extends Controller
         else
             $ipaddress = 'UNKNOWN';
         define('CLIENT_IP_ADRS', $ipaddress);
+
+        LaravelLocalization::setLocale('ja');
 	}
 
     /**

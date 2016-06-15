@@ -4,23 +4,24 @@
 <!-- content customer list -->
     <section id="page">
       <div class="container">
-        <div class="row content content--list"> 
-              @if ($message = Session::get('success'))
-              <div class="alert alert-success  alert-dismissible fade in" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <ul><strong><li> {{ $message }}</li></strong></ul>
-              </div>
-            @elseif($message = Session::get('danger'))
-              <div class="alert alert-danger alert-dismissible fade in" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <ul><strong><li> {{ $message }}</li></strong></ul>
-              </div>
-            @endif  
-
+        @if ($message = Session::get('success'))
+            <br><br>
+            <div class="alert alert-success  alert-dismissible fade in" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <ul><strong><li> {{ $message }}</li></strong></ul>
+            </div>
+          @elseif($message = Session::get('danger'))
+          <br><br>
+            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <ul><strong><li> {{ $message }}</li></strong></ul>
+            </div>
+          @endif
+        <div class="row content content--list">
           <p>全{{$count_all}}件中、{{$total_count}}件が該当しました。うち、{{$record_from}}～{{$record_to + count($customers)}}件を表示しています。</p>
           <div class="row fl-right mar-bottom">
             <div class="col-md-12">
@@ -50,14 +51,12 @@
             @endforeach
 
             @else
-              <tr><td colspan="6" style="text-align: center;">該当データなし。</td></tr>
+              <tr><td colspan="6" style="text-align: center;">該当するデータがありません。</td></tr>
             @endif
           </table>
         </div>
         <div class="row mar-bottom30">
           <div class="col-md-12 text-center">
-            <!-- <input name="button3" value="前の20件を表示" disabled="disabled" type="submit" class="btn btn-sm btn-primary form-control--mar-right">
-            <input name="button4" value="次の20件を表示" type="submit" class="btn btn-sm btn-primary"> -->
             {!! (new App\Pagination\SimplePagination($customers))->render() !!}
           </div>
         </div>

@@ -6,6 +6,7 @@ use Input;
 use Session;
 use Validator;
 use Auth;
+use LaravelLocalization;
 
 class CustomerController extends BackendController
 {
@@ -67,7 +68,6 @@ class CustomerController extends BackendController
         $data['title']        = '顧客情報の新規登録';
         return view('backend.customers.regist', $data);
     }
-
 
     public function postRegist() {
         $clsCustomer                    = new CustomerModel();
