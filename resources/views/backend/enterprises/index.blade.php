@@ -67,7 +67,7 @@
                     <h4 class="modal-title">{{trans('common.modal_header_delete')}}</h4>
                   </div>
                   <div class="modal-body">
-                    <p>{{trans('common.modal_confirn_delete')}}</p>
+                    <p>{{trans('common.modal_content_delete')}}</p>
                   </div>
                   <div class="modal-footer">
                     <a href="{{ route('backend.enterprises.delete', $enterprise->ent_id) }}" class="btn btn-xs btn-primary">{{trans('common.modal_btn_delete')}}</a>

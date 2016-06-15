@@ -208,7 +208,7 @@ class CustomerModel
 
     public function update($id, $data)
     {
-    	$results = DB::table($this->table)->where('cus_id', $id)->update($data);
+        $results = DB::table($this->table)->where('cus_id', $id)->update($data);
         return $results;
     }
 
