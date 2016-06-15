@@ -25,7 +25,7 @@ class CustomerController extends BackendController
         $where['cus_name']          = Input::get('cus_name');
         $where['cus_old_name']      = Input::get('cus_old_name');
 
-        $data['title']              = '顧客情報の検索結果一覧';
+        $data['title']              = trans('common.cust_title_index');
         $data['customers']          = $clsCustomer->get_all($where);
         $data['count_all']          = $clsCustomer->count();
         $data['total_count']        = count($clsCustomer->get_all($where));
@@ -44,7 +44,7 @@ class CustomerController extends BackendController
 
     public function search()
     {
-        $data['title']            = '顧客の検索';
+        $data['title']            = trans('common.cust_title_search');
         $data['cus_code']         = Input::get('cus_code');
         $data['cus_name']         = Input::get('cus_name');
         $data['cus_old_name']     = Input::get('cus_old_name');
@@ -65,7 +65,7 @@ class CustomerController extends BackendController
      * call view customer regist
     */
     public function getRegist() {
-        $data['title']        = '顧客情報の新規登録';
+        $data['title']        = trans('common.cust_title_regist');
         return view('backend.customers.regist', $data);
     }
 
@@ -125,10 +125,10 @@ class CustomerController extends BackendController
         }
 
         if ( $clsCustomer->insert($dataInsert) ) {
-            Session::flash('success', 'The customer registed successfully.');
+            Session::flash('success', trans('common.cust_msg_regist_succ'));
             return redirect()->route('backend.customers.index');
         } else {
-            Session::flash('danger', 'The customer regist faild, try again!');
+            Session::flash('danger', trans('common.cust_msg_regist_faild'));
             return redirect()->route('backend.customers.regist')->with('title', $title);
         }
 	}
@@ -137,7 +137,7 @@ class CustomerController extends BackendController
 	public function getEdit($id) {
 		$clsCustomer 		= new CustomerModel();
 		$data['customer'] 	= $clsCustomer->get_by_id($id);
-		$data['title'] 		= '顧客情報の新規登録';
+		$data['title'] 		= trans('common.cust_title_edit');
         if($data['customer'] == null) return redirect()->route('backend.customers.index')->with($data);
 
 		return view('backend.customers.edit', $data);
@@ -151,7 +151,7 @@ class CustomerController extends BackendController
         if($dataCus->cus_code == Input::get('cus_code')) unset($rules['cus_code']);
 
         $dataUpdate             = array(
-            'cus_code'    	            => Input::get('cus_code'),
+            'cus_code'                 => Input::get('cus_code'),
             'cus_name'                  => Input::get('cus_name'),
             'cus_title'                 => Input::get('cus_title'),
             'cus_old_name'              => Input::get('cus_old_name'),
@@ -203,17 +203,17 @@ class CustomerController extends BackendController
         }
 
         if ( $clsCustomer->update($id, $dataUpdate) ) {
-            Session::flash('success', 'The customer updated successfully.');
+            Session::flash('success', trans('commom.cust_msg_edit_succ'));
             return redirect()->route('backend.customers.index');
         } else {
-            Session::flash('danger', 'The customer updated faild, try again!');
+            Session::flash('danger', trans('common.cust_msg_edit_faild'));
             return redirect()->route('backend.customers.edit', $id)->with('title', $title);
         }
     }
 
     public function delete($id) {
         $clsCustomer            = new CustomerModel();
-        $data['title']          = '顧客情報の検索結果一覧';
+        //$data['title']          = '顧客情報の検索結果一覧';
         $dataUpdate             = array(
             'last_date'         => date('Y-m-d H:i:s'),
             'last_kind'         => DELETE,
@@ -222,19 +222,19 @@ class CustomerController extends BackendController
         );
 
         if ( $clsCustomer->update($id, $dataUpdate) ) {
-            Session::flash('success', 'The customer deleted successfully.');
+            Session::flash('success', trans('common.cust_msg_del_succ'));
             // set page current
             $page = $this->set_page($clsCustomer, Input::get('page'));
             return redirect()->route('backend.customers.index', ['page' => $page]);
         } else {
-            Session::flash('danger', 'The customer delete faild, try again!');
+            Session::flash('danger', trans('common.cust_msg_del_faild'));
             return redirect()->route('backend.customers.index')->with('title', $title);
         }
         ;
     }
 
     public function detail($id){
-        $data['title']          = '登録済み顧客情報の参照';
+        $data['title']          = trans('common.cust_title_detail');
         $clsCustomer            = new CustomerModel();
         $data['customer']       = $clsCustomer->get_by_id($id);
         return view('backend.customers.detail', $data);
