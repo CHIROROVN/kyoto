@@ -198,6 +198,11 @@ class CustomerModel
         return $results;
     }
 
+    public function update_ent_id($ent_id, $data)
+    {
+        return DB::table($this->table)->where('ent_id', $ent_id)->update($data);
+    }
+
     //get list customer
     public function get_cus_by_kana($kana=null){
         if(!empty($kana)){

@@ -27,8 +27,7 @@ class EnterpriseModel
 
     public function get_all()
     {
-        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->orderBy('ent_id', 'desc')->paginate(PAGINATION);
-        return $results;
+        return DB::table($this->table)->where('last_kind', '<>', DELETE)->orderBy('ent_id', 'desc')->paginate(PAGINATION);
     }
 
     public function count() {

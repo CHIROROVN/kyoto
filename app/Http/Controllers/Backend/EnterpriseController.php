@@ -111,6 +111,7 @@ class EnterpriseController extends BackendController
 		$cns = Input::get('cus_name_lb2');
 		$clsEnterprise          = new EnterpriseModel();
 		$rules = $clsEnterprise->Rules();
+
 		$data 		= $clsEnterprise->get_by_id($id);
 		$ent_login = $data->ent_login;
 		if(Input::get('ent_login') == $ent_login)
@@ -135,7 +136,12 @@ class EnterpriseController extends BackendController
         	$cmModel = new CustomerModel();
         	$customers = $cmModel->get_cus_by_cid($cns);
         	$cusByEntID = $cmModel->get_by_ent_id($id);
-        	echo "<pre>"; print_r($cusByEntID);die;
+         	if(!empty($cusByEntID)){
+        	 	foreach($cusByEntID as $cEntID){
+        	 		$cmModel->update_ent_id($cEntID->ent_id, ['ent_id' => null]);
+        	 	}
+        	 }
+
         	if(!empty($customers)){
         		foreach($customers as $cus){
         			
@@ -143,18 +149,11 @@ class EnterpriseController extends BackendController
 	        			foreach ($cns as $cn) {
 	        				if($cus->cus_id == $cn){
 	        					$cmModel->update($cn, ['ent_id' => $id]);
-	        				}else{
-	        					$cmModel->update($cn, ['ent_id' => null]);
 	        				}
 	        			}
 	        		}
         		}
-        	}else{
-        		if(!empty($customers)){
-
-        		}
-	        		//$cmModel->update($cus->cus_id, ['ent_id' => null]);
-	        }
+        	}
 
         	if ( $clsEnterprise->update($id, $dataUpdate) ){
 	    		Session::flash('success', 'The Enterprise updated successfully.');

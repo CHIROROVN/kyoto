@@ -40,11 +40,11 @@
                       <tr>
                         <td rowspan="2" valign="bottom">
                           <select name="cus_name_lb2[]" multiple="multiple" id="cus_name_lb2" style="width: 120px;">
-                            @if($count = count(CusName($enterprise->ent_id)))
+                            <!-- @if($count = count(CusName($enterprise->ent_id)))
                               @foreach(CusName($enterprise->ent_id) as $key => $cusName)
                                 <option value="{{@$cusName->cus_id}}">{{@$cusName->cus_name}}</option>
                               @endforeach
-                            @endif
+                            @endif -->
                           </select>
                         </td>
                         <td align="right"><input name="cus_name_add" id="cus_name_add" value="←追加" type="button"></td>
