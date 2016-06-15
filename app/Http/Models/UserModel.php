@@ -36,18 +36,18 @@ class UserModel
     public function Messages()
     {
     	return array(
-            'u_name.required'           => 'Please enter full name',
-            'u_login.required'          => 'Please enter login ID',
-            'u_passwd.required'         => 'Please enter password',
-            'u_passwd.min'              => 'The password must be least 6 characters.',
-            'u_belong.required'         => 'Please enter belong',
-            'u_power.required'          => 'Please choose power',
-            'u_login.unique'            => 'This login ID existed, try again!',
-            'currpasswd.required'   	=> 'Please enter your current password.',
-            'newpasswd.required'        => 'Please enter new password.',
-            'newpasswd.alpha_num'       => 'Please enter new password must be alphanumeric characters.',
-            'newpasswd.min'             => 'The new password must be least 6 characters.',
-            'confnewpasswd.same'        => 'New password and confirm new password must be same.',
+            'u_name.required'           => trans('validation.error_u_name_required'),
+            'u_login.required'          => trans('validation.error_u_login_required'),
+            'u_passwd.required'         => trans('validation.error_u_passwd_required'),
+            'u_passwd.min'              => trans('validation.error_u_passwd_min'),
+            'u_belong.required'         => trans('validation.error_u_belong_required'),
+            'u_power.required'          => trans('validation.error_u_power_required'),
+            'u_login.unique'            => trans('validation.error_u_login_unique'),
+            'currpasswd.required'   	=> trans('validation.error_currpasswd_required'),
+            'newpasswd.required'        => trans('validation.error_newpasswd_required'),
+            'newpasswd.alpha_num'       => trans('validation.error_newpasswd_alpha_num'),
+            'newpasswd.min'             => trans('validation.error_newpasswd_min'),
+            'confnewpasswd.same'        => trans('validation.error_confnewpasswd_same'),
 		);
     }
 

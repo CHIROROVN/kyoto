@@ -36,10 +36,10 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">{{ TITLE_DELETE }}</h4>
+                    <h4 class="modal-title">{{ trans('common.modal_header_delete') }}</h4>
                   </div>
                   <div class="modal-body">
-                    <p>{{ CONTENT_DELETE }}</p>
+                    <p>{{ trans('common.modal_content_delete') }}</p>
                   </div>
                   <div class="modal-footer">
                     <a href="{{ route('backend.campaigns.delete', [$campaign->campaign_id, 'page' => $campaigns->currentPage()]) }}" class="btn btn-xs btn-primary">削除</a>

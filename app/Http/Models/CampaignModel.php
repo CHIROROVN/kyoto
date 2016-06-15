@@ -19,9 +19,9 @@ class CampaignModel
     public function Messages()
     {
     	return array(
-            'campaign_name.required'        => '※必須キャンペーン名',
-            'baitai_id.required'            => '※必須プレゼント名',
-            'presentlist_id.required'       => '※必須媒体名',
+            'campaign_name.required'        => trans('validation.error_campaign_name_required'),
+            'baitai_id.required'            => trans('validation.error_baitai_id_required'),
+            'presentlist_id.required'       => trans('validation.error_presentlist_id_required'),
 		);
     }
 

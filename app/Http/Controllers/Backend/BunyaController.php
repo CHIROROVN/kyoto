@@ -31,7 +31,7 @@ class BunyaController extends BackendController
 
 		$clsBunya 		= new BunyaModel();
 		$data['bunyas'] = $clsBunya->get_all(true, Input::all())['db'];
-		$data['title']  = '分野情報の検索結果一覧';
+		$data['title']  = trans('common.bunya_title_index');
 
 		$data['count_all']		= $clsBunya->count();
 		$data['total_count'] 	= $clsBunya->get_all(true, Input::all())['total_count'];
@@ -54,7 +54,7 @@ class BunyaController extends BackendController
 	 * get view regist
 	 */
 	public function getRegist() {
-		$data['title']  = '分野情報の新規登録';
+		$data['title']  = trans('common.bunya_title_regist');
 		return view('backend.bunyas.regist', $data);
 	}
 
@@ -103,7 +103,7 @@ class BunyaController extends BackendController
 
 		$clsBunya 		= new BunyaModel();
 		$data['bunya'] 	= $clsBunya->get_by_id($id);
-		$data['title']  = '分野情報の新規登録';
+		$data['title']  = trans('common.bunya_title_edit');
 
 		return view('backend.bunyas.edit', $data);
 	}
@@ -215,7 +215,7 @@ class BunyaController extends BackendController
 			return redirect()->route('backend.bunyas.search');
 		}
 
-		$data['title']  = '分野の検索';
+		$data['title']  = trans('common.bunya_title_search');
 		return view('backend.bunyas.search', $data);
 	}
 }

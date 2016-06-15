@@ -19,8 +19,8 @@ class PresentModel
     public function Messages()
     {
     	return array(
-            'present_code.required'   	=> '※必須プレゼントコード',
-            'present_name.required'     => '※必須プレゼント名',
+            'present_code.required'   	=> trans('validation.error_present_code_required'),
+            'present_name.required'     => trans('validation.error_present_name_required'),
 		);
     }
 

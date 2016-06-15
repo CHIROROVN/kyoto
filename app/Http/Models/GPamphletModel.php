@@ -17,8 +17,8 @@ class GPamphletModel
     public function Messages()
     {
         return array(
-            'gpamph_number.required'   	=> '※必須一括資料請求番号',
-            'pamph_id.required'         => '※必須資料請求番号',
+            'gpamph_number.required'   	=> trans('validation.error_gpamph_number_required'),
+            'pamph_id.required'         => trans('validation.error_pamph_id_required'),
         );
     }
 

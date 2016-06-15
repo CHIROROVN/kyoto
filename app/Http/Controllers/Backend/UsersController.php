@@ -21,7 +21,7 @@ class UsersController extends BackendController
 	 */
 	public function index() {
 		$userModel 		= new UserModel();
-		$title 			= "ユーザー情報の検索結果一覧";
+		$title 			= trans('common.user_title_index');
 		$users  		= $userModel->get_all();
 
 		return view('backend.users.index', compact('users', 'title'));
@@ -32,7 +32,7 @@ class UsersController extends BackendController
 	 * get view change password
 	 */
 	public function getChangePasswd(){
-		$title 			= "パスワードを変更する";
+		$title 			= trans('common.user_title_change_password');
 
 		return view('backend.users.change_passwd', compact('title'));
 	}
@@ -42,7 +42,7 @@ class UsersController extends BackendController
 	 * get view regist
 	 */
 	public function getRegist(){
-		$title 			= "ユーザーの新規登録";
+		$title 			= trans('common.user_title_regist');
 
 		return view('backend.users.regist', compact('title'));
 	}
@@ -74,10 +74,10 @@ class UsersController extends BackendController
         }
 
         if ( $userModel->insert($dataInsert) ) {
-    		Session::flash('success', 'The user registed successfully.');
+    		Session::flash('success', trans('common.user_message_success_regist'));
     		return redirect()->route('backend.users.index');
     	} else {
-    		Session::flash('danger', 'The user regist faild, try again!');
+    		Session::flash('danger', trans('common.user_message_danger_regist'));
 			return redirect()->route('backend.users.regist')->with('title', $title);
     	}
 
@@ -89,7 +89,7 @@ class UsersController extends BackendController
 	 * $id: id record
 	 */
 	public function getUpdate($id){
-		$title 						= "パスワードを変更する";
+		$title 						= trans('common.user_title_edit');
 		$page 						= Input::get('page');
 		$userModel 					= new UserModel();
 		$user 						= $userModel->get_by_id($id);
@@ -141,10 +141,10 @@ class UsersController extends BackendController
         }
 
         if($userModel->update($id, $dataUpdate)){
-    		Session::flash('success', 'The user registed successfully.');
+    		Session::flash('success', trans('common.user_message_success_update'));
     		return redirect()->route('backend.users.index', ['page' => $page]);
     	}else{
-    		Session::flash('danger', 'The user regist faild, try again!');
+    		Session::flash('danger', trans('common.user_message_danger_update'));
 			return redirect()->route('backend.users.update', [$id, 'page' => $page])->with('title', $title);
     	}
 	}
@@ -171,10 +171,10 @@ class UsersController extends BackendController
     		// set page current
     		$page = $this->set_page($userModel, $page);
 
-    		Session::flash('success', 'The user delete successfully.');
+    		Session::flash('success', trans('common.user_message_danger_delete'));
     		return redirect()->route('backend.users.index', ['page' => $page])->with('title', $title);
     	}else{
-    		Session::flash('danger', 'The user delete faild, try again!');
+    		Session::flash('danger', trans('common.user_message_danger_delete'));
 			return redirect()->route('backend.users.index', ['page' => $page])->with('title', $title);
     	}
 	}
@@ -184,7 +184,6 @@ class UsersController extends BackendController
 	 * update password database
 	 */
 	public function ChangePasswd(){
-		$title 						= "パスワードを変更する";
 		$userModel 					= new UserModel();
 		$id 						= Auth::user()->u_id;
 		$oldPasswd 					= Auth::user()->password;
@@ -204,15 +203,15 @@ class UsersController extends BackendController
 	        	);
 
         	if($userModel->update($id, $dataUpdate)){
-        		Session::flash('success', 'The password changed successfully.');
-        		return redirect()->route('backend.users.change_passwd')->with('title', $title);
+        		Session::flash('success', trans('common.user_message_success_login'));
+        		return redirect()->route('backend.users.change_passwd');
         	}else{
-        		Session::flash('danger', 'The password changed faild, try again!');
-				return redirect()->route('backend.users.change_passwd')->with('title', $title);
+        		Session::flash('danger', trans('common.user_message_danger_login'));
+				return redirect()->route('backend.users.change_passwd');
         	}
 		}else{
-			Session::flash('danger', 'Current password incorrect, try again!');
-			return redirect()->route('backend.users.change_passwd')->with('title', $title);
+			Session::flash('danger', trans('common.user_message_danger_change_password'));
+			return redirect()->route('backend.users.change_passwd');
 		}
 
 	}

@@ -20,11 +20,11 @@ class BunyaModel
     {
     	return array(
             
-            'bunya_code.required'       => '※必須分野コード',
-            'bunya_code.unique'         => '※分野コード exists',
-            'bunya_name.required'       => '※必須分野名',
-            'bunya_kind.required'       => '※必須種類',
-            'bunya_class.required'      => '※必須区分',
+            'bunya_code.required'       => trans('validation.error_bunya_code_required'),
+            'bunya_code.unique'         => trans('validation.error_bunya_code_unique'),
+            'bunya_name.required'       => trans('validation.error_bunya_name_required'),
+            'bunya_kind.required'       => trans('validation.error_bunya_kind_required'),
+            'bunya_class.required'      => trans('validation.error_bunya_class_required'),
 		);
     }
 

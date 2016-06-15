@@ -25,7 +25,7 @@ class CampaignController extends BackendController
 	public function index() {
 		$clsCampaign 		= new CampaignModel();
 		$data['campaigns'] 	= $clsCampaign->get_all_join();
-		$data['title']  	= 'キャンペーン情報の検索結果一覧';
+		$data['title']  	= trans('common.campaign_title_index');
 
 		return view('backend.campaigns.index', $data);
 	}
@@ -39,7 +39,7 @@ class CampaignController extends BackendController
 		$clsPresent 		= new PresentModel();
 		$data['baitais'] 	= $clsBaitai->get_for_select();
 		$data['presents'] 	= $clsPresent->get_for_select();
-		$data['title']  	= 'キャンペーンの新規登録';
+		$data['title']  	= trans('common.campaign_title_regist');
 
 		return view('backend.campaigns.regist', $data);
 	}
@@ -86,7 +86,7 @@ class CampaignController extends BackendController
 		$data['baitais'] 	= $clsBaitai->get_for_select();
 		$data['presents'] 	= $clsPresent->get_for_select();
 		$data['campaign'] 	= $clsCampaign->get_by_id($id);
-		$data['title']  	= 'キャンペーンの新規登録';
+		$data['title']  	= trans('common.campaign_title_edit');
 
 		return view('backend.campaigns.edit', $data);
 	}

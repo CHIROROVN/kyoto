@@ -23,7 +23,7 @@ class PresentController extends BackendController
 	public function index() {
 		$clsPresent 		= new PresentModel();
 		$data['presents'] 	= $clsPresent->get_all();
-		$data['title'] 		= 'プレゼント情報の検索結果一覧';
+		$data['title'] 		= trans('common.present_title_index');
 
 		return view('backend.presents.index', $data);
 	}
@@ -33,7 +33,7 @@ class PresentController extends BackendController
 	 * get view regist
 	 */
 	public function getRegist() {
-		$data['title'] 		= 'プレゼントの新規登録';
+		$data['title'] 		= trans('common.present_title_regist');
 		return view('backend.presents.regist', $data);
 	}
 
@@ -71,7 +71,7 @@ class PresentController extends BackendController
 	public function getEdit($id) {
 		$clsPresent 		= new PresentModel();
 		$data['present'] 	= $clsPresent->get_by_id($id);
-		$data['title'] 		= 'プレゼントの新規登録';
+		$data['title'] 		= trans('common.present_title_edit');
 		$data['page']		= Input::get('page');
 
 		return view('backend.presents.edit', $data);

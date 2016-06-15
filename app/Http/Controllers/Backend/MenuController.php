@@ -16,7 +16,7 @@ class MenuController extends BackendController
 
 
 	public function index() {
-		$title = 'メニュー';
+		$title = trans('common.menu_title_index');
 		return view('backend.menu.index', compact('title'));
 	}
 }

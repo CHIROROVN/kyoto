@@ -25,16 +25,16 @@ class PamphletModel
     public function Messages()
     {
     	return array(
-            'pamph_number.required'   	    => '※必須資料請求番号',
-            'pamph_name.required'           => '※必須資料名',
-            'pamph_kind.required'           => '※必須種別',
-            'pamph_class.required'          => '※必須使用区分',
-            'pamph_cus_id.required'         => '※必須学校名',
-            'pamph_send.required'           => '※必須発送の有無',
-            'pamph_bunya_id.required'       => '※必須分野',
-            'pamph_area.required'           => '※必須都道府県 or エリア',
-            'pamph_pref.required'           => '※必須都道府県 or エリア',
-            'pamph_sex.required'            => '※必須対象',
+            'pamph_number.required'   	    => trans('validation.error_pamph_number_required'),
+            'pamph_name.required'           => trans('validation.error_pamph_name_required'),
+            'pamph_kind.required'           => trans('validation.error_pamph_kind_required'),
+            'pamph_class.required'          => trans('validation.error_pamph_class_required'),
+            'pamph_cus_id.required'         => trans('validation.error_pamph_cus_id_required'),
+            'pamph_send.required'           => trans('validation.error_pamph_send_required'),
+            'pamph_bunya_id.required'       => trans('validation.error_pamph_bunya_id_required'),
+            'pamph_area.required'           => trans('validation.error_pamph_area_required'),
+            'pamph_pref.required'           => trans('validation.error_pamph_pref_required'),
+            'pamph_sex.required'            => trans('validation.error_pamph_sex_required'),
 		);
     }
 

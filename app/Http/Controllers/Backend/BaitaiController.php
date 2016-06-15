@@ -31,7 +31,7 @@ class BaitaiController extends BackendController
 		
 		$clsBaitai 				= new BaitaiModel();
 		$data['baitais'] 		= $clsBaitai->get_all(true, Input::all())['db'];
-		$data['title'] 			= '媒体情報の検索結果一覧';
+		$data['title'] 			= trans('common.baitai_title_index');
 
 		$data['count_all']		= $clsBaitai->count();
 		$data['total_count'] 	= $clsBaitai->get_all(true, Input::all())['total_count'];
@@ -54,7 +54,7 @@ class BaitaiController extends BackendController
 	 * get view regist
 	 */
 	public function getRegist() {
-		$data['title'] 		= '媒体情報の新規登録';
+		$data['title'] 		= trans('common.baitai_title_regist');
 		return view('backend.baitais.regist', $data);
 	}
 
@@ -103,7 +103,7 @@ class BaitaiController extends BackendController
 
 		$clsBaitai 			= new BaitaiModel();
 		$data['baitai'] 	= $clsBaitai->get_by_id($id);
-		$data['title'] 		= '媒体情報の新規登録';
+		$data['title'] 		= trans('common.baitai_title_edit');
 
 		return view('backend.baitais.edit', $data);
 	}
@@ -210,7 +210,7 @@ class BaitaiController extends BackendController
 			return redirect()->route('backend.baitais.search');
 		}
 
-		$data['title'] 		= '媒体の検索';
+		$data['title'] 		= trans('common.baitai_title_search');
 		return view('backend.baitais.search', $data);
 	}
 }

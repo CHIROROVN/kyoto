@@ -19,11 +19,11 @@ class BaitaiModel
     public function Messages()
     {
     	return array(
-            'baitai_code.required'   	=> '※必須媒体コード',
-            'baitai_name.required'      => '※必須媒体名',
-            'baitai_kind.required'      => '※必須性別',
-            'baitai_year.required'      => '※必須発行年',
-            'baitai_year.numeric'       => '※Format is number 発行年',
+            'baitai_code.required'   	=> trans('validation.error_baitai_code_required'),
+            'baitai_name.required'      => trans('validation.error_baitai_name_required'),
+            'baitai_kind.required'      => trans('validation.error_baitai_kind_required'),
+            'baitai_year.required'      => trans('validation.error_baitai_year_required'),
+            'baitai_year.numeric'       => trans('validation.error_baitai_code_numeric'),
 		);
     }
 

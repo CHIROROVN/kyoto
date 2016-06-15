@@ -33,7 +33,7 @@ class GPamphletController extends BackendController
 		$clsGPamphlet 					= new GPamphletModel();
 		$data['gpamphlets'] 			= $clsGPamphlet->get_all(true, $data)['db'];
 		$data['gpamphlets_distinct'] 	= $clsGPamphlet->get_all_distinct();
-		$data['title'] 					= '一括資料請求情報の検索結果一覧';
+		$data['title'] 					= trans('common.gpamphlet_title_index');
 
 		$data['count_all']		= $clsGPamphlet->count();
 		$data['total_count'] 	= $clsGPamphlet->get_all(true, Input::all())['total_count'];
@@ -57,7 +57,7 @@ class GPamphletController extends BackendController
 	 */
 	public function getRegist() {
 		$clsPamphlet 		= new PamphletModel();
-		$data['title'] 		= '一括資料請求番号の新規登録';
+		$data['title'] 		= trans('common.gpamphlet_title_regist');
 
 		return view('backend.gpamphlets.regist', $data);
 	}
@@ -106,7 +106,7 @@ class GPamphletController extends BackendController
 		$clsGPamphlet 				= new GPamphletModel();
 		$clsPamphlet 				= new PamphletModel();
 		$data['gpamphlet'] 			= $clsGPamphlet->get_by_id($id);
-		$data['title'] 				= '媒体情報の新規登録';
+		$data['title'] 				= trans('common.gpamphlet_title_edit');
 
 		return view('backend.gpamphlets.edit', $data);
 	}
@@ -199,7 +199,7 @@ class GPamphletController extends BackendController
 			return redirect()->route('backend.gpamphlets.search');
 		}
 
-		$data['title'] 		= '一括資料請求番号の検索';
+		$data['title'] 		= trans('common.gpamphlet_title_search');
 		return view('backend.gpamphlets.search', $data);
 	}
 
