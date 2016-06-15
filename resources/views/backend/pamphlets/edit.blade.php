@@ -295,7 +295,9 @@
       <input type="hidden" name="s_pamph_send_yes" value="{{ $s_pamph_send_yes }}">
       <input type="hidden" name="s_pamph_bunya_id" value="{{ $s_pamph_bunya_id }}">
       <input type="hidden" name="s_pamph_bunya_name" value="{{ $s_pamph_bunya_name }}">
-      <?php //<input type="hidden" name="s_pamph_pref" value="{{ $s_pamph_pref }}"> ?>
+      @foreach ( $s_pamph_pref as $item )
+        <input type="hidden" name="s_pamph_pref[]" value="{{ $item }}">
+      @endforeach
       <input type="hidden" name="s_pamph_sex_unspecified" value="{{ $s_pamph_sex_unspecified }}">
       <input type="hidden" name="s_pamph_sex_men" value="{{ $s_pamph_sex_men }}">
       <input type="hidden" name="s_pamph_sex_women" value="{{ $s_pamph_sex_women }}">
