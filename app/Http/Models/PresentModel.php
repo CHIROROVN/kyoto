@@ -40,7 +40,7 @@ class PresentModel
 
     public function get_for_select()
     {
-        $results = DB::table($this->table)->select('presentlist_id', 'present_name')->where('last_kind', '<>', DELETE)->get();
+        $results = DB::table($this->table)->select('presentlist_id', 'present_name')->where('last_kind', '<>', DELETE)->orderBy('present_code', 'asc')->get();
         return $results;
     }
 

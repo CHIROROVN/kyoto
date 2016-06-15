@@ -8,7 +8,7 @@
 
     <div class="row fl-right mar-bottom">
       <div class="col-md-12">
-        <input onclick="location.href='{{ route('backend.gpamphlets.regist') }}'" value="媒体の新規登録" type="button" class="btn btn-sm btn-primary"/>
+        <input onclick="location.href='{{ route('backend.gpamphlets.regist') }}'" value="一括資料請求番号の新規登録" type="button" class="btn btn-sm btn-primary"/>
       </div>
     </div>
     

@@ -82,7 +82,7 @@ class BaitaiModel
 
     public function get_for_select()
     {
-        $results = DB::table($this->table)->select('baitai_id', 'baitai_name')->where('last_kind', '<>', DELETE)->get();
+        $results = DB::table($this->table)->select('baitai_id', 'baitai_name')->where('last_kind', '<>', DELETE)->orderBy('baitai_code', 'asc')->get();
         return $results;
     }
 

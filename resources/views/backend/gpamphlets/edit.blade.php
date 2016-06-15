@@ -69,13 +69,25 @@
 </div>
 </form>
 
-<?php echo '<script type="text/javascript">var pamphlets = ' . $pamphlets . '; </script>' ?>
 <script>
   $(document).ready(function(){
-    // pamphlets
     $( "#pamph_id" ).autocomplete({
       minLength: 0,
-      source: pamphlets,
+      // source: pamphlets,
+      source: function(request, response){
+          var key = $('#pamph_id').val();
+          $.ajax({
+              url: "{{ route('backend.gpamphlets.autocomplete') }}",
+              beforeSend: function(){
+                  // alert("beforeSend");
+              },
+              async:    true,
+              data: { key: key },
+              dataType: "json",
+              method: "get",
+              success: response
+          });
+      },
       focus: function( event, ui ) {
         $( "#pamph_id" ).val( ui.item.label );
         return false;
@@ -84,15 +96,14 @@
         $( "#pamph_id" ).val( ui.item.label );
         $( "#pamph_id-id" ).val( ui.item.value );
         // $( "#pamph_bunya_id-description" ).html( ui.item.desc );
-
         return false;
       }
-    })
-    .autocomplete( "instance" )._renderItem = function( ul, item ) {
-      return $( "<li>" )
-        .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
-        .appendTo( ul );
+    }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+          //.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+          .append( "<a>" + item.desc + "</a>" )
+          .appendTo( ul );
     };
-  });
+  }); //end document
 </script>
 @endsection

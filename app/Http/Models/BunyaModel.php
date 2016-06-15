@@ -82,8 +82,23 @@ class BunyaModel
 
     public function get_for_select()
     {
-        $results = DB::table($this->table)->select('bunya_id', 'bunya_code', 'bunya_name')->where('last_kind', '<>', DELETE)->get();
+        $results = DB::table($this->table)->select('bunya_id', 'bunya_code', 'bunya_name')->where('last_kind', '<>', DELETE)->orderBy('bunya_code', 'asc')->get();
         return $results;
+    }
+
+
+    public function get_for_autocomplate($key = '')
+    {
+        $results = DB::table($this->table)
+                        ->select('bunya_id', 'bunya_code', 'bunya_name')
+                        ->where('last_kind', '<>', DELETE);
+        if ( !empty($key) ) {
+            $results = $results->where('bunya_code', 'like', '%' . $key . '%')
+                                ->orWhere('bunya_name', 'like', '%' . $key . '%');
+        }
+        $db = $results->orderBy('bunya_code', 'asc')->get();
+
+        return $db;
     }
 
     public function count() {

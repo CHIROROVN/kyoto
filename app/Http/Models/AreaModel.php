@@ -25,7 +25,7 @@ class AreaModel
 
     public function get_for_select()
     {
-        $results = DB::table($this->table)->select('area_id', 'area_name')->where('last_kind', '<>', DELETE)->get();
+        $results = DB::table($this->table)->select('area_id', 'area_name')->where('last_kind', '<>', DELETE)->orderBy('area_code', 'asc')->get();
         return $results;
     }
 }

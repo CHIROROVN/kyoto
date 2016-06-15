@@ -27,7 +27,7 @@ class CampaignModel
 
     public function get_all($pagination = true)
     {
-        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->orderBy('campaign_id', 'asc');
+        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->orderBy('campaign_name', 'asc');
 
         if ($pagination) {
             $db = $results->simplePaginate(PAGINATION); //simplePaginate, paginate
@@ -45,7 +45,7 @@ class CampaignModel
                         ->leftJoin('m_presentlist', 't_campaign.presentlist_id', '=', 'm_presentlist.presentlist_id')
                         ->select('t_campaign.*', 'baitai_name', 'present_name')
                         ->where('t_campaign.last_kind', '<>', DELETE)
-                        ->orderBy('t_campaign.campaign_id', 'asc')
+                        ->orderBy('t_campaign.campaign_name', 'asc')
                         ->paginate(PAGINATION);
         return $results;
     }

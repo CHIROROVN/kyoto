@@ -25,7 +25,7 @@ class PrefModel
 
     public function get_for_select()
     {
-        $results = DB::table($this->table)->select('pref_id', 'pref_name')->where('last_kind', '<>', DELETE)->get();
+        $results = DB::table($this->table)->select('pref_id', 'pref_name')->where('last_kind', '<>', DELETE)->orderBy('pref_code', 'asc')->get();
         return $results;
     }
 }

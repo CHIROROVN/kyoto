@@ -90,35 +90,26 @@
 </form>
 
 
-<?php echo '<script type="text/javascript">var customers = ' . $customers . '; var bunyas = ' . $bunyas . '; </script>' ?>
 <script>
   $(document).ready(function(){
-    // customers
-    $( "#s_pamph_cus_id" ).autocomplete({
-      minLength: 0,
-      source: customers,
-      focus: function( event, ui ) {
-        $( "#s_pamph_cus_id" ).val( ui.item.label );
-        return false;
-      },
-      select: function( event, ui ) {
-        $( "#s_pamph_cus_id" ).val( ui.item.label );
-        $( "#s_pamph_cus_id-id" ).val( ui.item.value );
-        // $( "#pamph_bunya_id-description" ).html( ui.item.desc );
-
-        return false;
-      }
-    })
-    .autocomplete( "instance" )._renderItem = function( ul, item ) {
-      return $( "<li>" )
-        .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
-        .appendTo( ul );
-    };
-
-    // bunyas
+    // bunya
     $( "#s_pamph_bunya_id" ).autocomplete({
       minLength: 0,
-      source: bunyas,
+      // source: pamphlets,
+      source: function(request, response){
+          var key = $('#s_pamph_bunya_id').val();
+          $.ajax({
+              url: "{{ route('backend.pamphlets.autocomplete.bunya') }}",
+              beforeSend: function(){
+                  // alert("beforeSend");
+              },
+              async:    true,
+              data: { key: key },
+              dataType: "json",
+              method: "get",
+              success: response
+          });
+      },
       focus: function( event, ui ) {
         $( "#s_pamph_bunya_id" ).val( ui.item.label );
         return false;
@@ -127,14 +118,48 @@
         $( "#s_pamph_bunya_id" ).val( ui.item.label );
         $( "#s_pamph_bunya_id-id" ).val( ui.item.value );
         // $( "#pamph_bunya_id-description" ).html( ui.item.desc );
-
         return false;
       }
-    })
-    .autocomplete( "instance" )._renderItem = function( ul, item ) {
-      return $( "<li>" )
-        .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
-        .appendTo( ul );
+    }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+          //.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+          .append( "<a>" + item.desc + "</a>" )
+          .appendTo( ul );
+    };
+
+    // first customer : group 1
+    $( "#s_pamph_cus_id" ).autocomplete({
+      minLength: 0,
+      // source: pamphlets,
+      source: function(request, response){
+          var key = $('#pamph_cus_id-group-1').val();
+          $.ajax({
+              url: "{{ route('backend.pamphlets.autocomplete.customer') }}",
+              beforeSend: function(){
+                  // alert("beforeSend");
+              },
+              async:    true,
+              data: { key: key },
+              dataType: "json",
+              method: "get",
+              success: response
+          });
+      },
+      focus: function( event, ui ) {
+        $( "#s_pamph_cus_id" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+        $( "#s_pamph_cus_id" ).val( ui.item.label );
+        $( "#s_pamph_cus_id-id" ).val( ui.item.value );
+        // $( "#pamph_bunya_id-description" ).html( ui.item.desc );
+        return false;
+      }
+    }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+          //.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+          .append( "<a>" + item.desc + "</a>" )
+          .appendTo( ul );
     };
   });
 </script>

@@ -58,16 +58,6 @@ class GPamphletController extends BackendController
 	public function getRegist() {
 		$clsPamphlet 		= new PamphletModel();
 		$data['title'] 		= '一括資料請求番号の新規登録';
-		// set value for complate pamphlets
-		$pamphlets 			= $clsPamphlet->get_for_select();
-		foreach ( $pamphlets as $pamphlet ) {
-			$tmp[] = array(
-				'value' 	=> $pamphlet->pamph_id,
-				'label' 	=> $pamphlet->pamph_name,
-				'desc' 		=> $pamphlet->pamph_number . '_' . $pamphlet->pamph_name
-			);
-		}
-		$data['pamphlets'] = json_encode($tmp);
 
 		return view('backend.gpamphlets.regist', $data);
 	}
@@ -117,17 +107,6 @@ class GPamphletController extends BackendController
 		$clsPamphlet 				= new PamphletModel();
 		$data['gpamphlet'] 			= $clsGPamphlet->get_by_id($id);
 		$data['title'] 				= '媒体情報の新規登録';
-
-		// set value for complate pamphlets
-		$pamphlets 			= $clsPamphlet->get_for_select();
-		foreach ( $pamphlets as $pamphlet ) {
-			$tmp[] = array(
-				'value' 	=> $pamphlet->pamph_id,
-				'label' 	=> $pamphlet->pamph_name,
-				'desc' 		=> $pamphlet->pamph_number . '_' . $pamphlet->pamph_name
-			);
-		}
-		$data['pamphlets'] = json_encode($tmp);
 
 		return view('backend.gpamphlets.edit', $data);
 	}
@@ -210,18 +189,6 @@ class GPamphletController extends BackendController
 			$data['s_pamph_id'] = null;
 		}
 
-		// set value for complate pamphlets
-		$clsPamphlet 		= new PamphletModel();
-		$pamphlets 			= $clsPamphlet->get_for_select();
-		foreach ( $pamphlets as $pamphlet ) {
-			$tmp[] = array(
-				'value' 	=> $pamphlet->pamph_id,
-				'label' 	=> $pamphlet->pamph_name,
-				'desc' 		=> $pamphlet->pamph_number . '_' . $pamphlet->pamph_name
-			);
-		}
-		$data['pamphlets'] = json_encode($tmp);
-
 		// reset where
 		if (Input::get('where') == 'null') {
 			// search
@@ -234,5 +201,22 @@ class GPamphletController extends BackendController
 
 		$data['title'] 		= '一括資料請求番号の検索';
 		return view('backend.gpamphlets.search', $data);
+	}
+
+
+	public function AutoComplete()
+	{
+		$key 			= Input::get('key', '');
+		$clsPamphlet 	= new PamphletModel();
+		$pamphlets 		= $clsPamphlet->get_for_autocomplate($key);
+		$tmp = array();
+		foreach ( $pamphlets as $pamphlet ) {
+			$tmp[] = (object)array(
+				'value' 	=> $pamphlet->pamph_id,
+				'label' 	=> $pamphlet->pamph_number . '_' . $pamphlet->pamph_name,
+				'desc' 		=> $pamphlet->pamph_number . '_' . $pamphlet->pamph_name
+			);
+		}
+		echo json_encode($tmp);
 	}
 }

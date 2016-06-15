@@ -295,9 +295,11 @@
       <input type="hidden" name="s_pamph_send_yes" value="{{ $s_pamph_send_yes }}">
       <input type="hidden" name="s_pamph_bunya_id" value="{{ $s_pamph_bunya_id }}">
       <input type="hidden" name="s_pamph_bunya_name" value="{{ $s_pamph_bunya_name }}">
-      @foreach ( $s_pamph_pref as $item )
-        <input type="hidden" name="s_pamph_pref[]" value="{{ $item }}">
-      @endforeach
+      @if ( isset($s_pamph_pref) )
+        @foreach ( $s_pamph_pref as $item )
+          <input type="hidden" name="s_pamph_pref[]" value="{{ $item }}">
+        @endforeach
+      @endif
       <input type="hidden" name="s_pamph_sex_unspecified" value="{{ $s_pamph_sex_unspecified }}">
       <input type="hidden" name="s_pamph_sex_men" value="{{ $s_pamph_sex_men }}">
       <input type="hidden" name="s_pamph_sex_women" value="{{ $s_pamph_sex_women }}">
@@ -356,13 +358,26 @@
 </div>
 </form>
 
-<?php echo '<script type="text/javascript">var bunyas = ' . $bunyas . '; var customers = ' . $customers . '</script>' ?>
 <script>
   $(document).ready(function(){
     // bunya
     $( "#pamph_bunya_id" ).autocomplete({
       minLength: 0,
-      source: bunyas,
+      // source: pamphlets,
+      source: function(request, response){
+          var key = $('#pamph_bunya_id').val();
+          $.ajax({
+              url: "{{ route('backend.pamphlets.autocomplete.bunya') }}",
+              beforeSend: function(){
+                  // alert("beforeSend");
+              },
+              async:    true,
+              data: { key: key },
+              dataType: "json",
+              method: "get",
+              success: response
+          });
+      },
       focus: function( event, ui ) {
         $( "#pamph_bunya_id" ).val( ui.item.label );
         return false;
@@ -371,20 +386,33 @@
         $( "#pamph_bunya_id" ).val( ui.item.label );
         $( "#pamph_bunya_id-id" ).val( ui.item.value );
         // $( "#pamph_bunya_id-description" ).html( ui.item.desc );
-
         return false;
       }
-    })
-    .autocomplete( "instance" )._renderItem = function( ul, item ) {
-      return $( "<li>" )
-        .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
-        .appendTo( ul );
+    }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+          //.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+          .append( "<a>" + item.desc + "</a>" )
+          .appendTo( ul );
     };
 
     // first customer : group 1
-    $( '#pamph_cus_id-group-1' ).autocomplete({
+    $( "#pamph_cus_id-group-1" ).autocomplete({
       minLength: 0,
-      source: customers,
+      // source: pamphlets,
+      source: function(request, response){
+          var key = $('#pamph_cus_id-group-1').val();
+          $.ajax({
+              url: "{{ route('backend.pamphlets.autocomplete.customer') }}",
+              beforeSend: function(){
+                  // alert("beforeSend");
+              },
+              async:    true,
+              data: { key: key },
+              dataType: "json",
+              method: "get",
+              success: response
+          });
+      },
       focus: function( event, ui ) {
         $( "#pamph_cus_id-group-1" ).val( ui.item.label );
         return false;
@@ -393,14 +421,13 @@
         $( "#pamph_cus_id-group-1" ).val( ui.item.label );
         $( "#pamph_cus_id-group-1-id" ).val( ui.item.value );
         // $( "#pamph_bunya_id-description" ).html( ui.item.desc );
-
         return false;
       }
-    })
-    .autocomplete( "instance" )._renderItem = function( ul, item ) {
-      return $( "<li>" )
-        .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
-        .appendTo( ul );
+    }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+          //.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+          .append( "<a>" + item.desc + "</a>" )
+          .appendTo( ul );
     };
     
 

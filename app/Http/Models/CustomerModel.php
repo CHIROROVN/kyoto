@@ -148,13 +148,28 @@ class CustomerModel
 
     public function get_for_select()
     {
-        $results = DB::table($this->table)->select('cus_id', 'cus_code', 'cus_name')->where('last_kind', '<>', DELETE)->get();
+        $results = DB::table($this->table)->select('cus_id', 'cus_code', 'cus_name')->where('last_kind', '<>', DELETE)->orderBy('cus_code', 'asc')->get();
         return $results;
+    }
+
+
+    public function get_for_autocomplate($key = '')
+    {
+        $results = DB::table($this->table)
+                        ->select('cus_id', 'cus_code', 'cus_name')
+                        ->where('last_kind', '<>', DELETE);
+        if ( !empty($key) ) {
+            $results = $results->where('cus_code', 'like', '%' . $key . '%')
+                                ->orWhere('cus_name', 'like', '%' . $key . '%');
+        }
+        $db = $results->orderBy('cus_code', 'asc')->get();
+
+        return $db;
     }
 
     public function get_by_ent_id($ent_id=null)
     {
-        return DB::table($this->table)->select('cus_id', 'ent_id')->where('last_kind', '<>', DELETE)->where('ent_id', '=', $ent_id)->get();
+        return DB::table($this->table)->select('cus_id', 'ent_id')->where('last_kind', '<>', DELETE)->where('ent_id', '=', $ent_id)->orderBy('cus_code', 'asc')->get();
     }
 
     public function count() {

@@ -117,26 +117,6 @@ class PamphletController extends BackendController
 		$bunyas				= $clsBunya->get_for_select();
 		$customers			= $clsCustomer->get_for_select();
 
-		// set value for complate bunyas
-		foreach ( $bunyas as $bunya ) {
-			$tmp[] = array(
-				'value' => $bunya->bunya_code,
-				'label' => $bunya->bunya_name,
-				'desc' => $bunya->bunya_code . '_' . $bunya->bunya_name
-			);
-		}
-		$data['bunyas'] = json_encode($tmp);
-
-		// set value for complate customers
-		foreach ( $customers as $customer ) {
-			$tmp[] = array(
-				'value' => $customer->cus_code,
-				'label' => $customer->cus_name,
-				'desc' => $customer->cus_code . '_' . $customer->cus_name
-			);
-		}
-		$data['customers'] = json_encode($tmp);
-
 		return view('backend.pamphlets.regist', $data);
 	}
 
@@ -277,26 +257,6 @@ class PamphletController extends BackendController
 		$customers 			= $clsCustomer->get_for_select();
 		$data['title'] 		= '媒体情報の新規登録';
 
-		// set value for complate bunyas
-		foreach ( $bunyas as $bunya ) {
-			$tmp[] = array(
-				'value' => $bunya->bunya_id,
-				'label' => $bunya->bunya_name,
-				'desc' 	=> $bunya->bunya_code . '_' . $bunya->bunya_name
-			);
-		}
-		$data['bunyas'] = json_encode($tmp);
-
-		// set value for complate customers
-		foreach ( $customers as $customer ) {
-			$tmp[] = array(
-				'value' => $customer->cus_id,
-				'label' => $customer->cus_name,
-				'desc' 	=> $customer->cus_code . '_' . $customer->cus_name
-			);
-		}
-		$data['customers'] = json_encode($tmp);
-
 		// set bunyas
 		foreach ( $bunyas as $bunya ) {
 			$tmp[$bunya->bunya_id] = $bunya->bunya_name;
@@ -311,9 +271,7 @@ class PamphletController extends BackendController
 		if ( !empty(Input::get('type')) ) {
 			$data['list_customers'] = $clsPamphlet->get_by_pamph_number(Input::get('type'));
 		}
-// echo '<pre>';
-// print_r($data);
-// echo '</pre>';die;
+
 		return view('backend.pamphlets.edit', $data);
 	}
 
@@ -571,26 +529,41 @@ class PamphletController extends BackendController
 		$customers			= $clsCustomer->get_for_select();
 		$data['title'] 		= '媒体の検索';
 		$data['prefs']		= $clsPref->get_for_select();
-		// set value for complate bunyas
-		foreach ( $bunyas as $bunya ) {
-			$tmp[] = array(
-				'value' => $bunya->bunya_id,
-				'label' => $bunya->bunya_name,
-				'desc' 	=> $bunya->bunya_code . '_' . $bunya->bunya_name
-			);
-		}
-		$data['bunyas'] = json_encode($tmp);
-
-		// set value for complate customers
-		foreach ( $customers as $customer ) {
-			$tmp[] = array(
-				'value' => $customer->cus_id,
-				'label' => $customer->cus_name,
-				'desc' 	=> $customer->cus_code . '_' . $customer->cus_name
-			);
-		}
-		$data['customers'] = json_encode($tmp);
 
 		return view('backend.pamphlets.search', $data);
+	}
+
+
+	public function AutoCompleteBunya()
+	{
+		$key 			= Input::get('key', '');
+		$clsBunya 		= new BunyaModel();
+		$bunyas 		= $clsBunya->get_for_autocomplate($key);
+		$tmp = array();
+		foreach ( $bunyas as $bunya ) {
+			$tmp[] = (object)array(
+				'value' 	=> $bunya->bunya_id,
+				'label' 	=> $bunya->bunya_code . '_' . $bunya->bunya_name,
+				'desc' 		=> $bunya->bunya_code . '_' . $bunya->bunya_name
+			);
+		}
+		echo json_encode($tmp);
+	}
+
+
+	public function AutoCompleteCustomer()
+	{
+		$key 			= Input::get('key', '');
+		$clsCustomer 	= new CustomerModel();
+		$customers 		= $clsCustomer->get_for_autocomplate($key);
+		$tmp = array();
+		foreach ( $customers as $customer ) {
+			$tmp[] = (object)array(
+				'value' 	=> $customer->cus_id,
+				'label' 	=> $customer->cus_code . '_' . $customer->cus_name,
+				'desc' 		=> $customer->cus_code . '_' . $customer->cus_name
+			);
+		}
+		echo json_encode($tmp);
 	}
 }

@@ -83,6 +83,8 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::post('pamphlets/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.edit', 'uses' => 'PamphletController@postEdit']);
 	Route::get('pamphlets/delete/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.delete', 'uses' => 'PamphletController@delete']);
 	Route::get('pamphlets/search', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.search', 'uses' => 'PamphletController@search']);
+	Route::get('pamphlets/autocomplete-bunya', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.autocomplete.bunya', 'uses' => 'PamphletController@AutoCompleteBunya']);
+	Route::get('pamphlets/autocomplete-customer', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.autocomplete.customer', 'uses' => 'PamphletController@AutoCompleteCustomer']);
 
 
 	/**
@@ -95,6 +97,7 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::post('gpamphlets/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.gpamphlets.edit', 'uses' => 'GPamphletController@postEdit']);
 	Route::get('gpamphlets/delete/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.gpamphlets.delete', 'uses' => 'GPamphletController@delete']);
 	Route::get('gpamphlets/search', ['middleware' => 'permission_admin', 'as' => 'backend.gpamphlets.search', 'uses' => 'GPamphletController@search']);
+	Route::get('gpamphlets/autocomplete', ['middleware' => 'permission_admin', 'as' => 'backend.gpamphlets.autocomplete', 'uses' => 'GPamphletController@AutoComplete']);
 
 
 	/**

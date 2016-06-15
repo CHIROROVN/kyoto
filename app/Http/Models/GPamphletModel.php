@@ -58,7 +58,7 @@ class GPamphletModel
 
     public function get_for_select()
     {
-        $results = DB::table($this->table)->select('gpamph_id', 'gpamph_number')->where('last_kind', '<>', DELETE)->get();
+        $results = DB::table($this->table)->select('gpamph_id', 'gpamph_number')->where('last_kind', '<>', DELETE)->orderBy('m_pamphlet_group.gpamph_number', 'asc')->get();
         return $results;
     }
 
@@ -68,6 +68,7 @@ class GPamphletModel
                         ->join('m_pamphlet', 'm_pamphlet_group.pamph_id', '=', 'm_pamphlet.pamph_id')
                         ->select('m_pamphlet_group.*', 'm_pamphlet.pamph_id', 'm_pamphlet.pamph_number')
                         ->where('m_pamphlet_group.last_kind', '<>', DELETE)
+                        ->orderBy('m_pamphlet_group.gpamph_number', 'asc')
                         ->get();
         return $results;
     }
