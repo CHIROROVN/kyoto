@@ -1,7 +1,6 @@
 @extends('backend.backend')
 
 @section('content')
-
 <div class="container">
   @if ($message = Session::get('success'))
     <br><br>
@@ -57,7 +56,6 @@
             <input onclick="location.href='{{ route('backend.enterprises.edit', $enterprise->ent_id) }}'" value="編集" type="button" class="btn btn-xs btn-primary">
             </td>
           <td align="center">
-            <!-- <input onclick="location.href='{{ route('backend.enterprises.delete', $enterprise->ent_id) }}'" value="削除" type="button" class="btn btn-xs btn-primary"> -->
             <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal-{{ $enterprise->ent_id }}">削除</button>
             <!-- popup -->
             <div class="modal fade bs-example-modal-sm" id="myModal-{{ $enterprise->ent_id }}" role="dialog">
@@ -88,8 +86,6 @@
   </div>
   <div class="row mar-bottom30">
     <div class="col-md-12 text-center">
-      <!-- <input name="button3" value="前の20件を表示" disabled="disabled" type="submit" class="btn btn-sm btn-primary form-control--mar-right">
-      <input name="button4" value="次の20件を表示" type="submit" class="btn btn-sm btn-primary"> -->
       {!! (new App\Pagination\SimplePagination($enterprises))->render() !!}
     </div>
   </div>

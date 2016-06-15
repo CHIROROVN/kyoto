@@ -18,7 +18,7 @@ class EnterpriseModel
     public function Messages()
     {
         return array(
-            'ent_name.required'         => 'Please enter enterprise nam',
+            'ent_name.required'         => trans('validation.error_ent_name_required'),
             'ent_login.required'        => 'Please enter enterprise login id',
             'ent_login.unique'          => 'This login id existed, try again.',
             'ent_passwd.required'       => 'Please enter enterprise password',
