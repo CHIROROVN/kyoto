@@ -68,7 +68,6 @@
                 <td>
                   <select name="ent_id" id="ent_id" class="form-control form-control--small">
                     <option value="" selected="selected">なし</option>
-                    <option value="123">ABC</option>                    
                   </select>
                   @if ($errors->first('ent_id'))
                     <div class="help-block with-errors">※ {!! $errors->first('ent_id') !!}</div>
