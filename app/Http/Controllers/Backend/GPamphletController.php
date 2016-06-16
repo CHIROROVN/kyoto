@@ -68,24 +68,28 @@ class GPamphletController extends BackendController
 	 */
 	public function postRegist() {
 		$clsGPamphlet         	= new GPamphletModel();
-        $dataInsert             = array(
-            'gpamph_number'     => Input::get('gpamph_number'),
-            'pamph_id'      	=> Input::get('pamph_id'),
+		$dataInsert             = array(
+		    'gpamph_number'     => Input::get('gpamph_number'),
+		    'pamph_id'      	=> Input::get('pamph_id'),
 
-            'last_date'         => date('Y-m-d H:i:s'),
-            'last_kind'         => INSERT,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
-        );
+		    'last_date'         => date('Y-m-d H:i:s'),
+		    'last_kind'         => INSERT,
+		    'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
+		    'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
+		);
 
-        $validator  = Validator::make($dataInsert, $clsGPamphlet->Rules(), $clsGPamphlet->Messages());
-        if ($validator->fails()) {
-            return redirect()->route('backend.gpamphlets.regist')->withErrors($validator)->withInput();
-        }
+		$validator  = Validator::make($dataInsert, $clsGPamphlet->Rules(), $clsGPamphlet->Messages());
+		if ($validator->fails()) {
+		    return redirect()->route('backend.gpamphlets.regist')->withErrors($validator)->withInput();
+		}
 
-        $clsGPamphlet->insert($dataInsert);
+		if ( $clsGPamphlet->insert($dataInsert) ) {
+			Session::flash('success', trans('common.message_regist_success'));
+		} else {
+			Session::flash('danger', trans('common.message_regist_danger'));
+		}
 
-        return redirect()->route('backend.gpamphlets.index');
+		return redirect()->route('backend.gpamphlets.index');
 	}
 
 
@@ -118,34 +122,38 @@ class GPamphletController extends BackendController
 	 */
 	public function postEdit($id) {
 		$clsGPamphlet           = new GPamphletModel();
-        $dataInsert             = array(
-            'gpamph_number'     => Input::get('gpamph_number'),
-            'pamph_id'      	=> Input::get('pamph_id'),
+		$dataInsert             = array(
+			'gpamph_number'     => Input::get('gpamph_number'),
+			'pamph_id'      	=> Input::get('pamph_id'),
 
-            'last_date'         => date('Y-m-d H:i:s'),
-            'last_kind'         => UPDATE,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
-        );
+			'last_date'         => date('Y-m-d H:i:s'),
+			'last_kind'         => UPDATE,
+			'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
+			'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
+		);
 
-        $validator  = Validator::make($dataInsert, $clsGPamphlet->Rules(), $clsGPamphlet->Messages());
-        if ($validator->fails()) {
-            return redirect()->route('backend.gpamphlets.edit', array($id, 
-            		's_gpamph_number' 		=> Input::get('s_gpamph_number'),
-        			's_pamph_name' 			=> Input::get('s_pamph_name'),
+		$validator  = Validator::make($dataInsert, $clsGPamphlet->Rules(), $clsGPamphlet->Messages());
+		if ($validator->fails()) {
+		    return redirect()->route('backend.gpamphlets.edit', array($id, 
+		    		's_gpamph_number' 		=> Input::get('s_gpamph_number'),
+					's_pamph_name' 			=> Input::get('s_pamph_name'),
 			        's_pamph_id' 			=> Input::get('s_pamph_id'),
 			        'page' 					=> Input::get('page')
-            	))->withErrors($validator)->withInput();
-        }
+		    	))->withErrors($validator)->withInput();
+		}
 
-        $clsGPamphlet->update($id, $dataInsert);
+		if ( $clsGPamphlet->update($id, $dataInsert) ) {
+			Session::flash('success', trans('common.message_edit_success'));
+		} else {
+			Session::flash('danger', trans('common.message_edit_danger'));
+		}
 
-        return redirect()->route('backend.gpamphlets.index', array(
-        		's_gpamph_number' 		=> Input::get('s_gpamph_number'),
-        		's_pamph_name' 			=> Input::get('s_pamph_name'),
-		        's_pamph_id' 			=> Input::get('s_pamph_id'),
-		        'page' 					=> Input::get('page')
-        	));
+		return redirect()->route('backend.gpamphlets.index', array(
+			's_gpamph_number' 		=> Input::get('s_gpamph_number'),
+			's_pamph_name' 			=> Input::get('s_pamph_name'),
+			's_pamph_id' 			=> Input::get('s_pamph_id'),
+			'page' 					=> Input::get('page')
+		));
 	}
 
 
@@ -161,7 +169,12 @@ class GPamphletController extends BackendController
             'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
             'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
 		);
-		$clsGPamphlet->update($id, $dataUpdate);
+
+		if ( $clsGPamphlet->update($id, $dataUpdate) ) {
+			Session::flash('success', trans('common.message_delete_success'));
+		} else {
+			Session::flash('danger', trans('common.message_delete_danger'));
+		}
 
 		// set page current
 		$page = $this->set_page($clsGPamphlet, Input::get('page'));

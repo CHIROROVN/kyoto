@@ -61,7 +61,9 @@ class PamphletModel
             $s_pamph_kind_bundle = $where['s_pamph_kind_bundle'];
             }
             $arr = [$s_pamph_kind_school, $s_pamph_kind_reserve, $s_pamph_kind_bundle];
-            $results = $results->whereIn('pamph_kind', $arr);
+            if ( !empty($s_pamph_kind_school) && !empty($s_pamph_kind_reserve) && !empty($s_pamph_kind_bundle) ) {
+                $results = $results->whereIn('pamph_kind', $arr);
+            }
         }
 
         // where s_pamph_class
@@ -75,7 +77,10 @@ class PamphletModel
                 $s_pamph_class_used = $where['s_pamph_class_used'];
             }
             $arr = [$s_pamph_class_unused, $s_pamph_class_used];
-            $results = $results->whereIn('pamph_class', $arr);
+            
+            if ( !empty($s_pamph_class_unused) && !empty($s_pamph_class_used) ) {
+                $results = $results->whereIn('pamph_class', $arr);
+            }
         }
 
         // where s_pamph_cus_id
@@ -94,7 +99,10 @@ class PamphletModel
                 $s_pamph_send_yes = $where['s_pamph_send_yes'];
             }
             $arr = [$s_pamph_send_none, $s_pamph_send_yes];
-            $results = $results->whereIn('pamph_send', $arr);
+            
+            if ( !empty($s_pamph_send_none) && !empty($s_pamph_send_yes) ) {
+                $results = $results->whereIn('pamph_send', $arr);
+            }
         }
 
         // where s_pamph_bunya_id
@@ -149,7 +157,10 @@ class PamphletModel
                 $s_pamph_sex_women = $where['s_pamph_sex_women'];
             }
             $arr = [$s_pamph_sex_unspecified, $s_pamph_sex_men, $s_pamph_sex_women];
-            $results = $results->whereIn('pamph_sex', $arr);
+            
+            if ( !empty($s_pamph_sex_unspecified) && !empty($s_pamph_sex_men) && !empty($s_pamph_sex_women) ) {
+                $results = $results->whereIn('pamph_sex', $arr);
+            }
         }
 
         $results = $results->orderBy('pamph_number', 'asc');

@@ -96,7 +96,6 @@ class PamphletController extends BackendController
 
 		$data['count_all']		= $clsPamphlet->count_distinct();
 		$data['total_count'] 	= $clsPamphlet->get_all(true, Input::all())['total_count'];
-
 		$page_current 			= Input::get('page', 1);
 		$data['record_from'] 	= (($page_current - 1) * PAGINATION) + 1;
 		$data['record_to'] 		= $data['record_from'] - 1;
@@ -193,15 +192,28 @@ class PamphletController extends BackendController
 		// insert from array customer ID
 		$tmp_cus_id = array();
 		if ( !empty($pamph_cus_id) ) {
+			$status_insert = true;
 			foreach ( $pamph_cus_id as $item ) {
 				if ( !in_array($item, $tmp_cus_id) ) {
 					$tmp_cus_id[] = $item;
 					$dataInsert['pamph_cus_id'] 	= $item;
-					$clsPamphlet->insert($dataInsert);
+					if ( !$clsPamphlet->insert($dataInsert) ) {
+						$status_insert = false;
+					}
 				}
 			}
+			if ( $status_insert ) {
+				Session::flash('success', trans('common.message_regist_success'));
+			} else {
+				Session::flash('danger', trans('common.message_regist_danger'));
+			}
 		} else {
-			$clsPamphlet->insert($dataInsert);
+			if ( $clsPamphlet->insert($dataInsert) ) {
+				Session::flash('success', trans('common.message_regist_success'));
+			} else {
+				Session::flash('danger', trans('common.message_regist_danger'));
+			}
+
 		}
 
 		return redirect()->route('backend.pamphlets.index');
@@ -390,7 +402,12 @@ class PamphletController extends BackendController
 		// 	$clsPamphlet->update($id, $dataInsert);
 		// }
 		// $dataInsert['pamph_cus_id'] = Input::get('pamph_cus_id');
-		$clsPamphlet->update($id, $dataInsert);
+
+		if ( $clsPamphlet->update($id, $dataInsert) ) {
+			Session::flash('success', trans('common.message_edit_success'));
+		} else {
+			Session::flash('danger', trans('common.message_edit_danger'));
+		}
 
 		return redirect()->route('backend.pamphlets.index', array(
 			's_pamph_number' 			=> Input::get('s_pamph_number'),
@@ -434,7 +451,11 @@ class PamphletController extends BackendController
 		if ( !empty(Input::get('type')) ) {
 			$clsPamphlet->update_by_pamph_number(Input::get('type'), $dataUpdate);
 		} else {
-			$clsPamphlet->update($id, $dataUpdate);
+			if ( $clsPamphlet->update($id, $dataUpdate) ) {
+				Session::flash('success', trans('common.message_delete_success'));
+			} else {
+				Session::flash('danger', trans('common.message_delete_danger'));
+			}
 		}
 
 		// set page current

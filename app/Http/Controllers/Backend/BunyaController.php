@@ -72,8 +72,8 @@ class BunyaController extends BackendController
 
             'last_date'         => date('Y-m-d H:i:s'),
             'last_kind'         => INSERT,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
+            'last_ipadrs'       => CLIENT_IP_ADRS,
+            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
         );
 
         $validator  = Validator::make($dataInsert, $clsBunya->Rules(), $clsBunya->Messages());
@@ -81,7 +81,11 @@ class BunyaController extends BackendController
             return redirect()->route('backend.bunyas.regist')->withErrors($validator)->withInput();
         }
 
-        $clsBunya->insert($dataInsert);
+        if ( $clsBunya->insert($dataInsert) ) {
+        	Session::flash('success', trans('common.message_regist_success'));
+        } else {
+        	Session::flash('danger', trans('common.message_regist_danger'));
+        }
 
         return redirect()->route('backend.bunyas.index');
 	}
@@ -124,8 +128,8 @@ class BunyaController extends BackendController
 
             'last_date'         => date('Y-m-d H:i:s'),
             'last_kind'         => UPDATE,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
+            'last_ipadrs'       => CLIENT_IP_ADRS,
+            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
         );
         $rule = $clsBunya->Rules();
         if ( $bunya->bunya_code == Input::get('bunya_code') ) {
@@ -145,17 +149,21 @@ class BunyaController extends BackendController
             	])->withErrors($validator)->withInput();
         }
 
-        $clsBunya->update($id, $dataInsert);
+		if ( $clsBunya->update($id, $dataInsert) ) {
+			Session::flash('success', trans('common.message_edit_success'));
+		} else {
+			Session::flash('danger', trans('common.message_edit_danger'));
+		}
 
-        return redirect()->route('backend.bunyas.index', [
-        		's_bunya_code' 			=> Input::get('s_bunya_code'),
-		        's_bunya_name' 			=> Input::get('s_bunya_name'),
-		        's_bunya_kind_pro' 		=> Input::get('s_bunya_kind_pro', null),
-		        's_bunya_kind_stu' 		=> Input::get('s_bunya_kind_stu', null),
-		        's_bunya_class_main' 	=> Input::get('s_bunya_class_main'),
-		        's_bunya_class_sub' 	=> Input::get('s_bunya_class_sub'),
-		        'page' 					=> Input::get('page')
-        	]);
+		return redirect()->route('backend.bunyas.index', [
+			's_bunya_code' 			=> Input::get('s_bunya_code'),
+			's_bunya_name' 			=> Input::get('s_bunya_name'),
+			's_bunya_kind_pro' 		=> Input::get('s_bunya_kind_pro', null),
+			's_bunya_kind_stu' 		=> Input::get('s_bunya_kind_stu', null),
+			's_bunya_class_main' 	=> Input::get('s_bunya_class_main'),
+			's_bunya_class_sub' 	=> Input::get('s_bunya_class_sub'),
+			'page' 					=> Input::get('page')
+		]);
 	}
 
 
@@ -168,23 +176,28 @@ class BunyaController extends BackendController
 		$dataUpdate 			= array(
 			'last_date'         => date('Y-m-d H:i:s'),
 			'last_kind'         => DELETE,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
+			'last_ipadrs'       => CLIENT_IP_ADRS,
+			'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
 		);
-		$clsBunya->update($id, $dataUpdate);
+		
+		if ( $clsBunya->update($id, $dataUpdate) ) {
+			Session::flash('success', trans('common.message_delete_success'));
+		} else {
+			Session::flash('danger', trans('common.message_delete_danger'));
+		}
 
 		// set page current
 		$page = $this->set_page($clsBunya, Input::get('page'));
 
-        return redirect()->route('backend.bunyas.index', [
-        		's_bunya_code' 			=> Input::get('s_bunya_code'),
-		        's_bunya_name' 			=> Input::get('s_bunya_name'),
-		        's_bunya_kind_pro' 		=> Input::get('s_bunya_kind_pro', null),
-		        's_bunya_kind_stu' 		=> Input::get('s_bunya_kind_stu', null),
-		        's_bunya_class_main' 	=> Input::get('s_bunya_class_main'),
-		        's_bunya_class_sub' 	=> Input::get('s_bunya_class_sub'),
-		        'page' 					=> $page
-        	]);
+		return redirect()->route('backend.bunyas.index', [
+			's_bunya_code' 			=> Input::get('s_bunya_code'),
+			's_bunya_name' 			=> Input::get('s_bunya_name'),
+			's_bunya_kind_pro' 		=> Input::get('s_bunya_kind_pro', null),
+			's_bunya_kind_stu' 		=> Input::get('s_bunya_kind_stu', null),
+			's_bunya_class_main' 	=> Input::get('s_bunya_class_main'),
+			's_bunya_class_sub' 	=> Input::get('s_bunya_class_sub'),
+			'page' 					=> $page
+		]);
 	}
 
 

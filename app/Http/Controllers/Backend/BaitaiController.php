@@ -81,7 +81,11 @@ class BaitaiController extends BackendController
             return redirect()->route('backend.baitais.regist')->withErrors($validator)->withInput();
         }
 
-        $clsBaitai->insert($dataInsert);
+        if ( $clsBaitai->insert($dataInsert) ) {
+        	Session::flash('success', trans('common.message_regist_success'));
+        } else {
+        	Session::flash('danger', trans('common.message_regist_danger'));
+        }
 
         return redirect()->route('backend.baitais.index');
 	}
@@ -140,7 +144,11 @@ class BaitaiController extends BackendController
             	))->withErrors($validator)->withInput();
         }
 
-        $clsBaitai->update($id, $dataInsert);
+        if ( $clsBaitai->update($id, $dataInsert) ) {
+        	Session::flash('success', trans('common.message_edit_success'));
+        } else {
+        	Session::flash('danger', trans('common.message_edit_danger'));
+        }
 
         return redirect()->route('backend.baitais.index', array(
         		's_baitai_code' 		=> Input::get('s_baitai_code'),
@@ -166,7 +174,12 @@ class BaitaiController extends BackendController
             'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
             'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
 		);
-		$clsBaitai->update($id, $dataUpdate);
+		
+		if ( $clsBaitai->update($id, $dataUpdate) ) {
+			Session::flash('success', trans('common.message_delete_success'));
+		} else {
+			Session::flash('danger', trans('common.message_delete_danger'));
+		}
 
 		// set page current
 		$page = $this->set_page($clsBaitai, Input::get('page'));

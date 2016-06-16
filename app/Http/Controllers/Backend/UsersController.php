@@ -52,7 +52,6 @@ class UsersController extends BackendController
 	 * insert database
 	 */
 	public function postRegist(){
-		$title 						= "ユーザーの新規登録";
 		$id 						= Auth::user()->u_id;
 		$userModel 					= new UserModel();
 
@@ -74,13 +73,12 @@ class UsersController extends BackendController
         }
 
         if ( $userModel->insert($dataInsert) ) {
-    		Session::flash('success', trans('common.user_message_success_regist'));
+    		Session::flash('success', trans('common.message_regist_success'));
     		return redirect()->route('backend.users.index');
     	} else {
-    		Session::flash('danger', trans('common.user_message_danger_regist'));
-			return redirect()->route('backend.users.regist')->with('title', $title);
+    		Session::flash('danger', trans('common.message_regist_danger'));
+			return redirect()->route('backend.users.regist');
     	}
-
 	}
 
 
@@ -141,10 +139,10 @@ class UsersController extends BackendController
         }
 
         if($userModel->update($id, $dataUpdate)){
-    		Session::flash('success', trans('common.user_message_success_update'));
+    		Session::flash('success', trans('common.message_edit_success'));
     		return redirect()->route('backend.users.index', ['page' => $page]);
     	}else{
-    		Session::flash('danger', trans('common.user_message_danger_update'));
+    		Session::flash('danger', trans('common.message_edit_danger'));
 			return redirect()->route('backend.users.update', [$id, 'page' => $page])->with('title', $title);
     	}
 	}
@@ -171,10 +169,10 @@ class UsersController extends BackendController
     		// set page current
     		$page = $this->set_page($userModel, $page);
 
-    		Session::flash('success', trans('common.user_message_danger_delete'));
+    		Session::flash('success', trans('common.message_delete_success'));
     		return redirect()->route('backend.users.index', ['page' => $page])->with('title', $title);
     	}else{
-    		Session::flash('danger', trans('common.user_message_danger_delete'));
+    		Session::flash('danger', trans('common.message_delete_danger'));
 			return redirect()->route('backend.users.index', ['page' => $page])->with('title', $title);
     	}
 	}

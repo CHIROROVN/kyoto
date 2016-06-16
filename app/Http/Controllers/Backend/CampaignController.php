@@ -50,25 +50,29 @@ class CampaignController extends BackendController
 	 */
 	public function postRegist() {
 		$clsCampaign            = new CampaignModel();
-        $dataInsert             = array(
-            'campaign_name'     => Input::get('campaign_name'),
-            'baitai_id'      	=> Input::get('baitai_id'),
-            'presentlist_id'    => Input::get('presentlist_id'),
+		$dataInsert             = array(
+			'campaign_name'     => Input::get('campaign_name'),
+			'baitai_id'      	=> Input::get('baitai_id'),
+			'presentlist_id'    => Input::get('presentlist_id'),
 
-            'last_date'         => date('Y-m-d H:i:s'),
-            'last_kind'         => INSERT,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
-        );
+			'last_date'         => date('Y-m-d H:i:s'),
+			'last_kind'         => INSERT,
+			'last_ipadrs'       => CLIENT_IP_ADRS,
+			'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
+		);
 
-        $validator  = Validator::make($dataInsert, $clsCampaign->Rules(), $clsCampaign->Messages());
-        if ($validator->fails()) {
-            return redirect()->route('backend.campaigns.regist')->withErrors($validator)->withInput();
-        }
+		$validator  = Validator::make($dataInsert, $clsCampaign->Rules(), $clsCampaign->Messages());
+		if ($validator->fails()) {
+			return redirect()->route('backend.campaigns.regist')->withErrors($validator)->withInput();
+		}
 
-        $clsCampaign->insert($dataInsert);
+		if ( $clsCampaign->insert($dataInsert) ) {
+			Session::flash('success', trans('common.message_regist_success'));
+		} else {
+			Session::flash('danger', trans('common.message_regist_danger'));
+		}
 
-        return redirect()->route('backend.campaigns.index');
+		return redirect()->route('backend.campaigns.index');
 	}
 
 
@@ -98,29 +102,33 @@ class CampaignController extends BackendController
 	 */
 	public function postEdit($id) {
 		$clsCampaign            = new CampaignModel();
-        $dataInsert             = array(
-            'campaign_name'     => Input::get('campaign_name'),
-            'baitai_id'      	=> Input::get('baitai_id'),
-            'presentlist_id'    => Input::get('presentlist_id'),
+		$dataInsert             = array(
+			'campaign_name'     => Input::get('campaign_name'),
+			'baitai_id'      	=> Input::get('baitai_id'),
+			'presentlist_id'    => Input::get('presentlist_id'),
 
-            'last_date'         => date('Y-m-d H:i:s'),
-            'last_kind'         => INSERT,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
-        );
+			'last_date'         => date('Y-m-d H:i:s'),
+			'last_kind'         => INSERT,
+			'last_ipadrs'       => CLIENT_IP_ADRS,
+			'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
+		);
 
-        $validator  = Validator::make($dataInsert, $clsCampaign->Rules(), $clsCampaign->Messages());
-        if ($validator->fails()) {
-            return redirect()->route('backend.campaigns.edit', array($id, 
-            		'page' => Input::get('page')
-            	))->withErrors($validator)->withInput();
-        }
+		$validator  = Validator::make($dataInsert, $clsCampaign->Rules(), $clsCampaign->Messages());
+		if ($validator->fails()) {
+			return redirect()->route('backend.campaigns.edit', array($id, 
+				'page' => Input::get('page')
+			))->withErrors($validator)->withInput();
+		}
 
-        $clsCampaign->update($id, $dataInsert);
+		if ( $clsCampaign->update($id, $dataInsert) ) {
+			Session::flash('success', trans('common.message_edit_success'));
+		} else {
+			Session::flash('danger', trans('common.message_edit_danger'));
+		}
 
-        return redirect()->route('backend.campaigns.index', array(
-        		'page' => Input::get('page')
-        	));
+		return redirect()->route('backend.campaigns.index', array(
+			'page' => Input::get('page')
+		));
 	}
 
 
@@ -133,16 +141,21 @@ class CampaignController extends BackendController
 		$dataUpdate 			= array(
 			'last_date'         => date('Y-m-d H:i:s'),
 			'last_kind'         => DELETE,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
+			'last_ipadrs'       => CLIENT_IP_ADRS,
+			'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
 		);
-		$clsCampaign->update($id, $dataUpdate);
+		
+		if ( $clsCampaign->update($id, $dataUpdate) ) {
+			Session::flash('success', trans('common.message_delete_success'));
+		} else {
+			Session::flash('danger', trans('common.message_delete_danger'));
+		}
 
 		// set page current
 		$page = $this->set_page($clsCampaign, Input::get('page'));
 
-        return redirect()->route('backend.campaigns.index', array(
-        		'page' => $page
-        	));
+		return redirect()->route('backend.campaigns.index', array(
+			'page' => $page
+		));
 	}
 }

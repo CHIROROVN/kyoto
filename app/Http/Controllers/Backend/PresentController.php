@@ -43,24 +43,28 @@ class PresentController extends BackendController
 	 */
 	public function postRegist() {
 		$clsPresent             = new PresentModel();
-        $dataInsert             = array(
-            'present_code'      => Input::get('present_code'),
-            'present_name'      => Input::get('present_name'),
+		$dataInsert             = array(
+			'present_code'      => Input::get('present_code'),
+			'present_name'      => Input::get('present_name'),
 
-            'last_date'         => date('Y-m-d H:i:s'),
-            'last_kind'         => INSERT,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
-        );
+			'last_date'         => date('Y-m-d H:i:s'),
+			'last_kind'         => INSERT,
+			'last_ipadrs'       => CLIENT_IP_ADRS,
+			'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
+		);
 
-        $validator  = Validator::make($dataInsert, $clsPresent->Rules(), $clsPresent->Messages());
-        if ($validator->fails()) {
-            return redirect()->route('backend.presents.regist')->withErrors($validator)->withInput();
-        }
+		$validator  = Validator::make($dataInsert, $clsPresent->Rules(), $clsPresent->Messages());
+		if ($validator->fails()) {
+			return redirect()->route('backend.presents.regist')->withErrors($validator)->withInput();
+		}
 
-        $clsPresent->insert($dataInsert);
+		if ( $clsPresent->insert($dataInsert) ) {
+			Session::flash('success', trans('common.message_regist_success'));
+		} else {
+			Session::flash('danger', trans('common.message_regist_danger'));
+		}
 
-        return redirect()->route('backend.presents.index');
+		return redirect()->route('backend.presents.index');
 	}
 
 
@@ -84,24 +88,28 @@ class PresentController extends BackendController
 	 */
 	public function postEdit($id) {
 		$clsPresent             = new PresentModel();
-        $dataInsert             = array(
-            'present_code'      => Input::get('present_code'),
-            'present_name'      => Input::get('present_name'),
+		$dataInsert             = array(
+			'present_code'      => Input::get('present_code'),
+			'present_name'      => Input::get('present_name'),
 
-            'last_date'         => date('Y-m-d H:i:s'),
-            'last_kind'         => UPDATE,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
-        );
+			'last_date'         => date('Y-m-d H:i:s'),
+			'last_kind'         => UPDATE,
+			'last_ipadrs'       => CLIENT_IP_ADRS,
+			'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
+		);
 
-        $validator  = Validator::make($dataInsert, $clsPresent->Rules(), $clsPresent->Messages());
-        if ($validator->fails()) {
-            return redirect()->route('backend.presents.edit', [$id, 'page' => Input::get('page')])->withErrors($validator)->withInput();
-        }
+		$validator  = Validator::make($dataInsert, $clsPresent->Rules(), $clsPresent->Messages());
+		if ($validator->fails()) {
+			return redirect()->route('backend.presents.edit', [$id, 'page' => Input::get('page')])->withErrors($validator)->withInput();
+		}
 
-        $clsPresent->update($id, $dataInsert);
+		if ( $clsPresent->update($id, $dataInsert) ) {
+			Session::flash('success', trans('common.message_edit_success'));
+		} else {
+			Session::flash('danger', trans('common.message_edit_danger'));
+		}
 
-        return redirect()->route('backend.presents.index', ['page' => Input::get('page')]);
+		return redirect()->route('backend.presents.index', ['page' => Input::get('page')]);
 	}
 
 
@@ -114,14 +122,19 @@ class PresentController extends BackendController
 		$dataUpdate = array(
 			'last_date'         => date('Y-m-d H:i:s'),
 			'last_kind'         => DELETE,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
+			'last_ipadrs'       => CLIENT_IP_ADRS,
+			'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
 		);
-		$clsPresent->update($id, $dataUpdate);
+		
+		if ( $clsPresent->update($id, $dataUpdate) ) {
+			Session::flash('success', trans('common.message_delete_success'));
+		} else {
+			Session::flash('danger', trans('common.message_delete_danger'));
+		}
 
 		// set page current
 		$page = $this->set_page($clsPresent, Input::get('page'));
 
-        return redirect()->route('backend.presents.index', ['page' => $page]);
+		return redirect()->route('backend.presents.index', ['page' => $page]);
 	}
 }
