@@ -12,6 +12,7 @@ class EnterpriseModel
             'ent_name'         => 'required',
             'ent_login'        => 'required|unique:m_enterprise',
             'ent_passwd'       => 'required',
+            'cus_name_lb2'     => 'required',
         );
     }
 
@@ -19,9 +20,10 @@ class EnterpriseModel
     {
         return array(
             'ent_name.required'         => trans('validation.error_ent_name_required'),
-            'ent_login.required'        => 'Please enter enterprise login id',
-            'ent_login.unique'          => 'This login id existed, try again.',
-            'ent_passwd.required'       => 'Please enter enterprise password',
+            'ent_login.required'        => trans('validation.error_ent_login_id_required'),
+            'ent_login.unique'          => trans('validation.error_ent_login_id_exist'),
+            'ent_passwd.required'       => trans('validation.error_ent_passwd_required'),
+            'cus_name_lb2.required'     => trans('validation.error_ent_cus_required'),
         );
     }
 

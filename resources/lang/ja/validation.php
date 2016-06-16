@@ -7,6 +7,11 @@ return [
     |--------------------------------------------------------------------------
     */
     "error_ent_name_required"							=> "法人名を入力してください。",
+    "error_ent_login_id_required"                       => "Please enter enterprise login id.",
+    "error_ent_login_id_exist"                          => "This login id existed, try again.",
+    "error_ent_passwd_required"                         => "Please enter enterprise password",
+    "error_ent_passwd_required"                         => "Please choose customer",
+    "error_ent_cus_required"                            => "Please choose customer",
 
     /*
     |--------------------------------------------------------------------------

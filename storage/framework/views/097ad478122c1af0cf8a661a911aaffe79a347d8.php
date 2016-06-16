@@ -32,7 +32,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">傘下の学校</td>
+                <td class="col-title">傘下の学校 <span class="note_required">※</span></td>
                 <td colspan="5">
                   <table class="table table-bordered" style="background:transparent;">
                     <tbody>
@@ -45,6 +45,9 @@
                               <?php endforeach; ?>
                             <?php endif; ?> -->
                           </select>
+                          <?php if($errors->first('cus_name_lb2')): ?>
+                            <div class="help-block with-errors">※ <?php echo $errors->first('cus_name_lb2'); ?></div>
+                          <?php endif; ?>
                         </td>
                         <td align="right"><input name="cus_name_add" id="cus_name_add" value="←追加" type="button"></td>
                         <td><select name="cus_name_kana" id="cus_name_kana">
