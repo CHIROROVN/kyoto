@@ -23,7 +23,7 @@ class Permission_Admin
             $arr_power = permistion(Auth::user()->u_power);
 
             if ( !in_array('SUPPER_ADMIN', $arr_power) || !in_array('ADMIN', $arr_power) ) {
-                Session::flash('no_access', $configs = Config::get('constants.DEFINE')['MESSAGE_NO_ACCESS']);
+                Session::flash('no_access', trans('common.baitai_title_index'));
                 return redirect()->route('backend.menu');
             }
         }

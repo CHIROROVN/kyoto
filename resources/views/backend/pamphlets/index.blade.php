@@ -130,31 +130,6 @@
                       @endif
                     @endforeach
                   </td>
-                  <!-- @if ( $tmp_count > 1 )
-                  <td>
-                    <input style="margin-top: 5px;" onclick="location.href='{{ route('backend.pamphlets.edit', array($pamphlet->pamph_id, 
-                      's_pamph_number'          => $s_pamph_number,
-                      's_pamph_name'            => $s_pamph_name,
-                      's_pamph_kind_school'     => $s_pamph_kind_school,
-                      's_pamph_kind_reserve'    => $s_pamph_kind_reserve,
-                      's_pamph_kind_bundle'     => $s_pamph_kind_bundle,
-                      's_pamph_class_unused'    => $s_pamph_class_unused,
-                      's_pamph_class_used'      => $s_pamph_class_used,
-                      's_pamph_cus_id'          => $s_pamph_cus_id,
-                      's_pamph_cus_name'        => $s_pamph_cus_name,
-                      's_pamph_send_none'       => $s_pamph_send_none,
-                      's_pamph_send_yes'        => $s_pamph_send_yes,
-                      's_pamph_bunya_id'        => $s_pamph_bunya_id,
-                      's_pamph_bunya_name'      => $s_pamph_bunya_name,
-                      's_pamph_pref'            => $s_pamph_pref,
-                      's_pamph_area'            => $s_pamph_area,
-                      's_pamph_sex_unspecified' => $s_pamph_sex_unspecified,
-                      's_pamph_sex_men'         => $s_pamph_sex_men,
-                      's_pamph_sex_women'       => $s_pamph_sex_women,
-                      'page'                    => $pamphlets->currentPage()
-                    )) }}'" value="編集" type="button" class="btn btn-xs btn-primary">
-                  </td>
-                  @endif -->
                 </tr>
               </table>
             </td>
@@ -213,53 +188,6 @@
                       @endif
                     @endforeach
                   </td>
-                  <!-- @if ( $tmp_count > 1 )
-                  <td>
-                    <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal-multi-{{ $pamphlet->pamph_id }}">削除</button>
-                    popup
-                    <div class="modal fade bs-example-modal-sm" id="myModal-multi-{{ $pamphlet->pamph_id }}" role="dialog">
-                      <div class="modal-dialog modal-sm">
-                        Modal content
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">{{ TITLE_DELETE }}</h4>
-                          </div>
-                          <div class="modal-body">
-                            <p>{{ CONTENT_DELETE }}</p>
-                          </div>
-                          <div class="modal-footer">
-                            <a href="{{ route('backend.pamphlets.delete', array($pamphlet->pamph_id, 
-                              'type'                    => $pamphlet->pamph_number,
-                              's_pamph_number'          => $s_pamph_number,
-                              's_pamph_name'            => $s_pamph_name,
-                              's_pamph_kind_school'     => $s_pamph_kind_school,
-                              's_pamph_kind_reserve'    => $s_pamph_kind_reserve,
-                              's_pamph_kind_bundle'     => $s_pamph_kind_bundle,
-                              's_pamph_class_unused'    => $s_pamph_class_unused,
-                              's_pamph_class_used'      => $s_pamph_class_used,
-                              's_pamph_cus_id'          => $s_pamph_cus_id,
-                              's_pamph_cus_name'        => $s_pamph_cus_name,
-                              's_pamph_send_none'       => $s_pamph_send_none,
-                              's_pamph_send_yes'        => $s_pamph_send_yes,
-                              's_pamph_bunya_id'        => $s_pamph_bunya_id,
-                              's_pamph_bunya_name'      => $s_pamph_bunya_name,
-                              's_pamph_pref'            => $s_pamph_pref,
-                              's_pamph_area'            => $s_pamph_area,
-                              's_pamph_sex_unspecified' => $s_pamph_sex_unspecified,
-                              's_pamph_sex_men'         => $s_pamph_sex_men,
-                              's_pamph_sex_women'       => $s_pamph_sex_women,
-                              'page'                    => $pamphlets->currentPage()
-                            )) }}" class="btn btn-xs btn-primary">削除</a>
-                            <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
-                          </div>
-                        </div>
-                        End Modal content
-                      </div>
-                    </div>
-                    end popup
-                  </td>
-                  @endif -->
                 </tr>
               </table>
             </td>
