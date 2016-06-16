@@ -52,7 +52,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title"><label for="u_belong">所属 <span class="note_required">※</span></label></td>
+                <td class="col-title"><label for="u_belong">所属</label></td>
                 <td>
                   <input name="u_belong" id="u_belong" type="text" class="form-control form-control--default" value="{{old('u_belong')}}">
                   @if ($errors->first('u_belong'))
