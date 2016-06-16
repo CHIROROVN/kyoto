@@ -13,6 +13,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Message notice success or danger: common
+    |--------------------------------------------------------------------------
+    */
+    'message_regist_success'                => '登録が完了しました。',
+    'message_regist_danger'                 => '登録できませんでした。',
+    'message_edit_success'                  => '編集箇所を保存しました。',
+    'message_edit_danger'                   => '編集箇所を保存できませんでした。',
+    'message_delete_success'                => '削除しました。',
+    'message_delete_danger'                 => '削除できませんでした。',
+
+    /*
+    |--------------------------------------------------------------------------
     | Message No Data Correspond
     |--------------------------------------------------------------------------
     */
@@ -114,10 +126,10 @@ return [
     'user_message_danger_login'				=> 'パスワードが変更できませんでした。',
     'user_message_danger_change_password'	=> '現在のパスワードが違います。',
     'user_message_success_login'			=> 'パスワードを変更しました。',
-    'user_message_success_regist'			=> '登録が完了しました。',				/*	common	*/
-    'user_message_danger_regist'			=> '登録できませんでした。',			/*	common	*/
-    'user_message_success_update'			=> '編集箇所を保存しました。',			/*	common	*/
-    'user_message_danger_update'			=> '編集箇所を保存できませんでした。',	/*	common	*/
-    'user_message_success_delete'			=> '削除しました。',					/*	common	*/
-    'user_message_danger_delete'			=> '削除できませんでした。',			/*	common	*/
+    //'user_message_success_regist'			=> '登録が完了しました。',				/*	common	*/
+    //'user_message_danger_regist'			=> '登録できませんでした。',			/*	common	*/
+    //'user_message_success_update'			=> '編集箇所を保存しました。',			/*	common	*/
+    //'user_message_danger_update'			=> '編集箇所を保存できませんでした。',	/*	common	*/
+    //'user_message_success_delete'			=> '削除しました。',					/*	common	*/
+    //'user_message_danger_delete'			=> '削除できませんでした。',			/*	common	*/
 ];
