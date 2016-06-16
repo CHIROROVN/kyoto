@@ -4,6 +4,24 @@
 <div class="container">
 
   <div class="row content content--list">
+    <div class="msg-alert-action">
+      @if ($message = Session::get('success'))
+        <div class="alert alert-success  alert-dismissible fade in" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <ul class="no-margin-bottom"><strong><li> {{ $message }}</li></strong></ul>
+        </div>
+      @elseif($message = Session::get('danger'))
+        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <ul class="no-margin-bottom"><strong><li> {{ $message }}</li></strong></ul>
+        </div>
+      @endif
+    </div>
+          
     <p>全{{ $count_all }}件中、{{ $total_count }}件が該当しました。うち、{{ $record_from }}～{{ $record_to + $gpamphlets->count() }}件を表示しています。</p>
 
     <div class="row fl-right mar-bottom">

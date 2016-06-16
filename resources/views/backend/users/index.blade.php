@@ -11,14 +11,14 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <ul><strong><li> {{ $message }}</li></strong></ul>
+                <ul class="no-margin-bottom"><strong><li> {{ $message }}</li></strong></ul>
               </div>
             @elseif($message = Session::get('danger'))
               <div class="alert alert-danger alert-dismissible fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <ul><strong><li> {{ $message }}</li></strong></ul>
+                <ul class="no-margin-bottom"><strong><li> {{ $message }}</li></strong></ul>
               </div>
             @endif
           </div>

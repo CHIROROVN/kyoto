@@ -3,11 +3,30 @@
 @section('content')
 <div class="container">
   <div class="row content content--list">
+    <div class="msg-alert-action">
+      @if ($message = Session::get('success'))
+        <div class="alert alert-success  alert-dismissible fade in" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <ul class="no-margin-bottom"><strong><li> {{ $message }}</li></strong></ul>
+        </div>
+      @elseif($message = Session::get('danger'))
+        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <ul class="no-margin-bottom"><strong><li> {{ $message }}</li></strong></ul>
+        </div>
+      @endif
+    </div>
+
     <div class="row fl-right mar-bottom">
       <div class="col-md-12">
         <input onclick="location.href='{{ route('backend.presents.regist') }}'" value="プレゼントの新規登録" type="button" class="btn btn-sm btn-primary"/>
       </div>
     </div>
+
     <table class="table table-bordered table-striped clearfix">
       <tr>
         <td class="col-title" align="center">プレゼントコード</td>
@@ -54,11 +73,13 @@
       @endif
     </table>
   </div>
+
   <div class="row mar-bottom30">
     <div class="col-md-12 text-center">
       {!! (new App\Pagination\SimplePagination($presents))->render() !!}
     </div>
   </div>
+  
   <div class="row">
     <div class="col-md-12 text-center">
       <input name="button7" value="再検索（条件を引き継ぐ）" type="submit" class="btn btn-sm btn-primary form-control--mar-right">
