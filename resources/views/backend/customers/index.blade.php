@@ -46,7 +46,27 @@
                 <td>{{$customer->cus_old_name}}</td>
                 <td align="center"><input onclick="location.href='{{route('backend.customers.detail', $customer->cus_id)}}'" value="詳細" type="button" class="btn btn-xs btn-primary"></td>
                 <td align="center"><input onclick="location.href='{{route('backend.customers.edit', $customer->cus_id)}}'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
-                <td align="center"><input onclick="location.href='{{route('backend.customers.delete', $customer->cus_id)}}'" value="削除" type="button" class="btn btn-xs btn-primary"></td>
+                <td align="center">
+                  <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal-{{ $customer->cus_id }}">削除</button>
+                  <!-- popup -->
+            <div class="modal fade bs-example-modal-sm" id="myModal-{{ $customer->cus_id }}" role="dialog">
+              <div class="modal-dialog modal-sm">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{trans('common.modal_header_delete')}}</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>{{trans('common.modal_content_delete')}}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="{{ route('backend.customers.delete', $customer->cus_id) }}" class="btn btn-xs btn-primary">{{trans('common.modal_btn_delete')}}</a>
+                    <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{trans('common.modal_btn_cancel')}}</button>
+                  </div>
+                </div>
+                <!-- End Modal content-->
+                </td>
               </tr>
             @endforeach
 
