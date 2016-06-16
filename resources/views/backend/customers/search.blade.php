@@ -25,7 +25,7 @@
         </div>
         <div class="row mar-bottom30">
           <div class="col-md-12 text-center">
-            <input type="submit" value="検索開始（OR検索）" type="button" class="btn btn-sm btn-primary form-control--mar-right">
+            <input type="submit" value="検索開始（AND検索）" type="button" class="btn btn-sm btn-primary form-control--mar-right">
             <input name="btnReset" value="クリア（全消し）" type="reset" class="btn btn-sm btn-primary">
           </div>
         </div>
