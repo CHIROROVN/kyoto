@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BackendController;
 use App\Http\Models\CustomerModel;
+use App\Http\Models\EnterpriseModel;
 use Input;
 use Session;
 use Validator;
@@ -65,7 +66,9 @@ class CustomerController extends BackendController
      * call view customer regist
     */
     public function getRegist() {
-        $data['title']        = trans('common.cust_title_regist');
+        $data['title']                  = trans('common.cust_title_regist');
+        $clsEnterprise                  = new EnterpriseModel();
+        $data['enterprises']            = $clsEnterprise->get_list_ent();
         return view('backend.customers.regist', $data);
     }
 
@@ -106,12 +109,12 @@ class CustomerController extends BackendController
             'cus_staff3_fax'            => Input::get('cus_staff3_fax'),
             'cus_staff3_email'          => Input::get('cus_staff3_email'),
 
-            // 'cus_mail_send'             => Input::get('cus_mail_send'),
-            // 'cus_zip_pwd'               => Input::get('cus_zip_pwd'),
+            'cus_mail_send'             => Input::get('cus_mail_send'),
+            'cus_zip_pwd'               => Input::get('cus_zip_pwd'),
             // 'cus_mail_span'             => Input::get('cus_mail_span'),
             // 'cus_mail_youbi'            => Input::get('cus_mail_youbi'),
             // 'cus_mail_hi'               => Input::get('cus_mail_hi'),
-            // 'cus_mail_attach'           => Input::get('cus_mail_attach'),
+            'cus_mail_attach'           => Input::get('cus_mail_attach'),
 
             'last_date'                 => date('Y-m-d H:i:s'),
             'last_kind'                 => INSERT,
@@ -131,20 +134,22 @@ class CustomerController extends BackendController
             Session::flash('danger', trans('common.cust_msg_regist_faild'));
             return redirect()->route('backend.customers.regist')->with('title', $title);
         }
-	}
+    }
 
 
-	public function getEdit($id) {
-		$clsCustomer 		= new CustomerModel();
-		$data['customer'] 	= $clsCustomer->get_by_id($id);
-		$data['title'] 		= trans('common.cust_title_edit');
+    public function getEdit($id) {
+        $clsCustomer 		= new CustomerModel();
+        $data['customer'] 	= $clsCustomer->get_by_id($id);
+        $data['title'] 		= trans('common.cust_title_edit');
+        $clsEnterprise                  = new EnterpriseModel();
+        $data['enterprises']            = $clsEnterprise->get_list_ent();
         if($data['customer'] == null) return redirect()->route('backend.customers.index')->with($data);
 
-		return view('backend.customers.edit', $data);
-	}
+        return view('backend.customers.edit', $data);
+    }
 
-	public function postEdit($id) {
-		$clsCustomer   = new CustomerModel();
+    public function postEdit($id) {
+        $clsCustomer   = new CustomerModel();
         $dataCus       = $clsCustomer->get_by_id($id);
         $rules         = $clsCustomer->Rules();
 
@@ -184,26 +189,25 @@ class CustomerController extends BackendController
             'cus_staff3_fax'            => Input::get('cus_staff3_fax'),
             'cus_staff3_email'          => Input::get('cus_staff3_email'),
 
-            // 'cus_mail_send'             => Input::get('cus_mail_send'),
-            // 'cus_zip_pwd'               => Input::get('cus_zip_pwd'),
+             'cus_mail_send'             => Input::get('cus_mail_send'),
+             'cus_zip_pwd'               => Input::get('cus_zip_pwd'),
             // 'cus_mail_span'             => Input::get('cus_mail_span'),
             // 'cus_mail_youbi'            => Input::get('cus_mail_youbi'),
             // 'cus_mail_hi'               => Input::get('cus_mail_hi'),
-            // 'cus_mail_attach'           => Input::get('cus_mail_attach'),
+             'cus_mail_attach'           => Input::get('cus_mail_attach'),
 
             'last_date'         => date('Y-m-d H:i:s'),
             'last_kind'         => UPDATE,
             'last_ipadrs'       => CLIENT_IP_ADRS,
             'last_user'         => (Auth::check()) ? Auth::user()->u_id : '',
         );
-
         $validator  = Validator::make(Input::all(), $rules, $clsCustomer->Messages());
         if ($validator->fails()) {
             return redirect()->route('backend.customers.edit', $id)->withErrors($validator)->withInput();
         }
 
         if ( $clsCustomer->update($id, $dataUpdate) ) {
-            Session::flash('success', trans('commom.cust_msg_edit_succ'));
+            Session::flash('success', trans('common.cust_msg_edit_succ'));
             return redirect()->route('backend.customers.index');
         } else {
             Session::flash('danger', trans('common.cust_msg_edit_faild'));
@@ -237,6 +241,10 @@ class CustomerController extends BackendController
         $data['title']          = trans('common.cust_title_detail');
         $clsCustomer            = new CustomerModel();
         $data['customer']       = $clsCustomer->get_by_id($id);
+
+        $clsEnterprise                  = new EnterpriseModel();
+        $data['enterprises']            = $clsEnterprise->get_list_ent();
+        
         return view('backend.customers.detail', $data);
     }
 }

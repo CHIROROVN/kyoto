@@ -61,6 +61,11 @@ class EnterpriseModel
         return $results;
     }
 
+    public function get_list_ent()
+    {
+        return DB::table($this->table)->where('last_kind', '<>', DELETE)->lists('ent_name', 'ent_id');
+    }
+
     public function find_max_id()
     {
         return DB::table($this->table)->where('last_kind', '<>', DELETE)->max('ent_id');

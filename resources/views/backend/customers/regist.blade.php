@@ -50,14 +50,14 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title"><label for="cus_title">見出し <span class="note_required">※</span></label></td>
+                <td class="col-title"><label for="cus_title">見出し</label></td>
                 <td>
                   <input name="cus_title" id="cus_title" type="text" class="form-control form-control--default" value="{{old('cus_title')}}">
                   @if ($errors->first('cus_title'))
                     <div class="help-block with-errors">※ {!! $errors->first('cus_title') !!}</div>
                   @endif
                 </td>
-                <td class="col-title"><label for="cus_old_name">旧学校名 <span class="note_required">※</span></label></td>
+                <td class="col-title"><label for="cus_old_name">旧学校名</label></td>
                 <td>
                   <input name="cus_old_name" id="cus_old_name" type="text" class="form-control form-control--default" value="{{old('cus_old_name')}}">
                   @if ($errors->first('cus_old_name'))
@@ -68,6 +68,11 @@
                 <td>
                   <select name="ent_id" id="ent_id" class="form-control form-control--small">
                     <option value="" selected="selected">なし</option>
+                    @if(count($enterprises) > 0)
+                    @foreach($enterprises as $key => $ent)
+                      <option value="{{$key}}" @if(old('ent_id') == $key) selected="selected" @endif >{{$ent}}</option>
+                    @endforeach
+                    @endif
                   </select>
                   @if ($errors->first('ent_id'))
                     <div class="help-block with-errors">※ {!! $errors->first('ent_id') !!}</div>
@@ -141,7 +146,7 @@
                   <div class="help-block with-errors">※ {!! $errors->first('cus_staff1_belong') !!}</div>
                 @endif
               </td>
-              <td class="col-title"><label for="cus_staff1_name">名前</label></td>
+              <td class="col-title"><label for="cus_staff1_name">名前 <span class="note_required">※</span></label></td>
               <td>
                 <input name="cus_staff1_name" id="cus_staff1_name" type="text" class="form-control form-control--default" value="{{old('cus_staff1_name')}}" >
                 @if ($errors->first('cus_staff1_name'))
@@ -276,14 +281,14 @@
           </table>
           <table class="table table-bordered">
             <tr>
-              <td class="col-title"><label for="cus_login">ログインID</label></td>
+              <td class="col-title"><label for="cus_login">ログインID <span class="note_required">※</span></label></td>
               <td>
                 <input name="cus_login" id="cus_login" type="text" class="form-control form-control--small" value="{{old('cus_login')}}" >
                 @if ($errors->first('cus_login'))
                   <div class="help-block with-errors">※ {!! $errors->first('cus_login') !!}</div>
                 @endif
               </td>
-              <td class="col-title"><label for="cus_passwd">パスワード</label></td>
+              <td class="col-title"><label for="cus_passwd">パスワード <span class="note_required">※</span></label></td>
               <td>
                 <input name="cus_passwd" id="cus_passwd" type="password" class="form-control form-control--default" value="{{old('cus_passwd')}}">
                 @if ($errors->first('cus_passwd'))
@@ -293,9 +298,9 @@
               <td class="col-title"><label for="cus_mail_send">メール送信</label></td>
               <td>
                 <select name="cus_mail_send" id="cus_mail_send" class="form-control form-control--small">
-                  <option value="" selected="selected">しない</option>
-                  <option value="0" @if(old('cus_mail_send') == '0') checked="checked" @endif >曜日指定</option>
-                  <option value="1" @if(old('cus_mail_send') == '1') checked="checked" @endif >日付指定</option>
+                  <option value="0" selected="selected">しない</option>
+                  <option value="1" @if(old('cus_mail_send') == '1') checked="checked" @endif >曜日指定</option>
+                  <option value="2" @if(old('cus_mail_send') == '2') checked="checked" @endif >日付指定</option>
                 </select>
                 @if ($errors->first('cus_mail_send'))
                   <div class="help-block with-errors">※ {!! $errors->first('cus_mail_send') !!}</div>

@@ -4,52 +4,27 @@ use DB;
 
 class CustomerModel
 {
-	protected $table = 'm_customer';
+    protected $table = 'm_customer';
 
     public function Rules()
     {
-    	return array(
-    		'cus_code'                  => 'required|unique:m_customer',
-            'cus_name'                  => 'required',
-            'cus_name_kana'             => 'required|regex:/^[\x{3041}-\x{3096}]+$/u',
-            'cus_title'                 => 'required',
-            'cus_old_name'              => 'required',
-            //'cus_old_name_kana'         => 'required',
-        //    'cus_notice'                => 'required',
-            'cus_pay'                   => 'required',
-            'cus_kind'                  => 'required',
-            'cus_owner'                 => 'required',
-            //'cus_sex'                   => 'required',
-            //'cus_login'                 => 'required',
-           // 'cus_passwd'                => 'required',
-
-            // 'cus_staff1_belong'         => 'required',
-            // 'cus_staff1_name'           => 'required',
-             'cus_staff1_name_kana'        => 'regex:/^[\x{3041}-\x{3096}]+$/u',
-            // 'cus_staff1_tel'            => 'required',
-            // 'cus_staff1_fax'            => 'required',
-            //   'cus_staff1_email'          => 'email',
-
-            // 'cus_staff2_belong'         => 'required',
-            // 'cus_staff2_name'           => 'required',
-             'cus_staff2_name_kana'        => 'regex:/^[\x{3041}-\x{3096}]+$/u',
-            // 'cus_staff2_tel'            => 'required',
-            // 'cus_staff2_fax'            => 'required',
-           //    'cus_staff2_email'          => 'email',
-
-            // 'cus_staff3_belong'         => 'required',
-            // 'cus_staff3_name'           => 'required',
-             'cus_staff3_name_kana'        => 'regex:/^[\x{3041}-\x{3096}]+$/u',
-            // 'cus_staff3_tel'            => 'required',
-            // 'cus_staff3_fax'            => 'required',
-               'cus_staff3_email'          => 'email',
-
-            // 'cus_mail_send'             => 'required|numeric',
-            // 'cus_zip_pwd'               => 'required',
-            // 'cus_mail_span'             => 'required|numeric',
-            // 'cus_mail_youbi'            => 'required',
-            // 'cus_mail_hi'               => 'required',
-            // 'cus_mail_attach'           => 'required',
+        return array(
+            'cus_code'                      => 'required|unique:m_customer',
+            'cus_name'                      => 'required',
+            'cus_name_kana'                 => 'required|regex:/^[\x{3041}-\x{3096}]+$/u',
+            'cus_pay'                       => 'required',
+            'cus_kind'                      => 'required',
+            'cus_owner'                     => 'required',
+//            'ent_id'                        => 'required',
+            'cus_staff1_name'               => 'required',
+            'cus_staff1_name_kana'          => 'regex:/^[\x{3041}-\x{3096}]+$/u',
+            'cus_staff1_email'              => 'email',
+            'cus_staff2_name_kana'          => 'regex:/^[\x{3041}-\x{3096}]+$/u',
+            'cus_staff2_email'              => 'email',
+            'cus_staff3_name_kana'          => 'regex:/^[\x{3041}-\x{3096}]+$/u',
+            'cus_staff3_email'              => 'email',
+            'cus_login'                     => 'required',
+            'cus_passwd'                    => 'required',
         );
     }
 
@@ -61,51 +36,18 @@ class CustomerModel
             'cus_name.required'                  => trans('validation.error_cus_name_required'),
             'cus_name_kana.regex'                => trans('validation.error_cus_name_kana_regex'),
             'cus_name_kana.required'             => trans('validation.error_cus_name_kana_required'),
-            'cus_title.required'                 => trans('validation.error_cus_title_required'),
-            'cus_old_name.required'              => trans('validation.error_cus_old_name_required'),
             'cus_pay.required'                   => trans('validation.error_cus_pay_required'),
-            'cus_pay.numeric'                    => trans('validation.error_cus_pay_must_num'),
             'cus_kind.required'                  => trans('validation.error_cus_kind_required'),
             'cus_owner.required'                 => trans('validation.error_cus_owner_required'),
-            'cus_sex.required'                   => trans('validation.error_cus_sex_required'),
             'cus_login.required'                 => trans('validation.error_cus_login_required'),
             'cus_passwd.required'                => trans('validation.error_cus_passwd_required'),
-
-            'cus_staff1_belong.required'         => trans('validation.error_cus_staff1_belong_required'),
             'cus_staff1_name.required'           => trans('validation.error_cus_staff1_name_required'),
-            'cus_staff1_name_kana.required'      => trans('validation.error_cus_staff1_name_kana_required'),
             'cus_staff1_name_kana.regex'         => trans('validation.error_cus_staff1_name_kana_must_kana'),
-            'cus_staff1_tel.required'            => trans('validation.error_cus_staff1_phone_required'),
-            'cus_staff1_fax.required'            => trans('validation.error_cus_staff1_fax_required'),
-            'cus_staff1_email.required'          => trans('validation.error_cus_staff1_email_required'),
             'cus_staff1_email.email'             => trans('validation.error_cus_staff1_email_format'),
-
-            'cus_staff2_belong.required'         => trans('validation.error_cus_staff2_belong_required'),
-            'cus_staff2_name.required'           => trans('validation.error_cus_staff2_name_required'),
-            'cus_staff2_name_kana.required'      => trans('validation.error_cus_staff2_name_kana_required'),
             'cus_staff2_name_kana.regex'         => trans('validation.error_cus_staff2_name_kana_must_kana'),
-            'cus_staff2_tel.required'            => trans('validation.error_cus_staff2_phone_required'),
-            'cus_staff2_fax.required'            => trans('validation.error_cus_staff2_fax_required'),
-            'cus_staff2_email.required'          => trans('validation.error_cus_staff2_email_required'),
             'cus_staff2_email.email'             => trans('validation.error_cus_staff2_email_format'),
-
-            'cus_staff3_belong.required'         => trans('validation.error_cus_staff3_belong_required'),
-            'cus_staff3_name.required'           => trans('validation.error_cus_staff3_name_required'),
-            'cus_staff3_name_kana.required'      => trans('validation.error_cus_staff3_name_kana_required'),
             'cus_staff3_name_kana.regex'         => trans('validation.error_cus_staff3_name_kana_must_kana'),
-            'cus_staff3_tel.required'            => trans('validation.error_cus_staff3_phone_required'),
-            'cus_staff3_fax.required'            => trans('validation.error_cus_staff3_fax_required'),
-            'cus_staff3_email.required'          => trans('validation.error_cus_staff3_email_required'),
             'cus_staff3_email.email'             => trans('validation.error_cus_staff3_email_format'),
-
-            // 'cus_mail_send.required'             => '※必須',
-            // 'cus_mail_send.numeric'              => '※Format is number',
-            // 'cus_zip_pwd.required'               => '※必須',
-            // 'cus_mail_span.required'             => '※必須',
-            // 'cus_mail_span.numeric'              => '※Format is number',
-            // 'cus_mail_youbi.required'            => '※必須',
-            // 'cus_mail_hi.required'               => '※必須',
-            // 'cus_mail_attach.required'           => '※必須',
         );
     }
 

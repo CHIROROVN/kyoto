@@ -50,14 +50,14 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title"><label for="cus_title">見出し <span class="note_required">※</span></label></td>
+                <td class="col-title"><label for="cus_title">見出し</label></td>
                 <td>
                   <input name="cus_title" id="cus_title" type="text" class="form-control form-control--default" value="{{$customer->cus_title}}">
                   @if ($errors->first('cus_title'))
                     <div class="help-block with-errors">※ {!! $errors->first('cus_title') !!}</div>
                   @endif
                 </td>
-                <td class="col-title"><label for="cus_old_name">旧学校名 <span class="note_required">※</span></label></td>
+                <td class="col-title"><label for="cus_old_name">旧学校名</label></td>
                 <td>
                   <input name="cus_old_name" id="cus_old_name" type="text" class="form-control form-control--default" value="{{$customer->cus_old_name}}">
                   @if ($errors->first('cus_old_name'))
@@ -68,7 +68,11 @@
                 <td>
                   <select name="ent_id" id="ent_id" class="form-control form-control--small">
                     <option value="" selected="selected">なし</option>
-                    <option value="123">ABC</option>                    
+                    @if(count($enterprises) > 0)
+                    @foreach($enterprises as $key => $ent)
+                      <option value="{{$key}}" @if(old('ent_id') == $key) selected="selected" @endif >{{$ent}}</option>
+                    @endforeach
+                    @endif
                   </select>
                   @if ($errors->first('ent_id'))
                     <div class="help-block with-errors">※ {!! $errors->first('ent_id') !!}</div>
@@ -142,7 +146,7 @@
                   <div class="help-block with-errors">※ {!! $errors->first('cus_staff1_belong') !!}</div>
                 @endif
               </td>
-              <td class="col-title"><label for="cus_staff1_name">名前</label></td>
+              <td class="col-title"><label for="cus_staff1_name">名前 <span class="note_required">※</span></label></td>
               <td>
                 <input name="cus_staff1_name" id="cus_staff1_name" type="text" class="form-control form-control--default" value="{{$customer->cus_staff1_name}}" >
                 @if ($errors->first('cus_staff1_name'))
@@ -277,14 +281,14 @@
           </table>
           <table class="table table-bordered">
             <tr>
-              <td class="col-title"><label for="cus_login">ログインID</label></td>
+              <td class="col-title"><label for="cus_login">ログインID <span class="note_required">※</span></label></td>
               <td>
                 <input name="cus_login" id="cus_login" type="text" class="form-control form-control--small" value="{{$customer->cus_login}}" >
                 @if ($errors->first('cus_login'))
                   <div class="help-block with-errors">※ {!! $errors->first('cus_login') !!}</div>
                 @endif
               </td>
-              <td class="col-title"><label for="cus_passwd">パスワード</label></td>
+              <td class="col-title"><label for="cus_passwd">パスワード <span class="note_required">※</span></label></td>
               <td>
                 <input name="cus_passwd" id="cus_passwd" type="password" class="form-control form-control--default" value="{{$customer->cus_passwd}}">
                 @if ($errors->first('cus_passwd'))
