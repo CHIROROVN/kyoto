@@ -30,12 +30,16 @@
               <td class="col-title">女子専用</td>
               <td>@if($customer->cus_sex == '2') 女性のみ @else いいえ @endif </td>
             </tr>
-            <?php $arr_cus_kind = ['01'=>'大学', '02'=>'職業大学', '11'=>'短期大学', '21'=>'専門学校', '22'=>'職業訓練法人'] ?>
+            <?php 
+              $arr_cus_kind = ['01'=>'大学', '02'=>'職業大学', '11'=>'短期大学', '21'=>'専門学校', '22'=>'職業訓練法人', '23'=>'一般教育機関', '24'=>'留学・外国教育機関', '25'=>'新聞奨学会', '26'=>'看護学校']; 
+              $arr_cus_owner = ['01'=>'国立', '02'=>'公立', '03'=>'私立'];
+              $arr_cus_mail_send = [''=>'しない', '0'=>'曜日指定', '1'=>'日付指定'];
+            ?>
             <tr>
               <td class="col-title">学校区分</td>
-              <td>{{$customer->cus_kind}}</td>
+              <td>{{@$arr_cus_kind[$customer->cus_kind]}}</td>
               <td class="col-title">運営区分</td>
-              <td>{{$customer->cus_owner}}</td>
+              <td>{{@$arr_cus_owner[$customer->cus_owner]}}</td>
             </tr>
           </table>
           <table class="table table-bordered">
@@ -98,7 +102,7 @@
               <td class="col-title">パスワード</td>
               <td>{{$customer->cus_passwd}}</td>
               <td class="col-title">メール送信</td>
-              <td>{{$customer->cus_mail_send}}</td>
+              <td>{{@$arr_cus_mail_send[$customer->cus_mail_send]}}</td>
             </tr>
            <tr>
               <td class="col-title">メール送信間隔</td>
@@ -106,7 +110,7 @@
               <td class="col-title">ZIPパスワード</td>
               <td>{{$customer->cus_zip_pwd}}</td>
               <td class="col-title">ファイル形式</td>
-              <td>{{$customer->cus_mail_attach}}</td>
+              <td> @if($customer->cus_mail_attach == '1') CSV @elseif($customer->cus_mail_attach == '2') Excel @else しない @endif </td>
             </tr>
           </table>
         </div>
