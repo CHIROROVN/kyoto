@@ -217,7 +217,6 @@ class CustomerController extends BackendController
 
     public function delete($id) {
         $clsCustomer            = new CustomerModel();
-        //$data['title']          = '顧客情報の検索結果一覧';
         $dataUpdate             = array(
             'last_date'         => date('Y-m-d H:i:s'),
             'last_kind'         => DELETE,

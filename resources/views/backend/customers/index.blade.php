@@ -61,7 +61,7 @@
                           <p>{{trans('common.modal_content_delete')}}</p>
                         </div>
                         <div class="modal-footer">
-                          <a href="{{ route('backend.customers.delete', $customer->cus_id) }}" class="btn btn-xs btn-primary">{{trans('common.modal_btn_delete')}}</a>
+                          <a href="{{ route('backend.customers.delete', array($customer->cus_id, 'page' => $customers->currentPage())) }}" class="btn btn-xs btn-primary">{{trans('common.modal_btn_delete')}}</a>
                           <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{trans('common.modal_btn_cancel')}}</button>
                         </div>
                       </div>
