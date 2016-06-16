@@ -28,7 +28,7 @@
       </tr>
       @if (empty($pamphlets) || count($pamphlets) == 0)
       <tr>
-        <td colspan="11"><h1 class="data-empty">Data empty...</h1></td>
+        <td colspan="11" align="center"><strong>{{ trans('common.no_data_correspond') }}</strong></td>
       </tr>
       @else
         @foreach ($pamphlets as $pamphlet)
@@ -102,6 +102,7 @@
                         's_pamph_bunya_id'        => $s_pamph_bunya_id,
                         's_pamph_bunya_name'      => $s_pamph_bunya_name,
                         's_pamph_pref'            => $s_pamph_pref,
+                        's_pamph_area'            => $s_pamph_area,
                         's_pamph_sex_unspecified' => $s_pamph_sex_unspecified,
                         's_pamph_sex_men'         => $s_pamph_sex_men,
                         's_pamph_sex_women'       => $s_pamph_sex_women,
@@ -128,6 +129,7 @@
                       's_pamph_bunya_id'        => $s_pamph_bunya_id,
                       's_pamph_bunya_name'      => $s_pamph_bunya_name,
                       's_pamph_pref'            => $s_pamph_pref,
+                      's_pamph_area'            => $s_pamph_area,
                       's_pamph_sex_unspecified' => $s_pamph_sex_unspecified,
                       's_pamph_sex_men'         => $s_pamph_sex_men,
                       's_pamph_sex_women'       => $s_pamph_sex_women,
@@ -176,12 +178,13 @@
                                 's_pamph_bunya_id'        => $s_pamph_bunya_id,
                                 's_pamph_bunya_name'      => $s_pamph_bunya_name,
                                 's_pamph_pref'            => $s_pamph_pref,
+                                's_pamph_area'            => $s_pamph_area,
                                 's_pamph_sex_unspecified' => $s_pamph_sex_unspecified,
                                 's_pamph_sex_men'         => $s_pamph_sex_men,
                                 's_pamph_sex_women'       => $s_pamph_sex_women,
                                 'page'                    => $pamphlets->currentPage()
-                              )) }}" class="btn btn-xs btn-primary">削除</a>
-                              <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
+                              )) }}" class="btn btn-xs btn-primary">{{ trans('common.modal_btn_delete') }}</a>
+                              <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{ trans('common.modal_btn_cancel') }}</button>
                             </div>
                           </div>
                           <!-- End Modal content-->
@@ -224,6 +227,7 @@
                               's_pamph_bunya_id'        => $s_pamph_bunya_id,
                               's_pamph_bunya_name'      => $s_pamph_bunya_name,
                               's_pamph_pref'            => $s_pamph_pref,
+                              's_pamph_area'            => $s_pamph_area,
                               's_pamph_sex_unspecified' => $s_pamph_sex_unspecified,
                               's_pamph_sex_men'         => $s_pamph_sex_men,
                               's_pamph_sex_women'       => $s_pamph_sex_women,
@@ -262,6 +266,7 @@
                                 's_pamph_bunya_id'        => $s_pamph_bunya_id,
                                 's_pamph_bunya_name'      => $s_pamph_bunya_name,
                                 's_pamph_pref'            => $s_pamph_pref,
+                                's_pamph_area'            => $s_pamph_area,
                                 's_pamph_sex_unspecified' => $s_pamph_sex_unspecified,
                                 's_pamph_sex_men'         => $s_pamph_sex_men,
                                 's_pamph_sex_women'       => $s_pamph_sex_women
@@ -285,6 +290,7 @@
         's_pamph_bunya_id'        => $s_pamph_bunya_id,
         's_pamph_bunya_name'      => $s_pamph_bunya_name,
         's_pamph_pref'            => $s_pamph_pref,
+        's_pamph_area'            => $s_pamph_area,
         's_pamph_sex_unspecified' => $s_pamph_sex_unspecified,
         's_pamph_sex_men'         => $s_pamph_sex_men,
         's_pamph_sex_women'       => $s_pamph_sex_women

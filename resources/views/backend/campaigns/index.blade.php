@@ -18,7 +18,7 @@
       </tr>
       @if (empty($campaigns) || count($campaigns) == 0)
       <tr>
-        <td colspan="5"><h1 class="data-empty">Data empty...</h1></td>
+        <td colspan="5" align="center"><strong>{{ trans('common.no_data_correspond') }}</strong></td>
       </tr>
       @else
         @foreach ($campaigns as $campaign)
@@ -42,8 +42,8 @@
                     <p>{{ trans('common.modal_content_delete') }}</p>
                   </div>
                   <div class="modal-footer">
-                    <a href="{{ route('backend.campaigns.delete', [$campaign->campaign_id, 'page' => $campaigns->currentPage()]) }}" class="btn btn-xs btn-primary">削除</a>
-                    <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
+                    <a href="{{ route('backend.campaigns.delete', [$campaign->campaign_id, 'page' => $campaigns->currentPage()]) }}" class="btn btn-xs btn-primary">{{ trans('common.modal_btn_delete') }}</a>
+                    <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{ trans('common.modal_btn_cancel') }}</button>
                   </div>
                 </div>
                 <!-- End Modal content-->

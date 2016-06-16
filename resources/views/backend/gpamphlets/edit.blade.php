@@ -51,8 +51,8 @@
                       's_pamph_name'          => $s_pamph_name,
                       's_pamph_id'            => $s_pamph_id,
                       'page'                  => $page
-                    )) }}" class="btn btn-xs btn-primary">削除</a>
-              <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
+                    )) }}" class="btn btn-xs btn-primary">{{ trans('common.modal_btn_delete') }}</a>
+              <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{ trans('common.modal_btn_cancel') }}</button>
             </div>
           </div>
           <!-- End Modal content-->

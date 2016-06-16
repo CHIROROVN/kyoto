@@ -60,8 +60,8 @@
               <p>{{ trans('common.modal_content_delete') }}</p>
             </div>
             <div class="modal-footer">
-              <a href="{{ route('backend.campaigns.delete', [$campaign->campaign_id, 'page' => $page]) }}" class="btn btn-xs btn-primary">削除</a>
-              <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
+              <a href="{{ route('backend.campaigns.delete', [$campaign->campaign_id, 'page' => $page]) }}" class="btn btn-xs btn-primary">{{ trans('common.modal_btn_delete') }}</a>
+              <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{ trans('common.modal_btn_cancel') }}</button>
             </div>
           </div>
           <!-- End Modal content-->

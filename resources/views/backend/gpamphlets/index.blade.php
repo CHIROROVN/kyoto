@@ -21,7 +21,7 @@
       </tr>
       @if (empty($gpamphlets) || count($gpamphlets) == 0)
       <tr>
-        <td colspan="4"><h1 class="data-empty">Data empty...</h1></td>
+        <td colspan="4" align="center"><strong>{{ trans('common.no_data_correspond') }}</strong></td>
       </tr>
       @else
         @foreach ($gpamphlets as $gpamphlet)
@@ -31,7 +31,7 @@
             <table class="child-tbl table-striped">
             @foreach ( $gpamphlets_distinct as $item )
               @if ( $item->gpamph_number == $gpamphlet->gpamph_number )
-              <tr><td style="height: 30px; padding-top: 2px;">
+              <tr><td style="height: 32px;">
               {{ $item->pamph_number }} <br>
               </td></tr>
               @endif
@@ -78,8 +78,8 @@
                         's_pamph_name'            => $s_pamph_name,
                         's_pamph_id'              => $s_pamph_id,
                         'page'                    => $gpamphlets->currentPage()
-                      )) }}" class="btn btn-xs btn-primary">削除</a>
-                      <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
+                      )) }}" class="btn btn-xs btn-primary">{{ trans('common.modal_btn_delete') }}</a>
+                      <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{ trans('common.modal_btn_cancel') }}</button>
                     </div>
                   </div>
                   <!-- End Modal content-->

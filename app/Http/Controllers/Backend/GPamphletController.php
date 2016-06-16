@@ -35,7 +35,7 @@ class GPamphletController extends BackendController
 		$data['gpamphlets_distinct'] 	= $clsGPamphlet->get_all_distinct();
 		$data['title'] 					= trans('common.gpamphlet_title_index');
 
-		$data['count_all']		= $clsGPamphlet->count();
+		$data['count_all']		= $clsGPamphlet->count_distinct();
 		$data['total_count'] 	= $clsGPamphlet->get_all(true, Input::all())['total_count'];
 		$page_current 			= Input::get('page', 1);
 		$data['record_from'] 	= (($page_current - 1) * PAGINATION) + 1;

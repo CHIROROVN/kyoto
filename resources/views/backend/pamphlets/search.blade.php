@@ -6,7 +6,7 @@
   <div class="row content">
     <div class="row fl-right mar-bottom">
       <div class="col-md-12">
-        <input onclick="location.href='pamphlet_regist.html'" value="資料請求番号の新規登録" type="button" class="btn btn-sm btn-primary">
+        <input onclick="location.href='{{ route('backend.pamphlets.regist') }}'" value="資料請求番号の新規登録" type="button" class="btn btn-sm btn-primary">
       </div>
     </div>
     <table class="table table-bordered">
@@ -66,6 +66,24 @@
               <option value="0" selected="">選択なし</option>
              @foreach ( $prefs as $pref )
               <option value="{{ $pref->pref_id }}">{{ $pref->pref_name }}</option>
+              @endforeach
+              @endif
+            </select>
+            OR
+            <select name="s_pamph_area[]" id="s_pamph_area" class="form-control form-control--small" multiple="multiple">
+              @if ( !empty($s_pamph_area) )
+                @if ( in_array(0, $s_pamph_area) )
+                <option value="0" selected="">選択なし</option>
+                @else
+                <option value="0">選択なし</option>
+                @endif
+                @foreach ( $areas as $area )
+                <option value="{{ $area->area_id }}" @if(in_array($area->area_id, $s_pamph_area)) selected @endif>{{ $area->area_name }}</option>
+                @endforeach
+              @else
+              <option value="0" selected="">選択なし</option>
+             @foreach ( $areas as $area )
+              <option value="{{ $area->area_id }}">{{ $area->area_name }}</option>
               @endforeach
               @endif
             </select>

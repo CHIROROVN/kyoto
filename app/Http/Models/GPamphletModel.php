@@ -37,11 +37,12 @@ class GPamphletModel
         }
 
         $results = $results->orderBy('gpamph_number', 'asc');
+        $results = $results->groupby('gpamph_number');
 
         // count record pagination
-        $total_count = $results->count();
+        $total_count = $results->get();
+        $total_count = count($total_count);
 
-        $results = $results->groupby('gpamph_number');
 
         if ($pagination) {
             $db = $results->simplePaginate(PAGINATION);//simplePaginate, paginate
@@ -65,7 +66,7 @@ class GPamphletModel
     public function get_all_distinct()
     {
         $results = DB::table($this->table)
-                        ->join('m_pamphlet', 'm_pamphlet_group.pamph_id', '=', 'm_pamphlet.pamph_id')
+                        ->leftJoin('m_pamphlet', 'm_pamphlet_group.pamph_id', '=', 'm_pamphlet.pamph_id')
                         ->select('m_pamphlet_group.*', 'm_pamphlet.pamph_id', 'm_pamphlet.pamph_number')
                         ->where('m_pamphlet_group.last_kind', '<>', DELETE)
                         ->orderBy('m_pamphlet_group.gpamph_number', 'asc')
@@ -78,6 +79,13 @@ class GPamphletModel
     {
         $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->count();
         return $results;
+    }
+
+
+    public function count_distinct() 
+    {
+        $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->groupby('gpamph_number')->get();
+        return count($results);
     }
 
 
@@ -98,7 +106,7 @@ class GPamphletModel
     public function get_by_id($id)
     {
         $results = DB::table($this->table)
-                        ->join('m_pamphlet', 'm_pamphlet_group.pamph_id', '=', 'm_pamphlet.pamph_id')
+                        ->leftJoin('m_pamphlet', 'm_pamphlet_group.pamph_id', '=', 'm_pamphlet.pamph_id')
                         ->select('m_pamphlet_group.*', 'm_pamphlet.pamph_id', 'm_pamphlet.pamph_number')
                         ->where('gpamph_id', $id)
                         ->first();

@@ -100,11 +100,21 @@
           <td class="col-title"><label for="pamph_cus_id">学校名</label></td>
           <td>
             <div id="group">
+              @if ( old('pamph_cus_id') )
+                @foreach ( old('pamph_cus_id') as $key => $value )
+                  <div class="group-child" id="group-{{ $key + 1 }}" @if ($key > 0) style="margin-top: 5px;" @endif>
+                    <input name="pamph_cus_name[]" id="pamph_cus_id-group-{{ $key + 1 }}" type="text" class="form-control form-control--default input-auto-complete" value="{{ old('pamph_cus_name')[$key] }}">
+                    <input name="pamph_cus_id[]" type="hidden" id="pamph_cus_id-group-{{ $key + 1 }}-id" value="{{ $value }}">
+                    <span id="" div-group="group-{{ $key + 1 }}" class="btn btn-default btn-xs delete" onClick="delete_div(this)">Delete</span>
+                  </div>
+                @endforeach
+              @else
               <div class="group-child" id="group-1">
-                <input name="pamph_cus_name" id="pamph_cus_id-group-1" type="text" class="form-control form-control--default input-auto-complete" value="">
+                <input name="pamph_cus_name[]" id="pamph_cus_id-group-1" type="text" class="form-control form-control--default input-auto-complete" value="">
                 <input name="pamph_cus_id[]" type="hidden" id="pamph_cus_id-group-1-id" value="">
                 <span id="" div-group="group-1" class="btn btn-default btn-xs delete" onClick="delete_div(this)">Delete</span>
               </div>
+              @endif
             </div>
             <button style="margin-top: 5px;" class="btn btn-primary btn-xs" id="add">Add</button>
             <!-- <p id="pamph_bunya_id-description"></p> -->
@@ -257,7 +267,7 @@
       count_group_child += 1;
       count_group_child = check_id(count_group_child);
 
-      $('#group').append('<div style="margin-top: 5px;" class="group-child" id="group-' + count_group_child + '"><input name="pamph_cus_name" id="pamph_cus_id-group-' + count_group_child + '" type="text" class="form-control form-control--default input-auto-complete" value=""><input name="pamph_cus_id[]" type="hidden" id="pamph_cus_id-group-' + count_group_child + '-id" value=""><span style="margin-left: 5px;" id="" div-group="group-' + count_group_child + '" class="btn btn-default btn-xs delete" onClick="delete_div(this);">Delete</span></div>');
+      $('#group').append('<div style="margin-top: 5px;" class="group-child" id="group-' + count_group_child + '"><input name="pamph_cus_name[]" id="pamph_cus_id-group-' + count_group_child + '" type="text" class="form-control form-control--default input-auto-complete" value=""><input name="pamph_cus_id[]" type="hidden" id="pamph_cus_id-group-' + count_group_child + '-id" value=""><span style="margin-left: 5px;" id="" div-group="group-' + count_group_child + '" class="btn btn-default btn-xs delete" onClick="delete_div(this);">Delete</span></div>');
 
       after_add();
     });

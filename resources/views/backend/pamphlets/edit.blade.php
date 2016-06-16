@@ -2,49 +2,6 @@
 
 @section('content')
 
-<script>
-/*  function delete_div(span) {
-    var group_child_id = $(span).attr('div-group');
-    $('#' + group_child_id).remove();
-  }
-
-  function check_id(id) {
-    if ( !$('#group').find('#group-' + id).length ) {
-      return id;
-    } 
-
-    return check_id(id + 1);
-  }
-
-  function after_add() {
-    // customer
-    $( ".group-child" ).each(function( index ) {
-      var id = 'pamph_cus_id-' + $(this).attr('id');
-      // alert(id);
-      $( '#' + id ).autocomplete({
-        minLength: 0,
-        source: customers,
-        focus: function( event, ui ) {
-          $( "#" + id ).val( ui.item.label );
-          return false;
-        },
-        select: function( event, ui ) {
-          $( "#" + id ).val( ui.item.label );
-          $( "#" + id + '-id' ).val( ui.item.value );
-          // $( "#pamph_bunya_id-description" ).html( ui.item.desc );
-
-          return false;
-        }
-      })
-      .autocomplete( "instance" )._renderItem = function( ul, item ) {
-        return $( "<li>" )
-          .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
-          .appendTo( ul );
-      };
-    });
-  }*/
-</script>
-
 {!! Form::open(array('route' => ['backend.pamphlets.edit', $pamphlet->pamph_id], 'enctype'=>'multipart/form-data')) !!}
 <div class="container">
   <div class="row content">
@@ -135,7 +92,7 @@
               <div class="group-child" id="group-1">
                 @if ( old('pamph_cus_name') )
                 <input name="pamph_cus_name" id="pamph_cus_id-group-1" type="text" class="form-control form-control--default input-auto-complete" value="<?php echo old('pamph_cus_name'); ?>">
-                @elseif ( isset($customers_old[$pamphlet->pamph_cus_id]) )
+                @elseif ( !empty($pamphlet->pamph_cus_id) && isset($customers_old[$pamphlet->pamph_cus_id]) )
                 <input name="pamph_cus_name" id="pamph_cus_id-group-1" type="text" class="form-control form-control--default input-auto-complete" value="<?php echo $customers_old[$pamphlet->pamph_cus_id]; ?>">
                 @else
                 <input name="pamph_cus_name" id="pamph_cus_id-group-1" type="text" class="form-control form-control--default input-auto-complete" value="">
@@ -144,9 +101,11 @@
                 @if ( old('pamph_cus_id') )
                 <!-- <input name="pamph_cus_id[]" type="hidden" id="pamph_cus_id-group-1-id" value="{{ old('pamph_cus_id') }}"> -->
                 <input name="pamph_cus_id" type="hidden" id="pamph_cus_id-group-1-id" value="{{ old('pamph_cus_id') }}">
-                @else
+                @elseif ( !empty($pamphlet->pamph_cus_id) )
                 <!-- <input name="pamph_cus_id[]" type="hidden" id="pamph_cus_id-group-1-id" value="{{ $pamphlet->pamph_cus_id }}"> -->
                 <input name="pamph_cus_id" type="hidden" id="pamph_cus_id-group-1-id" value="{{ $pamphlet->pamph_cus_id }}">
+                @else
+                <input name="pamph_cus_id" type="hidden" id="pamph_cus_id-group-1-id" value="">
                 @endif
               </div>
               @else
@@ -296,8 +255,13 @@
       <input type="hidden" name="s_pamph_bunya_id" value="{{ $s_pamph_bunya_id }}">
       <input type="hidden" name="s_pamph_bunya_name" value="{{ $s_pamph_bunya_name }}">
       @if ( isset($s_pamph_pref) )
-        @foreach ( $s_pamph_pref as $item )
-          <input type="hidden" name="s_pamph_pref[]" value="{{ $item }}">
+        @foreach ( $s_pamph_pref as $pref )
+          <input type="hidden" name="s_pamph_pref[]" value="{{ $pref }}">
+        @endforeach
+      @endif
+      @if ( isset($s_pamph_area) )
+        @foreach ( $s_pamph_area as $area )
+          <input type="hidden" name="s_pamph_area[]" value="{{ $area }}">
         @endforeach
       @endif
       <input type="hidden" name="s_pamph_sex_unspecified" value="{{ $s_pamph_sex_unspecified }}">
@@ -336,12 +300,13 @@
                       's_pamph_bunya_id'        => $s_pamph_bunya_id,
                       's_pamph_bunya_name'      => $s_pamph_bunya_name,
                       's_pamph_pref'            => $s_pamph_pref,
+                      's_pamph_area'            => $s_pamph_area,
                       's_pamph_sex_unspecified' => $s_pamph_sex_unspecified,
                       's_pamph_sex_men'         => $s_pamph_sex_men,
                       's_pamph_sex_women'       => $s_pamph_sex_women,
                       'page'                    => $page
-                    )) }}" class="btn btn-xs btn-primary">削除</a>
-              <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
+                    )) }}" class="btn btn-xs btn-primary">{{ trans('common.modal_btn_delete') }}</a>
+              <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{ trans('common.modal_btn_cancel') }}</button>
             </div>
           </div>
           <!-- End Modal content-->
@@ -429,21 +394,6 @@
           .append( "<a>" + item.desc + "</a>" )
           .appendTo( ul );
     };
-    
-
-
-    // // add new customer
-    // $('#add').click(function(event) {
-    //   event.preventDefault();
-
-    //   var count_group_child = $('#group').find('.group-child').length;
-    //   count_group_child += 1;
-    //   count_group_child = check_id(count_group_child);
-
-    //   $('#group').append('<div style="margin-top: 5px;" class="group-child" id="group-' + count_group_child + '"><input name="pamph_cus_name" id="pamph_cus_id-group-' + count_group_child + '" type="text" class="form-control form-control--default input-auto-complete" value=""><input name="pamph_cus_id[]" type="hidden" id="pamph_cus_id-group-' + count_group_child + '-id" value=""><span style="margin-left: 5px;" id="" div-group="group-' + count_group_child + '" class="btn btn-default btn-xs delete" onClick="delete_div(this);">Delete</span></div>');
-
-    //   after_add();
-    // });
   });
 </script>
 @endsection
