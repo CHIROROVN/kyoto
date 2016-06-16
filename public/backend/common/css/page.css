@@ -497,7 +497,9 @@ h1 {
   border-bottom: none;
 }
 
-
+.no-margin-bottom {
+  margin-bottom: 0 !important;
+}
 
 
 
