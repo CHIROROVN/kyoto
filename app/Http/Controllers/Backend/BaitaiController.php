@@ -73,7 +73,7 @@ class BaitaiController extends BackendController
             'last_date'         => date('Y-m-d H:i:s'),
             'last_kind'         => INSERT,
             'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
+            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
         );
 
         $validator  = Validator::make($dataInsert, $clsBaitai->Rules(), $clsBaitai->Messages());
@@ -128,7 +128,7 @@ class BaitaiController extends BackendController
             'last_date'         => date('Y-m-d H:i:s'),
             'last_kind'         => UPDATE,
             'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
+            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
         );
 
         $validator  = Validator::make($dataInsert, $clsBaitai->Rules(), $clsBaitai->Messages());
@@ -172,7 +172,7 @@ class BaitaiController extends BackendController
 			'last_date'         => date('Y-m-d H:i:s'),
 			'last_kind'         => DELETE,
             'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
-            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 1,
+            'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
 		);
 		
 		if ( $clsBaitai->update($id, $dataUpdate) ) {

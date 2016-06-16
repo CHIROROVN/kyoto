@@ -63,7 +63,7 @@ return [
     'error_baitai_code_required'						=> '媒体コードを入力してください。',
     'error_baitai_name_required'						=> '媒体名を入力してください。',
     'error_baitai_kind_required'						=> '性別を選択してください。',
-    'error_baitai_year_required'						=> '発行年を入力してください。',
+    // 'error_baitai_year_required'						=> '発行年を入力してください。',
     'error_baitai_code_numeric'							=> '発行年は半角数字で入力してください。',
 
 

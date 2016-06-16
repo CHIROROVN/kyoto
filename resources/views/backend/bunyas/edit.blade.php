@@ -7,17 +7,17 @@
     <table class="table table-bordered">
       <tbody>
         <tr>
-          <td class="col-title"><label for="bunya_code">分野コード</label></td>
+          <td class="col-title"><label for="bunya_code">分野コード <span class="note_required">※</span></label></td>
           <td>
             <input name="bunya_code" id="bunya_code" type="text" class="form-control form-control--small" value="{{ $bunya->bunya_code }}">
             @if ($errors->first('bunya_code'))<span class="error-input">{!! $errors->first('bunya_code') !!}</span>@endif
           </td>
-          <td class="col-title"><label for="bunya_name">分野名</label></td>
+          <td class="col-title"><label for="bunya_name">分野名 <span class="note_required">※</span></label></td>
           <td>
             <input name="bunya_name" id="bunya_name" type="text" class="form-control form-control--default" value="{{ $bunya->bunya_name }}">
             @if ($errors->first('bunya_name'))<span class="error-input">{!! $errors->first('bunya_name') !!}</span>@endif
           </td>
-          <td class="col-title"><label for="rdType">種類</label></td>
+          <td class="col-title"><label for="rdType">種類 <span class="note_required">※</span></label></td>
           <td>
             <input name="bunya_kind" id="rdType" value="1" type="radio" @if($bunya->bunya_kind == 1) {{'checked'}} @endif> 職業　　　
             <input name="bunya_kind" value="2" type="radio" @if($bunya->bunya_kind) == 2) {{'checked'}} @endif> 学問
@@ -25,7 +25,7 @@
           </td>
         </tr>
         <tr>
-          <td class="col-title"><label for="rdClassification">区分</label></td>
+          <td class="col-title"><label for="rdClassification">区分 <span class="note_required">※</span></label></td>
           <td colspan="5">
             <input name="bunya_class" id="rdClassification" value="1" type="radio" @if($bunya->bunya_class == 1) {{'checked'}} @endif> メイン　　　
             <input name="bunya_class" value="2" type="radio" @if($bunya->bunya_class == 2) {{'checked'}} @endif> サブ

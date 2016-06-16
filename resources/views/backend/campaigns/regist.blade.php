@@ -8,14 +8,14 @@
       <tbody>
         <tr>
           <!-- campaign_name -->
-          <td class="col-title"><label for="campaign_name">キャンペーン名</label></td>
+          <td class="col-title"><label for="campaign_name">キャンペーン名 <span class="note_required">※</span></label></td>
           <td>
             <input name="campaign_name" id="campaign_name" type="text" class="form-control form-control--small" value="{{ old('campaign_name') }}">
             @if ($errors->first('campaign_name'))<span class="error-input">{!! $errors->first('campaign_name') !!}</span>@endif
           </td>
 
           <!-- presentlist_id -->
-          <td class="col-title"><label for="presentlist_id">プレゼント名</label></td>
+          <td class="col-title"><label for="presentlist_id">プレゼント名 <span class="note_required">※</span></label></td>
           <td>
             <select name="presentlist_id" id="presentlist_id" class="form-control form-control--small">
               <option value="">▼選択</option>
@@ -27,7 +27,7 @@
           </td>
 
           <!-- baitai_id -->
-          <td class="col-title"><label for="baitai_id">媒体名</label></td>
+          <td class="col-title"><label for="baitai_id">媒体名 <span class="note_required">※</span></label></td>
           <td>
             <select name="baitai_id" id="baitai_id" class="form-control form-control--small">
               <option value="">▼選択</option>

@@ -9,7 +9,7 @@
       <tbody>
         <tr>
           <!-- pamph_number -->
-          <td class="col-title"><label for="pamph_number">資料請求番号</label></td>
+          <td class="col-title"><label for="pamph_number">資料請求番号 <span class="note_required">※</span></label></td>
           <td>
             @if ( old('pamph_number') )
             <input name="pamph_number" id="pamph_number" type="text" class="form-control form-control--small" value="{{ old('pamph_number') }}">
@@ -21,7 +21,7 @@
           </td>
 
           <!-- pamph_name -->
-          <td class="col-title"><label for="pamph_name">資料名</label></td>
+          <td class="col-title"><label for="pamph_name">資料名 <span class="note_required">※</span></label></td>
           <td>
             @if ( old('pamph_name') )
             <input name="pamph_name" id="pamph_name" type="text" class="form-control form-control--default" value="{{ old('pamph_name') }}">
@@ -32,7 +32,7 @@
           </td>
 
           <!-- pamph_kind -->
-          <td class="col-title"><label for="pamph_kind">種別</label></td>
+          <td class="col-title"><label for="pamph_kind">種別 <span class="note_required">※</span></label></td>
           <td>
             @if ( old('pamph_kind') == '0' )
             <input name="pamph_kind" id="pamph_kind" value="0" type="radio" checked> 学校　　　
@@ -63,7 +63,7 @@
         </tr>
         <tr>
           <!-- pamph_class -->
-          <td class="col-title"><label for="pamph_class">使用区分</label></td>
+          <td class="col-title"><label for="pamph_class">使用区分 <span class="note_required">※</span></label></td>
           <td>
             @if ( old('pamph_class') == '1' )
             <input name="pamph_class" id="pamph_class" value="1" type="radio" checked> 使用済み　　　
@@ -125,7 +125,7 @@
           </td>
 
           <!-- pamph_send -->
-          <td class="col-title"><label for="pamph_send">発送の有無</label></td>
+          <td class="col-title"><label for="pamph_send">発送の有無 <span class="note_required">※</span></label></td>
           <td>
             @if ( old('pamph_send') == '1' )
             <input name="pamph_send" id="pamph_send" value="1" type="radio" checked> あり　　　
@@ -169,7 +169,7 @@
           </td>
 
           <!-- pamph_pref_area -->
-          <td class="col-title"><label for="pamph_pref">都道府県・エリア</label></td>
+          <td class="col-title"><label for="pamph_pref">都道府県・エリア <span class="note_required">※</span></label></td>
           <td>
             <select name="pamph_pref" id="pamph_pref" class="form-control form-control--small">
               <option value="0">▼都道府県</option>
@@ -206,7 +206,7 @@
           </td>
 
           <!-- pamph_sex -->
-          <td class="col-title"><label for="pamph_sex">対象</label></td>
+          <td class="col-title"><label for="pamph_sex">対象 <span class="note_required">※</span></label></td>
           <td>
             @if ( old('pamph_sex') == '0' )
             <input name="pamph_sex" id="pamph_sex" value="0" type="radio" checked> 共通　　　

@@ -12,7 +12,6 @@ class BaitaiModel
     		'baitai_code'    	=> 'required',
             'baitai_name'       => 'required',
             'baitai_kind'       => 'required',
-            'baitai_year'       => 'required|numeric',
 		);
     }
 
@@ -23,7 +22,6 @@ class BaitaiModel
             'baitai_name.required'      => trans('validation.error_baitai_name_required'),
             'baitai_kind.required'      => trans('validation.error_baitai_kind_required'),
             'baitai_year.required'      => trans('validation.error_baitai_year_required'),
-            'baitai_year.numeric'       => trans('validation.error_baitai_code_numeric'),
 		);
     }
 

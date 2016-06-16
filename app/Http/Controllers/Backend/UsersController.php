@@ -12,7 +12,7 @@ class UsersController extends BackendController
 {
 	public function __construct()
 	{
-		parent::__construct();		
+		parent::__construct();
 	}
 
 
@@ -52,7 +52,6 @@ class UsersController extends BackendController
 	 * insert database
 	 */
 	public function postRegist(){
-		$id 						= Auth::user()->u_id;
 		$userModel 					= new UserModel();
 
 		$dataInsert 				= array(
@@ -65,7 +64,7 @@ class UsersController extends BackendController
         	'last_kind'				=> INSERT,
         	'last_date'         	=> date('Y-m-d H:i:s'),
         	'last_ipadrs'       	=> CLIENT_IP_ADRS,
-        	'last_user'				=> $id,
+        	'last_user'				=> (Auth::check()) ? Auth::user()->u_id : 0,
 		);
 		$validator  = Validator::make(Input::all(), $userModel->addRules(), $userModel->Messages());
         if ( $validator->fails() ) {
@@ -120,7 +119,7 @@ class UsersController extends BackendController
         	'last_kind'				=> UPDATE,
         	'last_date'         	=> date('Y-m-d H:i:s'),
         	'last_ipadrs'       	=> CLIENT_IP_ADRS,
-        	'last_user'				=> (Auth::check()) ? Auth::user()->u_id : 1,
+        	'last_user'				=> (Auth::check()) ? Auth::user()->u_id : 0,
 		);
 
 		// if no update new password
@@ -162,7 +161,7 @@ class UsersController extends BackendController
         	'last_kind'				=> DELETE,
         	'last_date'         	=> date('Y-m-d H:i:s'),
         	'last_ipadrs'       	=> CLIENT_IP_ADRS,
-        	'last_user'				=> (Auth::check()) ? Auth::user()->u_id : 1,
+        	'last_user'				=> (Auth::check()) ? Auth::user()->u_id : 0,
         	);
 
     	if($userModel->update($id, $dataUpdate)){
@@ -197,7 +196,7 @@ class UsersController extends BackendController
 	        	'last_kind'				=> UPDATE,
 	        	'last_date'         	=> date('Y-m-d H:i:s'),
 	        	'last_ipadrs'       	=> CLIENT_IP_ADRS,
-	        	'last_user'				=> $id,
+	        	'last_user'				=> (Auth::check()) ? Auth::user()->u_id : 0,
 	        	);
 
         	if($userModel->update($id, $dataUpdate)){

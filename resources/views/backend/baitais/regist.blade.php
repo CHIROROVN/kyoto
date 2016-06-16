@@ -7,17 +7,17 @@
     <table class="table table-bordered">
       <tbody>
         <tr>
-          <td class="col-title"><label for="baitai_code">媒体コード</label></td>
+          <td class="col-title"><label for="baitai_code">媒体コード <span class="note_required">※</span></label></td>
           <td>
             <input name="baitai_code" id="baitai_code" type="text" class="form-control form-control--default" value="{{ old('baitai_code') }}">
             @if ($errors->first('baitai_code'))<span class="error-input">{!! $errors->first('baitai_code') !!}</span>@endif
           </td>
-          <td class="col-title"><label for="baitai_name">媒体名</label></td>
+          <td class="col-title"><label for="baitai_name">媒体名 <span class="note_required">※</span></label></td>
           <td>
             <input name="baitai_name" id="baitai_name" type="text" class="form-control form-control--default" value="{{ old('baitai_name') }}">
             @if ($errors->first('baitai_name'))<span class="error-input">{!! $errors->first('baitai_name') !!}</span>@endif
           </td>
-          <td class="col-title"><label for="rdNewOld">性別</label></td>
+          <td class="col-title"><label for="rdNewOld">性別 <span class="note_required">※</span></label></td>
           <td>
             <input name="baitai_kind" id="rdNewOld" value="2" type="radio" @if(old('baitai_kind') == 2) {{'checked'}} @endif> 新　　　
             <input name="baitai_kind" value="1" type="radio" @if(old('baitai_kind') == 1) {{'checked'}} @endif> 旧

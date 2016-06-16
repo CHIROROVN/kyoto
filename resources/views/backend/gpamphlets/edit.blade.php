@@ -7,12 +7,12 @@
     <table class="table table-bordered">
       <tbody>
         <tr>
-          <td class="col-title"><label for="gpamph_number">一括資料請求番号</label></td>
+          <td class="col-title"><label for="gpamph_number">一括資料請求番号 <span class="note_required">※</span></label></td>
           <td>
             <input name="gpamph_number" id="gpamph_number" type="text" class="form-control form-control--small" value="{{ $gpamphlet->gpamph_number }}">
             @if ($errors->first('gpamph_number'))<span class="error-input">{!! $errors->first('gpamph_number') !!}</span>@endif
           </td>
-          <td class="col-title"><label for="pamph_id">資料請求番号</label></td>
+          <td class="col-title"><label for="pamph_id">資料請求番号 <span class="note_required">※</span></label></td>
           <td>
             <input name="pamph_number" id="pamph_id" type="text" class="form-control form-control--default" value="{{ $gpamphlet->pamph_number }}">
             <input name="pamph_id" type="hidden" id="pamph_id-id" value="{{ $gpamphlet->pamph_id }}">
