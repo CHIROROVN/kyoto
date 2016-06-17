@@ -72,7 +72,7 @@ class BaitaiController extends BackendController
 
             'last_date'         => date('Y-m-d H:i:s'),
             'last_kind'         => INSERT,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
+            'last_ipadrs'       => CLIENT_IP_ADRS,
             'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
         );
 
@@ -127,7 +127,7 @@ class BaitaiController extends BackendController
 
             'last_date'         => date('Y-m-d H:i:s'),
             'last_kind'         => UPDATE,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
+            'last_ipadrs'       => CLIENT_IP_ADRS,
             'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
         );
 
@@ -171,7 +171,7 @@ class BaitaiController extends BackendController
 		$dataUpdate 			= array(
 			'last_date'         => date('Y-m-d H:i:s'),
 			'last_kind'         => DELETE,
-            'last_ipadrs'       => $_SERVER['REMOTE_ADDR'],
+            'last_ipadrs'       => CLIENT_IP_ADRS,
             'last_user'         => (Auth::check()) ? Auth::user()->u_id : 0,
 		);
 		

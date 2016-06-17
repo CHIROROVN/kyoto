@@ -63,10 +63,10 @@
                 <option value="{{ $pref->pref_id }}" @if(in_array($pref->pref_id, $s_pamph_pref)) selected @endif>{{ $pref->pref_name }}</option>
                 @endforeach
               @else
-              <option value="0" selected="">選択なし</option>
-             @foreach ( $prefs as $pref )
-              <option value="{{ $pref->pref_id }}">{{ $pref->pref_name }}</option>
-              @endforeach
+                <option value="0" selected="">選択なし</option>
+                @foreach ( $prefs as $pref )
+                <option value="{{ $pref->pref_id }}">{{ $pref->pref_name }}</option>
+                @endforeach
               @endif
             </select>
             OR
@@ -81,10 +81,10 @@
                 <option value="{{ $area->area_id }}" @if(in_array($area->area_id, $s_pamph_area)) selected @endif>{{ $area->area_name }}</option>
                 @endforeach
               @else
-              <option value="0" selected="">選択なし</option>
-             @foreach ( $areas as $area )
-              <option value="{{ $area->area_id }}">{{ $area->area_name }}</option>
-              @endforeach
+                <option value="0" selected="">選択なし</option>
+                @foreach ( $areas as $area )
+                <option value="{{ $area->area_id }}">{{ $area->area_name }}</option>
+                @endforeach
               @endif
             </select>
           </td>
