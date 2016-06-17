@@ -132,6 +132,13 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::post('customers/search', ['as' => 'backend.customers.search', 'uses' => 'CustomerController@postSearch']);
 	Route::get('customers/detail/{id}', ['as' => 'backend.customers.detail', 'uses' => 'CustomerController@detail']);
 
+	/**
+	 * HighSchool
+	*/
+	Route::get('highshools', ['as' => 'backend.highshools.index', 'uses' => 'HighSchoolController@index']);
+	Route::get('highshools/search', ['as' => 'backend.highshools.search', 'uses' => 'HighSchoolController@search']);
+	Route::get('highshools/regist', ['as' => 'backend.highshools.regist', 'uses' => 'HighSchoolController@getRegist']);
+	Route::post('highshools/regist', ['as' => 'backend.highshools.regist', 'uses' => 'HighSchoolController@postRegist']);
 
 	/**
 	 * auth

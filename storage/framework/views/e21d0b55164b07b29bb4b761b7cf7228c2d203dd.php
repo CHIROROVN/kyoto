@@ -52,7 +52,7 @@
         <li><a href="<?php echo e(route('backend.pamphlets.search')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>資料請求番号マスタ管理</a></li>
         <li><a href="<?php echo e(route('backend.gpamphlets.search')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>一括資料請求番号マスタ管理</a></li>
         <li><a href="<?php echo e(route('backend.bunyas.search')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>分野番号マスタ管理</a></li>
-        <li><a href="highschool_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>高等学校マスタ管理</a></li>
+        <li><a href="<?php echo e(route('backend.highshools.search')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>高等学校マスタ管理</a></li>
         <li><a href="<?php echo e(route('backend.unyversitys.index')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>大学マスタ管理</a></li>
         <li><a href="<?php echo e(route('backend.presents.index')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>プレゼントマスタ管理</a></li>
         <li><a href="<?php echo e(route('backend.campaigns.index')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>キャンペーンマスタ管理</a></li>
