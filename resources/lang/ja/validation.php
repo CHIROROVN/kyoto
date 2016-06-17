@@ -39,30 +39,9 @@ return [
     'error_cus_staff1_fax_required'						=> '担当者①のFAXを入力してください。',
     'error_cus_staff1_email_required'					=> '担当者①のメールアドレスを入力してください。',
     'error_cus_staff1_email_format'						=> '担当者①のメールアドレスを正しく入力してください。',
-
-/*	cus_staff2 and cus_staff3 are NOT required;
-    'error_cus_staff2_belong_required'					=> 'Please enter customer staff2 belong.',
-    'error_cus_staff2_name_required'					=> 'Please enter customer staff2 name.',
-    'error_cus_staff2_name_kana_required'				=> 'Please enter customer staff2 name kana.',
-*/
     'error_cus_staff2_name_kana_must_kana'				=> 'ひらがなで入力してください。',
-
-/*    'error_cus_staff2_phone_required'					=> 'Please enter customer staff2 phone number.',
-    'error_cus_staff2_fax_required'						=> 'Please enter customer staff2 fax number.',
-    'error_cus_staff2_email_required'					=> 'Please enter customer staff2 email.',
-*/
     'error_cus_staff2_email_format'						=> '担当者②のメールアドレスを正しく入力してください。',
-
-/*    'error_cus_staff3_belong_required'					=> 'Please enter customer staff3 belong.',
-    'error_cus_staff3_name_required'					=> 'Please enter customer staff3 name.',
-    'error_cus_staff3_name_kana_required'				=> 'Please enter customer staff3 name kana.',
-*/
     'error_cus_staff3_name_kana_must_kana'				=> 'ひらがなで入力してください。',
-
-/*    'error_cus_staff3_phone_required'					=> 'Please enter customer staff3 phone number.',
-    'error_cus_staff3_fax_required'						=> 'Please enter customer staff3 fax number.',
-    'error_cus_staff3_email_required'					=> 'Please enter customer staff3 email.',
-*/
     'error_cus_staff3_email_format'						=> '担当者③のメールアドレスを正しく入力してください。',
 
     
@@ -153,5 +132,12 @@ return [
     'error_newpasswd_alpha_num'							=> 'パスワードは英数字を指定してください。',
     'error_newpasswd_min'								=> 'パスワードは6文字以上で指定してください。',
     'error_confnewpasswd_same'							=> '新しいパスワードが一致しません。',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Student Contact
+    |--------------------------------------------------------------------------
+    */
+    
 
 ];

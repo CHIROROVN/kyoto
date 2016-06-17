@@ -64,7 +64,7 @@
                     <div class="help-block with-errors">※ {!! $errors->first('cus_old_name') !!}</div>
                   @endif
                 </td>
-                <td class="col-title"><label for="ent_id">親法人</label></td>
+                <td class="col-title"><label for="ent_id">親法人 <span class="note_required">※</span></label></td>
                 <td>
                   <select name="ent_id" id="ent_id" class="form-control form-control--small">
                     <option value="" selected="selected">なし</option>

@@ -152,4 +152,15 @@ return [
     //'user_message_danger_update'			=> '編集箇所を保存できませんでした。',	/*	common	*/
     //'user_message_success_delete'			=> '削除しました。',					/*	common	*/
     //'user_message_danger_delete'			=> '削除できませんでした。',			/*	common	*/
+
+    /*
+    |--------------------------------------------------------------------------
+    | Student Contact
+    |--------------------------------------------------------------------------
+    */
+    'stu_contact_title_index'               => 'お問い合わせ管理',
+    'stu_contact_title_regist'              => 'お問い合わせ情報の新規登録',
+    'stu_contact_title_edit'                => '登録済みお問い合わせ情報の編集',
+    'stu_contact_title_detail'              => '登録済みお問い合わせ情報の詳細',
+    'stu_contact_title_del_cnf'             => '登録済みお問い合わせ情報の削除',
 ];

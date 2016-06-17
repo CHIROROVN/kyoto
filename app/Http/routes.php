@@ -148,6 +148,19 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::get('logout', ['as' => 'backend.logout', 'uses' => 'AuthController@logout']);
 
 	/**
+	 * Student Contact
+	*/
+	Route::get('students/contact', ['as' => 'backend.students.contact.index', 'uses' => 'StudentContactController@index']);
+	Route::get('students/contact/regist', ['as' => 'backend.students.contact.regist', 'uses' => 'StudentContactController@getRegist']);
+	Route::post('students/contact/regist', ['as' => 'backend.students.contact.regist', 'uses' => 'StudentContactController@postRegist']);
+	Route::get('students/contact/edit', ['as' => 'backend.students.contact.edit', 'uses' => 'StudentContactController@getEdit']);
+	Route::post('students/contact/edit', ['as' => 'backend.students.contact.edit', 'uses' => 'StudentContactController@postEdit']);
+	Route::get('students/contact/detail', ['as' => 'backend.students.contact.detail', 'uses' => 'StudentContactController@detail']);
+	Route::get('students/contact/delete_cnf', ['as' => 'backend.students.contact.delete_cnf', 'uses' => 'StudentContactController@deleteCnf']);
+	Route::get('students/contact/delete', ['as' => 'backend.students.contact.delete', 'uses' => 'StudentContactController@delete']);
+
+
+	/**
 	 * Users
 	*/
 	Route::get('users', ['middleware' => 'permission_admin', 'as' => 'backend.users.index', 'uses' => 'UsersController@index']);
