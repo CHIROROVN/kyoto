@@ -7,15 +7,15 @@
     <table class="table table-bordered">
       <tbody>
         <tr>
-          <td class="col-title"><label for="present_code">プレゼントコード</label></td>
+          <td class="col-title"><label for="present_code">プレゼントコード <span class="note_required">※</span></label></td>
           <td>
             <input name="present_code" id="present_code" type="text" class="form-control form-control--small" maxlength="3" value="{{ old('present_code') }}">
-            @if ($errors->first('present_code'))<span class="error-input">{!! $errors->first('present_code') !!}</span>@endif
+            @if ($errors->first('present_code'))<span class="error-input">※{!! $errors->first('present_code') !!}</span>@endif
           </td>
-          <td class="col-title"><label for="present_name">プレゼント名</label></td>
+          <td class="col-title"><label for="present_name">プレゼント名 <span class="note_required">※</span></label></td>
           <td>
             <input name="present_name" id="present_name" type="text" class="form-control form-control--default" value="{{ old('present_name') }}">
-            @if ($errors->first('present_name'))<span class="error-input">{!! $errors->first('present_name') !!}</span>@endif
+            @if ($errors->first('present_name'))<span class="error-input">※{!! $errors->first('present_name') !!}</span>@endif
           </td>
         </tr>
       </tbody>

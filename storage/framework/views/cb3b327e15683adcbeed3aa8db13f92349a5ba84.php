@@ -2,24 +2,24 @@
 <!-- content customer list -->
     <section id="page">
       <div class="container">
-        <?php if($message = Session::get('success')): ?>
-            <br><br>
+        <div class="row content content--list">
+        <div class="msg-alert-action">
+          <?php if($message = Session::get('success')): ?>
             <div class="alert alert-success  alert-dismissible fade in" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <ul><strong><li> <?php echo e($message); ?></li></strong></ul>
+              <ul class="no-margin-bottom"><strong><li> <?php echo e($message); ?></li></strong></ul>
             </div>
           <?php elseif($message = Session::get('danger')): ?>
-          <br><br>
             <div class="alert alert-danger alert-dismissible fade in" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <ul><strong><li> <?php echo e($message); ?></li></strong></ul>
+              <ul class="no-margin-bottom"><strong><li> <?php echo e($message); ?></li></strong></ul>
             </div>
           <?php endif; ?>
-        <div class="row content content--list">
+        </div>
           <p>全<?php echo e($count_all); ?>件中、<?php echo e($total_count); ?>件が該当しました。うち、<?php echo e($record_from); ?>～<?php echo e($record_to + count($customers)); ?>件を表示しています。</p>
           <div class="row fl-right mar-bottom">
             <div class="col-md-12">

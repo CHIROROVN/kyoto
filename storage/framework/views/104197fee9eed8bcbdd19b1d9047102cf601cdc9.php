@@ -1,11 +1,30 @@
 <?php $__env->startSection('content'); ?>
 <div class="container">
   <div class="row content content--list">
+    <div class="msg-alert-action">
+      <?php if($message = Session::get('success')): ?>
+        <div class="alert alert-success  alert-dismissible fade in" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <ul class="no-margin-bottom"><strong><li> <?php echo e($message); ?></li></strong></ul>
+        </div>
+      <?php elseif($message = Session::get('danger')): ?>
+        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <ul class="no-margin-bottom"><strong><li> <?php echo e($message); ?></li></strong></ul>
+        </div>
+      <?php endif; ?>
+    </div>
+
     <div class="row fl-right mar-bottom">
       <div class="col-md-12">
         <input onclick="location.href='<?php echo e(route('backend.presents.regist')); ?>'" value="プレゼントの新規登録" type="button" class="btn btn-sm btn-primary"/>
       </div>
     </div>
+
     <table class="table table-bordered table-striped clearfix">
       <tr>
         <td class="col-title" align="center">プレゼントコード</td>
@@ -15,7 +34,7 @@
       </tr>
       <?php if(empty($presents) || count($presents) == 0): ?>
       <tr>
-        <td colspan="4"><h1 class="data-empty">Data empty...</h1></td>
+        <td colspan="4" align="center"><strong><?php echo e(trans('common.no_data_correspond')); ?></strong></td>
       </tr>
       <?php else: ?>
         <?php foreach($presents as $present): ?>
@@ -38,8 +57,8 @@
                     <p><?php echo e(trans('common.modal_content_delete')); ?></p>
                   </div>
                   <div class="modal-footer">
-                    <a href="<?php echo e(route('backend.presents.delete', [$present->presentlist_id, 'page' => $presents->currentPage()])); ?>" class="btn btn-xs btn-primary">削除</a>
-                    <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
+                    <a href="<?php echo e(route('backend.presents.delete', [$present->presentlist_id, 'page' => $presents->currentPage()])); ?>" class="btn btn-xs btn-primary"><?php echo e(trans('common.modal_btn_delete')); ?></a>
+                    <button type="button" class="btn btn-xs btn-default" data-dismiss="modal"><?php echo e(trans('common.modal_btn_cancel')); ?></button>
                   </div>
                 </div>
                 <!-- End Modal content-->
@@ -52,12 +71,14 @@
       <?php endif; ?>
     </table>
   </div>
+
   <div class="row mar-bottom30">
     <div class="col-md-12 text-center">
       <?php echo (new App\Pagination\SimplePagination($presents))->render(); ?>
 
     </div>
   </div>
+  
   <div class="row">
     <div class="col-md-12 text-center">
       <input name="button7" value="再検索（条件を引き継ぐ）" type="submit" class="btn btn-sm btn-primary form-control--mar-right">

@@ -4,24 +4,24 @@
 <!-- content customer list -->
     <section id="page">
       <div class="container">
-        @if ($message = Session::get('success'))
-            <br><br>
+        <div class="row content content--list">
+        <div class="msg-alert-action">
+          @if ($message = Session::get('success'))
             <div class="alert alert-success  alert-dismissible fade in" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <ul><strong><li> {{ $message }}</li></strong></ul>
+              <ul class="no-margin-bottom"><strong><li> {{ $message }}</li></strong></ul>
             </div>
           @elseif($message = Session::get('danger'))
-          <br><br>
             <div class="alert alert-danger alert-dismissible fade in" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <ul><strong><li> {{ $message }}</li></strong></ul>
+              <ul class="no-margin-bottom"><strong><li> {{ $message }}</li></strong></ul>
             </div>
           @endif
-        <div class="row content content--list">
+        </div>
           <p>全{{$count_all}}件中、{{$total_count}}件が該当しました。うち、{{$record_from}}～{{$record_to + count($customers)}}件を表示しています。</p>
           <div class="row fl-right mar-bottom">
             <div class="col-md-12">

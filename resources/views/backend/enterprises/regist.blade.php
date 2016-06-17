@@ -27,7 +27,7 @@
                     <div class="help-block with-errors">※ {!! $errors->first('ent_login') !!}</div>
                   @endif
                 </td>
-                <td class="col-title"><label for="textPass">パスワード <span class="note_required">※</span></label></td>
+                <td class="col-title"><label for="ent_passwd">パスワード <span class="note_required">※</span></label></td>
                 <td>
                   <input name="ent_passwd" id="ent_passwd" type="text" class="form-control form-control--default" value="{{old('ent_passwd')}}">
                   @if ($errors->first('ent_passwd'))

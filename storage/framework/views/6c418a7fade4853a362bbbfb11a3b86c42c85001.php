@@ -26,7 +26,7 @@
                     <div class="help-block with-errors">※ <?php echo $errors->first('ent_login'); ?></div>
                   <?php endif; ?>
                 </td>
-                <td class="col-title"><label for="textPass">パスワード <span class="note_required">※</span></label></td>
+                <td class="col-title"><label for="ent_passwd">パスワード <span class="note_required">※</span></label></td>
                 <td>
                   <input name="ent_passwd" id="ent_passwd" type="text" class="form-control form-control--default" value="<?php echo e(old('ent_passwd')); ?>">
                   <?php if($errors->first('ent_passwd')): ?>
@@ -35,15 +35,18 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">傘下の学校</td>
+                <td class="col-title">傘下の学校 <span class="note_required">※</span></td>
                 <td colspan="5">
                   <table class="table table-bordered" style="background:transparent;">
                     <tbody>
                       <tr>
                         <td rowspan="2" valign="bottom">
                           <select name="cus_name_lb2[]" multiple="multiple" id="cus_name_lb2" style="width: 120px;">
-                            <!-- <option value="">&nbsp;</option> -->
+                            
                           </select>
+                          <?php if($errors->first('cus_name_lb2')): ?>
+                            <div class="help-block with-errors">※ <?php echo $errors->first('cus_name_lb2'); ?></div>
+                          <?php endif; ?>
                         </td>
                         <td align="right"><input name="cus_name_add" id="cus_name_add" value="←追加" type="button"></td>
                         <td><select name="cus_name_kana" id="cus_name_kana">
@@ -64,10 +67,6 @@
                         <td>
                           <select name="cus_name_lb1" multiple="multiple" id="cus_name_lb1" style="width: 120px;">
                             <option value="" style="width: 100px;">&nbsp;</option>
-                            <!-- <option>岡山理科大学</option>
-                            <option>岡山商科大学</option>
-                            <option>岡山大学</option>
-                            <option>岡山学院大学</option> -->
                           </select>
                         </td>
                       </tr>

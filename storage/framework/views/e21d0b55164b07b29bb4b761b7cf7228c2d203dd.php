@@ -49,8 +49,8 @@
         <li><a href="<?php echo e(route('backend.customers.search')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>顧客マスタ管理</a></li>
         <li><a href="<?php echo e(route('backend.enterprises.index')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>法人マスタ管理</a></li>
         <li><a href="<?php echo e(route('backend.baitais.search')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>媒体マスタ管理</a></li>
-        <li><a href="pamphlet_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>資料請求番号マスタ管理</a></li>
-        <li><a href="g-pamphlet_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>一括資料請求番号マスタ管理</a></li>
+        <li><a href="<?php echo e(route('backend.pamphlets.search')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>資料請求番号マスタ管理</a></li>
+        <li><a href="<?php echo e(route('backend.gpamphlets.search')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>一括資料請求番号マスタ管理</a></li>
         <li><a href="<?php echo e(route('backend.bunyas.search')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>分野番号マスタ管理</a></li>
         <li><a href="highschool_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>高等学校マスタ管理</a></li>
         <li><a href="<?php echo e(route('backend.unyversitys.index')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>大学マスタ管理</a></li>
@@ -67,7 +67,7 @@
       <div class="col-md-4">
         <h2>マスタ管理</h2>
         <ul>
-          <li><a href="customer_search.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>顧客マスタ管理</a></li>
+          <li><a href="<?php echo e(route('backend.customers.search')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>顧客マスタ管理</a></li>
           <li><a href="<?php echo e(route('backend.enterprises.index')); ?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>法人マスタ管理</a></li>
         </ul>
       </div>

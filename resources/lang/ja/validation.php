@@ -7,11 +7,10 @@ return [
     |--------------------------------------------------------------------------
     */
     "error_ent_name_required"							=> "法人名を入力してください。",
-    "error_ent_login_id_required"                       => "Please enter enterprise login id.",
-    "error_ent_login_id_exist"                          => "This login id existed, try again.",
-    "error_ent_passwd_required"                         => "Please enter enterprise password",
-    "error_ent_passwd_required"                         => "Please choose customer",
-    "error_ent_cus_required"                            => "Please choose customer",
+    "error_ent_login_id_required"                       => "ログインIDを入力してください。",
+    "error_ent_login_id_exist"                          => "ログインIDがすでに存在しています。",
+    "error_ent_passwd_required"                         => "パスワードを入力してください。",
+    "error_ent_cus_required"                            => "顧客を選択してください。",
 
     /*
     |--------------------------------------------------------------------------
@@ -40,24 +39,32 @@ return [
     'error_cus_staff1_fax_required'						=> '担当者①のFAXを入力してください。',
     'error_cus_staff1_email_required'					=> '担当者①のメールアドレスを入力してください。',
     'error_cus_staff1_email_format'						=> '担当者①のメールアドレスを正しく入力してください。',
+
 /*	cus_staff2 and cus_staff3 are NOT required;
     'error_cus_staff2_belong_required'					=> 'Please enter customer staff2 belong.',
     'error_cus_staff2_name_required'					=> 'Please enter customer staff2 name.',
     'error_cus_staff2_name_kana_required'				=> 'Please enter customer staff2 name kana.',
-    'error_cus_staff2_name_kana_must_kana'				=> 'Customer staff2 name must be kana characters.',
-    'error_cus_staff2_phone_required'					=> 'Please enter customer staff2 phone number.',
+*/
+    'error_cus_staff2_name_kana_must_kana'				=> 'ひらがなで入力してください。',
+
+/*    'error_cus_staff2_phone_required'					=> 'Please enter customer staff2 phone number.',
     'error_cus_staff2_fax_required'						=> 'Please enter customer staff2 fax number.',
     'error_cus_staff2_email_required'					=> 'Please enter customer staff2 email.',
-    'error_cus_staff2_email_format'						=> 'Please enter customer staff2 email correct format.',
-    'error_cus_staff3_belong_required'					=> 'Please enter customer staff3 belong.',
+*/
+    'error_cus_staff2_email_format'						=> '担当者②のメールアドレスを正しく入力してください。',
+
+/*    'error_cus_staff3_belong_required'					=> 'Please enter customer staff3 belong.',
     'error_cus_staff3_name_required'					=> 'Please enter customer staff3 name.',
     'error_cus_staff3_name_kana_required'				=> 'Please enter customer staff3 name kana.',
-    'error_cus_staff3_name_kana_must_kana'				=> 'Customer staff3 name must be kana.',
-    'error_cus_staff3_phone_required'					=> 'Please enter customer staff3 phone number.',
+*/
+    'error_cus_staff3_name_kana_must_kana'				=> 'ひらがなで入力してください。',
+
+/*    'error_cus_staff3_phone_required'					=> 'Please enter customer staff3 phone number.',
     'error_cus_staff3_fax_required'						=> 'Please enter customer staff3 fax number.',
     'error_cus_staff3_email_required'					=> 'Please enter customer staff3 email.',
-    'error_cus_staff3_email_format'						=> 'Please enter customer staff3 email correct format.',
 */
+    'error_cus_staff3_email_format'						=> '担当者③のメールアドレスを正しく入力してください。',
+
     
     
     /*
@@ -135,7 +142,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'error_u_name_required'								=> '名前を入力してください。',
-    'error_u_login_required'							=> 'ログインIDを入力してください。',
+    'error_u_login_required'							=> 'ユーザーIDを入力してください。',
     'error_u_passwd_required'							=> 'パスワードを入力してください。',
     'error_u_passwd_min'								=> 'パスワードは6文字以上で指定してください。',
     'error_u_belong_required'							=> '所属を入力してください。',
