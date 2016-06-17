@@ -139,12 +139,12 @@ return [
     | Model University
     |--------------------------------------------------------------------------
     */
-    'error_univ_code_required'                             => 'Please enter university code!',
-    'error_univ_code_unique'                               => 'University code exist!',
-    'error_univ_name_required'                             => 'Please enter university name!',
-    'error_univ_name_kana_required'                        => 'Please enter university name kana!',
-    'error_univ_name_kana_regex'                           => 'Format name hiragana!',
-    'error_univ_pref_id_required'                          => 'Please enter pref!',
+    'error_univ_code_required'                             => '大学コードを入力してください。',
+    'error_univ_code_unique'                               => 'そのCODEは既に使用されています。',
+    'error_univ_name_required'                             => '大学名を入力してください。',
+    'error_univ_name_kana_required'                        => '大学名かなを入力してください。',
+    'error_univ_name_kana_regex'                           => 'ひらがなで入力してください。',
+    'error_univ_pref_id_required'                          => '都道府県を選択してください。',
 
     /*
     |--------------------------------------------------------------------------

@@ -146,12 +146,6 @@ return [
     'user_message_danger_login'				=> 'パスワードが変更できませんでした。',
     'user_message_danger_change_password'	=> '現在のパスワードが違います。',
     'user_message_success_login'			=> 'パスワードを変更しました。',
-    //'user_message_success_regist'			=> '登録が完了しました。',				/*	common	*/
-    //'user_message_danger_regist'			=> '登録できませんでした。',			/*	common	*/
-    //'user_message_success_update'			=> '編集箇所を保存しました。',			/*	common	*/
-    //'user_message_danger_update'			=> '編集箇所を保存できませんでした。',	/*	common	*/
-    //'user_message_success_delete'			=> '削除しました。',					/*	common	*/
-    //'user_message_danger_delete'			=> '削除できませんでした。',			/*	common	*/
 
     /*
     |--------------------------------------------------------------------------
@@ -160,7 +154,7 @@ return [
     */
     'university_title_index'         => '大学情報の検索結果一覧',
     'university_title_regist'        => '大学情報の新規登録',
-    'university_title_edit'          => '大学情報の新規登録',
+    'university_title_edit'          => '大学情報の編集',
     'university_title_search'        => '大学の検索',
 
     /*
