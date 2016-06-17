@@ -133,6 +133,19 @@ return [
     'error_newpasswd_min'								=> 'パスワードは6文字以上で指定してください。',
     'error_confnewpasswd_same'							=> '新しいパスワードが一致しません。',
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Model University
+    |--------------------------------------------------------------------------
+    */
+    'error_univ_code_required'                             => 'Please enter university code!',
+    'error_univ_code_unique'                               => 'University code exist!',
+    'error_univ_name_required'                             => 'Please enter university name!',
+    'error_univ_name_kana_required'                        => 'Please enter university name kana!',
+    'error_univ_name_kana_regex'                           => 'Format name hiragana!',
+    'error_univ_pref_id_required'                          => 'Please enter pref!',
+
     /*
     |--------------------------------------------------------------------------
     | Student Contact

@@ -99,6 +99,17 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::get('gpamphlets/search', ['middleware' => 'permission_admin', 'as' => 'backend.gpamphlets.search', 'uses' => 'GPamphletController@search']);
 	Route::get('gpamphlets/autocomplete', ['middleware' => 'permission_admin', 'as' => 'backend.gpamphlets.autocomplete', 'uses' => 'GPamphletController@AutoComplete']);
 
+	/**
+	 * unyversitys
+	*/
+	Route::get('universities', ['middleware' => 'permission_admin', 'as' => 'backend.universities.index', 'uses' => 'UniversityController@index']);
+	Route::get('universities/regist', ['middleware' => 'permission_admin', 'as' => 'backend.universities.regist', 'uses' => 'UniversityController@getRegist']);
+	Route::post('universities/regist', ['middleware' => 'permission_admin', 'as' => 'backend.universities.regist', 'uses' => 'UniversityController@postRegist']);
+	Route::get('universities/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.universities.edit', 'uses' => 'UniversityController@getEdit']);
+	Route::post('universities/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.universities.edit', 'uses' => 'UniversityController@postEdit']);
+	Route::get('universities/delete/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.universities.delete', 'uses' => 'UniversityController@delete']);
+	Route::get('universities/search', ['middleware' => 'permission_admin', 'as' => 'backend.universities.search', 'uses' => 'UniversityController@search']);
+
 
 	/**
 	 * enterprises
