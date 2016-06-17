@@ -17,7 +17,7 @@
             <input name="baitai_name" id="baitai_name" type="text" class="form-control form-control--default" value="{{ $baitai->baitai_name }}">
             @if ($errors->first('baitai_name'))<span class="error-input">{!! $errors->first('baitai_name') !!}</span>@endif
           </td>
-          <td class="col-title"><label for="rdNewOld">性別 <span class="note_required">※</span></label></td>
+          <td class="col-title"><label for="rdNewOld">新旧<!-- 性別 --> <span class="note_required">※</span></label></td>
           <td>
             <input name="baitai_kind" id="rdNewOld" value="2" type="radio" @if($baitai->baitai_kind == 2) {{'checked'}} @endif> 新　　　
             <input name="baitai_kind" value="1" type="radio" @if($baitai->baitai_kind == 1) {{'checked'}} @endif> 旧
