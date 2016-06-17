@@ -74,4 +74,22 @@ class StudentController extends BackendController
 	public function delete(){
 		
 	}
+
+	/************************************************************************
+    * get student delete
+    /************************************************************************/
+	public function import(){
+		$data['title'] 			= '個人情報の一括取り込み';
+
+		return view('backend.students.import', $data);
+	}
+
+	/************************************************************************
+    * get student delete
+    /************************************************************************/
+	public function import_result(){
+		$data['title'] 			= '個人情報の新規登録';
+
+		return view('backend.students.import_result', $data);
+	}
 }

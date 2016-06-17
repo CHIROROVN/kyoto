@@ -187,18 +187,22 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	/**
 	 * Students
 	*/
-	Route::get('student/search', ['as' => 'backend.students.search', 'uses' => 'StudentController@search']);
+	Route::get('students/search', ['as' => 'backend.students.search', 'uses' => 'StudentController@search']);
 	Route::get('student', ['as' => 'backend.students.index', 'uses' => 'StudentController@index']);
-	Route::get('student/regist', ['as' => 'backend.students.regist', 'uses' => 'StudentController@regist']);
-	Route::get('student/update', ['as' => 'backend.students.update', 'uses' => 'StudentController@getUpdate']);
-	Route::post('student/update', ['as' => 'backend.students.update', 'uses' => 'StudentController@postUpdate']);
-	Route::get('student/detail/{?id}', ['as' => 'backend.students.detail', 'uses' => 'StudentController@detail']);
+	Route::get('students/regist', ['as' => 'backend.students.regist', 'uses' => 'StudentController@regist']);
+	Route::get('students/update', ['as' => 'backend.students.update', 'uses' => 'StudentController@getUpdate']);
+	Route::post('students/update', ['as' => 'backend.students.update', 'uses' => 'StudentController@postUpdate']);
+	Route::get('students/detail/{?id}', ['as' => 'backend.students.detail', 'uses' => 'StudentController@detail']);
 
-	Route::get('student/detail', ['as' => 'backend.students.detail', 'uses' => 'StudentController@detail']);
+	Route::get('students/detail', ['as' => 'backend.students.detail', 'uses' => 'StudentController@detail']);
 
-	Route::get('student/delete', ['as' => 'backend.students.delete', 'uses' => 'StudentController@delete']);
+	Route::get('students/delete', ['as' => 'backend.students.delete', 'uses' => 'StudentController@delete']);
 
-	Route::get('student/delete_cnf', ['as' => 'backend.students.delete_cnf', 'uses' => 'StudentController@deleteCnf']);
+	Route::get('students/delete_cnf', ['as' => 'backend.students.delete_cnf', 'uses' => 'StudentController@deleteCnf']);
+
+	Route::get('students/import', ['as' => 'backend.students.import', 'uses' => 'StudentController@import']);
+
+	Route::get('students/import_result', ['as' => 'backend.students.import_result', 'uses' => 'StudentController@import_result']);
 
 
 	/**

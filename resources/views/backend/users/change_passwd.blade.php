@@ -29,7 +29,9 @@
               <div class="col-md-6">
                 <input type="password" name="currpasswd" class="form-control" id="currpasswd" value="{{old('currpasswd')}}">
                 <div class="help-block with-errors">
-                	<ul class="list-unstyled"><li>@if ($errors->first('currpasswd')) ※ {!! $errors->first('currpasswd') !!} @endif</li></ul>
+                @if ($errors->first('currpasswd'))
+                    <div class="help-block with-errors">※ {!! $errors->first('currpasswd') !!}</div>
+                  @endif
                 </div>
               </div>
             </div>
@@ -38,7 +40,9 @@
               <div class="col-md-6">
                 <input type="password" name="newpasswd" class="form-control" id="newpasswd">
                 <div class="help-block with-errors">
-                	<ul class="list-unstyled"><li>@if ($errors->first('newpasswd')) ※ {!! $errors->first('newpasswd') !!} @endif</li></ul>
+                  @if ($errors->first('newpasswd'))
+                    <div class="help-block with-errors">※ {!! $errors->first('newpasswd') !!}</div>
+                  @endif
                 </div>
               </div>
             </div>
@@ -47,7 +51,9 @@
               <div class="col-md-6">
                 <input type="password" name="confnewpasswd" class="form-control" id="confnewpasswd">
                 <div class="help-block with-errors">
-                	<ul class="list-unstyled"><li>@if ($errors->first('confnewpasswd')) ※ {!! $errors->first('confnewpasswd') !!} @endif</li></ul>
+                  @if ($errors->first('confnewpasswd'))
+                    <div class="help-block with-errors">※ {!! $errors->first('confnewpasswd') !!}</div>
+                  @endif
                 </div>
               </div>
             </div>
