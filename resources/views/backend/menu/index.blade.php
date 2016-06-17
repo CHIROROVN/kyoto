@@ -22,8 +22,8 @@
     <div class="col-md-4">
       <h2>個人情報管理業務</h2>
       <ul>
-        <li><a href="student_regist.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>個人情報の新規登録</a></li>
-        <li><a href="student_import.html"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>個人情報のCSV一括登録</a></li>
+        <li><a href="{{route('backend.students.regist')}}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>個人情報の新規登録</a></li>
+        <li><a href="{{route('backend.students.import')}}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>個人情報のCSV一括登録</a></li>
         <li><a href="{{ route('backend.students.search') }}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>個人情報の検索・一覧・修正・削除・CSV出力</a></li>
       </ul>
     </div>
