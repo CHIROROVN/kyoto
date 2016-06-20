@@ -20,7 +20,7 @@ class StudentController extends BackendController
 	public function index(){
 		$data['title'] 			= '個人情報の検索結果一覧';
 
-		return view('backend.students.index', $data);
+		return view('backend.students.infomation.index', $data);
 	}
 
 	/************************************************************************
@@ -29,7 +29,7 @@ class StudentController extends BackendController
 	public function search(){
 		$data['title'] 			= '個人情報の検索';
 
-		return view('backend.students.search', $data);
+		return view('backend.students.infomation.search', $data);
 	}
 
 	/************************************************************************
@@ -38,7 +38,7 @@ class StudentController extends BackendController
 	public function regist(){
 		$data['title'] 			= '個人情報の新規登録';
 
-		return view('backend.students.regist', $data);
+		return view('backend.students.infomation.regist', $data);
 	}
 
 	/************************************************************************
@@ -47,7 +47,7 @@ class StudentController extends BackendController
 	public function detail(){
 		$data['title'] 			= '登録済み個人情報の参照';
 
-		return view('backend.students.detail', $data);
+		return view('backend.students.infomation.detail', $data);
 	}
 
 	/************************************************************************
@@ -56,7 +56,7 @@ class StudentController extends BackendController
 	public function getUpdate(){
 		$data['title'] 			= '登録済み個人情報の編集';
 
-		return view('backend.students.update', $data);
+		return view('backend.students.infomation.update', $data);
 	}
 
 	/************************************************************************
@@ -65,7 +65,7 @@ class StudentController extends BackendController
 	public function deleteCnf(){
 		$data['title'] 			= '登録済み個人情報の削除';
 
-		return view('backend.students.delete_cnf', $data);
+		return view('backend.students.infomation.delete_cnf', $data);
 	}
 
 	/************************************************************************
@@ -81,7 +81,7 @@ class StudentController extends BackendController
 	public function import(){
 		$data['title'] 			= '個人情報の一括取り込み';
 
-		return view('backend.students.import', $data);
+		return view('backend.students.infomation.import', $data);
 	}
 
 	/************************************************************************
@@ -90,6 +90,6 @@ class StudentController extends BackendController
 	public function import_result(){
 		$data['title'] 			= '個人情報の新規登録';
 
-		return view('backend.students.import_result', $data);
+		return view('backend.students.infomation.import_result', $data);
 	}
 }

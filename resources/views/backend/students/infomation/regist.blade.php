@@ -11,7 +11,7 @@
                   <td>
                     <input name="txtname" id="textnumber" type="text" class="form-control form-control--small">
                   </td>
-                  <td class="col-title"><label for="textmednumber">媒体番号</label></td>
+                  <td class="col-title"><label for="textmednumber">媒体番号 <span class="note_required">※</span></label></td>
                   <td colspan="3"><input name="txtmednumber" id="textmednumber" type="text" class="form-control form-control--small"> →</td>
                 </tr>
                 <tr>
