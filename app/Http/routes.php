@@ -159,9 +159,11 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::get('logout', ['as' => 'backend.logout', 'uses' => 'AuthController@logout']);
 
 	/**
-	 * Student Contact
+	 * Student Contact`
 	*/
+
 	Route::get('students/contact/{stu_id?}', ['as' => 'backend.students.contact.index', 'uses' => 'StudentContactController@index']);
+
 	Route::get('students/contact/regist', ['as' => 'backend.students.contact.regist', 'uses' => 'StudentContactController@getRegist']);
 	Route::post('students/contact/regist', ['as' => 'backend.students.contact.regist', 'uses' => 'StudentContactController@postRegist']);
 	Route::get('students/contact/edit', ['as' => 'backend.students.contact.edit', 'uses' => 'StudentContactController@getEdit']);
@@ -188,7 +190,7 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	 * Students
 	*/
 	Route::get('students/search', ['as' => 'backend.students.search', 'uses' => 'StudentController@search']);
-	Route::get('student', ['as' => 'backend.students.index', 'uses' => 'StudentController@index']);
+	Route::get('students', ['as' => 'backend.students.index', 'uses' => 'StudentController@index']);
 	Route::get('students/regist', ['as' => 'backend.students.regist', 'uses' => 'StudentController@regist']);
 	Route::get('students/update', ['as' => 'backend.students.update', 'uses' => 'StudentController@getUpdate']);
 	Route::post('students/update', ['as' => 'backend.students.update', 'uses' => 'StudentController@postUpdate']);

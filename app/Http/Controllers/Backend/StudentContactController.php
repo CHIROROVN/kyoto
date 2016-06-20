@@ -16,8 +16,6 @@ class StudentContactController extends BackendController
 
 	public function index(){
 		$stu_id  = Input::get('stu_id');
-		echo "ID: ".$stu_id;die;
-
 		$data['title'] 			= trans('common.stu_contact_title_index');
 		$data['stu_id'] 			= $stu_id;
 		$contactModel = new ContactModel();
