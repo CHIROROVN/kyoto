@@ -56,8 +56,12 @@ class UserModel
         } else {
             $db = $results->get();
         }
-
         return $db;
+    }
+
+    public function get_list($pagination = true)
+    {
+        return DB::table($this->table)->where('last_kind', '<>', DELETE)->lists('u_name', 'u_id');
     }
 
     public function count() {

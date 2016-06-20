@@ -100,7 +100,7 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::get('gpamphlets/autocomplete', ['middleware' => 'permission_admin', 'as' => 'backend.gpamphlets.autocomplete', 'uses' => 'GPamphletController@AutoComplete']);
 
 	/**
-	 * unyversitys
+	 * universities
 	*/
 	Route::get('universities', ['middleware' => 'permission_admin', 'as' => 'backend.universities.index', 'uses' => 'UniversityController@index']);
 	Route::get('universities/regist', ['middleware' => 'permission_admin', 'as' => 'backend.universities.regist', 'uses' => 'UniversityController@getRegist']);
@@ -161,7 +161,7 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	/**
 	 * Student Contact
 	*/
-	Route::get('students/contact', ['as' => 'backend.students.contact.index', 'uses' => 'StudentContactController@index']);
+	Route::get('students/contact/{stu_id?}', ['as' => 'backend.students.contact.index', 'uses' => 'StudentContactController@index']);
 	Route::get('students/contact/regist', ['as' => 'backend.students.contact.regist', 'uses' => 'StudentContactController@getRegist']);
 	Route::post('students/contact/regist', ['as' => 'backend.students.contact.regist', 'uses' => 'StudentContactController@postRegist']);
 	Route::get('students/contact/edit', ['as' => 'backend.students.contact.edit', 'uses' => 'StudentContactController@getEdit']);
@@ -213,14 +213,6 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::post('student/present_regist', ['as' => 'backend.students.present_regist', 'uses' => 'StudentController@postPresentRegist']);
 	Route::get('students/present_update', ['as' => 'backend.students.present_update', 'uses' => 'StudentController@getPresentUpdate']);
 	Route::post('student/present_update', ['as' => 'backend.students.present_update', 'uses' => 'StudentController@postPresentUpdate']);
-
-	/**
-	 * University
-	*/
-	Route::get('university', ['as' => 'backend.unyversitys.index', 'uses' => 'UniversityController@index']);
-	Route::get('university/regist', ['as' => 'backend.unyversitys.regist', 'uses' => 'UniversityController@regist']);
-	Route::get('university/search', ['as' => 'backend.unyversitys.search', 'uses' => 'UniversityController@search']);
-
 });
 
 Route::group(['prefix' => '4school', 'namespace' => 'Frontend'], function () 

@@ -42,7 +42,7 @@
                     <div class="help-block with-errors">※ {!! $errors->first('u_login') !!}</div>
                   @endif
                 </td>
-                <td class="col-title"><label for="u_passwd">パスワード</span></label></td></label></td>
+                <td class="col-title"><label for="u_passwd">パスワード <span class="note_required">※</span></label></td>
                 <td>
                   <input name="u_passwd" id="u_passwd" type="password" class="form-control form-control--default" value="">
                   @if ($errors->first('u_passwd'))
@@ -51,7 +51,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title"><label for="u_belong">所属 <span class="note_required">※</span></label></td>
+                <td class="col-title"><label for="u_belong">所属</label></td>
                 <td>
                   <input name="u_belong" id="u_belong" type="text" class="form-control form-control--default" value="{{$user->u_belong}}">
                   @if ($errors->first('u_belong'))

@@ -9,12 +9,24 @@ class ContactModel
     public function Rules()
     {
         return array(
-            'cus_code'                      => 'required|unique:m_customer',
+            'contact_title'                      => 'required',
+            'contact_main'                       => 'required',
         );
     }
 
     public function Messages()
     {
+        return array(
+            'contact_title.required'             => 'required',
+            'contact_main.required'              => 'required',
+        );
+    }
+
+    public function get_all(){
+        $query = DB::table($this->table)
+                        ->where('last_kind', '<>', DELETE)
+                        ->orderBy('contact_id', 'asc');
+        return  $query->simplePaginate(PAGINATION);
     }
 
 }

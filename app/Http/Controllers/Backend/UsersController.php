@@ -53,7 +53,6 @@ class UsersController extends BackendController
 	 */
 	public function postRegist(){
 		$userModel 					= new UserModel();
-
 		$dataInsert 				= array(
 			'remember_token'		=> Input::get('_token'),
 			'u_name'				=> Input::get('u_name'),
@@ -64,7 +63,7 @@ class UsersController extends BackendController
         	'last_kind'				=> INSERT,
         	'last_date'         	=> date('Y-m-d H:i:s'),
         	'last_ipadrs'       	=> CLIENT_IP_ADRS,
-        	'last_user'				=> (Auth::check()) ? Auth::user()->u_id : 0,
+        	'last_user'				=> (Auth::check()) ? Auth::user()->u_id : '',
 		);
 		$validator  = Validator::make(Input::all(), $userModel->addRules(), $userModel->Messages());
         if ( $validator->fails() ) {

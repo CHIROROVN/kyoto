@@ -44,7 +44,8 @@
                 <td align="right">{{$customer->cus_code}}</td>
                 <td>{{$customer->cus_name}}</td>
                 <td>{{$customer->cus_old_name}}</td>
-                <td align="center"><input onclick="location.href='{{route('backend.customers.detail', $customer->cus_id)}}'" value="詳細" type="button" class="btn btn-xs btn-primary"></td>
+                <td align="center"><input onclick="location.href='{{route('backend.students.contact.index', ['stu_d'=>'1'])}}'" value="詳細" type="button" class="btn btn-xs btn-primary"></td>
+                <!-- <td align="center"><input onclick="location.href='{{route('backend.customers.detail', $customer->cus_id)}}'" value="詳細" type="button" class="btn btn-xs btn-primary"></td> -->
                 <td align="center"><input onclick="location.href='{{route('backend.customers.edit', $customer->cus_id)}}'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
                 <td align="center">
                   <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal-{{ $customer->cus_id }}">削除</button>

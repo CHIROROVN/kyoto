@@ -9,3 +9,8 @@
 		}
 	}
 
+	function formatDate($date=null){
+		$dates = date_create($date);
+		return date_format($dates,"Y/m/d");
+	}
+

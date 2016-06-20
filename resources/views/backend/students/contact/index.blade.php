@@ -37,7 +37,7 @@
             </tr>
           </table>
           <div class="text-right">
-            <input onclick="location.href='student_contact_regist.html'" value="お問い合わせ情報の新規登録" type="button" class="btn btn-sm btn-primary">
+            <input onclick="location.href='{{route('backend.students.contact.regist')}}'" value="お問い合わせ情報の新規登録" type="button" class="btn btn-sm btn-primary">
           </div>
           <table class="table table-bordered table-striped clearfix">
             <tr>
@@ -48,7 +48,22 @@
               <td class="col-title" align="center">編集</td>
               <td class="col-title" align="center">削除</td>
             </tr>
-            <tr>
+            @if(count($contacts) > 0)
+              @foreach($contacts as $contact)
+                <tr>
+                  <td>{{@formatDate($contact->contact_date)}}</td>
+                  <td>{{$contact->contact_title}}</td>
+                  <td>{{@$users[$contact->contact_fst_user]}}</td>
+                  <td align="center"><input onclick="location.href='{{route('backend.students.contact.detail')}}'" value="詳細" type="button" class="btn btn-xs btn-primary"></td>
+                  <td align="center"><input onclick="location.href='{{route('backend.students.contact.edit')}}'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
+                  <td align="center"><input onclick="location.href='{{route('backend.students.contact.delete_cnf')}}'" value="削除" type="button" class="btn btn-xs btn-primary"></td>
+                </tr>
+              @endforeach
+            @else
+              <tr><td colspan="6" style="text-align: center;">該当するデータがありません。</td></tr>
+            @endif
+
+            <!-- <tr>
               <td>2016/08/31</td>
               <td>資料請求内容の変更について</td>
               <td>山田花子</td>
@@ -71,7 +86,8 @@
               <td align="center"><input onclick="location.href='student_contact_detail.html'" value="詳細" type="button" class="btn btn-xs btn-primary"></td>
               <td align="center"><input onclick="location.href='student_contact_edit.html'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
               <td align="center"><input onclick="location.href='student_contact_delete_cnf.html'" value="削除" type="button" class="btn btn-xs btn-primary"></td>
-            </tr>
+            </tr> -->
+
           </table>
         </div>
         <div class="row">
