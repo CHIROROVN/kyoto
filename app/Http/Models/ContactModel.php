@@ -22,11 +22,21 @@ class ContactModel
         );
     }
 
-    public function get_all(){
+    public function get_all($stu_id=null){
         $query = DB::table($this->table)
                         ->where('last_kind', '<>', DELETE)
+                        ->where('stu_id', '=', $stu_id)
                         ->orderBy('contact_id', 'asc');
         return  $query->simplePaginate(PAGINATION);
     }
 
+    public function get_contact_by_id($stu_id=null, $contact_id=null){
+
+        $query = DB::table($this->table)
+                        ->where('last_kind', '<>', DELETE)
+                        ->where('stu_id', '=', $stu_id)
+                        ->where('contact_id', '=', $contact_id)
+                        ->orderBy('contact_id', 'asc');
+        return  $query->get();
+    }
 }
