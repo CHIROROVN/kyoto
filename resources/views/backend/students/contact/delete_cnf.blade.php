@@ -9,17 +9,17 @@
           <table class="table table-bordered">
             <tr>
               <td class="col-title">日付</td>
-              <td>西暦 2016 年 4 月 15 日</td>
+              <td>西暦 {{date('Y', strtotime($contact[0]->contact_date))}} 年 {{date('m', strtotime($contact['0']->contact_date))}} 月 {{date('d', strtotime($contact['0']->contact_date))}} 日</td>
               <td class="col-title">応対者</td>
-              <td>山田花子</td>
+              <td>{{$users[$contact['0']->contact_fst_user]}}</td>
             </tr>
             <tr>
               <td class="col-title">タイトル</td>
-              <td colspan="3">資料請求番号の変更について</td>
+              <td colspan="3">{{$contact['0']->contact_title}}</td>
             </tr>
             <tr>
               <td class="col-title">内容</td>
-              <td colspan="3">番号を間違えたので修正したい。<br />12345→11111<br />資料請求情報管理から修正済みです</td>
+              <td colspan="3"><?php echo nl2br($contact['0']->contact_main) ?></td>
             </tr>
           </table>
         </div>
@@ -27,7 +27,6 @@
           <div class="col-md-12 text-center">
 
             <input type="button" onClick="location.href='{{route('backend.students.contact.delete', ['stu_id'=>$stu_id, 'contact_id'=>$contact_id])}}'" name="delete" value="削除する" class="btn btn-sm btn-primary mar-right btn-mar-right">
-
             <input type="button" onClick="history.back()" value="やめる" class="btn btn-sm btn-primary">
           </div>
         </div>

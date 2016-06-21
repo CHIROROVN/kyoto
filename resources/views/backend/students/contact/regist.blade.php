@@ -5,14 +5,14 @@
       <div class="container">
         {!! Form::open( ['id' => 'frmContactRegist', 'class' => 'form-horizontal','method' => 'post', 'route' => ['backend.students.contact.regist', $stu_id], 'enctype'=>'multipart/form-data', 'accept-charset'=>'utf-8']) !!}
         <div class="row content content--list">
-          <h3><a style="text-decoration:none;" href="{{route('backend.students.contact.index')}}">お問い合わせ管理</a>　＞　お問い合わせ情報の新規登録</h3>
+          <h3><a style="text-decoration:none;" href="{{route('backend.students.contact.index', $stu_id)}}">お問い合わせ管理</a>　＞　お問い合わせ情報の新規登録</h3>
           <table class="table table-bordered">
             <tr>
               <td class="col-title">日付 <span class="note_required">※</span></td>
               <td><label for="date">西暦</label>
-                <input name="year" id="year" class="form-control form-control--small-xs" type="text"> 年 
-                <input name="month" id="month" class="form-control form-control--small-xs" type="text"> 月 
-                <input name="day" id="day" class="form-control form-control--small-xs" type="text"> 日
+                <input name="year" id="year" class="form-control form-control--small-xs" type="text" maxlength="4" value="{{old('year')}}"> 年 
+                <input name="month" id="month" class="form-control form-control--small-xs" type="text" maxlength="2" value="{{old('month')}}"> 月 
+                <input name="day" id="day" class="form-control form-control--small-xs" type="text" maxlength="2" value="{{old('day')}}"> 日
                 <input name="dateNow" id="dateNow" value="今日" type="button" class="btn btn-xs btn-primary">
                   @if ($errors->first('year'))
                     <div class="help-block with-errors">※ {!! $errors->first('year') !!}</div>
@@ -31,7 +31,7 @@
             </tr>
             <tr>
               <td class="col-title"><label for="contact_title">タイトル <span class="note_required">※</span></label></td>
-              <td colspan="3"><input name="contact_title" id="contact_title" class="form-control form-control--large" type="text">
+              <td colspan="3"><input name="contact_title" id="contact_title" class="form-control form-control--large" type="text" value="{{old('contact_title')}}">
                   @if ($errors->first('contact_title'))
                     <div class="help-block with-errors">※ {!! $errors->first('contact_title') !!}</div>
                   @endif
@@ -39,7 +39,7 @@
             </tr>
             <tr>
               <td class="col-title"><label for="contact_main">内容 <span class="note_required">※</span></label></td>
-              <td colspan="3"><textarea name="contact_main" cols="70" rows="5" id="contact_main" class="form-control form-control--large"></textarea>
+              <td colspan="3"><textarea name="contact_main" cols="70" rows="5" id="contact_main" class="form-control form-control--large">{{old('contact_main')}}</textarea>
                   @if ($errors->first('contact_main'))
                     <div class="help-block with-errors">※ {!! $errors->first('contact_main') !!}</div>
                   @endif
@@ -54,7 +54,7 @@
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-            <input onclick="location.href='{{route('backend.students.contact.index')}}'" value="お問い合わせ情報一覧に戻る" type="button" class="btn btn-sm btn-primary">
+            <input onclick="location.href='{{route('backend.students.contact.index', $stu_id)}}'" value="お問い合わせ情報一覧に戻る" type="button" class="btn btn-sm btn-primary">
           </div>
         </div>
         {!! Form::close() !!}

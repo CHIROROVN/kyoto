@@ -5,20 +5,31 @@ use DB;
 class ContactModel
 {
     protected $table = 't_contact';
+    protected $primaryKey = 'contact_id';
+    public $timestamps  = false;
 
     public function Rules()
     {
         return array(
             'contact_title'                      => 'required',
             'contact_main'                       => 'required',
+            'year'                               => 'required|numeric',
+            'month'                              => 'required|numeric',
+            'day'                                => 'required|numeric',
         );
     }
 
     public function Messages()
     {
         return array(
-            'contact_title.required'             => 'required',
-            'contact_main.required'              => 'required',
+            'contact_title.required'             => trans('validation.error_stu_contact_title_required'),
+            'contact_main.required'              => trans('validation.error_stu_contact_content_required'),
+            'year.required'                      => trans('validation.error_stu_contact_year_required'),
+            'year.numeric'                       => trans('validation.error_stu_contact_year_numeric'),
+            'month.required'                     => trans('validation.error_stu_contact_month_required'),
+            'month.numeric'                      => trans('validation.error_stu_contact_month_numeric'),
+            'day.required'                       => trans('validation.error_stu_contact_day_required'),
+            'day.numeric'                        => trans('validation.error_stu_contact_day_numeric'),
         );
     }
 
@@ -36,7 +47,7 @@ class ContactModel
                         ->where('stu_id', '=', $stu_id)
                         ->where('contact_id', '=', $contact_id)
                         ->orderBy('contact_id', 'asc');
-        return  $query->get();
+        return  $query->first();
     }
 
     public function insert($data)

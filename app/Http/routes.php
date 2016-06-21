@@ -178,8 +178,10 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	*/
 
 	Route::get('students/{stu_id}/contacts', ['as' => 'backend.students.contact.index', 'uses' => 'StudentContactController@index']);
-	Route::get('students/contacts/regist', ['as' => 'backend.students.contact.regist', 'uses' => 'StudentContactController@getRegist']);
-	Route::post('students/contacts/regist', ['as' => 'backend.students.contact.regist', 'uses' => 'StudentContactController@postRegist']);
+
+	Route::get('students/{stu_id}/contacts/regist', ['as' => 'backend.students.contact.regist', 'uses' => 'StudentContactController@getRegist']);
+	Route::post('students/{stu_id}/contacts/regist', ['as' => 'backend.students.contact.regist', 'uses' => 'StudentContactController@postRegist']);
+	
 	Route::get('students/{stu_id}/contacts/edit/{contact_id}', ['as' => 'backend.students.contact.edit', 'uses' => 'StudentContactController@getEdit']);
 	Route::post('students/{stu_id}/contacts/edit/{contact_id}', ['as' => 'backend.students.contact.edit', 'uses' => 'StudentContactController@postEdit']);
 	Route::get('students/{stu_id}/contacts/detail/{contact_id}', ['as' => 'backend.students.contact.detail', 'uses' => 'StudentContactController@detail']);

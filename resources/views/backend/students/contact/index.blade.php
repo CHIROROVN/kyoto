@@ -4,40 +4,58 @@
     <section id="page">
       <div class="container">
         <div class="row content content--list">
+        <div class="msg-alert-action">
+          @if ($message = Session::get('success'))
+            <div class="alert alert-success  alert-dismissible fade in" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <ul class="no-margin-bottom"><strong><li> {{ $message }}</li></strong></ul>
+            </div>
+          @elseif($message = Session::get('danger'))
+            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <ul class="no-margin-bottom"><strong><li> {{ $message }}</li></strong></ul>
+            </div>
+          @endif
+        </div>
+        
           <table class="table table-bordered">
             <tr>
               <td class="col-title">氏名</td>
-              <td>山田　太郎</td>
+              <td>{{$student->per_fname}}</td>
               <td class="col-title">ふりがな</td>
-              <td>やまだ　たろう</td>
+              <td>{{$student->per_fname_kana}}</td>
               <td class="col-title">誕生日</td>
-              <td>西暦 1980 年 12 月 25 日</td>
+              <td>西暦 {{date('Y', strtotime($student->per_birthday))}} 年 {{date('m', strtotime($student->per_birthday))}} 月 {{date('d', strtotime($student->per_birthday))}} 日</td>
             </tr>
             <tr>
               <td class="col-title">性別</td>
-              <td>男</td>
+              <td>@if($student->per_sex == '1') 男 @elseif($student->per_sex == '2') 女 @endif</td>
               <td class="col-title">高校</td>
               <td>岡山高等学校</td>
               <td class="col-title">学年</td>
-              <td>3 年生（4/1現在）</td>
+              <td>{{$student->per_grade}} 年生（4/1現在）</td>
             </tr>
             <tr>
               <td class="col-title">郵便番号</td>
-              <td>700-0001</td>
+              <td>{{$student->per_zipcode}}</td>
               <td class="col-title">住所</td>
-              <td colspan="3">岡山県　倉敷市　福井125-7　スギモトマンション1101</td>
+              <td colspan="3">{{$student->per_address1}} {{$student->per_address2}} {{$student->per_address3}}</td>
             </tr>
             <tr>
               <td class="col-title">電話番号</td>
-              <td>086-111-1111</td>
+              <td>{{$student->per_phone}}</td>
               <td class="col-title">メールアドレス</td>
-              <td>sugimoto@chiroro.co.jp</td>
+              <td>{{$student->per_email}}</td>
               <td class="col-title">ステータス</td>
-              <td>本登録</td>
+              <td>@if($student->per_status == '0') 規定 @elseif($student->per_status == '1') 本登録 @endif</td>
             </tr>
           </table>
           <div class="text-right">
-            <input onclick="location.href='{{route('backend.students.contact.regist')}}'" value="お問い合わせ情報の新規登録" type="button" class="btn btn-sm btn-primary">
+            <input onclick="location.href='{{route('backend.students.contact.regist', $stu_id)}}'" value="お問い合わせ情報の新規登録" type="button" class="btn btn-sm btn-primary">
           </div>
           <table class="table table-bordered table-striped clearfix">
             <tr>
