@@ -167,4 +167,14 @@ return [
     'stu_contact_title_edit'                => '登録済みお問い合わせ情報の編集',
     'stu_contact_title_detail'              => '登録済みお問い合わせ情報の詳細',
     'stu_contact_title_del_cnf'             => '登録済みお問い合わせ情報の削除',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Student = Personal
+    |--------------------------------------------------------------------------
+    */
+    'student_title_index'         => '個人情報の検索結果一覧',
+    'student_title_regist'        => '個人情報の新規登録',
+    'student_title_edit'          => '登録済み個人情報の編集',
+    'student_title_search'        => '個人情報の検索',
 ];

@@ -113,17 +113,17 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	/**
 	 * Students
 	*/
-	Route::get('students', ['as' => 'backend.students.index', 'uses' => 'StudentController@index']);
-	Route::get('students/regist', ['as' => 'backend.students.regist', 'uses' => 'StudentController@regist']);
-	Route::get('students/update', ['as' => 'backend.students.update', 'uses' => 'StudentController@getUpdate']);
-	Route::post('students/update', ['as' => 'backend.students.update', 'uses' => 'StudentController@postUpdate']);
-	Route::get('students/detail/{id?}', ['as' => 'backend.students.detail', 'uses' => 'StudentController@detail']);
-	Route::get('students/detail', ['as' => 'backend.students.detail', 'uses' => 'StudentController@detail']);
-	Route::get('students/delete', ['as' => 'backend.students.delete', 'uses' => 'StudentController@delete']);
-	Route::get('students/delete_cnf', ['as' => 'backend.students.delete_cnf', 'uses' => 'StudentController@deleteCnf']);
-	Route::get('students/search', ['as' => 'backend.students.search', 'uses' => 'StudentController@search']);
-	Route::get('students/import', ['as' => 'backend.students.import', 'uses' => 'StudentController@import']);
-	Route::get('students/import_result', ['as' => 'backend.students.import_result', 'uses' => 'StudentController@import_result']);
+	Route::get('students', ['middleware' => 'permission_admin', 'as' => 'backend.students.index', 'uses' => 'StudentController@index']);
+	Route::get('students/regist', ['middleware' => 'permission_admin', 'as' => 'backend.students.regist', 'uses' => 'StudentController@getRegist']);
+	Route::post('students/regist', ['middleware' => 'permission_admin', 'as' => 'backend.students.regist', 'uses' => 'StudentController@postRegist']);
+	Route::get('students/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.students.edit', 'uses' => 'StudentController@getEdit']);
+	Route::post('students/edit/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.students.edit', 'uses' => 'StudentController@postEdit']);
+	Route::get('students/delete/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.students.delete', 'uses' => 'StudentController@delete']);
+	Route::get('students/delete_cnf', ['middleware' => 'permission_admin', 'as' => 'backend.students.delete_cnf', 'uses' => 'StudentController@deleteCnf']);
+	Route::get('students/detail/{id}', ['middleware' => 'permission_admin', 'as' => 'backend.students.detail', 'uses' => 'StudentController@detail']);
+	Route::get('students/search', ['middleware' => 'permission_admin', 'as' => 'backend.students.search', 'uses' => 'StudentController@search']);
+	Route::get('students/import', ['middleware' => 'permission_admin', 'as' => 'backend.students.import', 'uses' => 'StudentController@import']);
+	Route::get('students/import_result', ['middleware' => 'permission_admin', 'as' => 'backend.students.import_result', 'uses' => 'StudentController@import_result']);
 
 
 	/**

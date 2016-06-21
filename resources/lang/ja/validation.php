@@ -151,6 +151,26 @@ return [
     | Student Contact
     |--------------------------------------------------------------------------
     */
-    
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Model Personal (Student)
+    |--------------------------------------------------------------------------
+    */
+    'error_baitai_id_required'                              => '媒体番号を入力してください。',
+    'error_per_fname_required'                              => '氏名を入力してください。',
+    'error_per_gname_required'                              => '氏名を入力してください。',
+    'error_per_fname_kana_required'                         => 'フリガナを入力してください。',
+    'error_per_fname_kana_regex'                            => 'ひらがなで入力してください。',
+    'error_per_gname_kana_required'                         => 'フリガナを入力してください。',
+    'error_per_gname_kana_regex'                            => 'ひらがなで入力してください。',
+    'error_per_email_required'                              => 'メールアドレスを入力してください。',
+    'error_per_email_email'                                 => 'メールアドレスメールアドレスを正しく入力してください。',
+    'error_per_sex_required'                                => '性別を選択してください。',
+    'error_per_zipcode_required'                            => '郵便番号を入力してください。',
+    'error_per_address1_required'                           => '住所を入力してください。',
+    'error_per_address2_required'                           => '住所を入力してください。',
+    'error_pamph_id_required'                               => '資料請求番号を入力してください。',
 
 ];

@@ -30,16 +30,16 @@
               @else
                 @foreach ( $students as $student)
                 <tr>
-                  <td align="right">12345678</td>
-                  <td>山田　太郎</td>
-                  <td>やまだ　たろう</td>
-                  <td>男</td>
-                  <td>岡山県</td>
-                  <td>086-000-0000</td>
-                  <td align="center"><input type="button" onClick="location.href='student_detail.html'" value="個人情報管理" class="btn btn-xs btn-primary"/></td>
+                  <td align="right">{{ $student->per_id }}</td>
+                  <td>{{ $student->per_fname }} {{ $student->per_gname }}</td>
+                  <td>{{ $student->per_fname_kana }} {{ $student->per_gname_kana }}</td>
+                  <td><?php echo ($student->per_sex == 1) ? '男' : '女'; ?></td>
+                  <td>{{ $student->pref_name }}</td>
+                  <td>{{ $student->phone }}</td>
+                  <td align="center"><input type="button" onClick="location.href='{{ route('backend.students.detail', [$student->per_id]) }}'" value="個人情報管理" class="btn btn-xs btn-primary"/></td>
                   <td align="center"><input type="button" onClick="location.href='student_brochure_list.html'" value="資料請求情報管理" class="btn btn-xs btn-primary"/></td>
-                  <td align="center"><input type="button" onClick="location.href='student_contact_list.html'" value="問い合わせ管理" class="btn btn-xs btn-primary"/></td>
-                  <td align="center"><input type="button" onClick="location.href='student_present_list.html'" value="希望プレゼント管理" class="btn btn-xs btn-primary"/></td>
+                  <td align="center"><input type="button" onClick="location.href='{{ route('backend.students.contact.index', [$student->per_id]) }}'" value="問い合わせ管理" class="btn btn-xs btn-primary"/></td>
+                  <td align="center"><input type="button" onClick="location.href='{{ route('backend.students.present_index') }}'" value="希望プレゼント管理" class="btn btn-xs btn-primary"/></td>
                 </tr>
                 @endforeach
               @endif

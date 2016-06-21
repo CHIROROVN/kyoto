@@ -1,283 +1,306 @@
 @extends('backend.backend')
 @section('content')
 	<!-- content student regist -->
-    <section id="page">
-      <div class="container">
-        <div class="row content content--regist">
-          <table class="table table-bordered">
-              <tbody>
-                <tr>
-                  <td class="col-title"><label for="textnumber">請求者番号</label></td>
-                  <td>
-                    <input name="txtname" id="textnumber" type="text" class="form-control form-control--small">
-                  </td>
-                  <td class="col-title"><label for="textmednumber">媒体番号 <span class="note_required">※</span></label></td>
-                  <td colspan="3"><input name="txtmednumber" id="textmednumber" type="text" class="form-control form-control--small"> →</td>
-                </tr>
-                <tr>
-                  <td class="col-title"><label for="textname">氏名</label></td>
-                  <td>
-                    <input name="txtname" type="text" class="form-control form-control--small form-control--mar-right">
-                    <input name="txtname" id="textname" type="text" class="form-control form-control--small">
-                  </td>
-                  <td class="col-title"><label for="textphone">フリガナ</label></td>
-                  <td>
-                    <input name="txtphone1" type="text" id="textphone" class="form-control form-control--small form-control--mar-right">
-                    <input name="txtphone1" id="textname" type="text" class="form-control form-control--small">
-                  </td>
-                  <td class="col-title"><label for="sbbillmethod">請求方法</label></td>
-                  <td>
-                    <select name="sbbillmethod" id="sbbillmethod" class="form-control form-control--small">
-                        <option selected="selected">請求方法</option>
-                    </select>
-                  </td>
-                </tr>
-               <tr>
-                  <td class="col-title"><label for="textphone">電話番号</label></td>
-                  <td>ハイフンなし
-                    <input name="txtphone" id="textphone" type="text" class="form-control form-control--default"></td>
-                  <td class="col-title"><label for="textemail">メールアドレス</label></td>
-                  <td>
-                    <input name="txtemail" id="textemail" type="email" class="form-control form-control--default form-control--mar-right">
-                  </td>
-                  <td class="col-title"><label for="textsex">性別</label></td>
-                  <td>
-                    <input name="rasex" id="textsex" value="radio" type="radio"> 男　　　
-                    <input name="rasex" value="radio2" type="radio"> 女
-                  </td>
-                </tr>
-                <tr>
-                  <td class="col-title"><label for="textpostal">郵便番号</label></td>
-                  <td><label for="textpostal">ハイフンなし7桁 </label>
-                    <input name="txtpostal" id="textpostal" type="text" class="form-control form-control--smaller form-control--mar-right">
-                    <input name="btsladdress" value="住所選択" type="submit" class="btn btn-xs btn-primary" style="margin-top: -4.5px;">
-                  </td>
-                  <td class="col-title"><label for="sbprefectures">都道府県</label></td>
-                  <td colspan="3">
-                    <select name="sbprefectures" id="sbprefectures" class="form-control form-control--small">
-                        <option selected="selected">都道府県</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="col-title"><label for="sbprefecture">住所</label></td>
-                  <td colspan="5">
-                    <select name="sbprefecture" id="sbprefecture" class="form-control form-control--small">
-                      <option selected="selected">▼都道府県</option>
-                    </select>
-                    <label for="textcity">（市区町村）</label>
-                    <input name="txtcity" id="textcity" type="text" class="form-control form-control--default">
-                    <label for="textaddress">（地名番地）</label>
-                    <input name="txtaddress" id="textaddress" type="text"  class="form-control form-control--default">
-                    <label for="textaddotder">（ビル等）</label>
-                    <input name="txtaddotder" id="textaddotder" type="text"  class="form-control form-control--default">
-                  </td>
-                </tr>
-                <tr>
-                  <td class="col-title"><label for="textschoolname">高校・大学</label></td>
-                  <td>
-                    <input name="txtschoolname1" id="textschoolname" type="text" class="form-control form-control--smaller form-control--mar-right">
-                    <input name="txtschoolname1"  type="text" class="form-control form-control--smaller">
-                    <span>年生・回生</span>
-                  </td>
-                  <td class="col-title"><label for="sbprefectures">都道府県</label></td>
-                  <td>
-                    <select name="sbprefectures" id="sbprefectures" class="form-control form-control--small">
-                        <option selected="selected">都道府県</option>
-                    </select>
-                  </td>
-                  <td class="col-title"><label for="textbirtdday">誕生日</label></td>
-                  <td>西暦
-                      <input name="txtyear" id="textbirtdday" type="text" class="form-control form-control--small-xs"> 年 
-                      <input name="txtmontd" type="text" class="form-control form-control--small-xs"> 月 
-                      <input name="txtyear" type="text" class="form-control form-control--small-xs"> 日 
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div id="scrollbox3">
-            <table class="table table-bordered table-striped clearfix">
-              <tbody>
-              <tr>
-                <td class="col-title" align="center">類似率</td>
-                <td class="col-title" align="center">入力日</td>
-                <td class="col-title" align="center">氏名</td>
-                <td class="col-title" align="center">氏名よみ</td>
-                <td class="col-title" align="center">性別</td>
-                <td class="col-title" align="center">住所</td>
-                <td class="col-title" align="center">電話番号</td>
-                <td class="col-title" align="center">メールアドレス</td>
-              </tr>
-              <tr>
-                <td align="right">99%</td>
-                <td>2016/04/06</td>
-                <td>山田　太郎</td>
-                <td>やまだ　たろう</td>
-                <td>男</td>
-                <td>岡山県倉敷市福井125-7</td>
-                <td>086-430-3956</td>
-                <td>test@chiroro.co.jp</td>
-              </tr>
-              <tr>
-                <td align="right">99%</td>
-                <td>2016/04/06</td>
-                <td>山田　太郎</td>
-                <td>やまだ　たろう</td>
-                <td>男</td>
-                <td>岡山県倉敷市福井125-7</td>
-                <td>086-430-3956</td>
-                <td>test@chiroro.co.jp</td>
-              </tr>
-              <tr>
-                <td align="right">99%</td>
-                <td>2016/04/06</td>
-                <td>山田　太郎</td>
-                <td>やまだ　たろう</td>
-                <td>男</td>
-                <td>岡山県倉敷市福井125-7</td>
-                <td>086-430-3956</td>
-                <td>test@chiroro.co.jp</td>
-              </tr>
-              <tr>
-                <td align="right">99%</td>
-                <td>2016/04/06</td>
-                <td>山田　太郎</td>
-                <td>やまだ　たろう</td>
-                <td>男</td>
-                <td>岡山県倉敷市福井125-7</td>
-                <td>086-430-3956</td>
-                <td>test@chiroro.co.jp</td>
-              </tr>
-              <tr>
-                <td align="right">99%</td>
-                <td>2016/04/06</td>
-                <td>山田　太郎</td>
-                <td>やまだ　たろう</td>
-                <td>男</td>
-                <td>岡山県倉敷市福井125-7</td>
-                <td>086-430-3956</td>
-                <td>test@chiroro.co.jp</td>
-              </tr>
-              <tr>
-                <td align="right">99%</td>
-                <td>2016/04/06</td>
-                <td>山田　太郎</td>
-                <td>やまだ　たろう</td>
-                <td>男</td>
-                <td>岡山県倉敷市福井125-7</td>
-                <td>086-430-3956</td>
-                <td>test@chiroro.co.jp</td>
-              </tr>
-              <tr>
-                <td align="right">99%</td>
-                <td>2016/04/06</td>
-                <td>山田　太郎</td>
-                <td>やまだ　たろう</td>
-                <td>男</td>
-                <td>岡山県倉敷市福井125-7</td>
-                <td>086-430-3956</td>
-                <td>test@chiroro.co.jp</td>
-              </tr>
-              <tr>
-                <td align="right">99%</td>
-                <td>2016/04/06</td>
-                <td>山田　太郎</td>
-                <td>やまだ　たろう</td>
-                <td>男</td>
-                <td>岡山県倉敷市福井125-7</td>
-                <td>086-430-3956</td>
-                <td>test@chiroro.co.jp</td>
-              </tr>
-              <tr>
-                <td align="right">99%</td>
-                <td>2016/04/06</td>
-                <td>山田　太郎</td>
-                <td>やまだ　たろう</td>
-                <td>男</td>
-                <td>岡山県倉敷市福井125-7</td>
-                <td>086-430-3956</td>
-                <td>test@chiroro.co.jp</td>
-              </tr>
-              <tr>
-                <td align="right">99%</td>
-                <td>2016/04/06</td>
-                <td>山田　太郎</td>
-                <td>やまだ　たろう</td>
-                <td>男</td>
-                <td>岡山県倉敷市福井125-7</td>
-                <td>086-430-3956</td>
-                <td>test@chiroro.co.jp</td>
-              </tr>
-             </tbody>
-            </table>
-            <script>
-              $('#scrollbox3').enscroll({
-                showOnHover: true,
-                verticalTrackClass: 'track3',
-                verticalHandleClass: 'handle3'
-              });
-            </script>
-            </div>
-            <table class="table table-bordered clearfix">
-             <tbody>
-               <tr>
-                  <td class="col-title"><label for="textreqnumber">資料請求番号</label></td>
-                  <td colspan="5">
-                    <div class="mar-bottom">
-                      <input name="txtreqnumber" id="textreqnumber" type="text" class="form-control form-control--small-xs  form-control--mar-right"> 
-                      <input name="txtreqnumber2" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber3" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber4" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber5" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber6" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber7" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber8" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber2" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber3" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber4" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber5" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber6" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber7" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber8" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber8" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                    </div>
-                    <div>
-                      <input name="txtreqnumber9" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber10" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber5" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber6" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber7" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber8" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber9" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber10" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber2" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber3" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber4" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber5" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber6" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber7" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber8" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                      <input name="txtreqnumber8" type="text" class="form-control form-control--small-xs form-control--mar-right">
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="col-title"><label for="textgift">希望プレゼント</label></td>
-                  <td colspan="5">
-                    <input name="txtgift1" id="textgift" type="text" class="form-control form-control--default"> 
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <input name="button5" value="本登録" type="submit" class="btn btn-sm btn-primary btn-mar-right">
-            <input name="button4" value="仮登録" type="submit" class="btn btn-sm btn-primary btn-mar-right">
-            <input name="button7" value="クリア（全消し）" type="submit" class="btn btn-sm btn-primary">
-          </div>
-        </div>
+{!! Form::open(array('route' => 'backend.students.regist', 'enctype'=>'multipart/form-data')) !!}
+<div class="container">
+  <div class="row content content--regist">
+    <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <!-- per id -->
+            <td class="col-title"><label for="per_id">請求者番号</label></td>
+            <td>
+              <input name="per_id" id="per_id" type="text" class="form-control form-control--small" readonly="" value="123">
+            </td>
+
+            <!-- baitai_id -->
+            <td class="col-title"><label for="baitai_id">媒体番号 <span class="note_required">※</span></label></td>
+            <td colspan="3">
+              <input name="baitai_id" id="baitai_id" type="text" class="form-control form-control--small" value="{{ old('baitai_id') }}"> →
+              @if ($errors->first('baitai_id'))<span class="error-input">{!! $errors->first('baitai_id') !!}</span>@endif
+            </td>
+          </tr>
+
+          <tr>
+            <!-- per_fname and per_gname -->
+            <td class="col-title"><label for="textname">氏名 <span class="note_required">※</span></label></td>
+            <td>
+              <input name="per_fname" type="text" class="form-control form-control--small form-control--mar-right" value="{{ old('per_fname') }}">
+              <input name="per_gname" id="textname" type="text" class="form-control form-control--small" value="{{ old('per_gname') }}">
+              @if ($errors->first('per_fname'))<span class="error-input">{!! $errors->first('per_fname') !!}</span>@endif
+              @if ($errors->first('per_gname'))<span class="error-input">{!! $errors->first('per_gname') !!}</span>@endif
+            </td>
+
+            <!-- per_fname_kana and per_gname_kana -->
+            <td class="col-title"><label for="per_fname_kana">フリガナ <span class="note_required">※</span></label></td>
+            <td>
+              <input name="per_fname_kana" type="text" id="per_fname_kana" class="form-control form-control--small form-control--mar-right" value="{{ old('per_fname_kana') }}">
+              <input name="per_gname_kana" id="per_gname_kana" type="text" class="form-control form-control--small" value="{{ old('per_gname_kana') }}">
+              @if ($errors->first('per_fname_kana'))<span class="error-input">{!! $errors->first('per_fname_kana') !!}</span>@endif
+              @if ($errors->first('per_gname_kana'))<span class="error-input">{!! $errors->first('per_gname_kana') !!}</span>@endif
+            </td>
+
+            <!-- per_way -->
+            <td class="col-title"><label for="per_way">請求方法</label></td>
+            <td>
+              <select name="per_way" id="per_way" class="form-control form-control--small">
+                  <option value="0" @if(old('per_way') == 0) selected="" @endif>請求方法</option>
+                  <option value="1" @if(old('per_way') == 1) selected="" @endif>Postmail</option>
+                  <option value="2" @if(old('per_way') == 2) selected="" @endif>Tel</option>
+                  <option value="3" @if(old('per_way') == 3) selected="" @endif>Website</option>
+              </select>
+            </td>
+          </tr>
+
+         <tr>
+            <!-- per_phone -->
+            <td class="col-title"><label for="per_phone">電話番号</label></td>
+            <td>ハイフンなし
+              <input name="per_phone" id="per_phone" type="text" class="form-control form-control--default" value="{{ old('per_phone') }}"></td>
+
+            <!-- per_email -->
+            <td class="col-title"><label for="per_email">メールアドレス <span class="note_required">※</span></label></td>
+            <td>
+              <input name="per_email" id="per_email" type="email" class="form-control form-control--default form-control--mar-right" value="{{ old('per_email') }}">
+              @if ($errors->first('per_email'))<span class="error-input">{!! $errors->first('per_email') !!}</span>@endif
+            </td>
+
+            <!-- per_sex -->
+            <td class="col-title"><label for="per_sex">性別 <span class="note_required">※</span></label></td>
+            <td>
+              <input name="per_sex" id="per_sex" value="1" type="radio" @if(old('per_sex') == 1) checked="" @endif> 男　　　
+              <input name="per_sex" value="2" type="radio" @if(old('per_sex') == 1) checked="" @endif> 女
+              @if ($errors->first('per_sex'))<span class="error-input">{!! $errors->first('per_sex') !!}</span>@endif
+            </td>
+          </tr>
+
+          <tr>
+            <!-- per_zipcode -->
+            <td class="col-title"><label for="per_zipcode">郵便番号 <span class="note_required">※</span></label></td>
+            <td><label for="per_zipcode">ハイフンなし7桁</label>
+              <input name="per_zipcode" id="per_zipcode" type="text" class="form-control form-control--smaller form-control--mar-right" value="{{ old('per_zipcode') }}">
+              <input name="" value="住所選択" type="button" id="btn-zipcode" class="btn btn-xs btn-primary" style="margin-top: -4.5px;">
+              @if ($errors->first('per_zipcode'))<span class="error-input">{!! $errors->first('per_zipcode') !!}</span>@endif
+            </td>
+
+            <!-- pref_code -->
+            <td class="col-title"><label for="pref_code">都道府県</label></td>
+            <td colspan="3">
+              <select name="pref_code" id="pref_code" class="form-control form-control--small" value="{{ old('pref_code') }}">
+                  <option value="0">都道府県</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="col-title"><label for="sbprefecture">住所 <span class="note_required">※</span></label></td>
+            <td colspan="5">
+              <select name="sbprefecture" id="sbprefecture" class="form-control form-control--small">
+                <option selected="selected">▼都道府県</option>
+              </select>
+
+              <!-- per_address1 -->
+              <label for="per_address1">（市区町村）</label>
+              <input name="per_address1" id="per_address1" type="text" class="form-control form-control--default" value="{{ old('per_address1') }}">
+
+              <!-- per_address2 -->
+              <label for="per_address2">（地名番地）</label>
+              <input name="per_address2" id="per_address2" type="text"  class="form-control form-control--default" value="{{ old('per_address2') }}">
+
+              <!-- per_address3 -->
+              <label for="per_address3">（ビル等）</label>
+              <input name="per_address3" id="per_address3" type="text"  class="form-control form-control--default" value="{{ old('per_address3') }}">
+
+              @if ($errors->first('per_address1'))<span class="error-input">{!! $errors->first('per_address1') !!}</span>@endif
+              @if ($errors->first('per_address2'))<span class="error-input">{!! $errors->first('per_address2') !!}</span>@endif
+            </td>
+          </tr>
+
+          <tr>
+            <td class="col-title"><label for="textschoolname">高校・大学 <span class="note_required">※</span></label></td>
+            <td>
+              <input name="txtschoolname1" id="textschoolname" type="text" class="form-control form-control--smaller form-control--mar-right">
+              <input name="txtschoolname1"  type="text" class="form-control form-control--smaller">
+              <span>年生・回生</span>
+            </td>
+            <td class="col-title"><label for="sbprefectures">都道府県 <span class="note_required">※</span></label></td>
+            <td>
+              <select name="sbprefectures" id="sbprefectures" class="form-control form-control--small">
+                  <option selected="selected">都道府県</option>
+              </select>
+            </td>
+
+            <!-- per_birthday -->
+            <td class="col-title"><label for="per_birthday">誕生日</label></td>
+            <td>西暦
+                <input name="per_birthday_year" id="per_birthday" type="text" class="form-control form-control--small-xs" value="{{ old('per_birthday_year') }}"> 年 
+                <input name="per_birthday_month" type="text" class="form-control form-control--small-xs" value="{{ old('per_birthday_month') }}"> 月 
+                <input name="per_birthday_day" type="text" class="form-control form-control--small-xs" value="{{ old('per_birthday_day') }}"> 日 
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div id="scrollbox3">
+      <table class="table table-bordered table-striped clearfix" id="tbl-list-personal">
+        <tbody>
+        <tr>
+          <td class="col-title" align="center">類似率</td>
+          <td class="col-title" align="center">入力日</td>
+          <td class="col-title" align="center">氏名</td>
+          <td class="col-title" align="center">氏名よみ</td>
+          <td class="col-title" align="center">性別</td>
+          <td class="col-title" align="center">住所</td>
+          <td class="col-title" align="center">電話番号</td>
+          <td class="col-title" align="center">メールアドレス</td>
+        </tr>
+        <tr>
+          <td align="right">99%</td>
+          <td>2016/04/06</td>
+          <td>山田　太郎</td>
+          <td>やまだ　たろう</td>
+          <td>男</td>
+          <td>岡山県倉敷市福井125-7</td>
+          <td>086-430-3956</td>
+          <td>test@chiroro.co.jp</td>
+        </tr>
+        <tr>
+          <td align="right">99%</td>
+          <td>2016/04/06</td>
+          <td>山田　太郎</td>
+          <td>やまだ　たろう</td>
+          <td>男</td>
+          <td>岡山県倉敷市福井125-7</td>
+          <td>086-430-3956</td>
+          <td>test@chiroro.co.jp</td>
+        </tr>
+        <tr>
+          <td align="right">99%</td>
+          <td>2016/04/06</td>
+          <td>山田　太郎</td>
+          <td>やまだ　たろう</td>
+          <td>男</td>
+          <td>岡山県倉敷市福井125-7</td>
+          <td>086-430-3956</td>
+          <td>test@chiroro.co.jp</td>
+        </tr>
+        <tr>
+          <td align="right">99%</td>
+          <td>2016/04/06</td>
+          <td>山田　太郎</td>
+          <td>やまだ　たろう</td>
+          <td>男</td>
+          <td>岡山県倉敷市福井125-7</td>
+          <td>086-430-3956</td>
+          <td>test@chiroro.co.jp</td>
+        </tr>
+        <tr>
+          <td align="right">99%</td>
+          <td>2016/04/06</td>
+          <td>山田　太郎</td>
+          <td>やまだ　たろう</td>
+          <td>男</td>
+          <td>岡山県倉敷市福井125-7</td>
+          <td>086-430-3956</td>
+          <td>test@chiroro.co.jp</td>
+        </tr>
+        <tr>
+          <td align="right">99%</td>
+          <td>2016/04/06</td>
+          <td>山田　太郎</td>
+          <td>やまだ　たろう</td>
+          <td>男</td>
+          <td>岡山県倉敷市福井125-7</td>
+          <td>086-430-3956</td>
+          <td>test@chiroro.co.jp</td>
+        </tr>
+        <tr>
+          <td align="right">99%</td>
+          <td>2016/04/06</td>
+          <td>山田　太郎</td>
+          <td>やまだ　たろう</td>
+          <td>男</td>
+          <td>岡山県倉敷市福井125-7</td>
+          <td>086-430-3956</td>
+          <td>test@chiroro.co.jp</td>
+        </tr>
+        <tr>
+          <td align="right">99%</td>
+          <td>2016/04/06</td>
+          <td>山田　太郎</td>
+          <td>やまだ　たろう</td>
+          <td>男</td>
+          <td>岡山県倉敷市福井125-7</td>
+          <td>086-430-3956</td>
+          <td>test@chiroro.co.jp</td>
+        </tr>
+        <tr>
+          <td align="right">99%</td>
+          <td>2016/04/06</td>
+          <td>山田　太郎</td>
+          <td>やまだ　たろう</td>
+          <td>男</td>
+          <td>岡山県倉敷市福井125-7</td>
+          <td>086-430-3956</td>
+          <td>test@chiroro.co.jp</td>
+        </tr>
+        <tr>
+          <td align="right">99%</td>
+          <td>2016/04/06</td>
+          <td>山田　太郎</td>
+          <td>やまだ　たろう</td>
+          <td>男</td>
+          <td>岡山県倉敷市福井125-7</td>
+          <td>086-430-3956</td>
+          <td>test@chiroro.co.jp</td>
+        </tr>
+       </tbody>
+      </table>
+      <script>
+        $('#scrollbox3').enscroll({
+          showOnHover: true,
+          verticalTrackClass: 'track3',
+          verticalHandleClass: 'handle3'
+        });
+      </script>
       </div>
-    </section>
+
+      <table class="table table-bordered clearfix">
+       <tbody>
+         <tr>
+            <!-- pamph_id -->
+            <td class="col-title"><label for="pamph_id">資料請求番号 <span class="note_required">※</span></label></td>
+            <td colspan="5">
+              <div class="mar-bottom">
+                @for ( $i = 1; $i <= 16; $i++ )
+                <input name="pamph_id_{{ $i }}" type="text" @if($i == 1) id="pamph_id" @endif class="form-control form-control--small-xs form-control--mar-right" value="{{ old('pamph_id_' . $i) }}">
+                @endfor
+              </div>
+              <div>
+                @for ( $i = 17; $i <= 32; $i++ )
+                <input name="pamph_id_{{ $i }}" type="text" @if($i == 1) id="pamph_id" @endif class="form-control form-control--small-xs form-control--mar-right" value="{{ old('pamph_id_' . $i) }}">
+                @endfor
+              </div>
+              @if ($errors->first('pamph_id'))<span class="error-input">{!! $errors->first('pamph_id') !!}</span>@endif
+            </td>
+          </tr>
+          <tr>
+            <!-- campaign_id -->
+            <td class="col-title"><label for="campaign_id">希望プレゼント</label></td>
+            <td colspan="5">
+              <input name="campaign_id" id="campaign_id" type="text" class="form-control form-control--default" value="{{ old('campaign_id') }}"> 
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <input name="regist" value="本登録" type="submit" class="btn btn-sm btn-primary btn-mar-right">
+      <input name="regist_temp" value="仮登録" type="submit" class="btn btn-sm btn-primary btn-mar-right">
+      <input name="button7" value="クリア（全消し）" type="reset" class="btn btn-sm btn-primary">
+    </div>
+  </div>
+</div>
+</form>
 <!-- End content student regist -->
 @endsection

@@ -9,25 +9,46 @@ class PersonalModel
     public function Rules()
     {
     	return array(
-    		// 'baitai_code'    	=> 'required',
-      //       'per_fname'       => 'required',
-      //       'baitai_kind'       => 'required',
+    		'baitai_id'             => 'required',
+            'per_fname'             => 'required',
+            'per_gname'             => 'required',
+            'per_fname_kana'        => 'required|regex:/^[\x{3041}-\x{3096}]+$/u',
+            'per_gname_kana'        => 'required|regex:/^[\x{3041}-\x{3096}]+$/u',
+            'per_email'             => 'required|email',
+            'per_sex'               => 'required',
+            'per_zipcode'           => 'required',
+            'per_address1'          => 'required',
+            'per_address2'          => 'required',
+            'pamph_id'              => 'required',
 		);
     }
 
     public function Messages()
     {
     	return array(
-            // 'baitai_code.required'   	=> trans('validation.error_baitai_code_required'),
-            // 'per_fname.required'      => trans('validation.error_per_fname_required'),
-            // 'baitai_kind.required'      => trans('validation.error_baitai_kind_required'),
-            // 'baitai_year.required'      => trans('validation.error_baitai_year_required'),
+            'baitai_id.required'   	        => trans('validation.error_baitai_id_required'),
+            'per_fname.required'            => trans('validation.error_per_fname_required'),
+            'per_gname.required'            => trans('validation.error_per_gname_required'),
+            'per_fname_kana.required'       => trans('validation.error_per_fname_kana_required'),
+            'per_fname_kana.regex'          => trans('validation.error_per_fname_kana_regex'),
+            'per_gname_kana.required'       => trans('validation.error_per_gname_kana_required'),
+            'per_gname_kana.regex'          => trans('validation.error_per_gname_kana_regex'),
+            'per_email.required'            => trans('validation.error_per_email_required'),
+            'per_email.email'               => trans('validation.error_per_email_email'),
+            'per_sex.required'              => trans('validation.error_per_sex_required'),
+            'per_zipcode.required'          => trans('validation.error_per_zipcode_required'),
+            'per_address1.required'         => trans('validation.error_per_address1_required'),
+            'per_address2.required'         => trans('validation.error_per_address2_required'),
+            'pamph_id.required'             => trans('validation.error_pamph_id_required'),
 		);
     }
 
     public function get_all($pagination = true, $where = array())
     {
-        $results = DB::table($this->table)->where('last_kind', '<>', DELETE);
+        $results = DB::table($this->table)
+                    ->leftJoin('m_pref', 't_personal.per_pref_code', '=', 'm_pref.pref_code')
+                    ->select('t_personal.*', 'm_pref.pref_code', 'm_pref.pref_name')
+                    ->where('t_personal.last_kind', '<>', DELETE);
 
         // // where baitai_code
         // if ( !empty($where['s_baitai_code']) ) {
@@ -78,11 +99,11 @@ class PersonalModel
     }
 
 
-    public function get_for_select()
-    {
-        $results = DB::table($this->table)->select('per_id', 'per_fname')->where('last_kind', '<>', DELETE)->orderBy('baitai_code', 'asc')->get();
-        return $results;
-    }
+    // public function get_for_select()
+    // {
+    //     $results = DB::table($this->table)->select('per_id', 'per_fname')->where('last_kind', '<>', DELETE)->orderBy('baitai_code', 'asc')->get();
+    //     return $results;
+    // }
 
 
     public function count() 
