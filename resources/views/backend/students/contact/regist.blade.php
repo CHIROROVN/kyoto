@@ -10,9 +10,9 @@
             <tr>
               <td class="col-title">日付 <span class="note_required">※</span></td>
               <td><label for="date">西暦</label>
-                <input name="year" id="year" class="form-control form-control--small-xs" type="text" maxlength="4" value="{{old('year')}}"> 年 
-                <input name="month" id="month" class="form-control form-control--small-xs" type="text" maxlength="2" value="{{old('month')}}"> 月 
-                <input name="day" id="day" class="form-control form-control--small-xs" type="text" maxlength="2" value="{{old('day')}}"> 日
+                <input style="text-align: center;" name="year" id="year" class="form-control form-control--small-xs" type="text" maxlength="4" value="{{old('year')}}"> 年 
+                <input style="text-align: center;" name="month" id="month" class="form-control form-control--small-xs" type="text" maxlength="2" value="{{old('month')}}"> 月 
+                <input style="text-align: center;" name="day" id="day" class="form-control form-control--small-xs" type="text" maxlength="2" value="{{old('day')}}"> 日
                 <input name="dateNow" id="dateNow" value="今日" type="button" class="btn btn-xs btn-primary">
                   @if ($errors->first('year'))
                     <div class="help-block with-errors">※ {!! $errors->first('year') !!}</div>

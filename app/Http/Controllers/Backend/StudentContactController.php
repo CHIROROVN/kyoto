@@ -86,10 +86,32 @@ class StudentContactController extends BackendController
 	}
 
 	public function postEdit($stu_id=null, $contact_id=null){
+		$contactModel = new ContactModel();
 		$data['stu_id']				= $stu_id;
 		$data['contact_id']			= $contact_id;
+		$dataUpdate = array(
+				'stu_id'					=> $stu_id,
+				'contact_title'				=> Input::get('contact_title'),
+				'contact_main'				=> Input::get('contact_main'),
+				'contact_date'				=> trim(Input::get('year')).'-'.trim(Input::get('month')).'-'.trim(Input::get('day')),
+				'contact_fst_user'			=> Input::get('contact_fst_user'),
+				'last_kind'					=> UPDATE,
+	        	'last_date'         		=> date('Y-m-d H:i:s'),
+	        	'last_ipadrs'       		=> CLIENT_IP_ADRS,
+	        	'last_user'					=> (Auth::check()) ? Auth::user()->u_id : '',
+			);
+		$validator  = Validator::make(Input::all(), $contactModel->Rules(), $contactModel->Messages());
+        if ( $validator->fails() ) {
+            return redirect()->route('backend.students.contact.edit', $data)->withErrors($validator)->withInput();
+        }
 
-
+        if ( $contactModel->update($contact_id, $dataUpdate) ) {
+    		Session::flash('success', trans('common.message_edit_success'));
+    		return redirect()->route('backend.students.contact.index', $data);
+    	} else {
+    		Session::flash('danger', trans('common.message_edit_danger'));
+			return redirect()->route('backend.students.contact.edit', $data);
+    	}
 
 	}
 

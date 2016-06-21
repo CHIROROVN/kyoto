@@ -4,22 +4,22 @@
     <section id="page">
       <div class="container">
         <div class="row content content--list">
-          <h3>お問い合わせ管理　＞　登録済みお問い合わせ情報の削除</h3>
+          <h3><a style="text-decoration:none;" href="{{route('backend.students.contact.index', $stu_id)}}">お問い合わせ管理</a>　＞　登録済みお問い合わせ情報の削除</h3>
           <p>この情報を削除しますか？</p>
           <table class="table table-bordered">
             <tr>
               <td class="col-title">日付</td>
-              <td>西暦 {{date('Y', strtotime($contact[0]->contact_date))}} 年 {{date('m', strtotime($contact['0']->contact_date))}} 月 {{date('d', strtotime($contact['0']->contact_date))}} 日</td>
+              <td>西暦 {{date('Y', strtotime($contact->contact_date))}} 年 {{date('m', strtotime($contact->contact_date))}} 月 {{date('d', strtotime($contact->contact_date))}} 日</td>
               <td class="col-title">応対者</td>
-              <td>{{$users[$contact['0']->contact_fst_user]}}</td>
+              <td>{{$users[$contact->contact_fst_user]}}</td>
             </tr>
             <tr>
               <td class="col-title">タイトル</td>
-              <td colspan="3">{{$contact['0']->contact_title}}</td>
+              <td colspan="3">{{$contact->contact_title}}</td>
             </tr>
             <tr>
               <td class="col-title">内容</td>
-              <td colspan="3"><?php echo nl2br($contact['0']->contact_main) ?></td>
+              <td colspan="3"><?php echo nl2br($contact->contact_main) ?></td>
             </tr>
           </table>
         </div>

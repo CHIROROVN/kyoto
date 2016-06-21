@@ -4,7 +4,7 @@
     <section id="page">
       <div class="container">
         <div class="row content content--list">
-          <h3><<a href="mailto:joe@example.com?subject=feedback"> お問い合わせ管理</a>　＞　登録済みお問い合わせ情報の詳細</h3>
+          <h3><a style="text-decoration:none;" href="{{route('backend.students.contact.index', $stu_id)}}">お問い合わせ管理</a>　＞　登録済みお問い合わせ情報の詳細</h3>
           <table class="table table-bordered">
             <tr>
               <td class="col-title">日付</td>
