@@ -25,13 +25,15 @@
         </div>
         <div class="row mar-bottom30">
           <div class="col-md-12 text-center">
-            <input type="submit" name="button3" value="削除する" class="btn btn-sm btn-primary mar-right btn-mar-right">
+
+            <input type="button" onClick="location.href='{{route('backend.students.contact.delete', ['stu_id'=>$stu_id, 'contact_id'=>$contact_id])}}'" name="delete" value="削除する" class="btn btn-sm btn-primary mar-right btn-mar-right">
+
             <input type="button" onClick="history.back()" value="やめる" class="btn btn-sm btn-primary">
           </div>
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-            <input type="button" onClick="location.href='student_contact_list.html'" value="お問い合わせ情報一覧に戻る" class="btn btn-sm btn-primary">
+            <input type="button" onClick="location.href='{{route('backend.students.contact.index', $stu_id)}}'" value="お問い合わせ情報一覧に戻る" class="btn btn-sm btn-primary">
           </div>
         </div>
       </div>

@@ -101,7 +101,6 @@ class UsersController extends BackendController
 	public function postUpdate($id){
 		$page 						= Input::get('page');
 		$title 						= "ユーザーの新規登録";
-		//$id = Auth::user()->u_id;
 		$userModel 					= new UserModel();
 		$rules 						= $userModel->addRules();
 		$passwd 					= Input::get('u_passwd');
@@ -109,7 +108,6 @@ class UsersController extends BackendController
 
 		$dataUpdate = array();
 		$dataUpdate = array(
-			// 'remember_token'		=> Input::get('_token'),
 			'u_name'				=> Input::get('u_name'),
 			'u_login'				=> Input::get('u_login'),
 			'u_passwd'				=> Hash::make(Input::get('u_passwd')),
@@ -118,7 +116,7 @@ class UsersController extends BackendController
         	'last_kind'				=> UPDATE,
         	'last_date'         	=> date('Y-m-d H:i:s'),
         	'last_ipadrs'       	=> CLIENT_IP_ADRS,
-        	'last_user'				=> (Auth::check()) ? Auth::user()->u_id : 0,
+        	'last_user'				=> (Auth::check()) ? Auth::user()->u_id : '',
 		);
 
 		// if no update new password
@@ -175,7 +173,6 @@ class UsersController extends BackendController
     	}
 	}
 
-
 	/**
 	 * update password database
 	 */
@@ -183,7 +180,7 @@ class UsersController extends BackendController
 		$userModel 					= new UserModel();
 		$id 						= Auth::user()->u_id;
 		$oldPasswd 					= Auth::user()->password;
-		$currPasswd 				= Input::get('currpasswd');		
+		$currPasswd 				= Input::get('currpasswd');
 
         if(Hash::check($currPasswd, $oldPasswd)){
         	$validator  = Validator::make(Input::all(), $userModel->Rules(), $userModel->Messages());
@@ -195,7 +192,7 @@ class UsersController extends BackendController
 	        	'last_kind'				=> UPDATE,
 	        	'last_date'         	=> date('Y-m-d H:i:s'),
 	        	'last_ipadrs'       	=> CLIENT_IP_ADRS,
-	        	'last_user'				=> (Auth::check()) ? Auth::user()->u_id : 0,
+	        	'last_user'				=> (Auth::check()) ? Auth::user()->u_id : '',
 	        	);
 
         	if($userModel->update($id, $dataUpdate)){

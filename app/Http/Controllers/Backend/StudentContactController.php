@@ -7,6 +7,7 @@ use Input;
 use Session;
 use Validator;
 use Auth;
+use URL;
 
 class StudentContactController extends BackendController
 {
@@ -31,9 +32,8 @@ class StudentContactController extends BackendController
 		$data['contact_id'] 	= $contact_id;
 		$contactModel = new ContactModel();
 		$userModel = new UserModel();
-		$data['contact'] = $contactModel->get_contact_by_id($stu_id);
+		$data['contact'] = $contactModel->get_contact_by_id($stu_id, $contact_id);
 		$data['users'] = $userModel->get_list();
-
 		return view('backend.students.contact.detail', $data);
 	}
 
@@ -45,22 +45,44 @@ class StudentContactController extends BackendController
 
 	public function postRegist($stu_id=null){
 
-		echo "<pre>";print_r(Input::all());die;
+		// echo "<pre>";print_r(Input::all());die;
 		$dataInsert = array(
 				'stu_id'				=> $stu_id,
 			);
 	}
 
-	public function deleteCnf($stu_id=null){
+	public function getEdit($stu_id=null, $contact_id=null){
 		$data['title'] 			= trans('common.stu_contact_title_del_cnf');
-
+		$data['stu_id']			= $stu_id;
+		$data['stu_id']			= $contact_id;
 		return view('backend.students.contact.delete_cnf', $data);
 	}
 
-	public function delete($stu_id=null){
-		$data['title'] 			= trans('common.stu_contact_title_del_cnf');
+	public function deleteCnf($stu_id=null, $contact_id=null){
 
-		return view('backend.students.contact.delete', $data);
+		$data['title'] 			= trans('common.stu_contact_title_del_cnf');
+		$data['stu_id']			= $stu_id;
+		$data['contact_id']			= $contact_id;
+		return view('backend.students.contact.delete_cnf', $data);
+	}
+
+	public function delete($stu_id=null, $contact_id=null){
+		$contactModel = new ContactModel();
+		$data['stu_id']			= $stu_id;
+		$data['contact_id']		= $contact_id;
+		$dataDelete = array(
+			'last_kind'			=> DELETE,
+			'last_date'			=> date('Y-m-d H:i:s'),
+			'last_ipadrs'       => CLIENT_IP_ADRS,
+			'last_user'			=> (Auth::check()) ? Auth::user()->u_id : '',
+			);
+		if($contactModel->update($contact_id, $dataDelete)){
+    		Session::flash('success', trans('common.message_delete_success'));
+    		return redirect()->route('backend.students.contact.index', ['stu_id'=>$stu_id]);
+    	}else{
+    		Session::flash('danger', trans('common.message_delete_danger'));
+			return redirect()->route('backend.students.contact.delete_cnf', ['stu_id'=>$stu_id, 'contact_id'=>$contact_id]);
+    	}
 	}
 
 }

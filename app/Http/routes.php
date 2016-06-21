@@ -117,7 +117,7 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::get('students/regist', ['as' => 'backend.students.regist', 'uses' => 'StudentController@regist']);
 	Route::get('students/update', ['as' => 'backend.students.update', 'uses' => 'StudentController@getUpdate']);
 	Route::post('students/update', ['as' => 'backend.students.update', 'uses' => 'StudentController@postUpdate']);
-	Route::get('students/detail/{?id}', ['as' => 'backend.students.detail', 'uses' => 'StudentController@detail']);
+	Route::get('students/detail/{id?}', ['as' => 'backend.students.detail', 'uses' => 'StudentController@detail']);
 	Route::get('students/detail', ['as' => 'backend.students.detail', 'uses' => 'StudentController@detail']);
 	Route::get('students/delete', ['as' => 'backend.students.delete', 'uses' => 'StudentController@delete']);
 	Route::get('students/delete_cnf', ['as' => 'backend.students.delete_cnf', 'uses' => 'StudentController@deleteCnf']);
@@ -174,18 +174,17 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::get('logout', ['as' => 'backend.logout', 'uses' => 'AuthController@logout']);
 
 	/**
-	 * Student Contact`
+	 * Student Contact
 	*/
 
 	Route::get('students/{stu_id}/contacts', ['as' => 'backend.students.contact.index', 'uses' => 'StudentContactController@index']);
-
 	Route::get('students/contacts/regist', ['as' => 'backend.students.contact.regist', 'uses' => 'StudentContactController@getRegist']);
 	Route::post('students/contacts/regist', ['as' => 'backend.students.contact.regist', 'uses' => 'StudentContactController@postRegist']);
-	Route::get('students/contacts/edit', ['as' => 'backend.students.contact.edit', 'uses' => 'StudentContactController@getEdit']);
-	Route::post('students/contacts/edit', ['as' => 'backend.students.contact.edit', 'uses' => 'StudentContactController@postEdit']);
+	Route::get('students/{stu_id}/contacts/edit/{contact_id}', ['as' => 'backend.students.contact.edit', 'uses' => 'StudentContactController@getEdit']);
+	Route::post('students/{stu_id}/contacts/edit/{contact_id}', ['as' => 'backend.students.contact.edit', 'uses' => 'StudentContactController@postEdit']);
 	Route::get('students/{stu_id}/contacts/detail/{contact_id}', ['as' => 'backend.students.contact.detail', 'uses' => 'StudentContactController@detail']);
-	Route::get('students/contact/delete_cnf', ['as' => 'backend.students.contact.delete_cnf', 'uses' => 'StudentContactController@deleteCnf']);
-	Route::get('students/contacts/delete', ['as' => 'backend.students.contact.delete', 'uses' => 'StudentContactController@delete']);
+	Route::get('students/{stu_id}/contacts/delete_cnf/{contact_id}', ['as' => 'backend.students.contact.delete_cnf', 'uses' => 'StudentContactController@deleteCnf']);
+	Route::get('students/{stu_id}/contacts/delete/{contact_id}', ['as' => 'backend.students.contact.delete', 'uses' => 'StudentContactController@delete']);
 
 	/**
 	 * Users

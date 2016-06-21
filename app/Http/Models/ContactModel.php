@@ -31,12 +31,23 @@ class ContactModel
     }
 
     public function get_contact_by_id($stu_id=null, $contact_id=null){
-
         $query = DB::table($this->table)
                         ->where('last_kind', '<>', DELETE)
                         ->where('stu_id', '=', $stu_id)
                         ->where('contact_id', '=', $contact_id)
                         ->orderBy('contact_id', 'asc');
         return  $query->get();
+    }
+
+    public function insert($data)
+    {
+        $results = DB::table($this->table)->insert($data);
+        return $results;
+    }
+
+    public function update($id, $data)
+    {
+        $results = DB::table($this->table)->where('contact_id', $id)->update($data);
+        return $results;
     }
 }

@@ -69,6 +69,7 @@
                       <!-- End Modal content-->
                   </div>
                 </div>
+                <!-- /End Popup -->
                 </td>
               </tr>
             @endforeach

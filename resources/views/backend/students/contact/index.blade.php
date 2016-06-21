@@ -54,45 +54,19 @@
                   <td>{{@formatDate($contact->contact_date)}}</td>
                   <td>{{$contact->contact_title}}</td>
                   <td>{{@$users[$contact->contact_fst_user]}}</td>
-                  <td align="center"><input onclick="location.href='{{route('backend.students.contact.detail')}}'" value="詳細" type="button" class="btn btn-xs btn-primary"></td>
-                  <td align="center"><input onclick="location.href='{{route('backend.students.contact.edit')}}'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
-                  <td align="center"><input onclick="location.href='{{route('backend.students.contact.delete_cnf')}}'" value="削除" type="button" class="btn btn-xs btn-primary"></td>
+                  <td align="center"><input onclick="location.href='{{route('backend.students.index').'/'}}{{$stu_id}}{{'/contacts/detail/'}}{{$contact->contact_id}}'"  value="詳細" type="button" class="btn btn-xs btn-primary"></td>
+                  <td align="center"><input onclick="location.href='{{route('backend.students.contact.edit', ['stu_id'=>$stu_id, 'contact_id'=>$contact->contact_id])}}'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
+                  <td align="center"><input onclick="location.href='{{route('backend.students.contact.delete_cnf', ['stu_id'=>$stu_id, 'contact_id'=>$contact->contact_id])}}'" value="削除" type="button" class="btn btn-xs btn-primary"></td>
                 </tr>
               @endforeach
             @else
               <tr><td colspan="6" style="text-align: center;">該当するデータがありません。</td></tr>
             @endif
-
-            <!-- <tr>
-              <td>2016/08/31</td>
-              <td>資料請求内容の変更について</td>
-              <td>山田花子</td>
-              <td align="center"><input onclick="location.href='student_contact_detail.html'" value="詳細" type="button" class="btn btn-xs btn-primary"></td>
-              <td align="center"><input onclick="location.href='student_contact_edit.html'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
-              <td align="center"><input onclick="location.href='student_contact_delete_cnf.html'" value="削除" type="button" class="btn btn-xs btn-primary"></td>
-            </tr>
-            <tr>
-              <td>2016/07/25</td>
-              <td>資料請求内容の変更について</td>
-              <td>山田花子</td>
-              <td align="center"><input onclick="location.href='student_contact_detail.html'" value="詳細" type="button" class="btn btn-xs btn-primary"></td>
-              <td align="center"><input onclick="location.href='student_contact_edit.html'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
-              <td align="center"><input onclick="location.href='student_contact_delete_cnf.html'" value="削除" type="button" class="btn btn-xs btn-primary"></td>
-            </tr>
-            <tr>
-              <td>2016/05/05</td>
-              <td>資料請求内容の変更について</td>
-              <td>山田花子</td>
-              <td align="center"><input onclick="location.href='student_contact_detail.html'" value="詳細" type="button" class="btn btn-xs btn-primary"></td>
-              <td align="center"><input onclick="location.href='student_contact_edit.html'" value="編集" type="button" class="btn btn-xs btn-primary"></td>
-              <td align="center"><input onclick="location.href='student_contact_delete_cnf.html'" value="削除" type="button" class="btn btn-xs btn-primary"></td>
-            </tr> -->
-
           </table>
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-            <input onclick="location.href='student_detail.html'" value="詳細に戻る" type="button" class="btn btn-sm btn-primary">
+            <input onclick="location.href='{{route('backend.students.detail',['stu_id'=>$stu_id])}}'" value="詳細に戻る" type="button" class="btn btn-sm btn-primary">
           </div>
         </div>
       </div>

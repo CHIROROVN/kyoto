@@ -24,13 +24,13 @@
         </div>
         <div class="row mar-bottom30">
           <div class="col-md-12 text-center">
-            <input onclick="location.href='student_contact_edit.html'" value="編集する" type="button" class="btn btn-sm btn-primary btn-mar-right">
-            <input onclick="location.href='student_contact_delete_cnf.html'" value="削除する" type="button" class="btn btn-sm btn-primary">
+            <input onclick="location.href='{{route('backend.students.contact.edit',['stu_id'=>$stu_id, 'contact_id'=>$contact_id])}}'" value="編集する" type="button" class="btn btn-sm btn-primary btn-mar-right">
+            <input onclick="location.href='{{route('backend.students.contact.delete_cnf', ['stu_id'=>$stu_id, 'contact_id'=>$contact_id])}}'" value="削除する" type="button" class="btn btn-sm btn-primary">
           </div>
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-            <input onclick="location.href='student_contact_list.html'" value="お問い合わせ情報一覧に戻る" type="button" class="btn btn-sm btn-primary">
+            <input onclick="location.href='{{route('backend.students.contact.index', $stu_id)}}'" value="お問い合わせ情報一覧に戻る" type="button" class="btn btn-sm btn-primary">
           </div>
         </div>
       </div>
