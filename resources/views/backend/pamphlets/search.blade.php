@@ -1,7 +1,7 @@
 @extends('backend.backend')
 
 @section('content')
-{!! Form::open(array('route' => 'backend.pamphlets.index', 'method' => 'get')) !!}
+{!! Form::open(array('route' => 'backend.pamphlets.index', 'method' => 'get', 'enctype'=>'multipart/form-data')) !!}
 <div class="container">
   <div class="row content">
     <div class="row fl-right mar-bottom">

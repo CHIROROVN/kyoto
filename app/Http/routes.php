@@ -124,6 +124,7 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function ()
 	Route::get('students/search', ['middleware' => 'permission_admin', 'as' => 'backend.students.search', 'uses' => 'StudentController@search']);
 	Route::get('students/import', ['middleware' => 'permission_admin', 'as' => 'backend.students.import', 'uses' => 'StudentController@import']);
 	Route::get('students/import_result', ['middleware' => 'permission_admin', 'as' => 'backend.students.import_result', 'uses' => 'StudentController@import_result']);
+	Route::get('students/autocomplete-highschool', ['middleware' => 'permission_admin', 'as' => 'backend.pamphlets.autocomplete.highschool', 'uses' => 'StudentController@AutoCompleteHighschool']);
 
 
 	/**

@@ -177,4 +177,5 @@ return [
     'student_title_regist'        => '個人情報の新規登録',
     'student_title_edit'          => '登録済み個人情報の編集',
     'student_title_search'        => '個人情報の検索',
+    'student_title_detail'        => '登録済み個人情報の参照',
 ];

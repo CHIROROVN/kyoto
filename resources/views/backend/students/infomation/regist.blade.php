@@ -10,7 +10,7 @@
             <!-- per id -->
             <td class="col-title"><label for="per_id">請求者番号</label></td>
             <td>
-              <input name="per_id" id="per_id" type="text" class="form-control form-control--small" readonly="" value="123">
+              <input name="per_id" id="per_id" type="text" class="form-control form-control--small" readonly="" value="{{ $per_id }}">
             </td>
 
             <!-- baitai_id -->
@@ -61,7 +61,7 @@
             <!-- per_email -->
             <td class="col-title"><label for="per_email">メールアドレス <span class="note_required">※</span></label></td>
             <td>
-              <input name="per_email" id="per_email" type="email" class="form-control form-control--default form-control--mar-right" value="{{ old('per_email') }}">
+              <input name="per_email" id="per_email" type="text" class="form-control form-control--default form-control--mar-right" value="{{ old('per_email') }}">
               @if ($errors->first('per_email'))<span class="error-input">{!! $errors->first('per_email') !!}</span>@endif
             </td>
 
@@ -83,11 +83,14 @@
               @if ($errors->first('per_zipcode'))<span class="error-input">{!! $errors->first('per_zipcode') !!}</span>@endif
             </td>
 
-            <!-- pref_code -->
-            <td class="col-title"><label for="pref_code">都道府県</label></td>
+            <!-- per_pref_code -->
+            <td class="col-title"><label for="per_pref_code">都道府県</label></td>
             <td colspan="3">
-              <select name="pref_code" id="pref_code" class="form-control form-control--small" value="{{ old('pref_code') }}">
+              <select name="per_pref_code" id="per_pref_code" class="form-control form-control--small" value="{{ old('per_pref_code') }}">
                   <option value="0">都道府県</option>
+                  @foreach ( $prefs as $pref )
+                  <option value="{{ $pref->pref_id }}">{{ $pref->pref_name }}</option>
+                  @endforeach
               </select>
             </td>
           </tr>
@@ -116,9 +119,12 @@
           </tr>
 
           <tr>
-            <td class="col-title"><label for="textschoolname">高校・大学 <span class="note_required">※</span></label></td>
+            <!-- per_hs_id -->
+            <td class="col-title"><label for="per_hs_id">高校・大学 <span class="note_required">※</span></label></td>
             <td>
-              <input name="txtschoolname1" id="textschoolname" type="text" class="form-control form-control--smaller form-control--mar-right">
+              <input name="per_hs_name" id="per_hs_id" type="text" class="form-control form-control--smaller form-control--mar-right" value="{{ old('per_hs_name') }}">
+              <input name="per_hs_id" type="hidden" id="per_hs_id-id" value="{{ old('per_hs_id') }}">
+
               <input name="txtschoolname1"  type="text" class="form-control form-control--smaller">
               <span>年生・回生</span>
             </td>
@@ -303,4 +309,44 @@
 </div>
 </form>
 <!-- End content student regist -->
+
+<script>
+  $(document).ready(function(){
+    // highschool
+    $( "#per_hs_id" ).autocomplete({
+      minLength: 0,
+      // source: pamphlets,
+      source: function(request, response){
+          var key = $('#per_hs_id').val();
+          $.ajax({
+              url: "{{ route('backend.pamphlets.autocomplete.highschool') }}",
+              beforeSend: function(){
+                  // alert("beforeSend");
+              },
+              async:    true,
+              data: { key: key },
+              dataType: "json",
+              method: "get",
+              success: response
+          });
+      },
+      focus: function( event, ui ) {
+        $( "#per_hs_id" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+        $( "#per_hs_id" ).val( ui.item.label );
+        $( "#per_hs_id-id" ).val( ui.item.value );
+        // $( "#per_hs_id-description" ).html( ui.item.desc );
+        return false;
+      }
+    }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+          //.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+          .append( "<a>" + item.desc + "</a>" )
+          .appendTo( ul );
+    };
+  });
+</script>
+
 @endsection

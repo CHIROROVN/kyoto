@@ -46,7 +46,7 @@ class PersonalModel
     public function get_all($pagination = true, $where = array())
     {
         $results = DB::table($this->table)
-                    ->leftJoin('m_pref', 't_personal.per_pref_code', '=', 'm_pref.pref_code')
+                    ->leftJoin('m_pref', 't_personal.per_pref_code', '=', 'm_pref.pref_id')
                     ->select('t_personal.*', 'm_pref.pref_code', 'm_pref.pref_name')
                     ->where('t_personal.last_kind', '<>', DELETE);
 
@@ -109,6 +109,12 @@ class PersonalModel
     public function count() 
     {
         $results = DB::table($this->table)->where('last_kind', '<>', DELETE)->count();
+        return $results;
+    }
+
+    public function get_max()
+    {
+        $results = DB::table($this->table)->max('per_id');
         return $results;
     }
 
