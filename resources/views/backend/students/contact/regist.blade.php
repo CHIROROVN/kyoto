@@ -62,7 +62,7 @@
     </section>
 <script type="text/javascript">
   var date  = new Date();
-  var day   = convert2Digit(date.getDay());
+  var day   = convert2Digit(date.getDate());
   var month = convert2Digit(date.getMonth()+1);
   var year  = date.getFullYear();
   $('#dateNow').click(function(event) {

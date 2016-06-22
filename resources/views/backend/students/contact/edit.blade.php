@@ -55,7 +55,7 @@
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-            <input onclick="location.href='student_contact_list.html'" value="お問い合わせ情報一覧に戻る" type="button" type="button" class="btn btn-sm btn-primary">
+            <input onclick="location.href='{{route('backend.students.contact.index', $stu_id)}}'" value="お問い合わせ情報一覧に戻る" type="button" type="button" class="btn btn-sm btn-primary">
           </div>
         </div>
         {!! Form::close() !!}
@@ -63,7 +63,7 @@
     </section>
   <script type="text/javascript">
   var date  = new Date();
-  var day   = convert2Digit(date.getDay());
+  var day   = convert2Digit(date.getDate());
   var month = convert2Digit(date.getMonth()+1);
   var year  = date.getFullYear();
   $('#dateNow').click(function(event) {
