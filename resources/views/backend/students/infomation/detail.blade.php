@@ -45,7 +45,7 @@
           <div class="col-md-12 text-center">
             <input type="button" onclick="location.href='student_brochure_list.html'" value="資料請求情報管理" class="btn btn-sm btn-primary  btn-mar-right">
             <input type="button" onclick="location.href='{{route('backend.students.contact.index', 1)}}'" value="問い合わせ管理" class="btn btn-sm btn-primary btn-mar-right">
-            <input type="button" onclick="location.href='student_present_list.html'" value="希望プレゼント管理" class="btn btn-sm btn-primary">
+            <input type="button" onclick="location.href='{{route('backend.students.contact.index', $personal->per_id)}}'" value="希望プレゼント管理" class="btn btn-sm btn-primary">
           </div>
         </div>
         <div class="row">
