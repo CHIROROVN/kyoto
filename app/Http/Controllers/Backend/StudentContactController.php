@@ -77,6 +77,9 @@ class StudentContactController extends BackendController
 	public function getEdit($stu_id=null, $contact_id=null){
 		$contactModel = new ContactModel();
 		$data['contact'] = $contactModel->get_contact_by_id($stu_id, $contact_id);
+		$data['stu_id']				= $stu_id;
+		$data['contact_id']			= $contact_id;
+		if($data['contact'] == null) return redirect()->route('backend.students.contact.index', $data);
 		$data['title'] 				= trans('common.stu_contact_title_del_cnf');
 		$data['stu_id']				= $stu_id;
 		$data['contact_id']			= $contact_id;
